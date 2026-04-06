@@ -228,8 +228,13 @@ export default function BolgeAnalizi() {
                   <RiskBadge sinif={risk.riskSinifi} etiket={riskEtiket} />
                 </div>
                 <div className="text-right">
-                  <span className="text-4xl font-bold" style={{ color: renk.text }}>{risk.riskSkoru}</span>
-                  <span className="text-sm" style={{ color: renk.text }}>/100</span>
+                  <p className="text-sm font-bold leading-tight" style={{ color: renk.text }}>
+                    {risk.riskSkoru >= 90 ? (lang === 'EN' ? 'Very High Risk' : 'Çok Yüksek Risk')
+                     : risk.riskSkoru >= 70 ? (lang === 'EN' ? 'High Risk' : 'Yüksek Risk')
+                     : risk.riskSkoru >= 40 ? (lang === 'EN' ? 'Medium Risk' : 'Orta Risk')
+                     : risk.riskSkoru >= 20 ? (lang === 'EN' ? 'Low-Medium Risk' : 'Düşük-Orta Risk')
+                     : (lang === 'EN' ? 'Low Risk' : 'Düşük Risk')}
+                  </p>
                 </div>
               </div>
               <div className="h-2 rounded-full bg-black/10 overflow-hidden">
@@ -245,7 +250,7 @@ export default function BolgeAnalizi() {
                 { label: t('metricFay'), value: `${risk.fayMesafe} km` },
                 { label: t('metricMw'), value: risk.beklenenMax },
                 { label: t('metricOlasilik'), value: risk.olasilik30Yil },
-                { label: t('metricDepremSayisi'), value: String(risk.depremSayisi) },
+                { label: t('metricDepremSayisi'), value: risk.depremler.length > 0 ? String(risk.depremler.length) : '—' },
               ].map((m) => (
                 <div key={m.label} className="p-3 text-center">
                   <p className="text-[10px] text-[var(--muted)] leading-tight mb-1">{m.label}</p>
