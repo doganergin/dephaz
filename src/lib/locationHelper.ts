@@ -1,4 +1,3 @@
-// Wrapper around turkey-neighbourhoods web API to match the mobile app's API shape
 import {
   getCities,
   getDistrictsByCityCode,
@@ -6,14 +5,38 @@ import {
 } from 'turkey-neighbourhoods';
 import type { Il, Ilce, Mahalle } from '@/types';
 
-// In-memory lookup: ilce id → {cityCode, districtName}
+// Sadece bu şehirler gösterilecek
+// Marmara: İstanbul, Kocaeli, Sakarya, Bursa, Balıkesir, Samsun
+// 6 Şubat 2023: Kahramanmaraş, Hatay, Adıyaman, Malatya, Gaziantep,
+//               Şanlıurfa, Diyarbakır, Kilis, Osmaniye, Adana
+const IZINLI_KODLAR = new Set([
+  '34', // İstanbul
+  '41', // Kocaeli
+  '54', // Sakarya
+  '16', // Bursa
+  '10', // Balıkesir
+  '55', // Samsun
+  '46', // Kahramanmaraş
+  '31', // Hatay
+  '02', // Adıyaman
+  '44', // Malatya
+  '27', // Gaziantep
+  '63', // Şanlıurfa
+  '21', // Diyarbakır
+  '79', // Kilis
+  '80', // Osmaniye
+  '01', // Adana
+]);
+
 const ilceLookup = new Map<number, { cityCode: string; districtName: string }>();
 
 export function getProvinces(): Il[] {
-  return getCities().map((c: { code: string; name: string }) => ({
-    id: parseInt(c.code, 10),
-    name: c.name,
-  }));
+  return getCities()
+    .filter((c: { code: string; name: string }) => IZINLI_KODLAR.has(c.code))
+    .map((c: { code: string; name: string }) => ({
+      id: parseInt(c.code, 10),
+      name: c.name,
+    }));
 }
 
 export function getDistricts(ilId: number): Ilce[] {
