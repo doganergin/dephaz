@@ -20,7 +20,8 @@ export async function kandilliDepremleriGetir(il?: string, limit = 15): Promise<
 }
 
 export async function bolgeRiskGetir(il: string, ilce: string, mahalle: string): Promise<BolgeRisk> {
-  const depremler = await kandilliDepremleriGetir(il, 10);
+  // İl filtresi yok — denizde olan ama hissedilen depremler de dahil olsun
+  const depremler = await kandilliDepremleriGetir(undefined, 15);
   return hesaplaRisk(il, ilce, mahalle, depremler);
 }
 
