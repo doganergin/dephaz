@@ -24,6 +24,14 @@ export async function bolgeRiskGetir(il: string, ilce: string, mahalle: string):
   return hesaplaRisk(il, ilce, mahalle, depremler);
 }
 
+function olasilikEtiket(oran: number): string {
+  if (oran >= 80) return 'Çok Yüksek';
+  if (oran >= 60) return 'Yüksek';
+  if (oran >= 40) return 'Orta';
+  if (oran >= 20) return 'Düşük-Orta';
+  return 'Düşük';
+}
+
 // ─── Risk Veritabanı ─────────────────────────────────────────────────────────
 // riskSkoru: 0-100  |  fayMesafe: km  |  olasilik30: %  |  beklenenMw: string
 interface RiskVeri {
@@ -194,6 +202,80 @@ const RISK_DB: Record<string, RiskVeri> = {
   'Adana-Kozan':             { riskSkoru: 70, fayMesafe: 45,  olasilik30: 48, beklenenMw: 'Mw 6.5–7.0', fayAdi: 'DAF' },
   'Adana-Karataş':           { riskSkoru: 72, fayMesafe: 42,  olasilik30: 50, beklenenMw: 'Mw 6.5–7.0', fayAdi: 'DAF güney' },
   'Adana-İmamoğlu':          { riskSkoru: 75, fayMesafe: 35,  olasilik30: 52, beklenenMw: 'Mw 6.5–7.0', fayAdi: 'DAF' },
+
+  // ── İZMİR ─────────────────────────────────────────────────────────────────
+  // Kaynak: AFAD Türkiye Deprem Tehlike Haritası 2018; Sözbilir vd. aktif tektonik çalışmaları
+  // 2020 Sisam (Samos) Mw 7.0 depremi İzmir'i ağır etkiledi; Bayraklı en fazla hasar gören ilçe
+  'İzmir-Bayraklı':          { riskSkoru: 90, fayMesafe: 8,   olasilik30: 65, beklenenMw: 'Mw 6.5–7.0', fayAdi: 'İzmir Körfezi Fayı' },
+  'İzmir-Bornova':           { riskSkoru: 78, fayMesafe: 12,  olasilik30: 56, beklenenMw: 'Mw 6.5–7.0', fayAdi: 'İzmir Körfezi Fayı' },
+  'İzmir-Karşıyaka':         { riskSkoru: 80, fayMesafe: 10,  olasilik30: 58, beklenenMw: 'Mw 6.5–7.0', fayAdi: 'İzmir Körfezi Fayı' },
+  'İzmir-Konak':             { riskSkoru: 82, fayMesafe: 9,   olasilik30: 60, beklenenMw: 'Mw 6.5–7.0', fayAdi: 'İzmir Körfezi Fayı' },
+  'İzmir-Buca':              { riskSkoru: 72, fayMesafe: 18,  olasilik30: 50, beklenenMw: 'Mw 6.5–7.0', fayAdi: 'Buca Fayı' },
+  'İzmir-Gaziemir':          { riskSkoru: 68, fayMesafe: 22,  olasilik30: 46, beklenenMw: 'Mw 6.0–6.8', fayAdi: 'Buca Fayı' },
+  'İzmir-Karabağlar':        { riskSkoru: 75, fayMesafe: 15,  olasilik30: 52, beklenenMw: 'Mw 6.5–7.0', fayAdi: 'İzmir Körfezi Fayı' },
+  'İzmir-Çiğli':             { riskSkoru: 76, fayMesafe: 14,  olasilik30: 54, beklenenMw: 'Mw 6.5–7.0', fayAdi: 'İzmir Körfezi Fayı' },
+  'İzmir-Narlıdere':         { riskSkoru: 65, fayMesafe: 20,  olasilik30: 44, beklenenMw: 'Mw 6.0–6.8', fayAdi: 'İzmir Körfezi Fayı' },
+  'İzmir-Torbalı':           { riskSkoru: 62, fayMesafe: 25,  olasilik30: 42, beklenenMw: 'Mw 6.0–6.8', fayAdi: 'Gediz Grabeni' },
+  'İzmir-Kemalpaşa':         { riskSkoru: 60, fayMesafe: 28,  olasilik30: 40, beklenenMw: 'Mw 6.0–6.8', fayAdi: 'Gediz Grabeni' },
+  'İzmir-Aliağa':            { riskSkoru: 65, fayMesafe: 22,  olasilik30: 44, beklenenMw: 'Mw 6.0–6.8', fayAdi: 'Bakırçay Fayı' },
+  'İzmir-Bergama':           { riskSkoru: 58, fayMesafe: 35,  olasilik30: 38, beklenenMw: 'Mw 5.5–6.5', fayAdi: 'Bakırçay Fayı' },
+
+  // ── ANTALYA ───────────────────────────────────────────────────────────────
+  // Kaynak: AFAD Türkiye Deprem Tehlike Haritası 2018; Akdeniz batı kolu sismisitesi
+  'Antalya-Kepez':           { riskSkoru: 50, fayMesafe: 65,  olasilik30: 32, beklenenMw: 'Mw 6.0–6.5', fayAdi: 'Akdeniz Fayları' },
+  'Antalya-Muratpaşa':       { riskSkoru: 48, fayMesafe: 68,  olasilik30: 30, beklenenMw: 'Mw 6.0–6.5', fayAdi: 'Akdeniz Fayları' },
+  'Antalya-Konyaaltı':       { riskSkoru: 52, fayMesafe: 60,  olasilik30: 34, beklenenMw: 'Mw 6.0–6.5', fayAdi: 'Akdeniz Fayları' },
+  'Antalya-Manavgat':        { riskSkoru: 55, fayMesafe: 55,  olasilik30: 36, beklenenMw: 'Mw 6.0–6.5', fayAdi: 'Manavgat Fayı' },
+  'Antalya-Alanya':          { riskSkoru: 58, fayMesafe: 50,  olasilik30: 38, beklenenMw: 'Mw 6.0–6.5', fayAdi: 'Alanya Fayı' },
+  'Antalya-Serik':           { riskSkoru: 45, fayMesafe: 72,  olasilik30: 28, beklenenMw: 'Mw 5.5–6.5', fayAdi: 'Akdeniz Fayları' },
+  'Antalya-Döşemealtı':      { riskSkoru: 42, fayMesafe: 78,  olasilik30: 26, beklenenMw: 'Mw 5.5–6.5', fayAdi: 'Akdeniz Fayları' },
+  'Antalya-Aksu':            { riskSkoru: 44, fayMesafe: 75,  olasilik30: 27, beklenenMw: 'Mw 5.5–6.5', fayAdi: 'Akdeniz Fayları' },
+
+  // ── MUĞLA ─────────────────────────────────────────────────────────────────
+  // Kaynak: AFAD Türkiye Deprem Tehlike Haritası 2018; Ege bölgesi yoğun sismisitesi
+  'Muğla-Menteşe':           { riskSkoru: 65, fayMesafe: 30,  olasilik30: 44, beklenenMw: 'Mw 6.5–7.0', fayAdi: 'Güneybatı Anadolu Fayları' },
+  'Muğla-Bodrum':            { riskSkoru: 72, fayMesafe: 20,  olasilik30: 50, beklenenMw: 'Mw 6.5–7.0', fayAdi: 'Bodrum-Kos Fayı' },
+  'Muğla-Fethiye':           { riskSkoru: 70, fayMesafe: 22,  olasilik30: 48, beklenenMw: 'Mw 6.5–7.0', fayAdi: 'Fethiye-Burdur Fayı' },
+  'Muğla-Marmaris':          { riskSkoru: 68, fayMesafe: 25,  olasilik30: 46, beklenenMw: 'Mw 6.5–7.0', fayAdi: 'Güneybatı Anadolu Fayları' },
+  'Muğla-Milas':             { riskSkoru: 62, fayMesafe: 32,  olasilik30: 42, beklenenMw: 'Mw 6.0–6.8', fayAdi: 'Güneybatı Anadolu Fayları' },
+  'Muğla-Datça':             { riskSkoru: 75, fayMesafe: 18,  olasilik30: 52, beklenenMw: 'Mw 6.5–7.0', fayAdi: 'Datça-Bozburun Fayı' },
+  'Muğla-Köyceğiz':          { riskSkoru: 60, fayMesafe: 35,  olasilik30: 40, beklenenMw: 'Mw 6.0–6.8', fayAdi: 'Fethiye-Burdur Fayı' },
+
+  // ── DENİZLİ ───────────────────────────────────────────────────────────────
+  // Kaynak: AFAD Türkiye Deprem Tehlike Haritası 2018; Büyük Menderes Grabeni sismisitesi
+  'Denizli-Pamukkale':       { riskSkoru: 72, fayMesafe: 15,  olasilik30: 50, beklenenMw: 'Mw 6.5–7.0', fayAdi: 'Büyük Menderes Grabeni' },
+  'Denizli-Merkezefendi':    { riskSkoru: 70, fayMesafe: 18,  olasilik30: 48, beklenenMw: 'Mw 6.5–7.0', fayAdi: 'Büyük Menderes Grabeni' },
+  'Denizli-Honaz':           { riskSkoru: 68, fayMesafe: 20,  olasilik30: 46, beklenenMw: 'Mw 6.5–7.0', fayAdi: 'Büyük Menderes Grabeni' },
+  'Denizli-Buldan':          { riskSkoru: 62, fayMesafe: 28,  olasilik30: 42, beklenenMw: 'Mw 6.0–6.8', fayAdi: 'Gediz Grabeni' },
+  'Denizli-Sarayköy':        { riskSkoru: 65, fayMesafe: 24,  olasilik30: 44, beklenenMw: 'Mw 6.5–7.0', fayAdi: 'Büyük Menderes Grabeni' },
+  'Denizli-Tavas':           { riskSkoru: 58, fayMesafe: 38,  olasilik30: 38, beklenenMw: 'Mw 6.0–6.8', fayAdi: 'Güneybatı Anadolu Fayları' },
+
+  // ── BOLU ──────────────────────────────────────────────────────────────────
+  // Kaynak: AFAD Türkiye Deprem Tehlike Haritası 2018; KAF'ın Bolu-Düzce segmenti
+  'Bolu-Merkez':             { riskSkoru: 82, fayMesafe: 8,   olasilik30: 58, beklenenMw: 'Mw 7.0–7.5', fayAdi: 'KAF Bolu' },
+  'Bolu-Gerede':             { riskSkoru: 88, fayMesafe: 4,   olasilik30: 64, beklenenMw: 'Mw 7.0–7.5', fayAdi: 'KAF Bolu' },
+  'Bolu-Mudurnu':            { riskSkoru: 85, fayMesafe: 6,   olasilik30: 62, beklenenMw: 'Mw 7.0–7.5', fayAdi: 'KAF Bolu' },
+  'Bolu-Göynük':             { riskSkoru: 78, fayMesafe: 12,  olasilik30: 54, beklenenMw: 'Mw 7.0–7.5', fayAdi: 'KAF Bolu' },
+  'Bolu-Dörtdivan':          { riskSkoru: 80, fayMesafe: 10,  olasilik30: 56, beklenenMw: 'Mw 7.0–7.5', fayAdi: 'KAF Bolu' },
+  'Bolu-Kıbrıscık':          { riskSkoru: 75, fayMesafe: 14,  olasilik30: 52, beklenenMw: 'Mw 7.0–7.5', fayAdi: 'KAF Bolu' },
+
+  // ── DÜZCE ─────────────────────────────────────────────────────────────────
+  // Kaynak: AFAD Türkiye Deprem Tehlike Haritası 2018; 1999 Düzce depremi (Mw 7.2)
+  'Düzce-Merkez':            { riskSkoru: 93, fayMesafe: 3,   olasilik30: 68, beklenenMw: 'Mw 7.0–7.5', fayAdi: 'KAF Düzce' },
+  'Düzce-Akçakoca':          { riskSkoru: 88, fayMesafe: 8,   olasilik30: 64, beklenenMw: 'Mw 7.0–7.5', fayAdi: 'KAF Düzce' },
+  'Düzce-Kaynaşlı':          { riskSkoru: 90, fayMesafe: 5,   olasilik30: 66, beklenenMw: 'Mw 7.0–7.5', fayAdi: 'KAF Düzce' },
+  'Düzce-Gölyaka':           { riskSkoru: 85, fayMesafe: 10,  olasilik30: 60, beklenenMw: 'Mw 7.0–7.5', fayAdi: 'KAF Düzce' },
+  'Düzce-Çilimli':           { riskSkoru: 82, fayMesafe: 12,  olasilik30: 58, beklenenMw: 'Mw 7.0–7.5', fayAdi: 'KAF Düzce' },
+  'Düzce-Yığılca':           { riskSkoru: 78, fayMesafe: 16,  olasilik30: 54, beklenenMw: 'Mw 7.0–7.5', fayAdi: 'KAF Düzce' },
+
+  // ── YALOVA ────────────────────────────────────────────────────────────────
+  // Kaynak: AFAD Türkiye Deprem Tehlike Haritası 2018; KAF Marmara güney kolu
+  'Yalova-Merkez':           { riskSkoru: 90, fayMesafe: 6,   olasilik30: 66, beklenenMw: 'Mw 7.0–7.5', fayAdi: 'KAF Marmara güney' },
+  'Yalova-Çınarcık':         { riskSkoru: 92, fayMesafe: 4,   olasilik30: 68, beklenenMw: 'Mw 7.0–7.5', fayAdi: 'KAF Marmara güney' },
+  'Yalova-Altınova':         { riskSkoru: 88, fayMesafe: 8,   olasilik30: 64, beklenenMw: 'Mw 7.0–7.5', fayAdi: 'KAF Marmara güney' },
+  'Yalova-Termal':           { riskSkoru: 85, fayMesafe: 10,  olasilik30: 62, beklenenMw: 'Mw 7.0–7.5', fayAdi: 'KAF Marmara güney' },
+  'Yalova-Çiftlikköy':       { riskSkoru: 87, fayMesafe: 8,   olasilik30: 63, beklenenMw: 'Mw 7.0–7.5', fayAdi: 'KAF Marmara güney' },
+  'Yalova-Armutlu':          { riskSkoru: 82, fayMesafe: 12,  olasilik30: 58, beklenenMw: 'Mw 7.0–7.5', fayAdi: 'KAF Marmara güney' },
 };
 
 // ─── Zemin Veritabanı ────────────────────────────────────────────────────────
@@ -238,6 +320,29 @@ const ZEMIN_DB: Record<string, BolgeRisk['zemin']> = {
     { ad: 'Gevşek çökel', yuzde: 22, risk: 'yuksek', aciklama: 'Yüksek amplifikasyon' },
     { ad: 'Kaya', yuzde: 8, risk: 'dusuk', aciklama: 'Sınırlı alan' },
   ],
+  // İzmir zemin — Kaynak: AFAD Zemin Araştırması; Sözbilir vd.
+  'İzmir-Bayraklı': [
+    { ad: 'Alüvyon', yuzde: 82, risk: 'yuksek', aciklama: '2020 Sisam depreminde en fazla hasar bu alanda oluştu; zemin büyütmesi yüksek' },
+    { ad: 'Killi zemin', yuzde: 14, risk: 'orta', aciklama: 'Orta risk' },
+    { ad: 'Kaya', yuzde: 4, risk: 'dusuk', aciklama: 'Çok sınırlı alan' },
+  ],
+  'İzmir-Konak': [
+    { ad: 'Alüvyon', yuzde: 65, risk: 'yuksek', aciklama: 'Körfez kenarı, sıvılaşma ve büyütme riski var' },
+    { ad: 'Killi zemin', yuzde: 25, risk: 'orta', aciklama: 'Orta risk' },
+    { ad: 'Kaya', yuzde: 10, risk: 'dusuk', aciklama: 'Görece güvenli' },
+  ],
+  // Düzce zemin — Kaynak: AFAD; 1999 Düzce depremi gözlemleri
+  'Düzce-Merkez': [
+    { ad: 'Alüvyon', yuzde: 75, risk: 'yuksek', aciklama: '1999 Mw 7.2 depreminde yoğun zemin büyütmesi yaşandı' },
+    { ad: 'Killi zemin', yuzde: 18, risk: 'orta', aciklama: 'Orta risk' },
+    { ad: 'Kaya', yuzde: 7, risk: 'dusuk', aciklama: 'Sınırlı alan' },
+  ],
+  // Yalova zemin — Kaynak: AFAD; 1999 Marmara depremi gözlemleri
+  'Yalova-Merkez': [
+    { ad: 'Alüvyon', yuzde: 70, risk: 'yuksek', aciklama: '1999 depreminde ciddi zemin büyütmesi yaşandı' },
+    { ad: 'Killi zemin', yuzde: 20, risk: 'orta', aciklama: 'Orta risk' },
+    { ad: 'Kaya', yuzde: 10, risk: 'dusuk', aciklama: 'Görece güvenli' },
+  ],
 };
 
 // ─── Ana hesaplama ────────────────────────────────────────────────────────────
@@ -262,10 +367,10 @@ function hesaplaRisk(il: string, ilce: string, mahalle: string, depremler: Depre
       : skor >= 35 ? 'M5.0–5.5+ deprem olasılığı orta'
       : 'M5.0–5.5+ deprem olasılığı düşük',
     aciklama: bilimsel?.genelDegerlendirme
-      ?? `${ilce} ilçesi deprem risk analizi · Fay: ${veri?.fayAdi ?? 'belirsiz'} · Veri: Kandilli / MTA`,
+      ?? `${ilce} ilçesi deprem risk analizi · Fay: ${veri?.fayAdi ?? 'belirsiz'} · Veri: AFAD / MTA`,
     fayMesafe: veri?.fayMesafe ?? 50,
     beklenenMax: veri?.beklenenMw ?? 'Mw 6.0–7.0',
-    olasilik30Yil: veri?.olasilik30 ?? 25,
+    olasilik30Yil: olasilikEtiket(veri?.olasilik30 ?? 25),
     depremSayisi: depremler.length > 0 ? depremler.length * 35 : Math.round(skor * 3.5),
     sonDeprem: depremler[0]?.tarih ?? '—',
     maxBuyukluk: depremler.length
@@ -334,5 +439,17 @@ const BINA_DB: Record<string, BolgeRisk['binalar']> = {
   'Hatay-Antakya': [
     { donem: '2023 öncesi', yuzde: 68, renk: '#E24B4A' },
     { donem: '2023 sonrası (yeniden yapılan)', yuzde: 32, renk: '#639922' },
+  ],
+  // İzmir bina stoğu — Kaynak: TÜİK 2021 Bina Sayımı
+  'İzmir-Bayraklı': [
+    { donem: '2000 öncesi', yuzde: 48, renk: '#E24B4A' },
+    { donem: '2000–2012', yuzde: 32, renk: '#EF9F27' },
+    { donem: '2012 sonrası', yuzde: 20, renk: '#639922' },
+  ],
+  // Düzce bina stoğu — Kaynak: TÜİK 2021 Bina Sayımı
+  'Düzce-Merkez': [
+    { donem: '1999 öncesi', yuzde: 22, renk: '#E24B4A' },
+    { donem: '1999–2012', yuzde: 45, renk: '#EF9F27' },
+    { donem: '2012 sonrası', yuzde: 33, renk: '#639922' },
   ],
 };

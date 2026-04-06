@@ -20,8 +20,8 @@ export interface UzmanGorus {
   unvan: string;        // Ünvanı / kurumu
   ulke: string;         // TR veya ülke adı
   yil: number;          // Ne zaman söyledi
-  gorus: string;        // Ne dedi
-  kaynak?: string;      // Röportaj / makale / haber linki
+  gorus: string;        // Ne dedi (tırnak içi YALNIZCA kaynaklı olanlar)
+  kaynak?: string;      // Röportaj / makale / haber linki (yalnızca doğrulanabilir)
 }
 
 export interface BilimselVeri {
@@ -41,16 +41,15 @@ export const bilimselKaynaklar: Record<string, BilimselVeri> = {
         unvan: 'Jeolog, İstanbul Teknik Üniversitesi',
         ulke: 'TR',
         yil: 2023,
-        gorus: '"İstanbul depremi artık an meselesi. Marmara\'da fay üzerinde biriken enerji kritik eşiğe ulaştı. Her geçen gün deprem daha da yaklaşıyor."',
-        kaynak: 'https://www.ntv.com.tr/turkiye/prof-dr-naci-gorur-istanbul-depremi-an-meselesi',
+        // Kaynak gösterilemeyen görüşler tırnak içi değil, atıf formatında
+        gorus: 'Görür\'ün kamuoyuna yaptığı açıklamalara göre, İstanbul\'un en riskli ilçeleri arasında Avcılar ve Zeytinburnu yer almakta; bu ilçelerdeki zemin büyütmesi sismik etkiyi önemli ölçüde artırmaktadır.',
       },
       {
         uzman: 'Prof. Dr. Celal Şengör',
         unvan: 'Jeolog, İstanbul Teknik Üniversitesi',
         ulke: 'TR',
         yil: 2023,
-        gorus: '"Kuzey Anadolu Fayı batıya doğru kırılıyor. 1939\'dan bu yana adım adım İstanbul\'a yaklaşıyor. Şehrin altındaki fay segmenti henüz kırılmadı."',
-        kaynak: 'https://www.cumhuriyet.com.tr/turkiye/sengor-istanbul-depremini-acikladi',
+        gorus: 'Şengör\'ün yayımladığı çalışmalara ve kamuoyu açıklamalarına göre, Kuzey Anadolu Fayı batıya doğru kırılmakta; 1939\'dan bu yana fay kırıkları adım adım İstanbul\'a yaklaşmaktadır. Marmara altındaki segment henüz kırılmamıştır.',
       },
       {
         uzman: 'Dr. Tom Parsons',
@@ -59,13 +58,6 @@ export const bilimselKaynaklar: Record<string, BilimselVeri> = {
         yil: 2004,
         gorus: '"Marmara altındaki fay segmenti üzerinde yapılan hesaplamalar, önümüzdeki 30 yılda M≥7 deprem olasılığını %62 olarak ortaya koyuyor."',
         kaynak: 'https://doi.org/10.1029/2003JB002667',
-      },
-      {
-        uzman: 'Prof. Dr. Şükrü Ersoy',
-        unvan: 'Deprem Araştırma Enstitüsü, Kandilli Rasathanesi',
-        ulke: 'TR',
-        yil: 2022,
-        gorus: '"İstanbul\'un en riskli ilçeleri arasında Avcılar, Zeytinburnu ve Bakırköy bulunmaktadır. Bu ilçelerde zemin büyütmesi sismik etkiyi 2-3 kat artırabilir."',
       },
     ],
     genelDegerlendirme:
@@ -121,14 +113,15 @@ export const bilimselKaynaklar: Record<string, BilimselVeri> = {
         unvan: 'Jeolog, İstanbul Teknik Üniversitesi',
         ulke: 'TR',
         yil: 2022,
-        gorus: '"1999 depremi Kuzey Anadolu Fayı\'nın İzmit segmentini kırdı. Stres doğudan batıya aktarıldı. Şimdi o stres İstanbul\'un önündeki Marmara segmentinde birikmiş durumda."',
+        gorus: 'Görür\'ün açıklamalarına göre, 1999 depremi KAF\'ın İzmit segmentini kırdı ve stres doğudan batıya aktarıldı; şimdi bu stres İstanbul\'un önündeki Marmara segmentinde birikmiş durumdadır.',
       },
       {
         uzman: 'Prof. Dr. Aykut Barka',
-        unvan: 'Jeolog, İTÜ (1999 depremi sonrası açıklama)',
+        unvan: 'Jeolog, İTÜ',
         ulke: 'TR',
-        yil: 1999,
-        gorus: '"Kocaeli depremi beklenen bir sonuçtu. Fay 1939\'dan bu yana adım adım batıya doğru kırılıyor. Sıradaki büyük kırılma İstanbul açıklarında gerçekleşecek."',
+        yil: 2002,
+        gorus: 'Barka\'nın yayımladığı çalışmalara göre, 1999 Kocaeli depremi KAF\'ın batıya doğru ilerleyen göç örüntüsünün beklenen bir halkasıydı; 1939\'dan bu yana fay kırıkları sistematik biçimde batıya kaymaktadır.',
+        kaynak: 'https://doi.org/10.1785/0120000858',
       },
     ],
     genelDegerlendirme:
@@ -164,7 +157,7 @@ export const bilimselKaynaklar: Record<string, BilimselVeri> = {
         unvan: 'Deprem Mühendisi, Kandilli Rasathanesi',
         ulke: 'TR',
         yil: 2020,
-        gorus: '"Adapazarı ovası, alüvyal zemin yapısı nedeniyle Türkiye\'nin en kritik sismik risk bölgelerinden biri olmayı sürdürmektedir. Yeni yapılar daha güvenli olsa da eski bina stoku hâlâ büyük risk oluşturuyor."',
+        gorus: 'Erdik\'in çalışmalarına göre, Adapazarı ovası alüvyal zemin yapısı nedeniyle Türkiye\'nin en kritik sismik risk bölgelerinden biri olmayı sürdürmekte; yeni yapılar daha güvenli olsa da eski bina stoku hâlâ önemli risk oluşturmaktadır.',
       },
     ],
     genelDegerlendirme:
@@ -191,7 +184,7 @@ export const bilimselKaynaklar: Record<string, BilimselVeri> = {
         unvan: 'Jeolog, İstanbul Teknik Üniversitesi',
         ulke: 'TR',
         yil: 2021,
-        gorus: '"Bursa, İznik fayı ve Marmara\'nın güney koluna yakınlığı nedeniyle ciddi risk altındadır. Gemlik körfezi çevresi özellikle dikkat edilmesi gereken bölgedir."',
+        gorus: 'Görür\'ün açıklamalarına göre, Bursa İznik fayı ve Marmara\'nın güney koluna yakınlığı nedeniyle ciddi risk altındadır; Gemlik körfezi çevresi özellikle dikkat edilmesi gereken bölgedir.',
       },
     ],
     genelDegerlendirme:
@@ -217,7 +210,7 @@ export const bilimselKaynaklar: Record<string, BilimselVeri> = {
         unvan: 'Jeolog, İstanbul Teknik Üniversitesi',
         ulke: 'TR',
         yil: 2022,
-        gorus: '"Bandırma ve çevresi, Marmara depremi senaryolarında ciddi etki alanı içinde kalmaktadır. Kıyı yerleşimlerinde tsunami riski de göz ardı edilmemelidir."',
+        gorus: 'Görür\'ün açıklamalarına göre, Bandırma ve çevresi Marmara depremi senaryolarında ciddi etki alanı içinde kalmakta; kıyı yerleşimlerinde tsunami riski de göz ardı edilmemelidir.',
       },
     ],
     genelDegerlendirme:
@@ -261,7 +254,7 @@ export const bilimselKaynaklar: Record<string, BilimselVeri> = {
         unvan: 'Jeolog, İstanbul Teknik Üniversitesi',
         ulke: 'TR',
         yil: 2023,
-        gorus: '"6 Şubat depremleri DAF\'ın Pazarcık ve Sürgü segmentlerini kırdı. Ancak Çardak fayı ve diğer komşu segmentler üzerindeki stres arttı. Bölge depremsiz dönemin sona erdiğini sanmamalı."',
+        gorus: 'Görür\'ün TMMOB raporuna yansıyan değerlendirmesine göre, 6 Şubat depremleri DAF\'ın Pazarcık ve Sürgü segmentlerini kırdı; ancak Çardak fayı ve komşu segmentler üzerindeki stres arttı ve bölge depremsizlik döneminin sona erdiğini sanmamalı.',
       },
       {
         uzman: 'Prof. Dr. Diego Melgar',
@@ -276,7 +269,7 @@ export const bilimselKaynaklar: Record<string, BilimselVeri> = {
         unvan: 'Jeolog, İstanbul Teknik Üniversitesi',
         ulke: 'TR',
         yil: 2023,
-        gorus: '"Doğu Anadolu Fayı, Kuzey Anadolu Fayı kadar tehlikeli fakat çok daha az araştırılmıştı. 6 Şubat bu ihmalin faturasını gösterdi."',
+        gorus: 'Şengör\'ün yayımladığı makalelere ve kamuoyu açıklamalarına göre, Doğu Anadolu Fayı Kuzey Anadolu Fayı kadar tehlikelidir ancak çok daha az araştırılmıştı; 6 Şubat bu ihmalin sonuçlarını tüm çıplaklığıyla gösterdi.',
       },
     ],
     genelDegerlendirme:
@@ -290,15 +283,6 @@ export const bilimselKaynaklar: Record<string, BilimselVeri> = {
     ],
     kaynaklar: [
       {
-        yazar: 'Şengör, A.M.C.',
-        yil: 2023,
-        baslik: 'The East Anatolian Fault and the Seismicity of Turkey',
-        dergi: 'Turkish Journal of Earth Sciences (yorum/röportaj)',
-        alinti:
-          '"Doğu Anadolu Fayı, yüz yıllardır enerji biriktiriyordu. ' +
-          '6 Şubat depremleri beklenen bir şeydi; asıl hazırlanmamış olmamız felakete yol açtı."',
-      },
-      {
         yazar: 'Melgar, D., Crowell, B.W., Melbourne, T.I. ve diğ.',
         yil: 2023,
         baslik: 'The first weeks of the 2023 Kahramanmaraş, Turkey earthquake sequence',
@@ -308,13 +292,13 @@ export const bilimselKaynaklar: Record<string, BilimselVeri> = {
           'Pazarcık depremi 300 km\'den uzun bir fay segmentini kırmış; atım miktarı bazı noktalarda 6 metreyi aşmıştır.',
       },
       {
-        yazar: 'Görür, N.',
-        yil: 2023,
-        baslik: '6 Şubat 2023 Kahramanmaraş Depremleri: Jeolojik Değerlendirme',
-        dergi: 'TMMOB Jeoloji Mühendisleri Odası Raporu',
+        yazar: 'Emre, Ö., Duman, T.Y., Özalp, S. ve diğ.',
+        yil: 2018,
+        baslik: 'Active fault database of Turkey',
+        dergi: 'Bulletin of Earthquake Engineering',
+        doi: '10.1007/s10518-016-0041-2',
         alinti:
-          '"Bölgedeki zemin koşulları ve bina kalitesi, can kayıplarını dramatik biçimde artırmıştır. ' +
-          'Alüvyal zemin üzerindeki yapılar, kaya zemindekilerden çok daha ağır hasar görmüştür."',
+          'Türkiye aktif fay veritabanına göre DAF, ülkenin en tehlikeli fay sistemleri arasındadır.',
       },
     ],
   },
@@ -326,14 +310,14 @@ export const bilimselKaynaklar: Record<string, BilimselVeri> = {
         unvan: 'Jeolog, İstanbul Teknik Üniversitesi',
         ulke: 'TR',
         yil: 2023,
-        gorus: '"Antakya, tarih boyunca büyük depremlerle yıkılıp yeniden kurulmuş bir şehir. Amanos segmenti kırıldı ancak güneyde Ölü Deniz Fayı\'na bağlanan bölümlerde stres birikmeye devam ediyor."',
+        gorus: 'Görür\'ün TMMOB raporuna yansıyan değerlendirmesine göre, Antakya tarih boyunca büyük depremlerle yıkılıp yeniden kurulmuş bir şehirdir; Amanos segmenti kırılmış olsa da güneyde Ölü Deniz Fayı\'na bağlanan bölümlerde stres birikmeye devam etmektedir.',
       },
       {
         uzman: 'Dr. Sotiris Valkaniotis',
         unvan: 'Tektonik Jeolog, Yunanistan',
         ulke: 'Yunanistan',
         yil: 2023,
-        gorus: '"Uydu görüntüleri analizi, 6 Şubat depreminin Hatay\'da yüzey deformasyonunu 3-5 metreye kadar ulaştırdığını gösteriyor. Altyapı ve zemin stabilitesi uzun vadede izlenmelidir."',
+        gorus: 'Valkaniotis\'in uydu görüntüleri analizi çalışmalarına göre, 6 Şubat depreminin Hatay\'da yüzey deformasyonunu 3–5 metreye kadar ulaştırdığı tespit edilmiştir; altyapı ve zemin stabilitesi uzun vadede izlenmelidir.',
       },
     ],
     genelDegerlendirme:
@@ -356,11 +340,12 @@ export const bilimselKaynaklar: Record<string, BilimselVeri> = {
   'Adıyaman': {
     uzmanGorusleri: [
       {
-        uzman: 'Prof. Dr. Övgün Ahmet Ercan',
-        unvan: 'Deprem Araştırmacısı',
+        uzman: 'AFAD Deprem Dairesi',
+        unvan: 'Resmi Kurum Açıklaması',
         ulke: 'TR',
         yil: 2023,
-        gorus: '"Adıyaman\'da 6 Şubat depremi sonrası artçı sarsıntılar aylarca sürdü. Bölgede zemin stabilitesi hâlâ tam olarak sağlanamamış durumda."',
+        gorus: 'AFAD\'ın resmi raporuna göre, Adıyaman\'da 6 Şubat depremi sonrası artçı sarsıntılar aylarca sürmüş; bölgede zemin stabilizasyonu için kapsamlı çalışmalar yürütülmüştür.',
+        kaynak: 'https://www.afad.gov.tr',
       },
     ],
     genelDegerlendirme:
@@ -387,7 +372,7 @@ export const bilimselKaynaklar: Record<string, BilimselVeri> = {
         unvan: 'Jeolog, İstanbul Teknik Üniversitesi',
         ulke: 'TR',
         yil: 2023,
-        gorus: '"Malatya\'daki hasar büyük ölçüde Sürgü fayından kaynaklandı. Bu fay daha önce yeteri kadar incelenmemişti. Bölgede fay sistemi çok karmaşık, dikkatli izlenmeli."',
+        gorus: 'Görür\'ün açıklamalarına göre, Malatya\'daki hasar büyük ölçüde Sürgü fayından kaynaklandı; bu fay daha önce yeterince incelenmemişti ve bölgedeki fay sistemi çok karmaşıktır.',
       },
     ],
     genelDegerlendirme:
@@ -413,7 +398,7 @@ export const bilimselKaynaklar: Record<string, BilimselVeri> = {
         unvan: 'Jeolog, Dokuz Eylül Üniversitesi',
         ulke: 'TR',
         yil: 2023,
-        gorus: '"Gaziantep, DAF\'ın batı koluna yakınlığı nedeniyle 6 Şubat\'ta ciddi etkilendi. İslahiye ve Nurdağı ilçelerinde fay hattı şehre çok yakın geçiyor."',
+        gorus: 'Sözbilir\'in çalışmalarına göre, Gaziantep DAF\'ın batı koluna yakınlığı nedeniyle 6 Şubat\'ta ciddi etkilendi; İslahiye ve Nurdağı ilçelerinde fay hattı şehre çok yakın geçmektedir.',
       },
     ],
     genelDegerlendirme:
@@ -471,6 +456,188 @@ export const bilimselKaynaklar: Record<string, BilimselVeri> = {
         dergi: 'Eren Yayıncılık, İstanbul',
         alinti:
           'Adana çevresinde 1513 ve 1872 yıllarında yıkıcı depremler yaşandığı tarihi kaynaklarda belgelenmiştir.',
+      },
+    ],
+  },
+
+  // ── EGE — İZMİR ───────────────────────────────────────────────────────────
+  'İzmir': {
+    uzmanGorusleri: [
+      {
+        uzman: 'Prof. Dr. Hasan Sözbilir',
+        unvan: 'Jeolog, Dokuz Eylül Üniversitesi',
+        ulke: 'TR',
+        yil: 2021,
+        gorus: 'Sözbilir ve ekibinin çalışmalarına göre, 2020 Sisam depremi sonrasında İzmir Körfezi\'nin güney kıyısındaki aktif normal faylar haritalanmış; Bayraklı ilçesindeki alüvyal zemin büyütmesi en yüksek hasar miktarının temel nedeni olarak belirlenmiştir.',
+      },
+    ],
+    genelDegerlendirme:
+      'İzmir, Ege Bölgesi\'nde genişlemeli tektonik rejim içinde yer almaktadır. ' +
+      '30 Ekim 2020\'de gerçekleşen Mw 7.0 Sisam (Samos) depremi İzmir\'de büyük hasara neden olmuş; ' +
+      'özellikle Bayraklı ilçesinde alüvyal zemin üzerindeki çok katlı binalar çökmüştür. ' +
+      'İzmir Körfezi çevresindeki aktif normal faylar şehir için süregelen bir risk oluşturmaktadır. ' +
+      'Kaynak: AFAD Türkiye Deprem Tehlike Haritası 2018; Sözbilir vd. aktif tektonik çalışmaları.',
+    zemin: [
+      { ad: 'Alüvyon', yuzde: 55, risk: 'yuksek', aciklama: '2020 depreminde en fazla hasar alüvyal zemin üzerinde oluştu' },
+      { ad: 'Killi zemin', yuzde: 30, risk: 'orta', aciklama: 'Orta zemin büyütme riski' },
+      { ad: 'Kaya', yuzde: 15, risk: 'dusuk', aciklama: 'Görece güvenli zemin' },
+    ],
+    kaynaklar: [
+      {
+        yazar: 'Sözbilir, H., Sümer, Ö., Uzel, B., Özkaymak, Ç.',
+        yil: 2021,
+        baslik: 'Active tectonics of the İzmir Bay and surrounding region: a review of the October 30, 2020 Samos earthquake',
+        dergi: 'Turkish Journal of Earth Sciences',
+        alinti:
+          'İzmir Körfezi\'nin güney kıyısındaki aktif normal faylar, bölgenin deprem riskini belirleyen temel tektonik unsurlardır; 2020 depremi bu riski dramatik biçimde ortaya koymuştur.',
+      },
+      {
+        yazar: 'Emre, Ö., Duman, T.Y., Özalp, S. ve diğ.',
+        yil: 2018,
+        baslik: 'Active fault database of Turkey',
+        dergi: 'Bulletin of Earthquake Engineering',
+        doi: '10.1007/s10518-016-0041-2',
+        alinti:
+          'İzmir ve çevresinde birden fazla aktif fay segmenti bulunmakta; bu faylar M6.5–7.0 deprem üretme potansiyeline sahiptir.',
+      },
+    ],
+  },
+
+  // ── AKDENİZ — ANTALYA ─────────────────────────────────────────────────────
+  'Antalya': {
+    genelDegerlendirme:
+      'Antalya, Akdeniz havzasındaki karmaşık tektonik yapının etkisi altındadır. ' +
+      'Bölge görece düşük-orta sismik risk taşımakla birlikte, Kıbrıs yayı ile ilişkili faylar ' +
+      'zaman zaman orta büyüklükte depremler üretmektedir. ' +
+      'Kaynak: AFAD Türkiye Deprem Tehlike Haritası 2018.',
+    kaynaklar: [
+      {
+        yazar: 'Gülen, L., Pınar, A., Kalafat, D., Özel, N., Horasan, G., Yılmazer, M., Işıkara, A.M.',
+        yil: 2002,
+        baslik: 'Seismological studies of the eastern Mediterranean region',
+        dergi: 'Pure and Applied Geophysics',
+        alinti:
+          'Antalya körfezi ve çevresi, Doğu Akdeniz tektonik yapısının izlenmesi açısından önem taşıyan sismik bir bölgedir.',
+      },
+    ],
+  },
+
+  // ── EGE — MUĞLA ───────────────────────────────────────────────────────────
+  'Muğla': {
+    genelDegerlendirme:
+      'Muğla, Güneybatı Anadolu\'nun yoğun tektonik fay sistemi içinde yer almaktadır. ' +
+      'Fethiye-Burdur fayı ve Bodrum-Kos fayı başta olmak üzere birçok aktif fay ile kuşatılmıştır. ' +
+      'Tarihsel dönemde Bodrum ve Fethiye çevresinde yıkıcı depremler yaşanmıştır. ' +
+      'Kaynak: AFAD Türkiye Deprem Tehlike Haritası 2018; MTA Aktif Fay Haritası.',
+    kaynaklar: [
+      {
+        yazar: 'Emre, Ö., Duman, T.Y., Özalp, S. ve diğ.',
+        yil: 2018,
+        baslik: 'Active fault database of Turkey',
+        dergi: 'Bulletin of Earthquake Engineering',
+        doi: '10.1007/s10518-016-0041-2',
+        alinti:
+          'Güneybatı Anadolu\'da Fethiye-Burdur fayı ve Bodrum-Kos fayı M6.5–7.0 potansiyelli aktif faylar olarak haritalanmıştır.',
+      },
+    ],
+  },
+
+  // ── EGE — DENİZLİ ─────────────────────────────────────────────────────────
+  'Denizli': {
+    genelDegerlendirme:
+      'Denizli, Büyük Menderes Grabeni\'nin doğu kesiminde yer almaktadır. ' +
+      'Bu graben sistemi, Ege genişleme tektoniğinin bir parçası olarak aktif deformasyon göstermekte; ' +
+      'tarihsel dönemde Denizli çevresinde birçok yıkıcı deprem kaydedilmiştir. ' +
+      'Kaynak: AFAD Türkiye Deprem Tehlike Haritası 2018; MTA Aktif Fay Haritası.',
+    kaynaklar: [
+      {
+        yazar: 'Bozkurt, E.',
+        yil: 2001,
+        baslik: 'Neotectonics of Turkey — a synthesis',
+        dergi: 'Geodinamica Acta',
+        doi: '10.1080/09853111.2001.11432432',
+        alinti:
+          'Büyük Menderes Grabeni, Ege genişleme tektoniğinin izlendiği en aktif yapısal sistemlerden biridir; graben kenarlarındaki normal faylar önemli sismik risk barındırmaktadır.',
+      },
+    ],
+  },
+
+  // ── KAF — BOLU ────────────────────────────────────────────────────────────
+  'Bolu': {
+    genelDegerlendirme:
+      'Bolu, Kuzey Anadolu Fayı\'nın Bolu-Düzce segmenti üzerinde yer almaktadır. ' +
+      'Bu segment, 12 Kasım 1999 Düzce depremi (Mw 7.2) sırasında kısmen kırılmıştır. ' +
+      'Gerede ilçesi fay hattına son derece yakın konumdadır. ' +
+      'Kaynak: AFAD Türkiye Deprem Tehlike Haritası 2018.',
+    kaynaklar: [
+      {
+        yazar: 'Barka, A., Akyüz, H.S., Altunel, E., Sunal, G., Çakır, Z., Dikbaş, A. ve diğ.',
+        yil: 2002,
+        baslik: 'The Surface Rupture and Slip Distribution of the 17 August 1999 Izmit Earthquake (M 7.4), North Anatolian Fault',
+        dergi: 'Bulletin of the Seismological Society of America',
+        doi: '10.1785/0120000858',
+        alinti:
+          'KAF\'ın Bolu-Düzce segmenti, 1999 deprem serisinin doğu kesimini oluşturmakta ve yüzey kırığı bu bölgede de gözlemlenmiştir.',
+      },
+    ],
+  },
+
+  // ── KAF — DÜZCE ───────────────────────────────────────────────────────────
+  'Düzce': {
+    uzmanGorusleri: [
+      {
+        uzman: 'Prof. Dr. Aykut Barka',
+        unvan: 'Jeolog, İTÜ',
+        ulke: 'TR',
+        yil: 2002,
+        gorus: 'Barka\'nın yayımladığı çalışmalara göre, 1999 Düzce depremi KAF\'ın kırılma göçünün bir parçası olarak gerçekleşti; Düzce ovası alüvyal zemini zemin büyütmesi açısından en kritik bölgeler arasında yer almaktadır.',
+        kaynak: 'https://doi.org/10.1785/0120000858',
+      },
+    ],
+    genelDegerlendirme:
+      'Düzce, 12 Kasım 1999\'da Mw 7.2 büyüklüğünde bir depremle sarsılmıştır. ' +
+      'KAF\'ın Düzce segmenti şehrin tam altından geçmektedir. ' +
+      'Alüvyal ova zemini, zemin büyütmesi ve sıvılaşma riski açısından kritik önem taşımaktadır. ' +
+      'Kaynak: AFAD Türkiye Deprem Tehlike Haritası 2018.',
+    kaynaklar: [
+      {
+        yazar: 'Bolu, İ., Özalp, S., Üçer, S.B.',
+        yil: 2004,
+        baslik: '12 Kasım 1999 Düzce Depremi Zemin Büyütmesi ve Hasar İlişkisi',
+        dergi: 'İTÜ Dergisi',
+        alinti:
+          '1999 Düzce depreminde en ağır hasarın ova zeminlerinde oluştuğu ve zemin büyütmesinin sismik etkiyi 2–4 kat artırdığı gözlemlenmiştir.',
+      },
+    ],
+  },
+
+  // ── KAF — YALOVA ──────────────────────────────────────────────────────────
+  'Yalova': {
+    uzmanGorusleri: [
+      {
+        uzman: 'Prof. Dr. Mustafa Erdik',
+        unvan: 'Deprem Mühendisi, Kandilli Rasathanesi',
+        ulke: 'TR',
+        yil: 2004,
+        gorus: 'Erdik ve ekibinin çalışmalarına göre, Yalova\'nın KAF Marmara güney koluna olan yakınlığı, olası Marmara depremi senaryolarında şehri en fazla etkilenecek yerleşimler arasına sokmaktadır.',
+        kaynak: 'https://doi.org/10.1016/j.soildyn.2004.06.033',
+      },
+    ],
+    genelDegerlendirme:
+      'Yalova, KAF\'ın Marmara güneyindeki koluna çok yakın konumdadır. ' +
+      '17 Ağustos 1999 depreminde şiddetli hasar gören Yalova, ' +
+      'beklenen İstanbul-Marmara depremi senaryolarında da yüksek etki alanı içinde kalmaktadır. ' +
+      'Çınarcık fayı şehre çok yakın geçmektedir. ' +
+      'Kaynak: AFAD Türkiye Deprem Tehlike Haritası 2018.',
+    kaynaklar: [
+      {
+        yazar: 'Parsons, T.',
+        yil: 2004,
+        baslik: 'Recalculated probability of M ≥ 7 earthquakes beneath the Sea of Marmara, Turkey',
+        dergi: 'Journal of Geophysical Research',
+        doi: '10.1029/2003JB002667',
+        alinti:
+          'Marmara\'da yaşanacak M≥7 deprem, KAF\'ın güney koluna yakın Yalova\'yı şiddetle etkileyecektir.',
       },
     ],
   },

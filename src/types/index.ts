@@ -45,7 +45,7 @@ export interface BolgeRisk {
   aciklama: string;
   fayMesafe: number;
   beklenenMax: string;
-  olasilik30Yil: number;
+  olasilik30Yil: string;
   depremSayisi: number;
   sonDeprem: string;
   maxBuyukluk: string;

@@ -26,6 +26,13 @@ const IZINLI_KODLAR = new Set([
   '79', // Kilis
   '80', // Osmaniye
   '01', // Adana
+  '35', // İzmir
+  '07', // Antalya
+  '48', // Muğla
+  '20', // Denizli
+  '14', // Bolu
+  '81', // Düzce
+  '77', // Yalova
 ]);
 
 const ilceLookup = new Map<number, { cityCode: string; districtName: string }>();
