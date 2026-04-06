@@ -50,12 +50,17 @@ function Select({ label, items, value, onChange, disabled, badge }: SelectProps)
 
 function RiskBadge({ sinif, skor }: { sinif: string; skor: number }) {
   const r = riskRenk(sinif);
-  const etiket = skor >= 90 ? 'Çok Yüksek' : skor >= 75 ? 'Yüksek' : skor >= 50 ? 'Orta-Yüksek' : skor >= 35 ? 'Orta' : 'Düşük';
+  const etiket =
+    skor >= 90 ? 'M4.5+ olasılığı çok yüksek'
+    : skor >= 75 ? 'M4.5+ olasılığı yüksek'
+    : skor >= 50 ? 'M4.5+ olasılığı orta-yüksek'
+    : skor >= 35 ? 'M4.5+ olasılığı orta'
+    : 'M4.5+ olasılığı düşük';
   return (
     <span className="inline-flex items-center gap-1 text-xs font-semibold px-2.5 py-1 rounded-full"
       style={{ backgroundColor: r.badge, color: r.badgeText }}>
       <span className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: r.bar }} />
-      {etiket} Risk
+      {etiket}
     </span>
   );
 }
@@ -157,8 +162,8 @@ export default function BolgeAnalizi() {
             <div className="grid grid-cols-4 divide-x divide-gray-100 border-t border-gray-100">
               {[
                 { label: 'Fay mesafesi', value: `${risk.fayMesafe} km` },
-                { label: 'Beklenen', value: risk.beklenenMax },
-                { label: '30 yıl ihtimal', value: `%${risk.olasilik30Yil}` },
+                { label: 'Beklenen Mw', value: risk.beklenenMax },
+                { label: 'M4.5+ ihtimali (30 yıl)', value: `%${risk.olasilik30Yil}` },
                 { label: 'Kayıtlı deprem', value: String(risk.depremSayisi) },
               ].map((m) => (
                 <div key={m.label} className="p-3 text-center">
@@ -320,6 +325,13 @@ export default function BolgeAnalizi() {
               </div>
             </div>
           )}
+
+          {/* Bilgi notu */}
+          <div className="bg-blue-50 border border-blue-100 rounded-xl p-3">
+            <p className="text-[11px] text-blue-700 leading-relaxed">
+              <span className="font-semibold">Not:</span> M4.5 ve üzeri büyüklükteki depremler yapısal hasar oluşturma potansiyeline sahip kabul edilmektedir. Bu veriler bilgilendirme amaçlıdır; kesin bir deprem tahmini değildir.
+            </p>
+          </div>
 
           {/* Aksiyon butonları */}
           <div className="grid grid-cols-2 gap-2">

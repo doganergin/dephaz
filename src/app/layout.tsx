@@ -18,9 +18,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <main className="flex-1 max-w-2xl mx-auto w-full px-4 py-6 pb-12">
           {children}
         </main>
-        <footer className="max-w-2xl mx-auto w-full px-4 py-4 border-t border-gray-100">
+        <footer className="max-w-2xl mx-auto w-full px-4 py-5 border-t border-gray-100 space-y-1.5">
           <p className="text-[11px] text-gray-400 text-center">
             Deprem verileri: <span className="font-medium">Kandilli Rasathanesi (KOERI)</span> · Fay verileri: <span className="font-medium">MTA Aktif Fay Haritası</span>
+          </p>
+          <p className="text-[11px] text-gray-400 text-center">
+            Hazırlayan: <span className="font-semibold text-gray-600">Doğan Ergin</span>
           </p>
         </footer>
       </body>

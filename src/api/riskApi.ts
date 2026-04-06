@@ -256,11 +256,11 @@ function hesaplaRisk(il: string, ilce: string, mahalle: string, depremler: Depre
     riskSkoru: skor,
     riskSinifi: skor >= 70 ? 'yuksek' : skor >= 40 ? 'orta' : 'dusuk',
     riskMetni:
-      skor >= 90 ? 'Çok yüksek risk'
-      : skor >= 75 ? 'Yüksek risk'
-      : skor >= 50 ? 'Orta-yüksek risk'
-      : skor >= 35 ? 'Orta risk'
-      : 'Düşük risk',
+      skor >= 90 ? 'M4.5+ deprem olasılığı çok yüksek'
+      : skor >= 75 ? 'M4.5+ deprem olasılığı yüksek'
+      : skor >= 50 ? 'M4.5+ deprem olasılığı orta-yüksek'
+      : skor >= 35 ? 'M4.5+ deprem olasılığı orta'
+      : 'M4.5+ deprem olasılığı düşük',
     aciklama: bilimsel?.genelDegerlendirme
       ?? `${ilce} ilçesi deprem risk analizi · Fay: ${veri?.fayAdi ?? 'belirsiz'} · Veri: Kandilli / MTA`,
     fayMesafe: veri?.fayMesafe ?? 50,
