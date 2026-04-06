@@ -258,6 +258,42 @@ export default function BolgeAnalizi() {
             </div>
           </div>
 
+          {/* Uzman görüşleri */}
+          {bilimsel && bilimsel.uzmanGorusleri && bilimsel.uzmanGorusleri.length > 0 && (
+            <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-4">
+              <p className="text-xs font-bold text-gray-500 uppercase tracking-wide mb-3">Uzman Görüşleri</p>
+              <div className="space-y-3">
+                {bilimsel.uzmanGorusleri.map((u, i) => (
+                  <div key={i} className="border border-gray-100 rounded-xl p-3 bg-gray-50">
+                    <div className="flex items-start justify-between gap-2 mb-2">
+                      <div>
+                        <p className="text-xs font-bold text-gray-800">{u.uzman}</p>
+                        <p className="text-[11px] text-gray-500">{u.unvan}</p>
+                      </div>
+                      <div className="flex items-center gap-1 shrink-0">
+                        <span className={`text-[10px] px-2 py-0.5 rounded-full font-semibold ${
+                          u.ulke === 'TR' ? 'bg-red-50 text-red-600' : 'bg-blue-50 text-blue-600'
+                        }`}>
+                          {u.ulke === 'TR' ? '🇹🇷 Yerli' : `🌍 ${u.ulke}`}
+                        </span>
+                        <span className="text-[10px] text-gray-400">{u.yil}</span>
+                      </div>
+                    </div>
+                    <p className="text-xs text-gray-700 leading-relaxed italic border-l-2 border-amber-300 pl-2.5">
+                      {u.gorus}
+                    </p>
+                    {u.kaynak && (
+                      <a href={u.kaynak} target="_blank" rel="noopener noreferrer"
+                        className="text-[11px] text-blue-500 hover:text-blue-700 mt-1.5 block">
+                        Kaynağa git →
+                      </a>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
           {/* Bilimsel kaynaklar */}
           {bilimsel && bilimsel.kaynaklar.length > 0 && (
             <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-4">

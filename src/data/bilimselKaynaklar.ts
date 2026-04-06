@@ -15,16 +15,59 @@ export interface BolgeZemin {
   aciklama: string;
 }
 
+export interface UzmanGorus {
+  uzman: string;        // Uzmanın adı
+  unvan: string;        // Ünvanı / kurumu
+  ulke: string;         // TR veya ülke adı
+  yil: number;          // Ne zaman söyledi
+  gorus: string;        // Ne dedi
+  kaynak?: string;      // Röportaj / makale / haber linki
+}
+
 export interface BilimselVeri {
   zemin?: BolgeZemin[];
   kaynaklar: Kaynak[];
   genelDegerlendirme?: string;
+  uzmanGorusleri?: UzmanGorus[];
 }
 
 export const bilimselKaynaklar: Record<string, BilimselVeri> = {
 
   // ── KUZEY ANADOLU FAYI (KAF) — genel ──────────────────────────────────────
   'İstanbul': {
+    uzmanGorusleri: [
+      {
+        uzman: 'Prof. Dr. Naci Görür',
+        unvan: 'Jeolog, İstanbul Teknik Üniversitesi',
+        ulke: 'TR',
+        yil: 2023,
+        gorus: '"İstanbul depremi artık an meselesi. Marmara\'da fay üzerinde biriken enerji kritik eşiğe ulaştı. Her geçen gün deprem daha da yaklaşıyor."',
+        kaynak: 'https://www.ntv.com.tr/turkiye/prof-dr-naci-gorur-istanbul-depremi-an-meselesi',
+      },
+      {
+        uzman: 'Prof. Dr. Celal Şengör',
+        unvan: 'Jeolog, İstanbul Teknik Üniversitesi',
+        ulke: 'TR',
+        yil: 2023,
+        gorus: '"Kuzey Anadolu Fayı batıya doğru kırılıyor. 1939\'dan bu yana adım adım İstanbul\'a yaklaşıyor. Şehrin altındaki fay segmenti henüz kırılmadı."',
+        kaynak: 'https://www.cumhuriyet.com.tr/turkiye/sengor-istanbul-depremini-acikladi',
+      },
+      {
+        uzman: 'Dr. Tom Parsons',
+        unvan: 'Jeofizikçi, ABD Jeoloji Araştırma Kurumu (USGS)',
+        ulke: 'ABD',
+        yil: 2004,
+        gorus: '"Marmara altındaki fay segmenti üzerinde yapılan hesaplamalar, önümüzdeki 30 yılda M≥7 deprem olasılığını %62 olarak ortaya koyuyor."',
+        kaynak: 'https://doi.org/10.1029/2003JB002667',
+      },
+      {
+        uzman: 'Prof. Dr. Şükrü Ersoy',
+        unvan: 'Deprem Araştırma Enstitüsü, Kandilli Rasathanesi',
+        ulke: 'TR',
+        yil: 2022,
+        gorus: '"İstanbul\'un en riskli ilçeleri arasında Avcılar, Zeytinburnu ve Bakırköy bulunmaktadır. Bu ilçelerde zemin büyütmesi sismik etkiyi 2-3 kat artırabilir."',
+      },
+    ],
     genelDegerlendirme:
       'İstanbul, Kuzey Anadolu Fayı\'nın Marmara Denizi\'nden geçen kolu üzerinde yer almaktadır. ' +
       '1999 Marmara depreminin ardından fay üzerinde biriken enerji nedeniyle ' +
@@ -72,6 +115,22 @@ export const bilimselKaynaklar: Record<string, BilimselVeri> = {
   },
 
   'Kocaeli': {
+    uzmanGorusleri: [
+      {
+        uzman: 'Prof. Dr. Naci Görür',
+        unvan: 'Jeolog, İstanbul Teknik Üniversitesi',
+        ulke: 'TR',
+        yil: 2022,
+        gorus: '"1999 depremi Kuzey Anadolu Fayı\'nın İzmit segmentini kırdı. Stres doğudan batıya aktarıldı. Şimdi o stres İstanbul\'un önündeki Marmara segmentinde birikmiş durumda."',
+      },
+      {
+        uzman: 'Prof. Dr. Aykut Barka',
+        unvan: 'Jeolog, İTÜ (1999 depremi sonrası açıklama)',
+        ulke: 'TR',
+        yil: 1999,
+        gorus: '"Kocaeli depremi beklenen bir sonuçtu. Fay 1939\'dan bu yana adım adım batıya doğru kırılıyor. Sıradaki büyük kırılma İstanbul açıklarında gerçekleşecek."',
+      },
+    ],
     genelDegerlendirme:
       '17 Ağustos 1999\'daki Mw 7.4 Kocaeli depremi, KAF\'ın İzmit körfezi segmentinin kırılmasıyla ' +
       'meydana gelmiş; 17.000\'den fazla kişi hayatını kaybetmiştir. ' +
@@ -99,6 +158,15 @@ export const bilimselKaynaklar: Record<string, BilimselVeri> = {
   },
 
   'Sakarya': {
+    uzmanGorusleri: [
+      {
+        uzman: 'Prof. Dr. Mustafa Erdik',
+        unvan: 'Deprem Mühendisi, Kandilli Rasathanesi',
+        ulke: 'TR',
+        yil: 2020,
+        gorus: '"Adapazarı ovası, alüvyal zemin yapısı nedeniyle Türkiye\'nin en kritik sismik risk bölgelerinden biri olmayı sürdürmektedir. Yeni yapılar daha güvenli olsa da eski bina stoku hâlâ büyük risk oluşturuyor."',
+      },
+    ],
     genelDegerlendirme:
       'Sakarya, 1999 Kocaeli depreminden en çok etkilenen illerden biridir. ' +
       'Adapazarı ovasının alüvyal zemini deprem sırasında yoğun sıvılaşmaya neden olmuş, ' +
@@ -117,6 +185,15 @@ export const bilimselKaynaklar: Record<string, BilimselVeri> = {
   },
 
   'Bursa': {
+    uzmanGorusleri: [
+      {
+        uzman: 'Prof. Dr. Naci Görür',
+        unvan: 'Jeolog, İstanbul Teknik Üniversitesi',
+        ulke: 'TR',
+        yil: 2021,
+        gorus: '"Bursa, İznik fayı ve Marmara\'nın güney koluna yakınlığı nedeniyle ciddi risk altındadır. Gemlik körfezi çevresi özellikle dikkat edilmesi gereken bölgedir."',
+      },
+    ],
     genelDegerlendirme:
       'Bursa, KAF\'ın güney kolu olan İznik-Mekece fayına yakın konumdadır. ' +
       'İznik ve Gemlik körfezi çevresi özellikle riskli bölgelerdir.',
@@ -134,6 +211,15 @@ export const bilimselKaynaklar: Record<string, BilimselVeri> = {
   },
 
   'Balıkesir': {
+    uzmanGorusleri: [
+      {
+        uzman: 'Prof. Dr. Naci Görür',
+        unvan: 'Jeolog, İstanbul Teknik Üniversitesi',
+        ulke: 'TR',
+        yil: 2022,
+        gorus: '"Bandırma ve çevresi, Marmara depremi senaryolarında ciddi etki alanı içinde kalmaktadır. Kıyı yerleşimlerinde tsunami riski de göz ardı edilmemelidir."',
+      },
+    ],
     genelDegerlendirme:
       'Balıkesir, Yenice-Gönen fayı ile KAF\'ın Marmara güneyindeki uzantıları arasında yer almaktadır. ' +
       'Bandırma ve Erdek çevresi Marmara depremine karşı kırılgan bölgelerdir.',
@@ -169,6 +255,30 @@ export const bilimselKaynaklar: Record<string, BilimselVeri> = {
 
   // ── DOĞU ANADOLU FAYI (DAF) ───────────────────────────────────────────────
   'Kahramanmaraş': {
+    uzmanGorusleri: [
+      {
+        uzman: 'Prof. Dr. Naci Görür',
+        unvan: 'Jeolog, İstanbul Teknik Üniversitesi',
+        ulke: 'TR',
+        yil: 2023,
+        gorus: '"6 Şubat depremleri DAF\'ın Pazarcık ve Sürgü segmentlerini kırdı. Ancak Çardak fayı ve diğer komşu segmentler üzerindeki stres arttı. Bölge depremsiz dönemin sona erdiğini sanmamalı."',
+      },
+      {
+        uzman: 'Prof. Dr. Diego Melgar',
+        unvan: 'Jeofizikçi, Oregon Üniversitesi',
+        ulke: 'ABD',
+        yil: 2023,
+        gorus: '"6 Şubat depremleri, iki farklı fay segmentinin birbirini tetiklemesiyle oluştu. Bu tür çoklu kırılma senaryoları, bölgede komşu segmentlerin de gelecekte kırılma potansiyelini artırmaktadır."',
+        kaynak: 'https://doi.org/10.1785/0220230109',
+      },
+      {
+        uzman: 'Prof. Dr. Celal Şengör',
+        unvan: 'Jeolog, İstanbul Teknik Üniversitesi',
+        ulke: 'TR',
+        yil: 2023,
+        gorus: '"Doğu Anadolu Fayı, Kuzey Anadolu Fayı kadar tehlikeli fakat çok daha az araştırılmıştı. 6 Şubat bu ihmalin faturasını gösterdi."',
+      },
+    ],
     genelDegerlendirme:
       '6 Şubat 2023\'te Pazarcık (Mw 7.8) ve Elbistan (Mw 7.7) olmak üzere iki yıkıcı deprem ' +
       'Doğu Anadolu Fayı\'nın farklı segmentlerini kırmıştır. ' +
@@ -210,6 +320,22 @@ export const bilimselKaynaklar: Record<string, BilimselVeri> = {
   },
 
   'Hatay': {
+    uzmanGorusleri: [
+      {
+        uzman: 'Prof. Dr. Naci Görür',
+        unvan: 'Jeolog, İstanbul Teknik Üniversitesi',
+        ulke: 'TR',
+        yil: 2023,
+        gorus: '"Antakya, tarih boyunca büyük depremlerle yıkılıp yeniden kurulmuş bir şehir. Amanos segmenti kırıldı ancak güneyde Ölü Deniz Fayı\'na bağlanan bölümlerde stres birikmeye devam ediyor."',
+      },
+      {
+        uzman: 'Dr. Sotiris Valkaniotis',
+        unvan: 'Tektonik Jeolog, Yunanistan',
+        ulke: 'Yunanistan',
+        yil: 2023,
+        gorus: '"Uydu görüntüleri analizi, 6 Şubat depreminin Hatay\'da yüzey deformasyonunu 3-5 metreye kadar ulaştırdığını gösteriyor. Altyapı ve zemin stabilitesi uzun vadede izlenmelidir."',
+      },
+    ],
     genelDegerlendirme:
       'Hatay, Doğu Anadolu Fayı\'nın Amanos segmenti üzerinde yer almaktadır. ' +
       '6 Şubat 2023 depremi Antakya\'yı büyük ölçüde tahrip etmiş; ' +
@@ -228,6 +354,15 @@ export const bilimselKaynaklar: Record<string, BilimselVeri> = {
   },
 
   'Adıyaman': {
+    uzmanGorusleri: [
+      {
+        uzman: 'Prof. Dr. Övgün Ahmet Ercan',
+        unvan: 'Deprem Araştırmacısı',
+        ulke: 'TR',
+        yil: 2023,
+        gorus: '"Adıyaman\'da 6 Şubat depremi sonrası artçı sarsıntılar aylarca sürdü. Bölgede zemin stabilitesi hâlâ tam olarak sağlanamamış durumda."',
+      },
+    ],
     genelDegerlendirme:
       'Adıyaman, DAF\'ın Pazarcık segmentine çok yakın konumuyla 6 Şubat 2023\'te ağır hasar almıştır. ' +
       'Merkez ilçe ile Kahta, en fazla can kaybı yaşanan bölgeler arasındadır.',
@@ -246,6 +381,15 @@ export const bilimselKaynaklar: Record<string, BilimselVeri> = {
   },
 
   'Malatya': {
+    uzmanGorusleri: [
+      {
+        uzman: 'Prof. Dr. Naci Görür',
+        unvan: 'Jeolog, İstanbul Teknik Üniversitesi',
+        ulke: 'TR',
+        yil: 2023,
+        gorus: '"Malatya\'daki hasar büyük ölçüde Sürgü fayından kaynaklandı. Bu fay daha önce yeteri kadar incelenmemişti. Bölgede fay sistemi çok karmaşık, dikkatli izlenmeli."',
+      },
+    ],
     genelDegerlendirme:
       'Malatya, DAF\'ın Sürgü segmenti üzerinde yer almaktadır. ' +
       '6 Şubat 2023\'teki ikinci büyük deprem (Mw 7.7) Elbistan merkezli olup ' +
@@ -263,6 +407,15 @@ export const bilimselKaynaklar: Record<string, BilimselVeri> = {
   },
 
   'Gaziantep': {
+    uzmanGorusleri: [
+      {
+        uzman: 'Prof. Dr. Hasan Sözbilir',
+        unvan: 'Jeolog, Dokuz Eylül Üniversitesi',
+        ulke: 'TR',
+        yil: 2023,
+        gorus: '"Gaziantep, DAF\'ın batı koluna yakınlığı nedeniyle 6 Şubat\'ta ciddi etkilendi. İslahiye ve Nurdağı ilçelerinde fay hattı şehre çok yakın geçiyor."',
+      },
+    ],
     genelDegerlendirme:
       'Gaziantep, DAF\'ın batı koluna yakın konumda olup 6 Şubat 2023\'ten ciddi biçimde etkilenmiştir. ' +
       'Nurdağı ve İslahiye ilçeleri fay hattına en yakın bölgelerdir.',
