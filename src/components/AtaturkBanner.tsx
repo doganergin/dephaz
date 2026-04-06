@@ -8,9 +8,8 @@ export default function AtaturkBanner() {
     <div className="flex items-center gap-3 bg-[var(--card-bg)] border border-[var(--border)] rounded-xl px-4 py-3 shadow-sm">
       {!imgHata && (
         <img
-          src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6a/Ataturk1930s.jpg/100px-Ataturk1930s.jpg"
+          src="/ataturk.jpg"
           alt="Mustafa Kemal Atatürk"
-          referrerPolicy="no-referrer"
           className="rounded-lg object-cover shrink-0"
           style={{ height: '56px', width: '44px' }}
           onError={() => setImgHata(true)}
