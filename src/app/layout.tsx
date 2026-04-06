@@ -23,7 +23,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             Deprem verileri: <span className="font-medium">Kandilli Rasathanesi (KOERI)</span> · Fay verileri: <span className="font-medium">MTA Aktif Fay Haritası</span>
           </p>
           <p className="text-[11px] text-gray-400 text-center">
-            Hazırlayan: <span className="font-semibold text-gray-600">Doğan Ergin</span>
+            © 2026 <span className="font-semibold text-gray-600">Doğan Ergin</span> · Tüm haklar saklıdır.
           </p>
         </footer>
       </body>
