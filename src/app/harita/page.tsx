@@ -41,7 +41,9 @@ export default function HaritaSayfasi() {
 
   const [anaTab, setAnaTab] = useState<'turkiye' | 'dunya'>('turkiye');
   const [trKaynak, setTrKaynak] = useState<'kandilli' | 'afad' | 'usgs'>('kandilli');
-  const [kucukGoster, setKucukGoster] = useState(false);
+  const [trKucukGoster, setTrKucukGoster] = useState(false);
+  const [dunyaKucukGoster, setDunyaKucukGoster] = useState(true);
+  const kucukGoster = anaTab === 'turkiye' ? trKucukGoster : dunyaKucukGoster;
 
   const [kandilliDepremler, setKandilliDepremler] = useState<MapDeprem[]>([]);
   const [afadDepremler, setAfadDepremler] = useState<MapDeprem[]>([]);
@@ -195,14 +197,14 @@ export default function HaritaSayfasi() {
       {anaTab === 'dunya' && (
         <div className="flex gap-1.5 items-center flex-wrap">
           <button
-            onClick={() => setKucukGoster(!kucukGoster)}
+            onClick={() => setDunyaKucukGoster(!dunyaKucukGoster)}
             className={`ml-auto px-3 py-1 text-[11px] font-semibold rounded-full border transition-colors ${
-              kucukGoster
+              dunyaKucukGoster
                 ? 'bg-amber-500 text-white border-amber-500'
                 : 'bg-[var(--card-bg)] text-[var(--muted)] border-[var(--border)]'
             }`}
           >
-            {kucukGoster ? 'M4.0 altı gizle' : 'M4.0 altını göster'}
+            {dunyaKucukGoster ? 'M4.0 altı gizle' : 'M4.0 altını göster'}
           </button>
         </div>
       )}
@@ -234,14 +236,14 @@ export default function HaritaSayfasi() {
             </button>
           ))}
           <button
-            onClick={() => setKucukGoster(!kucukGoster)}
+            onClick={() => setTrKucukGoster(!trKucukGoster)}
             className={`ml-auto px-3 py-1 text-[11px] font-semibold rounded-full border transition-colors ${
-              kucukGoster
+              trKucukGoster
                 ? 'bg-amber-500 text-white border-amber-500'
                 : 'bg-[var(--card-bg)] text-[var(--muted)] border-[var(--border)]'
             }`}
           >
-            {kucukGoster ? 'M4.0 altı gizle' : 'M4.0 altını göster'}
+            {trKucukGoster ? 'M4.0 altı gizle' : 'M4.0 altını göster'}
           </button>
         </div>
       )}
@@ -280,7 +282,7 @@ export default function HaritaSayfasi() {
               <p className="text-[11px]">Bu kaynak şu an erişilebilir değil veya filtre çok kısıtlayıcı.</p>
               {!kucukGoster && (
                 <button
-                  onClick={() => setKucukGoster(true)}
+                  onClick={() => anaTab === 'turkiye' ? setTrKucukGoster(true) : setDunyaKucukGoster(true)}
                   className="mt-2 px-3 py-1 text-[11px] bg-amber-500 text-white rounded-full"
                 >
                   Tüm büyüklükleri göster
