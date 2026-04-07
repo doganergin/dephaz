@@ -52,7 +52,7 @@ function parseKandilli(text: string): Deprem[] {
   return depremler;
 }
 
-async function usgsturkiyeGetir(limit: number, il?: string): Promise<Deprem[]> {
+async function usgsturkiyeGetir(limit: number, minmag: number, il?: string): Promise<Deprem[]> {
   const ninetyDaysAgo = new Date(Date.now() - 90 * 24 * 60 * 60 * 1000)
     .toISOString()
     .split('T')[0];
@@ -131,7 +131,7 @@ export async function GET(req: Request) {
   } catch {
     // 2. Kandilli down → USGS Türkiye fallback
     try {
-      const depremler = await usgsturkiyeGetir(limit, il);
+      const depremler = await usgsturkiyeGetir(limit, minmag, il);
       return NextResponse.json(depremler);
     } catch (err2) {
       return NextResponse.json(
