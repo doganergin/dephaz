@@ -1,5 +1,8 @@
 'use client';
 import { useEffect, useState } from 'react';
+
+const MAX_DEPREM = 100;  // listede tutulacak max kayıt
+const YENILEME_SN = 60; // kaç saniyede bir yenile
 import dynamic from 'next/dynamic';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { haberler } from '@/data/haberler';
@@ -51,11 +54,13 @@ export default function HaritaSayfasi() {
   const [usgsDepremler, setUsgsDepremler] = useState<MapDeprem[]>([]);       // M4.5+
   const [usgsDepremlerTam, setUsgsDepremlerTam] = useState<MapDeprem[]>([]); // M2.5+
   const [yukleniyor, setYukleniyor] = useState(true);
+  const [sonGuncelleme, setSonGuncelleme] = useState<Date | null>(null);
+  const [geriSayim, setGeriSayim] = useState(YENILEME_SN);
   const [kaynakDurum, setKaynakDurum] = useState({ kandilli: false, afad: false, usgsTr: false });
 
   useEffect(() => {
-    async function fetchData() {
-      setYukleniyor(true);
+    async function fetchData(ilk = false) {
+      if (ilk) setYukleniyor(true);
 
       const [kandilliRes, afadRes, usgsTrRes, usgsRes, usgsTamRes] = await Promise.allSettled([
         fetch('/api/kandilli?limit=500&minmag=1.0'),
@@ -67,62 +72,47 @@ export default function HaritaSayfasi() {
 
       const durum = { kandilli: false, afad: false, usgsTr: false };
 
+      type RawD = MapDeprem & { enlem?: number; boylam?: number; saat?: string };
+
+      const normalize = (d: RawD, kaynak: MapDeprem['kaynak']): MapDeprem => ({
+        buyukluk: d.buyukluk,
+        konum: d.konum,
+        tarih: d.saat ? `${d.tarih} ${d.saat}` : d.tarih,
+        lat: d.lat ?? d.enlem ?? 0,
+        lon: d.lon ?? d.boylam ?? 0,
+        derinlik: d.derinlik,
+        kaynak,
+      });
+
       if (kandilliRes.status === 'fulfilled' && kandilliRes.value.ok) {
-        const data = await kandilliRes.value.json();
+        const data: RawD[] = await kandilliRes.value.json();
         if (Array.isArray(data) && data.length > 0) {
           durum.kandilli = true;
           setKandilliDepremler(
-            data
-              .filter((d: MapDeprem & { enlem?: number; boylam?: number }) => (d.lat ?? d.enlem) && (d.lon ?? d.boylam))
-              .map((d: MapDeprem & { enlem?: number; boylam?: number; saat?: string }) => ({
-                buyukluk: d.buyukluk,
-                konum: d.konum,
-                tarih: d.saat ? `${d.tarih} ${d.saat}` : d.tarih,
-                lat: d.lat ?? d.enlem ?? 0,
-                lon: d.lon ?? d.boylam ?? 0,
-                derinlik: d.derinlik,
-                kaynak: 'kandilli' as const,
-              }))
+            data.filter((d) => (d.lat ?? d.enlem) && (d.lon ?? d.boylam))
+              .map((d) => normalize(d, 'kandilli')).slice(0, MAX_DEPREM)
           );
         }
       }
 
       if (afadRes.status === 'fulfilled' && afadRes.value.ok) {
-        const data = await afadRes.value.json();
+        const data: RawD[] = await afadRes.value.json();
         if (Array.isArray(data) && data.length > 0) {
           durum.afad = true;
           setAfadDepremler(
-            data
-              .filter((d: MapDeprem & { enlem?: number; boylam?: number }) => (d.lat ?? d.enlem) && (d.lon ?? d.boylam))
-              .map((d: MapDeprem & { enlem?: number; boylam?: number }) => ({
-                buyukluk: d.buyukluk,
-                konum: d.konum,
-                tarih: d.tarih,
-                lat: d.lat ?? d.enlem ?? 0,
-                lon: d.lon ?? d.boylam ?? 0,
-                derinlik: d.derinlik,
-                kaynak: 'afad' as const,
-              }))
+            data.filter((d) => (d.lat ?? d.enlem) && (d.lon ?? d.boylam))
+              .map((d) => normalize(d, 'afad')).slice(0, MAX_DEPREM)
           );
         }
       }
 
       if (usgsTrRes.status === 'fulfilled' && usgsTrRes.value.ok) {
-        const data = await usgsTrRes.value.json();
+        const data: RawD[] = await usgsTrRes.value.json();
         if (Array.isArray(data) && data.length > 0) {
           durum.usgsTr = true;
           setUsgsTrDepremler(
-            data
-              .filter((d: MapDeprem & { enlem?: number; boylam?: number }) => (d.lat ?? d.enlem) && (d.lon ?? d.boylam))
-              .map((d: MapDeprem & { enlem?: number; boylam?: number; saat?: string }) => ({
-                buyukluk: d.buyukluk,
-                konum: d.konum,
-                tarih: d.saat ? `${d.tarih} ${d.saat}` : d.tarih,
-                lat: d.lat ?? d.enlem ?? 0,
-                lon: d.lon ?? d.boylam ?? 0,
-                derinlik: d.derinlik,
-                kaynak: 'usgs' as const,
-              }))
+            data.filter((d) => (d.lat ?? d.enlem) && (d.lon ?? d.boylam))
+              .map((d) => normalize(d, 'usgs')).slice(0, MAX_DEPREM)
           );
         }
       }
@@ -136,7 +126,7 @@ export default function HaritaSayfasi() {
           lon: f.geometry.coordinates[0],
           derinlik: f.geometry.coordinates[2],
           kaynak: 'usgs' as const,
-        }));
+        })).slice(0, MAX_DEPREM);
 
       if (usgsRes.status === 'fulfilled' && usgsRes.value.ok) {
         const data = await usgsRes.value.json();
@@ -149,9 +139,23 @@ export default function HaritaSayfasi() {
       }
 
       setKaynakDurum(durum);
-      setYukleniyor(false);
+      setSonGuncelleme(new Date());
+      setGeriSayim(YENILEME_SN);
+      if (ilk) setYukleniyor(false);
     }
-    fetchData();
+
+    fetchData(true);
+    const interval = setInterval(() => fetchData(false), YENILEME_SN * 1000);
+
+    // Geri sayım göstergesi
+    const countdown = setInterval(() => {
+      setGeriSayim((s) => (s <= 1 ? YENILEME_SN : s - 1));
+    }, 1000);
+
+    return () => {
+      clearInterval(interval);
+      clearInterval(countdown);
+    };
   }, []);
 
   const kaynakDepremler =
@@ -173,9 +177,20 @@ export default function HaritaSayfasi() {
     <div className="space-y-4">
       <div>
         <h1 className="text-xl font-bold text-[var(--foreground)]">{t('haritaTitle')}</h1>
-        <p className="text-sm text-[var(--muted)] mt-0.5">
-          {kaynakEtiketi} · Son 90 gün · {kucukGoster ? 'Tüm büyüklükler' : 'M4.0+'}
-        </p>
+        <div className="flex items-center justify-between mt-0.5">
+          <p className="text-sm text-[var(--muted)]">
+            {kaynakEtiketi} · Son 90 gün · {kucukGoster ? 'Tüm büyüklükler' : 'M4.0+'}
+          </p>
+          <div className="flex items-center gap-1.5 text-[11px] text-[var(--muted)]">
+            {sonGuncelleme && (
+              <span>{sonGuncelleme.toLocaleTimeString('tr-TR', { hour: '2-digit', minute: '2-digit', second: '2-digit' })}</span>
+            )}
+            <span className="flex items-center gap-1">
+              <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
+              {geriSayim}s
+            </span>
+          </div>
+        </div>
       </div>
 
       {/* Ana sekmeler */}
