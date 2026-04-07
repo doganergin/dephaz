@@ -66,17 +66,17 @@ async function usgsturkiyeGetir(limit: number, minmag: number, il?: string): Pro
     `&minlongitude=${TURKIYE_BBOX.minlon}` +
     `&maxlongitude=${TURKIYE_BBOX.maxlon}` +
     `&orderby=time` +
-    `&limit=${Math.min(limit * 3, 500)}` + // fazla çek, filtreden sonra kes
+    `&limit=500` +
     `&starttime=${ninetyDaysAgo}`;
 
-  const res = await fetch(url, { next: { revalidate: 300 } });
+  const res = await fetch(url, { next: { revalidate: 120 } });
   if (!res.ok) throw new Error(`USGS hata: ${res.status}`);
 
   const data = await res.json();
   let depremler: Deprem[] = (data.features as USGSFeature[]).map((f) => {
     const dt = new Date(f.properties.time);
     return {
-      tarih: dt.toISOString().split('T')[0].replace(/-/g, '-'),
+      tarih: dt.toISOString().split('T')[0],
       saat: dt.toTimeString().slice(0, 8),
       enlem: f.geometry.coordinates[1],
       boylam: f.geometry.coordinates[0],
@@ -100,16 +100,29 @@ async function usgsturkiyeGetir(limit: number, minmag: number, il?: string): Pro
 export async function GET(req: Request) {
   const { searchParams } = new URL(req.url);
   const il = searchParams.get('il')?.toUpperCase();
-  const limit = parseInt(searchParams.get('limit') ?? '20');
-  const minmag = parseFloat(searchParams.get('minmag') ?? '2.5');
-  const forceUsgs = searchParams.get('source') === 'usgs';
+  const limit = parseInt(searchParams.get('limit') ?? '500');
+  const minmag = parseFloat(searchParams.get('minmag') ?? '1.0');
+  const source = searchParams.get('source');
 
-  // 1. Kandilli'yi dene (forceUsgs=true ise atla)
-  if (!forceUsgs) try {
+  // USGS direkt modu
+  if (source === 'usgs') {
+    try {
+      const depremler = await usgsturkiyeGetir(limit, minmag, il);
+      return NextResponse.json(depremler);
+    } catch (err) {
+      return NextResponse.json(
+        { error: 'USGS verisi alınamadı', detail: String(err) },
+        { status: 500 }
+      );
+    }
+  }
+
+  // Kandilli dene → USGS fallback
+  try {
     const res = await fetch(KANDILLI_URL, {
       headers: { 'Accept-Charset': 'windows-1254' },
-      next: { revalidate: 300 },
-      signal: AbortSignal.timeout(5000), // 5 sn timeout
+      next: { revalidate: 120 },
+      signal: AbortSignal.timeout(5000),
     });
 
     if (!res.ok) throw new Error('Kandilli yanıt vermedi');
@@ -125,11 +138,11 @@ export async function GET(req: Request) {
       );
     }
 
-    if (depremler.length === 0) throw new Error('Kandilli veri döndürmedi');
+    if (depremler.length === 0) throw new Error('Kandilli boş döndü');
 
     return NextResponse.json(depremler.slice(0, limit));
   } catch {
-    // 2. Kandilli down → USGS Türkiye fallback
+    // Kandilli down → USGS Türkiye fallback
     try {
       const depremler = await usgsturkiyeGetir(limit, minmag, il);
       return NextResponse.json(depremler);

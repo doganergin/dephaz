@@ -15,15 +15,15 @@ interface AFADEvent {
 
 export async function GET(req: Request) {
   const { searchParams } = new URL(req.url);
-  const limit = parseInt(searchParams.get('limit') ?? '50');
-  const minmag = parseFloat(searchParams.get('minmag') ?? '3.5');
+  const limit = parseInt(searchParams.get('limit') ?? '500');
+  const minmag = parseFloat(searchParams.get('minmag') ?? '1.0');
 
   try {
     const res = await fetch(
-      `https://api.orhanaydogdu.com.tr/deprem/afad/live?limit=${limit * 3}`,
+      `https://api.orhanaydogdu.com.tr/deprem/afad/live?limit=500`,
       {
         headers: { 'User-Agent': 'DepHaz/1.0' },
-        next: { revalidate: 300 }, // 5 dk cache
+        next: { revalidate: 120 },
         signal: AbortSignal.timeout(8000),
       }
     );
@@ -40,6 +40,7 @@ export async function GET(req: Request) {
         buyukluk: e.mag,
         konum: e.title,
         tarih: e.date_time,
+        saat: '',
         enlem: e.geojson.coordinates[1],
         boylam: e.geojson.coordinates[0],
         derinlik: e.depth,
