@@ -1,23 +1,29 @@
 import { NextResponse } from 'next/server';
 
-export async function GET() {
+export async function GET(req: Request) {
+  const { searchParams } = new URL(req.url);
+  const minmag = parseFloat(searchParams.get('minmag') ?? '1.0');
+  const limit = parseInt(searchParams.get('limit') ?? '500');
+
   try {
     const ninetyDaysAgo = new Date(Date.now() - 90 * 24 * 60 * 60 * 1000)
       .toISOString()
       .split('T')[0];
 
-    const url = `https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&minmagnitude=6.5&orderby=time&limit=50&starttime=${ninetyDaysAgo}`;
+    const url =
+      `https://earthquake.usgs.gov/fdsnws/event/1/query` +
+      `?format=geojson` +
+      `&minmagnitude=${minmag}` +
+      `&orderby=time` +
+      `&limit=${limit}` +
+      `&starttime=${ninetyDaysAgo}`;
 
-    const res = await fetch(url, {
-      next: { revalidate: 600 }, // 10 dk cache
-    });
+    const res = await fetch(url, { next: { revalidate: 120 } });
 
     if (!res.ok) throw new Error(`USGS ${res.status}`);
 
     const data = await res.json();
-    return NextResponse.json(data, {
-      headers: { 'Cache-Control': 'public, s-maxage=600, stale-while-revalidate=60' },
-    });
+    return NextResponse.json(data);
   } catch (err) {
     return NextResponse.json(
       { error: 'USGS verisi alınamadı', detail: String(err) },

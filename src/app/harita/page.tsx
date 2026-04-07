@@ -58,7 +58,7 @@ export default function HaritaSayfasi() {
         fetch('/api/kandilli?limit=500&minmag=1.0'),
         fetch('/api/afad?limit=500&minmag=1.0'),
         fetch('/api/kandilli?limit=500&minmag=1.0&source=usgs'),
-        fetch('/api/usgs'),
+        fetch('/api/usgs?minmag=1.0&limit=500'),
       ]);
 
       const durum = { kandilli: false, afad: false, usgsTr: false };
@@ -166,9 +166,7 @@ export default function HaritaSayfasi() {
       <div>
         <h1 className="text-xl font-bold text-[var(--foreground)]">{t('haritaTitle')}</h1>
         <p className="text-sm text-[var(--muted)] mt-0.5">
-          {anaTab === 'turkiye'
-            ? `${kaynakEtiketi} · Son 90 gün · ${kucukGoster ? 'Tüm büyüklükler' : 'M4.0+'}`
-            : 'USGS · Son 90 gün · M6.5+'}
+          {kaynakEtiketi} · Son 90 gün · {kucukGoster ? 'Tüm büyüklükler' : 'M4.0+'}
         </p>
       </div>
 
@@ -192,6 +190,22 @@ export default function HaritaSayfasi() {
           </button>
         ))}
       </div>
+
+      {/* Dünya alt kontrolleri */}
+      {anaTab === 'dunya' && (
+        <div className="flex gap-1.5 items-center flex-wrap">
+          <button
+            onClick={() => setKucukGoster(!kucukGoster)}
+            className={`ml-auto px-3 py-1 text-[11px] font-semibold rounded-full border transition-colors ${
+              kucukGoster
+                ? 'bg-amber-500 text-white border-amber-500'
+                : 'bg-[var(--card-bg)] text-[var(--muted)] border-[var(--border)]'
+            }`}
+          >
+            {kucukGoster ? 'M4.0 altı gizle' : 'M4.0 altını göster'}
+          </button>
+        </div>
+      )}
 
       {/* Türkiye alt kaynak seçimi */}
       {anaTab === 'turkiye' && (
