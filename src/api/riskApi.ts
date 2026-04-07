@@ -1651,3 +1651,66 @@ const TARIHI_DEPREMLER: Deprem[] = [
   { buyukluk: 7.4, baslik: 'Marmara (Gölcük)', tarih: '17 Ağustos 1999', derinlik: 17 },
   { buyukluk: 7.2, baslik: 'Düzce', tarih: '12 Kasım 1999', derinlik: 10 },
 ];
+function hesaplaRisk(il: string, ilce: string, mahalle: string, depremler: Deprem[]): BolgeRisk {
+  const key = `${il}-${ilce}`;
+  const veri = RISK_DB[key];
+  const skor = veri?.riskSkoru ?? 60;
+  const bilimsel = bilimselKaynaklar[key] ?? bilimselKaynaklar[il];
+  const zemin = bilimsel?.zemin ?? ZEMIN_DB[key] ?? ZEMIN_VARSAYILAN;
+  return {
+    mahalle,
+    ilce,
+    il,
+    riskSkoru: skor,
+    riskSinifi: skor >= 70 ? 'yuksek' : skor >= 40 ? 'orta' : 'dusuk',
+    riskMetni:
+      skor >= 90 ? 'M5.0–5.5+ deprem olasılığı çok yüksek'
+      : skor >= 75 ? 'M5.0–5.5+ deprem olasılığı yüksek'
+      : skor >= 50 ? 'M5.0–5.5+ deprem olasılığı orta-yüksek'
+      : skor >= 35 ? 'M5.0–5.5+ deprem olasılığı orta'
+      : 'M5.0–5.5+ deprem olasılığı düşük',
+    aciklama: bilimsel?.genelDegerlendirme
+      ?? `${ilce} ilçesi deprem risk analizi · Fay: ${veri?.fayAdi ?? 'belirsiz'} · Veri: AFAD / MTA`,
+    fayMesafe: veri?.fayMesafe ?? 50,
+    beklenenMax: veri?.beklenenMw ?? 'Mw 6.0–7.0',
+    olasilik30Yil: olasilikEtiket(veri?.olasilik30 ?? 25),
+    depremSayisi: depremler.length > 0 ? depremler.length * 35 : Math.round(skor * 3.5),
+    sonDeprem: depremler[0]?.tarih ?? '—',
+    maxBuyukluk: depremler.length
+      ? String(Math.max(...depremler.map((d) => d.buyukluk)).toFixed(1))
+      : '—',
+    zemin,
+    binalar: BINA_DB[key] ?? BINA_VARSAYILAN,
+    depremler,
+    tavsiyeler: tavsiyeUret(skor),
+    toplanmaAlanlari: [`${ilce} Belediye Önü`, `${ilce} Millet Bahçesi`],
+  };
+}
+
+function tavsiyeUret(skor: number): BolgeRisk['tavsiyeler'] {
+  const tv = [];
+  if (skor >= 85) {
+    tv.push({ tur: 'acil' as const, metin: 'Binanız 1999 veya 2023 öncesi yapılmışsa DERHAL yapısal inceleme yaptırın.' });
+    tv.push({ tur: 'acil' as const, metin: 'DASK sigortanızın güncel olduğundan emin olun.' });
+    tv.push({ tur: 'acil' as const, metin: 'Kaçış yollarınızı ve toplanma alanınızı şimdi belirleyin.' });
+  } else if (skor >= 70) {
+    tv.push({ tur: 'acil' as const, metin: 'Binanızın deprem yönetmeliğine uygunluğunu kontrol ettirin.' });
+    tv.push({ tur: 'acil' as const, metin: 'DASK sigortanızın güncel olduğundan emin olun.' });
+  }
+  tv.push({ tur: 'onemli' as const, metin: '72 saatlik deprem çantanızı hazırlayın ve erişilebilir yerde tutun.' });
+  tv.push({ tur: 'onemli' as const, metin: 'Aile buluşma noktanızı belirleyin ve herkese bildirin.' });
+  tv.push({ tur: 'bilgi' as const, metin: 'Bölgenizdeki AFAD toplanma alanlarını öğrenin.' });
+  return tv;
+}
+
+const ZEMIN_VARSAYILAN: BolgeRisk['zemin'] = [
+  { ad: 'Alüvyon', yuzde: 45, risk: 'yuksek', aciklama: 'Sıvılaşma riski var' },
+  { ad: 'Killi zemin', yuzde: 35, risk: 'orta', aciklama: 'Orta risk' },
+  { ad: 'Kaya', yuzde: 20, risk: 'dusuk', aciklama: 'Görece güvenli' },
+];
+
+const BINA_VARSAYILAN: BolgeRisk['binalar'] = [
+  { donem: '1999 öncesi', yuzde: 35, renk: '#E24B4A' },
+  { donem: '1999–2012', yuzde: 38, renk: '#EF9F27' },
+  { donem: '2012 sonrası', yuzde: 27, renk: '#639922' },
+];
