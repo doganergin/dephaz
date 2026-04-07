@@ -20,7 +20,7 @@ export async function GET(req: Request) {
     const geoRes = await fetch(
       `https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(sorgu)}&format=json&limit=1&countrycodes=tr`,
       {
-        headers: { 'User-Agent': 'DepHaz/1.0 (deprem-hazirlik-rehberi)' },
+        headers: { 'User-Agent': 'DepremHatti/1.0' },
         next: { revalidate: 86400 }, // 24 saat cache — koordinatlar değişmez
       }
     );

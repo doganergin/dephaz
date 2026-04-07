@@ -22,7 +22,7 @@ export async function GET(req: Request) {
     const res = await fetch(
       `https://api.orhanaydogdu.com.tr/deprem/afad/live?limit=500`,
       {
-        headers: { 'User-Agent': 'DepHaz/1.0' },
+        headers: { 'User-Agent': 'DepremHatti/1.0' },
         next: { revalidate: 120 },
         signal: AbortSignal.timeout(8000),
       }

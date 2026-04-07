@@ -8,8 +8,8 @@ import { LanguageProvider } from "@/contexts/LanguageContext";
 const geist = Geist({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "DepHaz — Deprem Hazırlık Rehberi",
-  description: "Türkiye için bölgesel deprem risk analizi, aile planı ve 72h çanta hazırlık rehberi",
+  title: "Deprem Hattı — Deprem Hazırlık Rehberi",
+  description: "Türkiye için bölgesel deprem risk analizi, 72h çanta ve deprem hazırlık rehberi",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

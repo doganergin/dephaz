@@ -19,8 +19,8 @@ export default function NavBar() {
     <header className="bg-[var(--card-bg)] border-b border-[var(--border)] sticky top-0 z-50">
       <div className="max-w-2xl mx-auto px-4">
         <div className="flex items-center gap-3 pt-3 pb-2 border-b border-[var(--border)]">
-          <div className="w-8 h-8 bg-red-500 rounded-lg flex items-center justify-center text-white text-sm font-bold shadow-sm shrink-0">
-            D
+          <div className="w-8 h-8 bg-red-500 rounded-lg flex items-center justify-center text-white text-xs font-bold shadow-sm shrink-0">
+            DH
           </div>
           <div className="flex-1">
             <p className="text-sm font-semibold text-[var(--foreground)] leading-none">{t('appName')}</p>

@@ -25,7 +25,7 @@ export type LangKey =
 type Dict = Record<LangKey, string>;
 
 const TR: Dict = {
-  appName: 'DepHaz',
+  appName: 'Deprem Hattı',
   appSubtitle: 'Deprem Hazırlık Rehberi',
   navBolgeAnalizi: 'Bölge Analizi',
   navAilePlani: 'Aile Planı',
@@ -89,7 +89,7 @@ const TR: Dict = {
 };
 
 const EN: Dict = {
-  appName: 'DepHaz',
+  appName: 'Deprem Hattı',
   appSubtitle: 'Earthquake Preparedness Guide',
   navBolgeAnalizi: 'Risk Analysis',
   navAilePlani: 'Family Plan',
