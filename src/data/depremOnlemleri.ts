@@ -96,14 +96,14 @@ export const depremSonrasiOnlemler: DepremOnlem[] = [
 export const kaynaklar = [
   {
     ad: 'AFAD Deprem Önlemleri Kılavuzu',
-    link: 'https://www.afad.gov.tr/deprem-oncesi-sirasinda-ve-sonrasinda-yapilmasi-gerekenler',
+    link: 'https://www.afad.gov.tr',
   },
   {
     ad: 'JICA Earthquake Preparedness Manual (Türkiye)',
-    link: 'https://www.jica.go.jp/turkish/project/index.html',
+    link: 'https://www.jica.go.jp/',
   },
   {
     ad: 'USGS Earthquake Hazards Program — Safety',
-    link: 'https://www.usgs.gov/programs/earthquake-hazards/earthquake-safety',
+    link: 'https://www.usgs.gov/programs/earthquake-hazards',
   },
 ];

@@ -67,7 +67,7 @@ export const haberler: Haber[] = [
     tarih: '2021',
     baslik: 'İzmir Körfezi ve Yakın Çevresi\'nin Aktif Tektoniği',
     ozet: 'Sözbilir ve ekibinin çalışmalarına göre, 2020 Sisam (Samos) depreminde en fazla hasarın görüldüğü Bayraklı ilçesi, alüvyal zemin ve yakın fay mesafesiyle İzmir\'in en riskli bölgelerinden biridir. İzmir Körfezi\'nin güney kıyısı boyunca aktif normal faylar haritalanmıştır.',
-    kaynak: 'https://www.deu.edu.tr/jeoloji',
+    kaynak: 'https://jeoloji.deu.edu.tr',
     kaynak_tur: 'universite',
   },
 ];

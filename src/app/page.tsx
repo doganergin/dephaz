@@ -4,8 +4,7 @@ import { getProvinces, getDistricts, getNeighbourhoods } from '@/lib/locationHel
 import { useAppStore } from '@/store';
 import { bolgeRiskGetir } from '@/api/riskApi';
 import { bilimselKaynaklar } from '@/data/bilimselKaynaklar';
-import { depremAnindaOnlemler } from '@/data/depremOnlemleri';
-import { haberler } from '@/data/haberler';
+import { depremAnindaOnlemler, depremSonrasiOnlemler } from '@/data/depremOnlemleri';
 import { useLanguage } from '@/contexts/LanguageContext';
 import type { BolgeRisk } from '@/types';
 
@@ -80,7 +79,7 @@ function DepremSkalasi({ t }: { t: (k: Parameters<typeof import('@/lib/i18n').t>
       <div className="flex items-center justify-between mb-3">
         <p className="text-xs font-bold text-[var(--muted)] uppercase tracking-wide">{t('skalaSectionTitle')}</p>
         <a
-          href="https://www.usgs.gov/programs/earthquake-hazards/magnitude-intensity-comparison"
+          href="https://www.usgs.gov/programs/earthquake-hazards"
           target="_blank" rel="noopener noreferrer"
           className="text-[10px] text-blue-500 hover:underline"
         >
@@ -358,46 +357,6 @@ export default function BolgeAnalizi() {
             </div>
           </div>
 
-          {/* Deprem anında ne yapılır */}
-          <div className="bg-[var(--card-bg)] rounded-2xl shadow-sm border border-[var(--border)] p-4">
-            <div className="flex items-center justify-between mb-3">
-              <p className="text-xs font-bold text-[var(--muted)] uppercase tracking-wide">{t('depremAnindaTitle')}</p>
-              <span className="text-[10px] text-[var(--muted)]">AFAD · JICA</span>
-            </div>
-            <div className="space-y-2">
-              {depremAnindaOnlemler.map((o) => (
-                <div key={o.adim} className="flex items-start gap-3 bg-amber-50 dark:bg-amber-900/20 rounded-xl p-3">
-                  <span className="text-lg shrink-0">{o.ikon}</span>
-                  <div>
-                    <p className="text-xs font-bold text-amber-800 dark:text-amber-400">
-                      {o.adim}. {lang === 'EN' ? o.baslikEN : o.baslik}
-                    </p>
-                    <p className="text-[11px] text-amber-700 dark:text-amber-500 mt-0.5 leading-relaxed">
-                      {lang === 'EN' ? o.aciklamaEN : o.aciklama}
-                    </p>
-                  </div>
-                </div>
-              ))}
-            </div>
-            <div className="mt-3 flex gap-2">
-              <a
-                href="https://www.afad.gov.tr/deprem-oncesi-sirasinda-ve-sonrasinda-yapilmasi-gerekenler"
-                target="_blank" rel="noopener noreferrer"
-                className="text-[11px] text-blue-500 hover:underline"
-              >
-                AFAD Kılavuzu →
-              </a>
-              <span className="text-[var(--muted)] text-[11px]">·</span>
-              <a
-                href="https://www.usgs.gov/programs/earthquake-hazards/earthquake-safety"
-                target="_blank" rel="noopener noreferrer"
-                className="text-[11px] text-blue-500 hover:underline"
-              >
-                USGS Safety →
-              </a>
-            </div>
-          </div>
-
           {/* Uzman görüşleri */}
           {bilimsel && bilimsel.uzmanGorusleri && bilimsel.uzmanGorusleri.length > 0 && (
             <div className="bg-[var(--card-bg)] rounded-2xl shadow-sm border border-[var(--border)] p-4">
@@ -506,36 +465,29 @@ export default function BolgeAnalizi() {
         </div>
       )}
 
-      {/* Uzman Haberleri — her zaman göster */}
+      {/* Deprem Anında Ne Yapmalıyız — her zaman göster */}
       <div className="bg-[var(--card-bg)] rounded-2xl shadow-sm border border-[var(--border)] p-4">
-        <div className="flex items-center justify-between mb-3">
-          <p className="text-xs font-bold text-[var(--muted)] uppercase tracking-wide">{t('haberlerTitle')}</p>
-          <span className="text-[10px] text-[var(--muted)]">{t('haberlerSubtitle')}</span>
-        </div>
-        <div className="space-y-3">
-          {haberler.map((h, i) => (
-            <div key={i} className="border border-[var(--border)] rounded-xl p-3 bg-gray-50 dark:bg-gray-800/50">
-              <div className="flex items-start gap-2 mb-1.5">
-                <div className="flex-1">
-                  <p className="text-xs font-bold text-[var(--foreground)]">{h.uzman}</p>
-                  <p className="text-[11px] text-[var(--muted)]">{h.unvan} · {h.kurum}</p>
-                </div>
-                <div className="flex items-center gap-1 shrink-0">
-                  <span className={`text-[10px] px-2 py-0.5 rounded-full font-semibold ${
-                    h.kaynak_tur === 'doi' ? 'bg-green-50 dark:bg-green-900/30 text-green-700 dark:text-green-400'
-                    : 'bg-blue-50 dark:bg-blue-900/30 text-blue-600'
-                  }`}>
-                    {h.kaynak_tur === 'doi' ? 'DOI' : h.kaynak_tur === 'kurum' ? 'Resmi' : 'Üniv.'}
-                  </span>
-                  <span className="text-[10px] text-[var(--muted)]">{h.tarih}</span>
-                </div>
+        <p className="text-xs font-bold text-[var(--muted)] uppercase tracking-wide mb-3">Deprem Anında Ne Yapmalıyız?</p>
+        <div className="space-y-2 mb-4">
+          {depremAnindaOnlemler.map((o) => (
+            <div key={o.adim} className="flex items-start gap-3 border border-[var(--border)] rounded-xl p-3 bg-gray-50 dark:bg-gray-800/50">
+              <span className="text-xl shrink-0">{o.ikon}</span>
+              <div>
+                <p className="text-xs font-bold text-[var(--foreground)]">{o.baslik}</p>
+                <p className="text-[11px] text-[var(--muted)] leading-relaxed mt-0.5">{o.aciklama}</p>
               </div>
-              <p className="text-xs font-semibold text-[var(--foreground)] mb-1">{h.baslik}</p>
-              <p className="text-[11px] text-[var(--muted)] leading-relaxed">{h.ozet}</p>
-              <a href={h.kaynak} target="_blank" rel="noopener noreferrer"
-                className="text-[11px] text-blue-500 hover:underline mt-1.5 block">
-                {t('kaynagaGit')}
-              </a>
+            </div>
+          ))}
+        </div>
+        <p className="text-xs font-bold text-[var(--muted)] uppercase tracking-wide mb-2">Deprem Sonrasında</p>
+        <div className="space-y-2">
+          {depremSonrasiOnlemler.map((o) => (
+            <div key={o.adim} className="flex items-start gap-3 border border-[var(--border)] rounded-xl p-3 bg-gray-50 dark:bg-gray-800/50">
+              <span className="text-xl shrink-0">{o.ikon}</span>
+              <div>
+                <p className="text-xs font-bold text-[var(--foreground)]">{o.baslik}</p>
+                <p className="text-[11px] text-[var(--muted)] leading-relaxed mt-0.5">{o.aciklama}</p>
+              </div>
             </div>
           ))}
         </div>

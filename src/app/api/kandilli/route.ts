@@ -65,8 +65,8 @@ export async function GET(req: Request) {
 
     let depremler = parseKandilli(text);
 
-    // M4.0 altı depremleri filtrele (hissedilmeyen depremler)
-    depremler = depremler.filter((d) => d.buyukluk >= 4.0);
+    // M3.5 altı depremleri filtrele
+    depremler = depremler.filter((d) => d.buyukluk >= 3.5);
 
     // Bölgeye göre filtrele (opsiyonel)
     if (il) {

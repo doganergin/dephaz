@@ -2,6 +2,7 @@
 import { useEffect, useState } from 'react';
 import dynamic from 'next/dynamic';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { haberler } from '@/data/haberler';
 
 // Leaflet SSR fix
 const DepremHaritasi = dynamic(() => import('@/components/DepremHaritasi'), {
@@ -126,7 +127,7 @@ export default function HaritaSayfasi() {
       <div>
         <h1 className="text-xl font-bold text-[var(--foreground)]">{t('haritaTitle')}</h1>
         <p className="text-sm text-[var(--muted)] mt-0.5">
-          {aktifTab === 'turkiye' ? 'Kandilli Rasathanesi · Son 30 gün · M4.0+' : 'USGS · Son 30 gün · M6.5+'}
+          {aktifTab === 'turkiye' ? 'Kandilli Rasathanesi · Son 30 gün · M3.5+' : 'USGS · Son 30 gün · M6.5+'}
         </p>
       </div>
 
@@ -195,11 +196,11 @@ export default function HaritaSayfasi() {
         <p className="text-[10px] font-semibold text-[var(--muted)] uppercase mb-2">Büyüklük / Renk</p>
         <div className="flex flex-wrap gap-3">
           {[
-            { renk: '#10B981', label: 'M4–5' },
-            { renk: '#F59E0B', label: 'M5–6' },
-            { renk: '#F97316', label: 'M6–7' },
-            { renk: '#EF4444', label: 'M7+' },
-            { renk: '#7F1D1D', label: 'M7.5+' },
+            { renk: '#10B981', label: 'M3.5–4' },
+            { renk: '#F59E0B', label: 'M4–5' },
+            { renk: '#F97316', label: 'M5–6' },
+            { renk: '#EF4444', label: 'M6–7' },
+            { renk: '#7F1D1D', label: 'M7+' },
           ].map((r) => (
             <div key={r.label} className="flex items-center gap-1.5">
               <div className="w-3 h-3 rounded-full" style={{ backgroundColor: r.renk }} />
@@ -231,6 +232,41 @@ export default function HaritaSayfasi() {
           </div>
         </div>
       )}
+
+      {/* Uzman Değerlendirmeleri */}
+      <div className="bg-[var(--card-bg)] rounded-2xl shadow-sm border border-[var(--border)] p-4">
+        <div className="flex items-center justify-between mb-3">
+          <p className="text-xs font-bold text-[var(--muted)] uppercase tracking-wide">Uzman Değerlendirmeleri</p>
+          <span className="text-[10px] text-[var(--muted)]">Bilimsel Kaynaklar</span>
+        </div>
+        <div className="space-y-3">
+          {haberler.map((h, i) => (
+            <div key={i} className="border border-[var(--border)] rounded-xl p-3 bg-gray-50 dark:bg-gray-800/50">
+              <div className="flex items-start gap-2 mb-1.5">
+                <div className="flex-1">
+                  <p className="text-xs font-bold text-[var(--foreground)]">{h.uzman}</p>
+                  <p className="text-[11px] text-[var(--muted)]">{h.unvan} · {h.kurum}</p>
+                </div>
+                <div className="flex items-center gap-1 shrink-0">
+                  <span className={`text-[10px] px-2 py-0.5 rounded-full font-semibold ${
+                    h.kaynak_tur === 'doi' ? 'bg-green-50 dark:bg-green-900/30 text-green-700 dark:text-green-400'
+                    : 'bg-blue-50 dark:bg-blue-900/30 text-blue-600'
+                  }`}>
+                    {h.kaynak_tur === 'doi' ? 'DOI' : h.kaynak_tur === 'kurum' ? 'Resmi' : 'Üniv.'}
+                  </span>
+                  <span className="text-[10px] text-[var(--muted)]">{h.tarih}</span>
+                </div>
+              </div>
+              <p className="text-xs font-semibold text-[var(--foreground)] mb-1">{h.baslik}</p>
+              <p className="text-[11px] text-[var(--muted)] leading-relaxed">{h.ozet}</p>
+              <a href={h.kaynak} target="_blank" rel="noopener noreferrer"
+                className="text-[11px] text-blue-500 hover:underline mt-1.5 block">
+                Kaynağa git →
+              </a>
+            </div>
+          ))}
+        </div>
+      </div>
     </div>
   );
 }

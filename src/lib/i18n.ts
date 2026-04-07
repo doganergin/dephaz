@@ -1,6 +1,6 @@
 export type LangKey =
   | 'appName' | 'appSubtitle'
-  | 'navBolgeAnalizi' | 'navAilePlani' | 'nav72hCanta' | 'navHarita' | 'navYakinda'
+  | 'navBolgeAnalizi' | 'navAilePlani' | 'nav72hCanta' | 'navHarita' | 'navYakinda' | 'navUzman'
   | 'pageTitle' | 'pageSubtitle'
   | 'selectIl' | 'selectIlce' | 'selectMahalle'
   | 'badgeSehir' | 'badgeIlce' | 'badgeMahalle'
@@ -31,6 +31,7 @@ const TR: Dict = {
   navAilePlani: 'Aile Planı',
   nav72hCanta: '72h Çanta',
   navHarita: 'Harita',
+  navUzman: 'Uzmanlar',
   navYakinda: 'yakında',
   pageTitle: 'Bölge Analizi',
   pageSubtitle: 'İl, ilçe ve mahalle seçerek deprem risk analizini görüntüle',
@@ -94,6 +95,7 @@ const EN: Dict = {
   navAilePlani: 'Family Plan',
   nav72hCanta: '72h Kit',
   navHarita: 'Map',
+  navUzman: 'Experts',
   navYakinda: 'soon',
   pageTitle: 'Regional Analysis',
   pageSubtitle: 'Select province, district and neighbourhood to view earthquake risk analysis',
