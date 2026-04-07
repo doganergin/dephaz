@@ -497,17 +497,11 @@ export default function BolgeAnalizi() {
             </p>
           </div>
 
-          {/* Aksiyon butonları */}
-          <div className="grid grid-cols-2 gap-2">
-            <a href="/aile-plani"
-              className="flex items-center justify-center gap-2 bg-gray-900 dark:bg-gray-700 text-white rounded-xl py-3 text-sm font-semibold hover:bg-gray-800 transition-colors">
-              {t('btnAilePlani')}
-            </a>
-            <a href="/canta"
-              className="flex items-center justify-center gap-2 border border-[var(--border)] bg-[var(--card-bg)] text-[var(--foreground)] rounded-xl py-3 text-sm font-semibold hover:opacity-80 transition-colors">
-              {t('btn72hCanta')}
-            </a>
-          </div>
+          {/* Aksiyon butonu */}
+          <a href="/canta"
+            className="flex items-center justify-center gap-2 bg-gray-900 dark:bg-gray-700 text-white rounded-xl py-3 text-sm font-semibold hover:bg-gray-800 transition-colors">
+            {t('btn72hCanta')}
+          </a>
         </div>
       )}
 
