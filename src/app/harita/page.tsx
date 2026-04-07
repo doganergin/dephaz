@@ -46,7 +46,7 @@ export interface MapDeprem {
   lat: number;
   lon: number;
   derinlik: number;
-  kaynak: 'kandilli' | 'usgs';
+  kaynak: 'kandilli' | 'usgs' | 'afad';
 }
 
 function buyuklukRenk(mag: number): string {
@@ -61,19 +61,21 @@ export default function HaritaSayfasi() {
   const { t } = useLanguage();
   const [kandilliDepremler, setKandilliDepremler] = useState<MapDeprem[]>([]);
   const [usgsDepremler, setUSGSDepremler] = useState<MapDeprem[]>([]);
+  const [afadDepremler, setAfadDepremler] = useState<MapDeprem[]>([]);
   const [yukleniyor, setYukleniyor] = useState(true);
   const [hata, setHata] = useState('');
-  const [aktifTab, setAktifTab] = useState<'turkiye' | 'dunya'>('turkiye');
+  const [aktifTab, setAktifTab] = useState<'turkiye' | 'afad' | 'dunya'>('turkiye');
 
   useEffect(() => {
     async function fetchData() {
       setYukleniyor(true);
       setHata('');
       try {
-        // Kandilli ve USGS paralel çek
-        const [kandilliRes, usgsRes] = await Promise.allSettled([
+        // Kandilli, USGS ve AFAD paralel çek
+        const [kandilliRes, usgsRes, afadRes] = await Promise.allSettled([
           fetch('/api/kandilli?limit=200'),
           fetch('/api/usgs'),
+          fetch('/api/afad?limit=100&minmag=3.5'),
         ]);
 
         // Kandilli
@@ -111,6 +113,23 @@ export default function HaritaSayfasi() {
             );
           }
         }
+        // AFAD
+        if (afadRes.status === 'fulfilled' && afadRes.value.ok) {
+          const data = await afadRes.value.json();
+          if (Array.isArray(data)) {
+            setAfadDepremler(
+              data.map((d: { buyukluk: number; konum: string; tarih: string; enlem: number; boylam: number; derinlik: number }) => ({
+                buyukluk: d.buyukluk,
+                konum: d.konum,
+                tarih: d.tarih,
+                lat: d.enlem,
+                lon: d.boylam,
+                derinlik: d.derinlik,
+                kaynak: 'afad' as const,
+              }))
+            );
+          }
+        }
       } catch (e) {
         setHata('Veriler alınamadı: ' + String(e));
       } finally {
@@ -120,14 +139,19 @@ export default function HaritaSayfasi() {
     fetchData();
   }, []);
 
-  const aktifDepremler = aktifTab === 'turkiye' ? kandilliDepremler : usgsDepremler;
+  const aktifDepremler =
+    aktifTab === 'turkiye' ? kandilliDepremler :
+    aktifTab === 'afad' ? afadDepremler :
+    usgsDepremler;
 
   return (
     <div className="space-y-4">
       <div>
         <h1 className="text-xl font-bold text-[var(--foreground)]">{t('haritaTitle')}</h1>
         <p className="text-sm text-[var(--muted)] mt-0.5">
-          {aktifTab === 'turkiye' ? 'Kandilli / USGS · Son 90 gün · M3.5+' : 'USGS · Son 90 gün · M6.5+'}
+          {aktifTab === 'turkiye' ? 'Kandilli / USGS · Son 90 gün · M3.5+' :
+           aktifTab === 'afad' ? 'AFAD · Son depremler · M3.5+' :
+           'USGS · Son 90 gün · M6.5+'}
         </p>
       </div>
 
@@ -135,6 +159,7 @@ export default function HaritaSayfasi() {
       <div className="flex gap-0 bg-[var(--card-bg)] border border-[var(--border)] rounded-2xl overflow-hidden shadow-sm">
         {[
           { key: 'turkiye' as const, label: t('haritaTurkiye'), icon: '🇹🇷' },
+          { key: 'afad' as const, label: 'AFAD', icon: '📡' },
           { key: 'dunya' as const, label: t('haritaDunya'), icon: '🌍' },
         ].map((tab) => (
           <button
@@ -157,7 +182,7 @@ export default function HaritaSayfasi() {
         {[
           { label: 'Toplam', value: String(aktifDepremler.length) },
           { label: 'Max Büyüklük', value: aktifDepremler.length ? Math.max(...aktifDepremler.map(d => d.buyukluk)).toFixed(1) : '—' },
-          { label: 'Kaynak', value: aktifTab === 'turkiye' ? 'USGS / Kandilli' : 'USGS' },
+          { label: 'Kaynak', value: aktifTab === 'turkiye' ? 'USGS/Kandilli' : aktifTab === 'afad' ? 'AFAD' : 'USGS' },
         ].map((s) => (
           <div key={s.label} className="bg-[var(--card-bg)] border border-[var(--border)] rounded-xl p-3 text-center">
             <p className="text-[10px] text-[var(--muted)]">{s.label}</p>

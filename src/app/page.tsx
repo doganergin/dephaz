@@ -1,5 +1,5 @@
 'use client';
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import { getProvinces, getDistricts, getNeighbourhoods } from '@/lib/locationHelper';
 import { useAppStore } from '@/store';
 import { bolgeRiskGetir } from '@/api/riskApi';
@@ -115,6 +115,52 @@ export default function BolgeAnalizi() {
   const [yukleniyor, setYukleniyor] = useState(false);
   const [risk, setRisk] = useState<BolgeRisk | null>(null);
   const [hata, setHata] = useState('');
+
+  // Güncel depremler
+  interface GuncelDeprem { buyukluk: number; konum: string; tarih: string; derinlik: number; }
+  const [guncelTab, setGuncelTab] = useState<'tr' | 'afad' | 'dunya'>('tr');
+  const [trDepremler, setTrDepremler] = useState<GuncelDeprem[]>([]);
+  const [afadDepremler, setAfadDepremler] = useState<GuncelDeprem[]>([]);
+  const [dunyaDepremler, setDunyaDepremler] = useState<GuncelDeprem[]>([]);
+  const [guncelYukleniyor, setGuncelYukleniyor] = useState(true);
+
+  useEffect(() => {
+    async function fetchGuncel() {
+      setGuncelYukleniyor(true);
+      const [trRes, afadRes, dunyaRes] = await Promise.allSettled([
+        fetch('/api/kandilli?limit=20'),
+        fetch('/api/afad?limit=20&minmag=3.5'),
+        fetch('/api/usgs'),
+      ]);
+      if (trRes.status === 'fulfilled' && trRes.value.ok) {
+        const d = await trRes.value.json();
+        setTrDepremler(Array.isArray(d) ? d.map((x: { buyukluk: number; konum: string; tarih: string; saat?: string; derinlik: number }) => ({
+          buyukluk: x.buyukluk, konum: x.konum,
+          tarih: x.saat ? `${x.tarih} ${x.saat}` : x.tarih,
+          derinlik: x.derinlik,
+        })) : []);
+      }
+      if (afadRes.status === 'fulfilled' && afadRes.value.ok) {
+        const d = await afadRes.value.json();
+        setAfadDepremler(Array.isArray(d) ? d.map((x: { buyukluk: number; konum: string; tarih: string; derinlik: number }) => ({
+          buyukluk: x.buyukluk, konum: x.konum, tarih: x.tarih, derinlik: x.derinlik,
+        })) : []);
+      }
+      if (dunyaRes.status === 'fulfilled' && dunyaRes.value.ok) {
+        const d = await dunyaRes.value.json();
+        if (d.features) {
+          setDunyaDepremler(d.features.slice(0, 20).map((f: { properties: { mag: number; place: string; time: number }; geometry: { coordinates: [number, number, number] } }) => ({
+            buyukluk: f.properties.mag,
+            konum: f.properties.place,
+            tarih: new Date(f.properties.time).toLocaleDateString('tr-TR'),
+            derinlik: Math.round(f.geometry.coordinates[2]),
+          })));
+        }
+      }
+      setGuncelYukleniyor(false);
+    }
+    fetchGuncel();
+  }, []);
 
   const iller = getProvinces().map((il) => ({ value: il.id, label: il.name }));
   const ilceler = secilenIl ? getDistricts(secilenIl.id).map((i) => ({ value: i.id, label: i.name })) : [];
@@ -464,6 +510,59 @@ export default function BolgeAnalizi() {
           </div>
         </div>
       )}
+
+      {/* Güncel Depremler — her zaman göster */}
+      <div className="bg-[var(--card-bg)] rounded-2xl shadow-sm border border-[var(--border)] p-4">
+        <p className="text-xs font-bold text-[var(--muted)] uppercase tracking-wide mb-3">Güncel Depremler</p>
+        {/* Kaynak sekmeleri */}
+        <div className="flex gap-0 bg-gray-100 dark:bg-gray-700 rounded-xl overflow-hidden mb-3">
+          {([
+            { key: 'tr' as const, label: '🇹🇷 Türkiye', sub: 'USGS/Kandilli · M3.5+' },
+            { key: 'afad' as const, label: '📡 AFAD', sub: 'Canlı · M3.5+' },
+            { key: 'dunya' as const, label: '🌍 Dünya', sub: 'USGS · M6.5+' },
+          ] as const).map((tab) => (
+            <button
+              key={tab.key}
+              onClick={() => setGuncelTab(tab.key)}
+              className={`flex-1 py-2 text-[11px] font-semibold transition-colors ${
+                guncelTab === tab.key
+                  ? 'bg-white dark:bg-gray-600 text-red-600 shadow-sm rounded-xl'
+                  : 'text-[var(--muted)]'
+              }`}
+            >
+              {tab.label}
+            </button>
+          ))}
+        </div>
+        {guncelYukleniyor ? (
+          <div className="flex items-center justify-center py-6 gap-2 text-sm text-[var(--muted)]">
+            <div className="w-4 h-4 border-2 border-red-400 border-t-transparent rounded-full animate-spin" />
+            Yükleniyor...
+          </div>
+        ) : (
+          <div className="space-y-2 max-h-72 overflow-y-auto">
+            {(guncelTab === 'tr' ? trDepremler : guncelTab === 'afad' ? afadDepremler : dunyaDepremler).length === 0 ? (
+              <p className="text-xs text-[var(--muted)] text-center py-4">Veri alınamadı</p>
+            ) : (
+              (guncelTab === 'tr' ? trDepremler : guncelTab === 'afad' ? afadDepremler : dunyaDepremler).map((d, i) => (
+                <div key={i} className="flex items-center gap-3 py-1.5 border-b border-[var(--border)] last:border-0">
+                  <div className={`w-10 h-10 rounded-xl flex items-center justify-center text-sm font-bold shrink-0 ${
+                    d.buyukluk >= 6 ? 'bg-red-50 dark:bg-red-900/30 text-red-600' :
+                    d.buyukluk >= 4 ? 'bg-amber-50 dark:bg-amber-900/30 text-amber-600' :
+                    'bg-gray-50 dark:bg-gray-700 text-gray-500'
+                  }`}>
+                    {d.buyukluk.toFixed(1)}
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <p className="text-xs font-medium text-[var(--foreground)] truncate">{d.konum}</p>
+                    <p className="text-[11px] text-[var(--muted)]">{d.tarih} · {d.derinlik} km</p>
+                  </div>
+                </div>
+              ))
+            )}
+          </div>
+        )}
+      </div>
 
       {/* Deprem Anında Ne Yapmalıyız — her zaman göster */}
       <div className="bg-[var(--card-bg)] rounded-2xl shadow-sm border border-[var(--border)] p-4">
