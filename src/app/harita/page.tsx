@@ -48,7 +48,8 @@ export default function HaritaSayfasi() {
   const [kandilliDepremler, setKandilliDepremler] = useState<MapDeprem[]>([]);
   const [afadDepremler, setAfadDepremler] = useState<MapDeprem[]>([]);
   const [usgsTrDepremler, setUsgsTrDepremler] = useState<MapDeprem[]>([]);
-  const [usgsDepremler, setUsgsDepremler] = useState<MapDeprem[]>([]);
+  const [usgsDepremler, setUsgsDepremler] = useState<MapDeprem[]>([]);       // M4.5+
+  const [usgsDepremlerTam, setUsgsDepremlerTam] = useState<MapDeprem[]>([]); // M2.5+
   const [yukleniyor, setYukleniyor] = useState(true);
   const [kaynakDurum, setKaynakDurum] = useState({ kandilli: false, afad: false, usgsTr: false });
 
@@ -56,11 +57,12 @@ export default function HaritaSayfasi() {
     async function fetchData() {
       setYukleniyor(true);
 
-      const [kandilliRes, afadRes, usgsTrRes, usgsRes] = await Promise.allSettled([
+      const [kandilliRes, afadRes, usgsTrRes, usgsRes, usgsTamRes] = await Promise.allSettled([
         fetch('/api/kandilli?limit=500&minmag=1.0'),
         fetch('/api/afad?limit=500&minmag=1.0'),
         fetch('/api/kandilli?limit=500&minmag=1.0&source=usgs'),
-        fetch('/api/usgs?minmag=1.0&limit=500'),
+        fetch('/api/usgs?minmag=4.5&limit=200'),
+        fetch('/api/usgs?minmag=2.5&limit=500'),
       ]);
 
       const durum = { kandilli: false, afad: false, usgsTr: false };
@@ -125,21 +127,25 @@ export default function HaritaSayfasi() {
         }
       }
 
+      const parseUsgs = (features: USGSFeature[]): MapDeprem[] =>
+        features.map((f) => ({
+          buyukluk: f.properties.mag,
+          konum: f.properties.place,
+          tarih: new Date(f.properties.time).toLocaleString('tr-TR'),
+          lat: f.geometry.coordinates[1],
+          lon: f.geometry.coordinates[0],
+          derinlik: f.geometry.coordinates[2],
+          kaynak: 'usgs' as const,
+        }));
+
       if (usgsRes.status === 'fulfilled' && usgsRes.value.ok) {
         const data = await usgsRes.value.json();
-        if (data.features) {
-          setUsgsDepremler(
-            (data.features as USGSFeature[]).map((f) => ({
-              buyukluk: f.properties.mag,
-              konum: f.properties.place,
-              tarih: new Date(f.properties.time).toLocaleString('tr-TR'),
-              lat: f.geometry.coordinates[1],
-              lon: f.geometry.coordinates[0],
-              derinlik: f.geometry.coordinates[2],
-              kaynak: 'usgs' as const,
-            }))
-          );
-        }
+        if (data.features) setUsgsDepremler(parseUsgs(data.features));
+      }
+
+      if (usgsTamRes.status === 'fulfilled' && usgsTamRes.value.ok) {
+        const data = await usgsTamRes.value.json();
+        if (data.features) setUsgsDepremlerTam(parseUsgs(data.features));
       }
 
       setKaynakDurum(durum);
@@ -149,14 +155,14 @@ export default function HaritaSayfasi() {
   }, []);
 
   const kaynakDepremler =
-    anaTab === 'dunya' ? usgsDepremler :
+    anaTab === 'dunya' ? (dunyaKucukGoster ? usgsDepremlerTam : usgsDepremler) :
     trKaynak === 'afad' ? afadDepremler :
     trKaynak === 'usgs' ? usgsTrDepremler :
     kandilliDepremler;
 
-  const aktifDepremler = kucukGoster
-    ? kaynakDepremler
-    : kaynakDepremler.filter((d) => d.buyukluk >= 4.0);
+  const aktifDepremler = (anaTab === 'turkiye' && !trKucukGoster)
+    ? kaynakDepremler.filter((d) => d.buyukluk >= 4.0)
+    : kaynakDepremler;
 
   const kaynakEtiketi =
     anaTab === 'dunya' ? 'USGS' :
