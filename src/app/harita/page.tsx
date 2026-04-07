@@ -72,7 +72,7 @@ export default function HaritaSayfasi() {
       try {
         // Kandilli ve USGS paralel çek
         const [kandilliRes, usgsRes] = await Promise.allSettled([
-          fetch('/api/kandilli?limit=50'),
+          fetch('/api/kandilli?limit=200'),
           fetch('/api/usgs'),
         ]);
 
@@ -127,7 +127,7 @@ export default function HaritaSayfasi() {
       <div>
         <h1 className="text-xl font-bold text-[var(--foreground)]">{t('haritaTitle')}</h1>
         <p className="text-sm text-[var(--muted)] mt-0.5">
-          {aktifTab === 'turkiye' ? 'Kandilli Rasathanesi · Son 30 gün · M3.5+' : 'USGS · Son 30 gün · M6.5+'}
+          {aktifTab === 'turkiye' ? 'Kandilli Rasathanesi · Son 90 gün · M3.5+' : 'USGS · Son 90 gün · M6.5+'}
         </p>
       </div>
 

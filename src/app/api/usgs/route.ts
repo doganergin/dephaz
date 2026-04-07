@@ -2,11 +2,11 @@ import { NextResponse } from 'next/server';
 
 export async function GET() {
   try {
-    const thirtyDaysAgo = new Date(Date.now() - 30 * 24 * 60 * 60 * 1000)
+    const ninetyDaysAgo = new Date(Date.now() - 90 * 24 * 60 * 60 * 1000)
       .toISOString()
       .split('T')[0];
 
-    const url = `https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&minmagnitude=6.5&orderby=time&limit=20&starttime=${thirtyDaysAgo}`;
+    const url = `https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&minmagnitude=6.5&orderby=time&limit=50&starttime=${ninetyDaysAgo}`;
 
     const res = await fetch(url, {
       next: { revalidate: 600 }, // 10 dk cache
