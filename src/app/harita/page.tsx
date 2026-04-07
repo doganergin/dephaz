@@ -127,7 +127,7 @@ export default function HaritaSayfasi() {
       <div>
         <h1 className="text-xl font-bold text-[var(--foreground)]">{t('haritaTitle')}</h1>
         <p className="text-sm text-[var(--muted)] mt-0.5">
-          {aktifTab === 'turkiye' ? 'Kandilli Rasathanesi · Son 90 gün · M3.5+' : 'USGS · Son 90 gün · M6.5+'}
+          {aktifTab === 'turkiye' ? 'Kandilli / USGS · Son 90 gün · M3.5+' : 'USGS · Son 90 gün · M6.5+'}
         </p>
       </div>
 
@@ -157,7 +157,7 @@ export default function HaritaSayfasi() {
         {[
           { label: 'Toplam', value: String(aktifDepremler.length) },
           { label: 'Max Büyüklük', value: aktifDepremler.length ? Math.max(...aktifDepremler.map(d => d.buyukluk)).toFixed(1) : '—' },
-          { label: 'Kaynak', value: aktifTab === 'turkiye' ? 'Kandilli' : 'USGS' },
+          { label: 'Kaynak', value: aktifTab === 'turkiye' ? 'USGS / Kandilli' : 'USGS' },
         ].map((s) => (
           <div key={s.label} className="bg-[var(--card-bg)] border border-[var(--border)] rounded-xl p-3 text-center">
             <p className="text-[10px] text-[var(--muted)]">{s.label}</p>
