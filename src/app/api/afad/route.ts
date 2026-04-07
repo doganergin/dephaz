@@ -23,7 +23,7 @@ export async function GET(req: Request) {
       `https://api.orhanaydogdu.com.tr/deprem/afad/live?limit=500`,
       {
         headers: { 'User-Agent': 'DepremHatti/1.0' },
-        next: { revalidate: 120 },
+        cache: 'no-store',
         signal: AbortSignal.timeout(8000),
       }
     );
@@ -47,7 +47,9 @@ export async function GET(req: Request) {
         kaynak: 'afad' as const,
       }));
 
-    return NextResponse.json(depremler);
+    return NextResponse.json(depremler, {
+      headers: { 'Cache-Control': 'no-store, max-age=0' },
+    });
   } catch (err) {
     return NextResponse.json(
       { error: 'AFAD verisi alınamadı', detail: String(err) },
@@ -55,3 +57,5 @@ export async function GET(req: Request) {
     );
   }
 }
+
+export const dynamic = 'force-dynamic';

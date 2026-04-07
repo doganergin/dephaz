@@ -69,7 +69,7 @@ async function usgsturkiyeGetir(limit: number, minmag: number, il?: string): Pro
     `&limit=500` +
     `&starttime=${ninetyDaysAgo}`;
 
-  const res = await fetch(url, { next: { revalidate: 120 } });
+  const res = await fetch(url, { cache: 'no-store' });
   if (!res.ok) throw new Error(`USGS hata: ${res.status}`);
 
   const data = await res.json();
@@ -104,11 +104,13 @@ export async function GET(req: Request) {
   const minmag = parseFloat(searchParams.get('minmag') ?? '1.0');
   const source = searchParams.get('source');
 
+  const noCache = { headers: { 'Cache-Control': 'no-store, max-age=0' } };
+
   // USGS direkt modu
   if (source === 'usgs') {
     try {
       const depremler = await usgsturkiyeGetir(limit, minmag, il);
-      return NextResponse.json(depremler);
+      return NextResponse.json(depremler, noCache);
     } catch (err) {
       return NextResponse.json(
         { error: 'USGS verisi alınamadı', detail: String(err) },
@@ -121,7 +123,7 @@ export async function GET(req: Request) {
   try {
     const res = await fetch(KANDILLI_URL, {
       headers: { 'Accept-Charset': 'windows-1254' },
-      next: { revalidate: 120 },
+      cache: 'no-store',
       signal: AbortSignal.timeout(5000),
     });
 
@@ -140,12 +142,12 @@ export async function GET(req: Request) {
 
     if (depremler.length === 0) throw new Error('Kandilli boş döndü');
 
-    return NextResponse.json(depremler.slice(0, limit));
+    return NextResponse.json(depremler.slice(0, limit), noCache);
   } catch {
     // Kandilli down → USGS Türkiye fallback
     try {
       const depremler = await usgsturkiyeGetir(limit, minmag, il);
-      return NextResponse.json(depremler);
+      return NextResponse.json(depremler, noCache);
     } catch (err2) {
       return NextResponse.json(
         { error: 'Deprem verisi alınamadı', detail: String(err2) },
@@ -154,3 +156,5 @@ export async function GET(req: Request) {
     }
   }
 }
+
+export const dynamic = 'force-dynamic';

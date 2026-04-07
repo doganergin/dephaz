@@ -18,12 +18,14 @@ export async function GET(req: Request) {
       `&limit=${limit}` +
       `&starttime=${ninetyDaysAgo}`;
 
-    const res = await fetch(url, { next: { revalidate: 120 } });
+    const res = await fetch(url, { cache: 'no-store' });
 
     if (!res.ok) throw new Error(`USGS ${res.status}`);
 
     const data = await res.json();
-    return NextResponse.json(data);
+    return NextResponse.json(data, {
+      headers: { 'Cache-Control': 'no-store, max-age=0' },
+    });
   } catch (err) {
     return NextResponse.json(
       { error: 'USGS verisi alınamadı', detail: String(err) },
@@ -31,3 +33,5 @@ export async function GET(req: Request) {
     );
   }
 }
+
+export const dynamic = 'force-dynamic';
