@@ -60,7 +60,7 @@ async function usgsturkiyeGetir(limit: number, il?: string): Promise<Deprem[]> {
   const url =
     `https://earthquake.usgs.gov/fdsnws/event/1/query` +
     `?format=geojson` +
-    `&minmagnitude=3.5` +
+    `&minmagnitude=${minmag}` +
     `&minlatitude=${TURKIYE_BBOX.minlat}` +
     `&maxlatitude=${TURKIYE_BBOX.maxlat}` +
     `&minlongitude=${TURKIYE_BBOX.minlon}` +
@@ -101,9 +101,11 @@ export async function GET(req: Request) {
   const { searchParams } = new URL(req.url);
   const il = searchParams.get('il')?.toUpperCase();
   const limit = parseInt(searchParams.get('limit') ?? '20');
+  const minmag = parseFloat(searchParams.get('minmag') ?? '2.5');
+  const forceUsgs = searchParams.get('source') === 'usgs';
 
-  // 1. Kandilli'yi dene
-  try {
+  // 1. Kandilli'yi dene (forceUsgs=true ise atla)
+  if (!forceUsgs) try {
     const res = await fetch(KANDILLI_URL, {
       headers: { 'Accept-Charset': 'windows-1254' },
       next: { revalidate: 300 },
@@ -115,7 +117,7 @@ export async function GET(req: Request) {
     const buffer = await res.arrayBuffer();
     const text = new TextDecoder('windows-1254').decode(buffer);
 
-    let depremler = parseKandilli(text).filter((d) => d.buyukluk >= 3.5);
+    let depremler = parseKandilli(text).filter((d) => d.buyukluk >= minmag);
 
     if (il) {
       depremler = depremler.filter((d) =>

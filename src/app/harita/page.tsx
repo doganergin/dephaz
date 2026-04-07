@@ -4,7 +4,6 @@ import dynamic from 'next/dynamic';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { haberler } from '@/data/haberler';
 
-// Leaflet SSR fix
 const DepremHaritasi = dynamic(() => import('@/components/DepremHaritasi'), {
   ssr: false,
   loading: () => (
@@ -18,34 +17,18 @@ const DepremHaritasi = dynamic(() => import('@/components/DepremHaritasi'), {
 });
 
 interface USGSFeature {
-  properties: {
-    mag: number;
-    place: string;
-    time: number;
-    depth?: number;
-  };
-  geometry: {
-    coordinates: [number, number, number];
-  };
+  properties: { mag: number; place: string; time: number };
+  geometry: { coordinates: [number, number, number] };
 }
 
 interface KandilliDeprem {
-  buyukluk: number;
-  konum: string;
-  tarih: string;
-  saat: string;
-  enlem: number;
-  boylam: number;
-  derinlik: number;
+  buyukluk: number; konum: string; tarih: string; saat: string;
+  enlem: number; boylam: number; derinlik: number;
 }
 
 export interface MapDeprem {
-  buyukluk: number;
-  konum: string;
-  tarih: string;
-  lat: number;
-  lon: number;
-  derinlik: number;
+  buyukluk: number; konum: string; tarih: string;
+  lat: number; lon: number; derinlik: number;
   kaynak: 'kandilli' | 'usgs' | 'afad';
 }
 
@@ -54,78 +37,86 @@ function buyuklukRenk(mag: number): string {
   if (mag >= 6) return '#EF4444';
   if (mag >= 5) return '#F97316';
   if (mag >= 4) return '#F59E0B';
-  return '#10B981';
+  if (mag >= 3) return '#10B981';
+  return '#9CA3AF';
 }
 
 export default function HaritaSayfasi() {
   const { t } = useLanguage();
+
+  // Ana sekmeler
+  const [anaTab, setAnaTab] = useState<'turkiye' | 'dunya'>('turkiye');
+  // Türkiye alt kaynak sekmesi
+  const [trKaynak, setTrKaynak] = useState<'kandilli' | 'afad' | 'usgs'>('kandilli');
+  // M4.0 altı toggle
+  const [kucukGoster, setKucukGoster] = useState(false);
+
+  // Veriler
   const [kandilliDepremler, setKandilliDepremler] = useState<MapDeprem[]>([]);
-  const [usgsDepremler, setUSGSDepremler] = useState<MapDeprem[]>([]);
   const [afadDepremler, setAfadDepremler] = useState<MapDeprem[]>([]);
+  const [usgsTrDepremler, setUsgsTrDepremler] = useState<MapDeprem[]>([]);
+  const [usgsDepremler, setUsgsDepremler] = useState<MapDeprem[]>([]);
   const [yukleniyor, setYukleniyor] = useState(true);
   const [hata, setHata] = useState('');
-  const [aktifTab, setAktifTab] = useState<'turkiye' | 'afad' | 'dunya'>('turkiye');
 
   useEffect(() => {
     async function fetchData() {
       setYukleniyor(true);
       setHata('');
       try {
-        // Kandilli, USGS ve AFAD paralel çek
-        const [kandilliRes, usgsRes, afadRes] = await Promise.allSettled([
-          fetch('/api/kandilli?limit=200'),
+        const [kandilliRes, afadRes, usgsTrRes, usgsRes] = await Promise.allSettled([
+          fetch('/api/kandilli?limit=300&minmag=2.5'),
+          fetch('/api/afad?limit=200&minmag=2.5'),
+          fetch('/api/kandilli?limit=300&minmag=2.5&source=usgs'),
           fetch('/api/usgs'),
-          fetch('/api/afad?limit=100&minmag=3.5'),
         ]);
 
-        // Kandilli
         if (kandilliRes.status === 'fulfilled' && kandilliRes.value.ok) {
           const data: KandilliDeprem[] = await kandilliRes.value.json();
           setKandilliDepremler(
-            data
-              .filter((d) => d.enlem && d.boylam)
-              .map((d) => ({
-                buyukluk: d.buyukluk,
-                konum: d.konum,
-                tarih: `${d.tarih} ${d.saat}`,
-                lat: d.enlem,
-                lon: d.boylam,
-                derinlik: d.derinlik,
-                kaynak: 'kandilli',
-              }))
+            data.filter((d) => d.enlem && d.boylam).map((d) => ({
+              buyukluk: d.buyukluk, konum: d.konum,
+              tarih: `${d.tarih} ${d.saat}`,
+              lat: d.enlem, lon: d.boylam, derinlik: d.derinlik,
+              kaynak: 'kandilli',
+            }))
           );
         }
 
-        // USGS
-        if (usgsRes.status === 'fulfilled' && usgsRes.value.ok) {
-          const data = await usgsRes.value.json();
-          if (data.features) {
-            setUSGSDepremler(
-              (data.features as USGSFeature[]).map((f) => ({
-                buyukluk: f.properties.mag,
-                konum: f.properties.place,
-                tarih: new Date(f.properties.time).toLocaleString('tr-TR'),
-                lat: f.geometry.coordinates[1],
-                lon: f.geometry.coordinates[0],
-                derinlik: f.geometry.coordinates[2],
-                kaynak: 'usgs',
-              }))
-            );
-          }
-        }
-        // AFAD
         if (afadRes.status === 'fulfilled' && afadRes.value.ok) {
           const data = await afadRes.value.json();
           if (Array.isArray(data)) {
             setAfadDepremler(
               data.map((d: { buyukluk: number; konum: string; tarih: string; enlem: number; boylam: number; derinlik: number }) => ({
-                buyukluk: d.buyukluk,
-                konum: d.konum,
-                tarih: d.tarih,
-                lat: d.enlem,
-                lon: d.boylam,
-                derinlik: d.derinlik,
+                buyukluk: d.buyukluk, konum: d.konum, tarih: d.tarih,
+                lat: d.enlem, lon: d.boylam, derinlik: d.derinlik,
                 kaynak: 'afad' as const,
+              }))
+            );
+          }
+        }
+
+        if (usgsTrRes.status === 'fulfilled' && usgsTrRes.value.ok) {
+          const data: KandilliDeprem[] = await usgsTrRes.value.json();
+          setUsgsTrDepremler(
+            data.filter((d) => d.enlem && d.boylam).map((d) => ({
+              buyukluk: d.buyukluk, konum: d.konum,
+              tarih: `${d.tarih} ${d.saat}`,
+              lat: d.enlem, lon: d.boylam, derinlik: d.derinlik,
+              kaynak: 'usgs',
+            }))
+          );
+        }
+
+        if (usgsRes.status === 'fulfilled' && usgsRes.value.ok) {
+          const data = await usgsRes.value.json();
+          if (data.features) {
+            setUsgsDepremler(
+              (data.features as USGSFeature[]).map((f) => ({
+                buyukluk: f.properties.mag, konum: f.properties.place,
+                tarih: new Date(f.properties.time).toLocaleString('tr-TR'),
+                lat: f.geometry.coordinates[1], lon: f.geometry.coordinates[0],
+                derinlik: f.geometry.coordinates[2], kaynak: 'usgs',
               }))
             );
           }
@@ -139,34 +130,45 @@ export default function HaritaSayfasi() {
     fetchData();
   }, []);
 
-  const aktifDepremler =
-    aktifTab === 'turkiye' ? kandilliDepremler :
-    aktifTab === 'afad' ? afadDepremler :
-    usgsDepremler;
+  // Aktif kaynak verisi
+  const kaynakDepremler =
+    anaTab === 'dunya' ? usgsDepremler :
+    trKaynak === 'afad' ? afadDepremler :
+    trKaynak === 'usgs' ? usgsTrDepremler :
+    kandilliDepremler;
+
+  // M4.0 filtresi
+  const aktifDepremler = kucukGoster
+    ? kaynakDepremler
+    : kaynakDepremler.filter((d) => d.buyukluk >= 4.0);
+
+  const kaynakEtiketi =
+    anaTab === 'dunya' ? 'USGS' :
+    trKaynak === 'afad' ? 'AFAD' :
+    trKaynak === 'usgs' ? 'USGS' : 'Kandilli / USGS';
 
   return (
     <div className="space-y-4">
       <div>
         <h1 className="text-xl font-bold text-[var(--foreground)]">{t('haritaTitle')}</h1>
         <p className="text-sm text-[var(--muted)] mt-0.5">
-          {aktifTab === 'turkiye' ? 'Kandilli / USGS · Son 90 gün · M3.5+' :
-           aktifTab === 'afad' ? 'AFAD · Son depremler · M3.5+' :
-           'USGS · Son 90 gün · M6.5+'}
+          {anaTab === 'turkiye'
+            ? `${kaynakEtiketi} · Son 90 gün · ${kucukGoster ? 'Tüm büyüklükler' : 'M4.0+'}`
+            : 'USGS · Son 90 gün · M6.5+'}
         </p>
       </div>
 
-      {/* Tab seçici */}
+      {/* Ana sekmeler */}
       <div className="flex gap-0 bg-[var(--card-bg)] border border-[var(--border)] rounded-2xl overflow-hidden shadow-sm">
         {[
           { key: 'turkiye' as const, label: t('haritaTurkiye'), icon: '🇹🇷' },
-          { key: 'afad' as const, label: 'AFAD', icon: '📡' },
           { key: 'dunya' as const, label: t('haritaDunya'), icon: '🌍' },
         ].map((tab) => (
           <button
             key={tab.key}
-            onClick={() => setAktifTab(tab.key)}
+            onClick={() => setAnaTab(tab.key)}
             className={`flex-1 flex items-center justify-center gap-1.5 py-3 text-xs font-semibold border-b-2 transition-colors ${
-              aktifTab === tab.key
+              anaTab === tab.key
                 ? 'border-red-500 text-red-600'
                 : 'border-transparent text-[var(--muted)] hover:text-[var(--foreground)]'
             }`}
@@ -177,12 +179,47 @@ export default function HaritaSayfasi() {
         ))}
       </div>
 
+      {/* Türkiye alt kaynak seçimi */}
+      {anaTab === 'turkiye' && (
+        <div className="flex gap-1.5 items-center">
+          <span className="text-[10px] text-[var(--muted)] font-semibold uppercase mr-1">Kaynak:</span>
+          {([
+            { key: 'kandilli' as const, label: 'Kandilli' },
+            { key: 'afad' as const, label: 'AFAD' },
+            { key: 'usgs' as const, label: 'USGS' },
+          ]).map((k) => (
+            <button
+              key={k.key}
+              onClick={() => setTrKaynak(k.key)}
+              className={`px-3 py-1 text-[11px] font-semibold rounded-full border transition-colors ${
+                trKaynak === k.key
+                  ? 'bg-red-500 text-white border-red-500'
+                  : 'bg-[var(--card-bg)] text-[var(--muted)] border-[var(--border)] hover:text-[var(--foreground)]'
+              }`}
+            >
+              {k.label}
+            </button>
+          ))}
+          {/* M4.0 altı toggle */}
+          <button
+            onClick={() => setKucukGoster(!kucukGoster)}
+            className={`ml-auto px-3 py-1 text-[11px] font-semibold rounded-full border transition-colors ${
+              kucukGoster
+                ? 'bg-amber-500 text-white border-amber-500'
+                : 'bg-[var(--card-bg)] text-[var(--muted)] border-[var(--border)]'
+            }`}
+          >
+            {kucukGoster ? 'M4.0 altı gizle' : 'M4.0 altını göster'}
+          </button>
+        </div>
+      )}
+
       {/* İstatistikler */}
       <div className="grid grid-cols-3 gap-2">
         {[
           { label: 'Toplam', value: String(aktifDepremler.length) },
           { label: 'Max Büyüklük', value: aktifDepremler.length ? Math.max(...aktifDepremler.map(d => d.buyukluk)).toFixed(1) : '—' },
-          { label: 'Kaynak', value: aktifTab === 'turkiye' ? 'USGS/Kandilli' : aktifTab === 'afad' ? 'AFAD' : 'USGS' },
+          { label: 'Kaynak', value: kaynakEtiketi },
         ].map((s) => (
           <div key={s.label} className="bg-[var(--card-bg)] border border-[var(--border)] rounded-xl p-3 text-center">
             <p className="text-[10px] text-[var(--muted)]">{s.label}</p>
@@ -191,7 +228,6 @@ export default function HaritaSayfasi() {
         ))}
       </div>
 
-      {/* Hata */}
       {hata && (
         <div className="bg-red-50 dark:bg-red-900/20 border border-red-100 rounded-xl p-3 text-sm text-red-600">{hata}</div>
       )}
@@ -208,8 +244,8 @@ export default function HaritaSayfasi() {
         ) : (
           <DepremHaritasi
             depremler={aktifDepremler}
-            merkez={aktifTab === 'turkiye' ? [39, 35] : [20, 0]}
-            zoom={aktifTab === 'turkiye' ? 6 : 2}
+            merkez={anaTab === 'turkiye' ? [39, 35] : [20, 0]}
+            zoom={anaTab === 'turkiye' ? 6 : 2}
             buyuklukRenk={buyuklukRenk}
             tLabels={{ buyukluk: t('haritaPopupBuyukluk'), tarih: t('haritaPopupTarih'), derinlik: t('haritaPopupDerinlik') }}
           />
@@ -221,7 +257,8 @@ export default function HaritaSayfasi() {
         <p className="text-[10px] font-semibold text-[var(--muted)] uppercase mb-2">Büyüklük / Renk</p>
         <div className="flex flex-wrap gap-3">
           {[
-            { renk: '#10B981', label: 'M3.5–4' },
+            { renk: '#9CA3AF', label: 'M<3' },
+            { renk: '#10B981', label: 'M3–4' },
             { renk: '#F59E0B', label: 'M4–5' },
             { renk: '#F97316', label: 'M5–6' },
             { renk: '#EF4444', label: 'M6–7' },
@@ -238,7 +275,9 @@ export default function HaritaSayfasi() {
       {/* Liste */}
       {aktifDepremler.length > 0 && (
         <div className="bg-[var(--card-bg)] rounded-2xl shadow-sm border border-[var(--border)] p-4">
-          <p className="text-xs font-bold text-[var(--muted)] uppercase tracking-wide mb-3">Son Depremler</p>
+          <p className="text-xs font-bold text-[var(--muted)] uppercase tracking-wide mb-3">
+            Son Depremler ({aktifDepremler.length})
+          </p>
           <div className="space-y-2 max-h-64 overflow-y-auto">
             {aktifDepremler.map((d, i) => (
               <div key={i} className="flex items-center gap-3 py-1.5 border-b border-[var(--border)] last:border-0">
