@@ -22,6 +22,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             __html: `(function(){try{var t=localStorage.getItem('theme');var m=window.matchMedia('(prefers-color-scheme: dark)').matches;if(t==='dark'||(t==null&&m))document.documentElement.classList.add('dark')}catch(e){}})()`,
           }}
         />
+        {/* Google AdSense */}
+        <meta name="google-adsense-account" content="ca-pub-8704382349010084" />
+        <script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8704382349010084"
+          crossOrigin="anonymous"
+        />
       </head>
       <body className="min-h-screen bg-[var(--background)] text-[var(--foreground)] flex flex-col">
         <LanguageProvider>
