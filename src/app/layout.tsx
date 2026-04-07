@@ -36,7 +36,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <footer className="max-w-2xl mx-auto w-full px-4 py-5 border-t border-[var(--border)] space-y-3">
             <div className="space-y-1">
               <p className="text-[11px] text-[var(--muted)] text-center">
-                Deprem verileri: <span className="font-medium">Kandilli Rasathanesi (KOERI)</span> · Fay verileri: <span className="font-medium">MTA Aktif Fay Haritası</span>
+                Deprem verileri: <span className="font-medium">Kandilli Rasathanesi (KOERI)</span> · <span className="font-medium">AFAD</span> · <span className="font-medium">USGS</span> · Fay verileri: <span className="font-medium">MTA Aktif Fay Haritası</span>
               </p>
               <p className="text-[11px] text-[var(--muted)] text-center">
                 © 2026 <span className="font-semibold">Doğan Ergin</span> · Tüm haklar saklıdır.
