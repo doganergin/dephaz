@@ -1656,7 +1656,7 @@ function hesaplaRisk(il: string, ilce: string, mahalle: string, depremler: Depre
   const veri = RISK_DB[key];
   const skor = veri?.riskSkoru ?? 60;
   const bilimsel = bilimselKaynaklar[key] ?? bilimselKaynaklar[il];
-  const zemin = bilimsel?.zemin ?? ZEMIN_DB[key] ?? ZEMIN_VARSAYILAN;
+  const zemin = ZEMIN_DB[key] ?? bilimsel?.zemin ?? ZEMIN_VARSAYILAN;
   return {
     mahalle,
     ilce,
