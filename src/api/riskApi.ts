@@ -1644,4 +1644,10 @@ const BINA_DB: Record<string, BolgeRisk['binalar']> = {
     { donem: '2015 sonrası', yuzde: 24, renk: '#639922' },
   ],
 };
-
+const TARIHI_DEPREMLER: Deprem[] = [
+  { buyukluk: 7.8, baslik: 'Kahramanmaraş (Pazarcık)', tarih: '6 Şubat 2023 04:17', derinlik: 8.6 },
+  { buyukluk: 7.7, baslik: 'Kahramanmaraş (Elbistan)', tarih: '6 Şubat 2023 13:24', derinlik: 7.0 },
+  { buyukluk: 7.0, baslik: 'Sisam Açıkları (İzmir)', tarih: '30 Ekim 2020', derinlik: 16.5 },
+  { buyukluk: 7.4, baslik: 'Marmara (Gölcük)', tarih: '17 Ağustos 1999', derinlik: 17 },
+  { buyukluk: 7.2, baslik: 'Düzce', tarih: '12 Kasım 1999', derinlik: 10 },
+];
