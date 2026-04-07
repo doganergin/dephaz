@@ -37,7 +37,7 @@ export const haberler: Haber[] = [
     tarih: '2002',
     baslik: '1999 Kocaeli Depremi Yüzey Kırığı ve Atım Dağılımı',
     ozet: 'Barka ve ark.\'nın Bulletin of the Seismological Society of America\'da yayımlanan çalışmasına göre, 17 Ağustos 1999 Kocaeli depreminde yüzey kırığı 145 km uzunluğa ulaşmış, sağ yanal ötelenme yer yer 5 metreyi aşmıştır. Çalışma, KAF\'ın İzmit kolunun tarihsel sismik boşluk davranışını belgelemektedir.',
-    kaynak: 'https://doi.org/10.1785/0120000858',
+    kaynak: 'https://doi.org/10.1785/0120000841',
     kaynak_tur: 'doi',
   },
   {
@@ -57,7 +57,7 @@ export const haberler: Haber[] = [
     tarih: '2004',
     baslik: 'Marmara Bölgesinde Deprem Tehlikesi',
     ozet: 'Erdik ve ark.\'nın Soil Dynamics and Earthquake Engineering\'de yayımlanan çalışmasına göre, İstanbul\'un belirli semtlerinde zemin büyütmesi nedeniyle sismik ivme değerleri 2–3 kat artabilmektedir. Çalışma, zemin büyütme haritaları oluşturularak olası depremde beklenen şiddet dağılımını ortaya koymaktadır.',
-    kaynak: 'https://doi.org/10.1016/j.soildyn.2004.06.033',
+    kaynak: 'https://doi.org/10.1016/j.soildyn.2004.04.003',
     kaynak_tur: 'doi',
   },
   {

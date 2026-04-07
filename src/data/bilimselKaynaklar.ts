@@ -89,7 +89,7 @@ export const bilimselKaynaklar: Record<string, BilimselVeri> = {
         yil: 2010,
         baslik: 'Geohazards rooted from the northern margin of the Sea of Marmara since the late Pleistocene',
         dergi: 'Natural Hazards',
-        doi: '10.1007/s11069-010-9534-1',
+        link: 'https://link.springer.com/journal/11069',
         alinti:
           'Marmara Denizi kuzey fayı üzerinde birden fazla kırık segmenti tanımlanmış; ' +
           'en tehlikeli segment İstanbul\'a yalnızca 20 km uzaktadır.',
@@ -99,7 +99,7 @@ export const bilimselKaynaklar: Record<string, BilimselVeri> = {
         yil: 2004,
         baslik: 'Earthquake hazard in Marmara Region, Turkey',
         dergi: 'Soil Dynamics and Earthquake Engineering',
-        doi: '10.1016/j.soildyn.2004.06.033',
+        doi: '10.1016/j.soildyn.2004.04.003',
         alinti:
           'İstanbul\'un belirli semtlerinde zemin büyütmesi nedeniyle sismik ivme değerleri 2–3 kat artabilmektedir.',
       },
@@ -121,7 +121,7 @@ export const bilimselKaynaklar: Record<string, BilimselVeri> = {
         ulke: 'TR',
         yil: 2002,
         gorus: 'Barka\'nın yayımladığı çalışmalara göre, 1999 Kocaeli depremi KAF\'ın batıya doğru ilerleyen göç örüntüsünün beklenen bir halkasıydı; 1939\'dan bu yana fay kırıkları sistematik biçimde batıya kaymaktadır.',
-        kaynak: 'https://doi.org/10.1785/0120000858',
+        kaynak: 'https://doi.org/10.1785/0120000841',
       },
     ],
     genelDegerlendirme:
@@ -134,7 +134,7 @@ export const bilimselKaynaklar: Record<string, BilimselVeri> = {
         yil: 2002,
         baslik: 'The Surface Rupture and Slip Distribution of the 17 August 1999 Izmit Earthquake (M 7.4), North Anatolian Fault',
         dergi: 'Bulletin of the Seismological Society of America',
-        doi: '10.1785/0120000858',
+        doi: '10.1785/0120000841',
         alinti:
           '1999 Kocaeli depreminde yüzey kırığı 145 km uzunluğa ulaşmış, sağ yanal ötelenme yer yer 5 metreyi aşmıştır.',
       },
@@ -575,7 +575,7 @@ export const bilimselKaynaklar: Record<string, BilimselVeri> = {
         yil: 2002,
         baslik: 'The Surface Rupture and Slip Distribution of the 17 August 1999 Izmit Earthquake (M 7.4), North Anatolian Fault',
         dergi: 'Bulletin of the Seismological Society of America',
-        doi: '10.1785/0120000858',
+        doi: '10.1785/0120000841',
         alinti:
           'KAF\'ın Bolu-Düzce segmenti, 1999 deprem serisinin doğu kesimini oluşturmakta ve yüzey kırığı bu bölgede de gözlemlenmiştir.',
       },
@@ -591,7 +591,7 @@ export const bilimselKaynaklar: Record<string, BilimselVeri> = {
         ulke: 'TR',
         yil: 2002,
         gorus: 'Barka\'nın yayımladığı çalışmalara göre, 1999 Düzce depremi KAF\'ın kırılma göçünün bir parçası olarak gerçekleşti; Düzce ovası alüvyal zemini zemin büyütmesi açısından en kritik bölgeler arasında yer almaktadır.',
-        kaynak: 'https://doi.org/10.1785/0120000858',
+        kaynak: 'https://doi.org/10.1785/0120000841',
       },
     ],
     genelDegerlendirme:
@@ -620,7 +620,7 @@ export const bilimselKaynaklar: Record<string, BilimselVeri> = {
         ulke: 'TR',
         yil: 2004,
         gorus: 'Erdik ve ekibinin çalışmalarına göre, Yalova\'nın KAF Marmara güney koluna olan yakınlığı, olası Marmara depremi senaryolarında şehri en fazla etkilenecek yerleşimler arasına sokmaktadır.',
-        kaynak: 'https://doi.org/10.1016/j.soildyn.2004.06.033',
+        kaynak: 'https://doi.org/10.1016/j.soildyn.2004.04.003',
       },
     ],
     genelDegerlendirme:

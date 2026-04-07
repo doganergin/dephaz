@@ -291,7 +291,7 @@ export default function BolgeAnalizi() {
             <div className="flex items-center justify-between mb-3">
               <p className="text-xs font-bold text-[var(--muted)] uppercase tracking-wide">{t('sectionBina')}</p>
               <a
-                href="https://data.tuik.gov.tr/Bulten/Index?p=Bina-Sayimi-2021"
+                href="https://www.tuik.gov.tr"
                 target="_blank" rel="noopener noreferrer"
                 className="text-[10px] text-blue-500 hover:underline"
               >
@@ -428,8 +428,8 @@ export default function BolgeAnalizi() {
                   <p className="text-xs font-semibold text-[var(--foreground)]">Veri Kaynakları</p>
                   <div className="mt-1.5 space-y-1">
                     {[
-                      { ad: 'Kandilli Rasathanesi (KOERI)', link: 'http://www.koeri.boun.edu.tr' },
-                      { ad: 'AFAD Türkiye Deprem Tehlike Haritası 2018', link: 'https://deprem.afad.gov.tr' },
+                      { ad: 'Kandilli Rasathanesi (KOERI)', link: 'https://www.koeri.boun.edu.tr' },
+                      { ad: 'AFAD Türkiye Deprem Tehlike Haritası 2018', link: 'https://www.afad.gov.tr' },
                       { ad: 'MTA Aktif Fay Haritası', link: 'https://www.mta.gov.tr' },
                       { ad: 'TÜİK 2021 Bina Sayımı', link: 'https://data.tuik.gov.tr' },
                     ].map((v) => (
