@@ -315,11 +315,11 @@ export default function BolgeAnalizi() {
           {risk.depremler.length > 0 && (
             <div className="bg-[var(--card-bg)] rounded-2xl shadow-sm border border-[var(--border)] p-4">
               <div className="flex items-center justify-between mb-3">
-                <p className="text-xs font-bold text-[var(--muted)] uppercase tracking-wide">{t('hissedilenDepremler')}</p>
-                <span className="text-[10px] text-[var(--muted)] bg-gray-50 dark:bg-gray-700 px-2 py-1 rounded-full">{t('kandilliLabel')}</span>
+                <p className="text-xs font-bold text-[var(--muted)] uppercase tracking-wide">Tarihsel Depremler · 100km çapı</p>
+                <span className="text-[10px] text-[var(--muted)] bg-gray-50 dark:bg-gray-700 px-2 py-1 rounded-full">USGS</span>
               </div>
               <div className="space-y-2">
-                {risk.depremler.slice(0, 6).map((d, i) => (
+                {risk.depremler.slice(0, 20).map((d, i) => (
                   <div key={i} className="flex items-center gap-3 py-1.5 border-b border-[var(--border)] last:border-0">
                     <div className={`w-10 h-10 rounded-xl flex items-center justify-center text-sm font-bold shrink-0 ${
                       d.buyukluk >= 6 ? 'bg-red-50 dark:bg-red-900/30 text-red-600' :

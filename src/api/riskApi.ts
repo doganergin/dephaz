@@ -20,8 +20,18 @@ export async function kandilliDepremleriGetir(il?: string, limit = 15): Promise<
 }
 
 export async function bolgeRiskGetir(il: string, ilce: string, mahalle: string): Promise<BolgeRisk> {
-  // İl filtresi yok — denizde olan ama hissedilen depremler de dahil olsun
-  const depremler = await kandilliDepremleriGetir(undefined, 15);
+  let depremler: Deprem[] = [];
+  try {
+    const params = new URLSearchParams({ il, ilce });
+    const res = await fetch(`/api/bolge-depremler?${params}`);
+    if (res.ok) {
+      const data = await res.json();
+      depremler = data.depremler ?? [];
+    }
+  } catch {
+    // USGS erişilemezse Kandilli fallback
+    depremler = await kandilliDepremleriGetir(undefined, 15);
+  }
   return hesaplaRisk(il, ilce, mahalle, depremler);
 }
 
