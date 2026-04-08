@@ -1,11 +1,11 @@
 'use client';
 import { useEffect, useState } from 'react';
+import dynamic from 'next/dynamic';
+import Link from 'next/link';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 const MAX_DEPREM = 100;  // listede tutulacak max kayıt
 const YENILEME_SN = 60; // kaç saniyede bir yenile
-import dynamic from 'next/dynamic';
-import { useLanguage } from '@/contexts/LanguageContext';
-import { haberler } from '@/data/haberler';
 
 const DepremHaritasi = dynamic(() => import('@/components/DepremHaritasi'), {
   ssr: false,
@@ -367,40 +367,15 @@ export default function HaritaSayfasi() {
         </div>
       )}
 
-      {/* Uzman Değerlendirmeleri */}
-      <div className="bg-[var(--card-bg)] rounded-2xl shadow-sm border border-[var(--border)] p-4">
-        <div className="flex items-center justify-between mb-3">
-          <p className="text-xs font-bold text-[var(--muted)] uppercase tracking-wide">Uzman Değerlendirmeleri</p>
-          <span className="text-[10px] text-[var(--muted)]">Bilimsel Kaynaklar</span>
+      {/* Uzman Görüşleri yönlendirme */}
+      <Link href="/uzman"
+        className="flex items-center justify-between bg-[var(--card-bg)] rounded-2xl shadow-sm border border-[var(--border)] p-4 hover:border-red-300 transition-colors">
+        <div>
+          <p className="text-xs font-bold text-[var(--foreground)]">Uzman Görüşleri</p>
+          <p className="text-[11px] text-[var(--muted)] mt-0.5">Bilimsel değerlendirmeler ve uzman analizleri</p>
         </div>
-        <div className="space-y-3">
-          {haberler.map((h, i) => (
-            <div key={i} className="border border-[var(--border)] rounded-xl p-3 bg-gray-50 dark:bg-gray-800/50">
-              <div className="flex items-start gap-2 mb-1.5">
-                <div className="flex-1">
-                  <p className="text-xs font-bold text-[var(--foreground)]">{h.uzman}</p>
-                  <p className="text-[11px] text-[var(--muted)]">{h.unvan} · {h.kurum}</p>
-                </div>
-                <div className="flex items-center gap-1 shrink-0">
-                  <span className={`text-[10px] px-2 py-0.5 rounded-full font-semibold ${
-                    h.kaynak_tur === 'doi' ? 'bg-green-50 dark:bg-green-900/30 text-green-700 dark:text-green-400'
-                    : 'bg-blue-50 dark:bg-blue-900/30 text-blue-600'
-                  }`}>
-                    {h.kaynak_tur === 'doi' ? 'DOI' : h.kaynak_tur === 'kurum' ? 'Resmi' : 'Üniv.'}
-                  </span>
-                  <span className="text-[10px] text-[var(--muted)]">{h.tarih}</span>
-                </div>
-              </div>
-              <p className="text-xs font-semibold text-[var(--foreground)] mb-1">{h.baslik}</p>
-              <p className="text-[11px] text-[var(--muted)] leading-relaxed">{h.ozet}</p>
-              <a href={h.kaynak} target="_blank" rel="noopener noreferrer"
-                className="text-[11px] text-blue-500 hover:underline mt-1.5 block">
-                Kaynağa git →
-              </a>
-            </div>
-          ))}
-        </div>
-      </div>
+        <span className="text-[var(--muted)] text-sm">→</span>
+      </Link>
     </div>
   );
 }

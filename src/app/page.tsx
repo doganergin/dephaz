@@ -116,36 +116,37 @@ export default function BolgeAnalizi() {
   const [risk, setRisk] = useState<BolgeRisk | null>(null);
   const [hata, setHata] = useState('');
 
-  // Güncel depremler
-  interface GuncelDeprem { buyukluk: number; konum: string; tarih: string; derinlik: number; }
-  const [guncelTab, setGuncelTab] = useState<'tr' | 'afad' | 'dunya'>('tr');
+  // Son depremler
+  interface GuncelDeprem { buyukluk: number; konum: string; tarih: string; derinlik: number; kaynak?: string; }
+  const [guncelTab, setGuncelTab] = useState<'tr' | 'dunya'>('tr');
   const [trDepremler, setTrDepremler] = useState<GuncelDeprem[]>([]);
-  const [afadDepremler, setAfadDepremler] = useState<GuncelDeprem[]>([]);
   const [dunyaDepremler, setDunyaDepremler] = useState<GuncelDeprem[]>([]);
   const [guncelYukleniyor, setGuncelYukleniyor] = useState(true);
 
   useEffect(() => {
     async function fetchGuncel() {
       setGuncelYukleniyor(true);
-      const [trRes, afadRes, dunyaRes] = await Promise.allSettled([
+      const [kandilliRes, afadRes, dunyaRes] = await Promise.allSettled([
         fetch('/api/kandilli?limit=20'),
         fetch('/api/afad?limit=20&minmag=3.5'),
         fetch('/api/usgs'),
       ]);
-      if (trRes.status === 'fulfilled' && trRes.value.ok) {
-        const d = await trRes.value.json();
-        setTrDepremler(Array.isArray(d) ? d.map((x: { buyukluk: number; konum: string; tarih: string; saat?: string; derinlik: number }) => ({
+      const combined: GuncelDeprem[] = [];
+      if (kandilliRes.status === 'fulfilled' && kandilliRes.value.ok) {
+        const d = await kandilliRes.value.json();
+        if (Array.isArray(d)) combined.push(...d.map((x: { buyukluk: number; konum: string; tarih: string; saat?: string; derinlik: number }) => ({
           buyukluk: x.buyukluk, konum: x.konum,
           tarih: x.saat ? `${x.tarih} ${x.saat}` : x.tarih,
-          derinlik: x.derinlik,
-        })) : []);
+          derinlik: x.derinlik, kaynak: 'Kandilli',
+        })));
       }
       if (afadRes.status === 'fulfilled' && afadRes.value.ok) {
         const d = await afadRes.value.json();
-        setAfadDepremler(Array.isArray(d) ? d.map((x: { buyukluk: number; konum: string; tarih: string; derinlik: number }) => ({
-          buyukluk: x.buyukluk, konum: x.konum, tarih: x.tarih, derinlik: x.derinlik,
-        })) : []);
+        if (Array.isArray(d)) combined.push(...d.map((x: { buyukluk: number; konum: string; tarih: string; derinlik: number }) => ({
+          buyukluk: x.buyukluk, konum: x.konum, tarih: x.tarih, derinlik: x.derinlik, kaynak: 'AFAD',
+        })));
       }
+      setTrDepremler(combined.sort((a, b) => b.buyukluk - a.buyukluk));
       if (dunyaRes.status === 'fulfilled' && dunyaRes.value.ok) {
         const d = await dunyaRes.value.json();
         if (d.features) {
@@ -154,6 +155,7 @@ export default function BolgeAnalizi() {
             konum: f.properties.place,
             tarih: new Date(f.properties.time).toLocaleDateString('tr-TR'),
             derinlik: Math.round(f.geometry.coordinates[2]),
+            kaynak: 'USGS',
           })));
         }
       }
@@ -505,14 +507,13 @@ export default function BolgeAnalizi() {
         </div>
       )}
 
-      {/* Güncel Depremler — her zaman göster */}
+      {/* Son Depremler — her zaman göster */}
       <div className="bg-[var(--card-bg)] rounded-2xl shadow-sm border border-[var(--border)] p-4">
-        <p className="text-xs font-bold text-[var(--muted)] uppercase tracking-wide mb-3">Güncel Depremler</p>
+        <p className="text-xs font-bold text-[var(--muted)] uppercase tracking-wide mb-3">Son Depremler</p>
         {/* Kaynak sekmeleri */}
         <div className="flex gap-0 bg-gray-100 dark:bg-gray-700 rounded-xl overflow-hidden mb-3">
           {([
-            { key: 'tr' as const, label: '🇹🇷 Türkiye', sub: 'USGS/Kandilli · M3.5+' },
-            { key: 'afad' as const, label: '📡 AFAD', sub: 'Canlı · M3.5+' },
+            { key: 'tr' as const, label: '🇹🇷 Türkiye', sub: 'Kandilli + AFAD · M3.5+' },
             { key: 'dunya' as const, label: '🌍 Dünya', sub: 'USGS · M6.5+' },
           ] as const).map((tab) => (
             <button
@@ -535,10 +536,10 @@ export default function BolgeAnalizi() {
           </div>
         ) : (
           <div className="space-y-2 max-h-72 overflow-y-auto">
-            {(guncelTab === 'tr' ? trDepremler : guncelTab === 'afad' ? afadDepremler : dunyaDepremler).length === 0 ? (
+            {(guncelTab === 'tr' ? trDepremler : dunyaDepremler).length === 0 ? (
               <p className="text-xs text-[var(--muted)] text-center py-4">Veri alınamadı</p>
             ) : (
-              (guncelTab === 'tr' ? trDepremler : guncelTab === 'afad' ? afadDepremler : dunyaDepremler).map((d, i) => (
+              (guncelTab === 'tr' ? trDepremler : dunyaDepremler).map((d, i) => (
                 <div key={i} className="flex items-center gap-3 py-1.5 border-b border-[var(--border)] last:border-0">
                   <div className={`w-10 h-10 rounded-xl flex items-center justify-center text-sm font-bold shrink-0 ${
                     d.buyukluk >= 6 ? 'bg-red-50 dark:bg-red-900/30 text-red-600' :
@@ -549,7 +550,7 @@ export default function BolgeAnalizi() {
                   </div>
                   <div className="flex-1 min-w-0">
                     <p className="text-xs font-medium text-[var(--foreground)] truncate">{d.konum}</p>
-                    <p className="text-[11px] text-[var(--muted)]">{d.tarih} · {d.derinlik} km</p>
+                    <p className="text-[11px] text-[var(--muted)]">{d.tarih} · {d.derinlik} km{d.kaynak ? ` · ${d.kaynak}` : ''}</p>
                   </div>
                 </div>
               ))
