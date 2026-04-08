@@ -1643,6 +1643,579 @@ const BINA_DB: Record<string, BolgeRisk['binalar']> = {
     { donem: '2000–2015', yuzde: 38, renk: '#EF9F27' },
     { donem: '2015 sonrası', yuzde: 24, renk: '#639922' },
   ],
+  'Balıkesir-Karesi': [
+    { donem: '2000 öncesi', yuzde: 40, renk: '#E24B4A' },
+    { donem: '2000–2015', yuzde: 36, renk: '#EF9F27' },
+    { donem: '2015 sonrası', yuzde: 24, renk: '#639922' },
+  ],
+  'Balıkesir-Erdek': [
+    { donem: '2000 öncesi', yuzde: 42, renk: '#E24B4A' },
+    { donem: '2000–2015', yuzde: 35, renk: '#EF9F27' },
+    { donem: '2015 sonrası', yuzde: 23, renk: '#639922' },
+  ],
+  'Balıkesir-Gönen': [
+    { donem: '2000 öncesi', yuzde: 44, renk: '#E24B4A' },
+    { donem: '2000–2015', yuzde: 34, renk: '#EF9F27' },
+    { donem: '2015 sonrası', yuzde: 22, renk: '#639922' },
+  ],
+  'Balıkesir-Manyas': [
+    { donem: '2000 öncesi', yuzde: 45, renk: '#E24B4A' },
+    { donem: '2000–2015', yuzde: 34, renk: '#EF9F27' },
+    { donem: '2015 sonrası', yuzde: 21, renk: '#639922' },
+  ],
+  'Balıkesir-Edremit': [
+    { donem: '2000 öncesi', yuzde: 38, renk: '#E24B4A' },
+    { donem: '2000–2015', yuzde: 36, renk: '#EF9F27' },
+    { donem: '2015 sonrası', yuzde: 26, renk: '#639922' },
+  ],
+  'Balıkesir-Susurluk': [
+    { donem: '2000 öncesi', yuzde: 42, renk: '#E24B4A' },
+    { donem: '2000–2015', yuzde: 36, renk: '#EF9F27' },
+    { donem: '2015 sonrası', yuzde: 22, renk: '#639922' },
+  ],
+
+  // ── İSTANBUL (ek ilçeler) ─────────────────────────────────────────────────
+  'İstanbul-Büyükçekmece': [
+    { donem: '1999 öncesi', yuzde: 48, renk: '#E24B4A' },
+    { donem: '1999–2012', yuzde: 30, renk: '#EF9F27' },
+    { donem: '2012 sonrası', yuzde: 22, renk: '#639922' },
+  ],
+  'İstanbul-Bahçelievler': [
+    { donem: '1999 öncesi', yuzde: 50, renk: '#E24B4A' },
+    { donem: '1999–2012', yuzde: 28, renk: '#EF9F27' },
+    { donem: '2012 sonrası', yuzde: 22, renk: '#639922' },
+  ],
+  'İstanbul-Kartal': [
+    { donem: '1999 öncesi', yuzde: 44, renk: '#E24B4A' },
+    { donem: '1999–2012', yuzde: 30, renk: '#EF9F27' },
+    { donem: '2012 sonrası', yuzde: 26, renk: '#639922' },
+  ],
+  'İstanbul-Pendik': [
+    { donem: '1999 öncesi', yuzde: 40, renk: '#E24B4A' },
+    { donem: '1999–2012', yuzde: 32, renk: '#EF9F27' },
+    { donem: '2012 sonrası', yuzde: 28, renk: '#639922' },
+  ],
+  'İstanbul-Maltepe': [
+    { donem: '1999 öncesi', yuzde: 42, renk: '#E24B4A' },
+    { donem: '1999–2012', yuzde: 30, renk: '#EF9F27' },
+    { donem: '2012 sonrası', yuzde: 28, renk: '#639922' },
+  ],
+  'İstanbul-Ümraniye': [
+    { donem: '1999 öncesi', yuzde: 38, renk: '#E24B4A' },
+    { donem: '1999–2012', yuzde: 32, renk: '#EF9F27' },
+    { donem: '2012 sonrası', yuzde: 30, renk: '#639922' },
+  ],
+  'İstanbul-Beyoğlu': [
+    { donem: '1980 öncesi', yuzde: 35, renk: '#E24B4A' },
+    { donem: '1980–1999', yuzde: 25, renk: '#EF9F27' },
+    { donem: '1999–2012', yuzde: 22, renk: '#FAC775' },
+    { donem: '2012 sonrası', yuzde: 18, renk: '#639922' },
+  ],
+  'İstanbul-Başakşehir': [
+    { donem: '1999 öncesi', yuzde: 18, renk: '#E24B4A' },
+    { donem: '1999–2012', yuzde: 40, renk: '#EF9F27' },
+    { donem: '2012 sonrası', yuzde: 42, renk: '#639922' },
+  ],
+
+  // ── KOCAELİ (ek ilçeler) ─────────────────────────────────────────────────
+  'Kocaeli-Körfez': [
+    { donem: '1999 öncesi', yuzde: 30, renk: '#E24B4A' },
+    { donem: '1999–2012', yuzde: 40, renk: '#EF9F27' },
+    { donem: '2012 sonrası', yuzde: 30, renk: '#639922' },
+  ],
+  'Kocaeli-Derince': [
+    { donem: '1999 öncesi', yuzde: 32, renk: '#E24B4A' },
+    { donem: '1999–2012', yuzde: 38, renk: '#EF9F27' },
+    { donem: '2012 sonrası', yuzde: 30, renk: '#639922' },
+  ],
+  'Kocaeli-Başiskele': [
+    { donem: '1999 öncesi', yuzde: 28, renk: '#E24B4A' },
+    { donem: '1999–2012', yuzde: 40, renk: '#EF9F27' },
+    { donem: '2012 sonrası', yuzde: 32, renk: '#639922' },
+  ],
+  'Kocaeli-Kartepe': [
+    { donem: '1999 öncesi', yuzde: 26, renk: '#E24B4A' },
+    { donem: '1999–2012', yuzde: 38, renk: '#EF9F27' },
+    { donem: '2012 sonrası', yuzde: 36, renk: '#639922' },
+  ],
+  'Kocaeli-Kandıra': [
+    { donem: '1999 öncesi', yuzde: 45, renk: '#E24B4A' },
+    { donem: '1999–2012', yuzde: 32, renk: '#EF9F27' },
+    { donem: '2012 sonrası', yuzde: 23, renk: '#639922' },
+  ],
+  'Kocaeli-Karamürsel': [
+    { donem: '1999 öncesi', yuzde: 35, renk: '#E24B4A' },
+    { donem: '1999–2012', yuzde: 36, renk: '#EF9F27' },
+    { donem: '2012 sonrası', yuzde: 29, renk: '#639922' },
+  ],
+
+  // ── SAKARYA (ek ilçeler) ──────────────────────────────────────────────────
+  'Sakarya-Serdivan': [
+    { donem: '1999 öncesi', yuzde: 22, renk: '#E24B4A' },
+    { donem: '1999–2012', yuzde: 42, renk: '#EF9F27' },
+    { donem: '2012 sonrası', yuzde: 36, renk: '#639922' },
+  ],
+  'Sakarya-Erenler': [
+    { donem: '1999 öncesi', yuzde: 26, renk: '#E24B4A' },
+    { donem: '1999–2012', yuzde: 42, renk: '#EF9F27' },
+    { donem: '2012 sonrası', yuzde: 32, renk: '#639922' },
+  ],
+  'Sakarya-Akyazı': [
+    { donem: '1999 öncesi', yuzde: 30, renk: '#E24B4A' },
+    { donem: '1999–2012', yuzde: 40, renk: '#EF9F27' },
+    { donem: '2012 sonrası', yuzde: 30, renk: '#639922' },
+  ],
+  'Sakarya-Hendek': [
+    { donem: '1999 öncesi', yuzde: 38, renk: '#E24B4A' },
+    { donem: '1999–2012', yuzde: 35, renk: '#EF9F27' },
+    { donem: '2012 sonrası', yuzde: 27, renk: '#639922' },
+  ],
+  'Sakarya-Sapanca': [
+    { donem: '1999 öncesi', yuzde: 28, renk: '#E24B4A' },
+    { donem: '1999–2012', yuzde: 40, renk: '#EF9F27' },
+    { donem: '2012 sonrası', yuzde: 32, renk: '#639922' },
+  ],
+  'Sakarya-Kaynarca': [
+    { donem: '1999 öncesi', yuzde: 45, renk: '#E24B4A' },
+    { donem: '1999–2012', yuzde: 32, renk: '#EF9F27' },
+    { donem: '2012 sonrası', yuzde: 23, renk: '#639922' },
+  ],
+
+  // ── BURSA (ek ilçeler) ────────────────────────────────────────────────────
+  'Bursa-Yıldırım': [
+    { donem: '1999 öncesi', yuzde: 42, renk: '#E24B4A' },
+    { donem: '1999–2012', yuzde: 32, renk: '#EF9F27' },
+    { donem: '2012 sonrası', yuzde: 26, renk: '#639922' },
+  ],
+  'Bursa-Mudanya': [
+    { donem: '1999 öncesi', yuzde: 40, renk: '#E24B4A' },
+    { donem: '1999–2012', yuzde: 33, renk: '#EF9F27' },
+    { donem: '2012 sonrası', yuzde: 27, renk: '#639922' },
+  ],
+  'Bursa-Orhangazi': [
+    { donem: '1999 öncesi', yuzde: 44, renk: '#E24B4A' },
+    { donem: '1999–2012', yuzde: 32, renk: '#EF9F27' },
+    { donem: '2012 sonrası', yuzde: 24, renk: '#639922' },
+  ],
+  'Bursa-İznik': [
+    { donem: '1999 öncesi', yuzde: 48, renk: '#E24B4A' },
+    { donem: '1999–2012', yuzde: 30, renk: '#EF9F27' },
+    { donem: '2012 sonrası', yuzde: 22, renk: '#639922' },
+  ],
+  'Bursa-İnegöl': [
+    { donem: '1999 öncesi', yuzde: 38, renk: '#E24B4A' },
+    { donem: '1999–2012', yuzde: 34, renk: '#EF9F27' },
+    { donem: '2012 sonrası', yuzde: 28, renk: '#639922' },
+  ],
+
+  // ── SAMSUN (ek ilçeler) ───────────────────────────────────────────────────
+  'Samsun-Tekkeköy': [
+    { donem: '2000 öncesi', yuzde: 38, renk: '#E24B4A' },
+    { donem: '2000–2015', yuzde: 36, renk: '#EF9F27' },
+    { donem: '2015 sonrası', yuzde: 26, renk: '#639922' },
+  ],
+  'Samsun-Bafra': [
+    { donem: '2000 öncesi', yuzde: 42, renk: '#E24B4A' },
+    { donem: '2000–2015', yuzde: 34, renk: '#EF9F27' },
+    { donem: '2015 sonrası', yuzde: 24, renk: '#639922' },
+  ],
+  'Samsun-Alaçam': [
+    { donem: '2000 öncesi', yuzde: 45, renk: '#E24B4A' },
+    { donem: '2000–2015', yuzde: 33, renk: '#EF9F27' },
+    { donem: '2015 sonrası', yuzde: 22, renk: '#639922' },
+  ],
+  'Samsun-Terme': [
+    { donem: '2000 öncesi', yuzde: 40, renk: '#E24B4A' },
+    { donem: '2000–2015', yuzde: 35, renk: '#EF9F27' },
+    { donem: '2015 sonrası', yuzde: 25, renk: '#639922' },
+  ],
+
+  // ── KAHRAMANMARAŞ (ek ilçeler) ────────────────────────────────────────────
+  'Kahramanmaraş-Göksun': [
+    { donem: '2023 öncesi (hasar gördü)', yuzde: 60, renk: '#E24B4A' },
+    { donem: '2023 sonrası', yuzde: 40, renk: '#639922' },
+  ],
+  'Kahramanmaraş-Afşin': [
+    { donem: '2023 öncesi (hasar gördü)', yuzde: 65, renk: '#E24B4A' },
+    { donem: '2023 sonrası (yeniden yapılan)', yuzde: 35, renk: '#639922' },
+  ],
+  'Kahramanmaraş-Andırın': [
+    { donem: '2023 öncesi', yuzde: 50, renk: '#E24B4A' },
+    { donem: '2023 sonrası', yuzde: 50, renk: '#639922' },
+  ],
+  'Kahramanmaraş-Nurhak': [
+    { donem: '2023 öncesi (hasar gördü)', yuzde: 58, renk: '#E24B4A' },
+    { donem: '2023 sonrası', yuzde: 42, renk: '#639922' },
+  ],
+
+  // ── HATAY (ek ilçeler) ────────────────────────────────────────────────────
+  'Hatay-Dörtyol': [
+    { donem: '2023 öncesi (hasar gördü)', yuzde: 68, renk: '#E24B4A' },
+    { donem: '2023 sonrası', yuzde: 32, renk: '#639922' },
+  ],
+  'Hatay-Reyhanlı': [
+    { donem: '2023 öncesi (hasar gördü)', yuzde: 62, renk: '#E24B4A' },
+    { donem: '2023 sonrası', yuzde: 38, renk: '#639922' },
+  ],
+  'Hatay-Hassa': [
+    { donem: '2023 öncesi (hasar gördü)', yuzde: 65, renk: '#E24B4A' },
+    { donem: '2023 sonrası', yuzde: 35, renk: '#639922' },
+  ],
+  'Hatay-Altınözü': [
+    { donem: '2023 öncesi (hasar gördü)', yuzde: 70, renk: '#E24B4A' },
+    { donem: '2023 sonrası', yuzde: 30, renk: '#639922' },
+  ],
+  'Hatay-Arsuz': [
+    { donem: '2023 öncesi (hasar gördü)', yuzde: 60, renk: '#E24B4A' },
+    { donem: '2023 sonrası', yuzde: 40, renk: '#639922' },
+  ],
+  'Hatay-Yayladağı': [
+    { donem: '2023 öncesi (hasar gördü)', yuzde: 58, renk: '#E24B4A' },
+    { donem: '2023 sonrası', yuzde: 42, renk: '#639922' },
+  ],
+  'Hatay-Belen': [
+    { donem: '2023 öncesi (hasar gördü)', yuzde: 55, renk: '#E24B4A' },
+    { donem: '2023 sonrası', yuzde: 45, renk: '#639922' },
+  ],
+
+  // ── ADIYAMAN (ek ilçeler) ─────────────────────────────────────────────────
+  'Adıyaman-Kahta': [
+    { donem: '2023 öncesi (hasar gördü)', yuzde: 62, renk: '#E24B4A' },
+    { donem: '2023 sonrası', yuzde: 38, renk: '#639922' },
+  ],
+  'Adıyaman-Besni': [
+    { donem: '2023 öncesi (hasar gördü)', yuzde: 58, renk: '#E24B4A' },
+    { donem: '2023 sonrası', yuzde: 42, renk: '#639922' },
+  ],
+  'Adıyaman-Gölbaşı': [
+    { donem: '2023 öncesi (hasar gördü)', yuzde: 55, renk: '#E24B4A' },
+    { donem: '2023 sonrası', yuzde: 45, renk: '#639922' },
+  ],
+  'Adıyaman-Samsat': [
+    { donem: '2023 öncesi (hasar gördü)', yuzde: 52, renk: '#E24B4A' },
+    { donem: '2023 sonrası', yuzde: 48, renk: '#639922' },
+  ],
+  'Adıyaman-Sincik': [
+    { donem: '2023 öncesi', yuzde: 48, renk: '#E24B4A' },
+    { donem: '2023 sonrası', yuzde: 52, renk: '#639922' },
+  ],
+  'Adıyaman-Çelikhan': [
+    { donem: '2023 öncesi (hasar gördü)', yuzde: 56, renk: '#E24B4A' },
+    { donem: '2023 sonrası', yuzde: 44, renk: '#639922' },
+  ],
+
+  // ── MALATYA (ek ilçeler) ──────────────────────────────────────────────────
+  'Malatya-Doğanşehir': [
+    { donem: '2023 öncesi (hasar gördü)', yuzde: 65, renk: '#E24B4A' },
+    { donem: '2023 sonrası', yuzde: 35, renk: '#639922' },
+  ],
+  'Malatya-Pütürge': [
+    { donem: '2023 öncesi (hasar gördü)', yuzde: 68, renk: '#E24B4A' },
+    { donem: '2023 sonrası', yuzde: 32, renk: '#639922' },
+  ],
+  'Malatya-Kale': [
+    { donem: '2023 öncesi (hasar gördü)', yuzde: 62, renk: '#E24B4A' },
+    { donem: '2023 sonrası', yuzde: 38, renk: '#639922' },
+  ],
+  'Malatya-Akçadağ': [
+    { donem: '2023 öncesi (hasar gördü)', yuzde: 60, renk: '#E24B4A' },
+    { donem: '2023 sonrası', yuzde: 40, renk: '#639922' },
+  ],
+  'Malatya-Hekimhan': [
+    { donem: '2023 öncesi', yuzde: 50, renk: '#E24B4A' },
+    { donem: '2023 sonrası', yuzde: 50, renk: '#639922' },
+  ],
+  'Malatya-Arapgir': [
+    { donem: '2023 öncesi', yuzde: 48, renk: '#E24B4A' },
+    { donem: '2023 sonrası', yuzde: 52, renk: '#639922' },
+  ],
+
+  // ── GAZİANTEP (ek ilçeler) ────────────────────────────────────────────────
+  'Gaziantep-Araban': [
+    { donem: '2023 öncesi (hasar gördü)', yuzde: 55, renk: '#E24B4A' },
+    { donem: '2023 sonrası', yuzde: 45, renk: '#639922' },
+  ],
+  'Gaziantep-Oğuzeli': [
+    { donem: '2000 öncesi', yuzde: 45, renk: '#E24B4A' },
+    { donem: '2000–2015', yuzde: 35, renk: '#EF9F27' },
+    { donem: '2015 sonrası', yuzde: 20, renk: '#639922' },
+  ],
+  'Gaziantep-Karkamış': [
+    { donem: '2000 öncesi', yuzde: 48, renk: '#E24B4A' },
+    { donem: '2000–2015', yuzde: 33, renk: '#EF9F27' },
+    { donem: '2015 sonrası', yuzde: 19, renk: '#639922' },
+  ],
+
+  // ── ŞANLIURFA (ek ilçeler) ────────────────────────────────────────────────
+  'Şanlıurfa-Karaköprü': [
+    { donem: '2000 öncesi', yuzde: 35, renk: '#E24B4A' },
+    { donem: '2000–2015', yuzde: 38, renk: '#EF9F27' },
+    { donem: '2015 sonrası', yuzde: 27, renk: '#639922' },
+  ],
+  'Şanlıurfa-Birecik': [
+    { donem: '2000 öncesi', yuzde: 42, renk: '#E24B4A' },
+    { donem: '2000–2015', yuzde: 35, renk: '#EF9F27' },
+    { donem: '2015 sonrası', yuzde: 23, renk: '#639922' },
+  ],
+  'Şanlıurfa-Bozova': [
+    { donem: '2000 öncesi', yuzde: 48, renk: '#E24B4A' },
+    { donem: '2000–2015', yuzde: 32, renk: '#EF9F27' },
+    { donem: '2015 sonrası', yuzde: 20, renk: '#639922' },
+  ],
+
+  // ── DİYARBAKIR (ek ilçeler) ───────────────────────────────────────────────
+  'Diyarbakır-Yenişehir': [
+    { donem: '2000 öncesi', yuzde: 32, renk: '#E24B4A' },
+    { donem: '2000–2015', yuzde: 38, renk: '#EF9F27' },
+    { donem: '2015 sonrası', yuzde: 30, renk: '#639922' },
+  ],
+  'Diyarbakır-Ergani': [
+    { donem: '2000 öncesi', yuzde: 50, renk: '#E24B4A' },
+    { donem: '2000–2015', yuzde: 32, renk: '#EF9F27' },
+    { donem: '2015 sonrası', yuzde: 18, renk: '#639922' },
+  ],
+  'Diyarbakır-Çermik': [
+    { donem: '2000 öncesi', yuzde: 48, renk: '#E24B4A' },
+    { donem: '2000–2015', yuzde: 32, renk: '#EF9F27' },
+    { donem: '2015 sonrası', yuzde: 20, renk: '#639922' },
+  ],
+
+  // ── KİLİS (ek ilçeler) ───────────────────────────────────────────────────
+  'Kilis-Musabeyli': [
+    { donem: '2023 öncesi (hasar gördü)', yuzde: 55, renk: '#E24B4A' },
+    { donem: '2023 sonrası', yuzde: 45, renk: '#639922' },
+  ],
+  'Kilis-Polateli': [
+    { donem: '2000 öncesi', yuzde: 45, renk: '#E24B4A' },
+    { donem: '2000–2015', yuzde: 33, renk: '#EF9F27' },
+    { donem: '2015 sonrası', yuzde: 22, renk: '#639922' },
+  ],
+  'Kilis-Elbeyli': [
+    { donem: '2000 öncesi', yuzde: 48, renk: '#E24B4A' },
+    { donem: '2000–2015', yuzde: 32, renk: '#EF9F27' },
+    { donem: '2015 sonrası', yuzde: 20, renk: '#639922' },
+  ],
+
+  // ── OSMANİYE (ek ilçeler) ─────────────────────────────────────────────────
+  'Osmaniye-Kadirli': [
+    { donem: '2023 öncesi (hasar gördü)', yuzde: 58, renk: '#E24B4A' },
+    { donem: '2023 sonrası', yuzde: 42, renk: '#639922' },
+  ],
+  'Osmaniye-Düziçi': [
+    { donem: '2023 öncesi (hasar gördü)', yuzde: 62, renk: '#E24B4A' },
+    { donem: '2023 sonrası', yuzde: 38, renk: '#639922' },
+  ],
+  'Osmaniye-Toprakkale': [
+    { donem: '2023 öncesi (hasar gördü)', yuzde: 65, renk: '#E24B4A' },
+    { donem: '2023 sonrası', yuzde: 35, renk: '#639922' },
+  ],
+  'Osmaniye-Bahçe': [
+    { donem: '2023 öncesi (hasar gördü)', yuzde: 60, renk: '#E24B4A' },
+    { donem: '2023 sonrası', yuzde: 40, renk: '#639922' },
+  ],
+
+  // ── ADANA (ek ilçeler) ────────────────────────────────────────────────────
+  'Adana-Çukurova': [
+    { donem: '2000 öncesi', yuzde: 32, renk: '#E24B4A' },
+    { donem: '2000–2015', yuzde: 38, renk: '#EF9F27' },
+    { donem: '2015 sonrası', yuzde: 30, renk: '#639922' },
+  ],
+  'Adana-Sarıçam': [
+    { donem: '2000 öncesi', yuzde: 30, renk: '#E24B4A' },
+    { donem: '2000–2015', yuzde: 38, renk: '#EF9F27' },
+    { donem: '2015 sonrası', yuzde: 32, renk: '#639922' },
+  ],
+  'Adana-Kozan': [
+    { donem: '2000 öncesi', yuzde: 42, renk: '#E24B4A' },
+    { donem: '2000–2015', yuzde: 35, renk: '#EF9F27' },
+    { donem: '2015 sonrası', yuzde: 23, renk: '#639922' },
+  ],
+  'Adana-Karataş': [
+    { donem: '2000 öncesi', yuzde: 48, renk: '#E24B4A' },
+    { donem: '2000–2015', yuzde: 32, renk: '#EF9F27' },
+    { donem: '2015 sonrası', yuzde: 20, renk: '#639922' },
+  ],
+  'Adana-İmamoğlu': [
+    { donem: '2000 öncesi', yuzde: 45, renk: '#E24B4A' },
+    { donem: '2000–2015', yuzde: 34, renk: '#EF9F27' },
+    { donem: '2015 sonrası', yuzde: 21, renk: '#639922' },
+  ],
+
+  // ── İZMİR (ek ilçeler) ───────────────────────────────────────────────────
+  'İzmir-Buca': [
+    { donem: '2020 öncesi', yuzde: 42, renk: '#E24B4A' },
+    { donem: '2020 sonrası', yuzde: 58, renk: '#639922' },
+  ],
+  'İzmir-Gaziemir': [
+    { donem: '2000 öncesi', yuzde: 38, renk: '#E24B4A' },
+    { donem: '2000–2015', yuzde: 36, renk: '#EF9F27' },
+    { donem: '2015 sonrası', yuzde: 26, renk: '#639922' },
+  ],
+  'İzmir-Karabağlar': [
+    { donem: '2020 öncesi (hasar gördü)', yuzde: 48, renk: '#E24B4A' },
+    { donem: '2020 sonrası', yuzde: 52, renk: '#639922' },
+  ],
+  'İzmir-Çiğli': [
+    { donem: '2020 öncesi (hasar gördü)', yuzde: 44, renk: '#E24B4A' },
+    { donem: '2020 sonrası', yuzde: 56, renk: '#639922' },
+  ],
+  'İzmir-Narlıdere': [
+    { donem: '2000 öncesi', yuzde: 35, renk: '#E24B4A' },
+    { donem: '2000–2015', yuzde: 36, renk: '#EF9F27' },
+    { donem: '2015 sonrası', yuzde: 29, renk: '#639922' },
+  ],
+  'İzmir-Torbalı': [
+    { donem: '2000 öncesi', yuzde: 40, renk: '#E24B4A' },
+    { donem: '2000–2015', yuzde: 35, renk: '#EF9F27' },
+    { donem: '2015 sonrası', yuzde: 25, renk: '#639922' },
+  ],
+  'İzmir-Kemalpaşa': [
+    { donem: '2000 öncesi', yuzde: 38, renk: '#E24B4A' },
+    { donem: '2000–2015', yuzde: 36, renk: '#EF9F27' },
+    { donem: '2015 sonrası', yuzde: 26, renk: '#639922' },
+  ],
+  'İzmir-Aliağa': [
+    { donem: '2000 öncesi', yuzde: 36, renk: '#E24B4A' },
+    { donem: '2000–2015', yuzde: 36, renk: '#EF9F27' },
+    { donem: '2015 sonrası', yuzde: 28, renk: '#639922' },
+  ],
+  'İzmir-Bergama': [
+    { donem: '2000 öncesi', yuzde: 45, renk: '#E24B4A' },
+    { donem: '2000–2015', yuzde: 33, renk: '#EF9F27' },
+    { donem: '2015 sonrası', yuzde: 22, renk: '#639922' },
+  ],
+
+  // ── ANTALYA (ek ilçeler) ──────────────────────────────────────────────────
+  'Antalya-Manavgat': [
+    { donem: '2000 öncesi', yuzde: 32, renk: '#E24B4A' },
+    { donem: '2000–2015', yuzde: 38, renk: '#EF9F27' },
+    { donem: '2015 sonrası', yuzde: 30, renk: '#639922' },
+  ],
+  'Antalya-Serik': [
+    { donem: '2000 öncesi', yuzde: 35, renk: '#E24B4A' },
+    { donem: '2000–2015', yuzde: 38, renk: '#EF9F27' },
+    { donem: '2015 sonrası', yuzde: 27, renk: '#639922' },
+  ],
+  'Antalya-Döşemealtı': [
+    { donem: '2000 öncesi', yuzde: 28, renk: '#E24B4A' },
+    { donem: '2000–2015', yuzde: 38, renk: '#EF9F27' },
+    { donem: '2015 sonrası', yuzde: 34, renk: '#639922' },
+  ],
+  'Antalya-Aksu': [
+    { donem: '2000 öncesi', yuzde: 30, renk: '#E24B4A' },
+    { donem: '2000–2015', yuzde: 38, renk: '#EF9F27' },
+    { donem: '2015 sonrası', yuzde: 32, renk: '#639922' },
+  ],
+
+  // ── MUĞLA (ek ilçeler) ───────────────────────────────────────────────────
+  'Muğla-Menteşe': [
+    { donem: '2000 öncesi', yuzde: 38, renk: '#E24B4A' },
+    { donem: '2000–2015', yuzde: 36, renk: '#EF9F27' },
+    { donem: '2015 sonrası', yuzde: 26, renk: '#639922' },
+  ],
+  'Muğla-Milas': [
+    { donem: '2000 öncesi', yuzde: 40, renk: '#E24B4A' },
+    { donem: '2000–2015', yuzde: 35, renk: '#EF9F27' },
+    { donem: '2015 sonrası', yuzde: 25, renk: '#639922' },
+  ],
+  'Muğla-Datça': [
+    { donem: '2000 öncesi', yuzde: 36, renk: '#E24B4A' },
+    { donem: '2000–2015', yuzde: 36, renk: '#EF9F27' },
+    { donem: '2015 sonrası', yuzde: 28, renk: '#639922' },
+  ],
+  'Muğla-Köyceğiz': [
+    { donem: '2000 öncesi', yuzde: 42, renk: '#E24B4A' },
+    { donem: '2000–2015', yuzde: 34, renk: '#EF9F27' },
+    { donem: '2015 sonrası', yuzde: 24, renk: '#639922' },
+  ],
+
+  // ── DENİZLİ (ek ilçeler) ─────────────────────────────────────────────────
+  'Denizli-Honaz': [
+    { donem: '2000 öncesi', yuzde: 40, renk: '#E24B4A' },
+    { donem: '2000–2015', yuzde: 35, renk: '#EF9F27' },
+    { donem: '2015 sonrası', yuzde: 25, renk: '#639922' },
+  ],
+  'Denizli-Buldan': [
+    { donem: '2000 öncesi', yuzde: 42, renk: '#E24B4A' },
+    { donem: '2000–2015', yuzde: 34, renk: '#EF9F27' },
+    { donem: '2015 sonrası', yuzde: 24, renk: '#639922' },
+  ],
+  'Denizli-Sarayköy': [
+    { donem: '2000 öncesi', yuzde: 38, renk: '#E24B4A' },
+    { donem: '2000–2015', yuzde: 36, renk: '#EF9F27' },
+    { donem: '2015 sonrası', yuzde: 26, renk: '#639922' },
+  ],
+  'Denizli-Tavas': [
+    { donem: '2000 öncesi', yuzde: 45, renk: '#E24B4A' },
+    { donem: '2000–2015', yuzde: 33, renk: '#EF9F27' },
+    { donem: '2015 sonrası', yuzde: 22, renk: '#639922' },
+  ],
+
+  // ── BOLU (ek ilçeler) ─────────────────────────────────────────────────────
+  'Bolu-Mudurnu': [
+    { donem: '1999 öncesi', yuzde: 45, renk: '#E24B4A' },
+    { donem: '1999–2012', yuzde: 33, renk: '#EF9F27' },
+    { donem: '2012 sonrası', yuzde: 22, renk: '#639922' },
+  ],
+  'Bolu-Göynük': [
+    { donem: '1999 öncesi', yuzde: 48, renk: '#E24B4A' },
+    { donem: '1999–2012', yuzde: 30, renk: '#EF9F27' },
+    { donem: '2012 sonrası', yuzde: 22, renk: '#639922' },
+  ],
+  'Bolu-Dörtdivan': [
+    { donem: '1999 öncesi', yuzde: 50, renk: '#E24B4A' },
+    { donem: '1999–2012', yuzde: 30, renk: '#EF9F27' },
+    { donem: '2012 sonrası', yuzde: 20, renk: '#639922' },
+  ],
+  'Bolu-Kıbrıscık': [
+    { donem: '1999 öncesi', yuzde: 52, renk: '#E24B4A' },
+    { donem: '1999–2012', yuzde: 28, renk: '#EF9F27' },
+    { donem: '2012 sonrası', yuzde: 20, renk: '#639922' },
+  ],
+
+  // ── DÜZCE (ek ilçeler) ────────────────────────────────────────────────────
+  'Düzce-Akçakoca': [
+    { donem: '1999 öncesi', yuzde: 38, renk: '#E24B4A' },
+    { donem: '1999–2012', yuzde: 36, renk: '#EF9F27' },
+    { donem: '2012 sonrası', yuzde: 26, renk: '#639922' },
+  ],
+  'Düzce-Gölyaka': [
+    { donem: '1999 öncesi', yuzde: 30, renk: '#E24B4A' },
+    { donem: '1999–2012 (yeniden yapılan)', yuzde: 42, renk: '#EF9F27' },
+    { donem: '2012 sonrası', yuzde: 28, renk: '#639922' },
+  ],
+  'Düzce-Çilimli': [
+    { donem: '1999 öncesi', yuzde: 28, renk: '#E24B4A' },
+    { donem: '1999–2012 (yeniden yapılan)', yuzde: 44, renk: '#EF9F27' },
+    { donem: '2012 sonrası', yuzde: 28, renk: '#639922' },
+  ],
+  'Düzce-Yığılca': [
+    { donem: '1999 öncesi', yuzde: 42, renk: '#E24B4A' },
+    { donem: '1999–2012', yuzde: 34, renk: '#EF9F27' },
+    { donem: '2012 sonrası', yuzde: 24, renk: '#639922' },
+  ],
+
+  // ── YALOVA (ek ilçeler) ───────────────────────────────────────────────────
+  'Yalova-Altınova': [
+    { donem: '1999 öncesi', yuzde: 28, renk: '#E24B4A' },
+    { donem: '1999–2012 (yeniden yapılan)', yuzde: 44, renk: '#EF9F27' },
+    { donem: '2012 sonrası', yuzde: 28, renk: '#639922' },
+  ],
+  'Yalova-Termal': [
+    { donem: '1999 öncesi', yuzde: 35, renk: '#E24B4A' },
+    { donem: '1999–2012', yuzde: 38, renk: '#EF9F27' },
+    { donem: '2012 sonrası', yuzde: 27, renk: '#639922' },
+  ],
+  'Yalova-Çiftlikköy': [
+    { donem: '1999 öncesi', yuzde: 30, renk: '#E24B4A' },
+    { donem: '1999–2012 (yeniden yapılan)', yuzde: 40, renk: '#EF9F27' },
+    { donem: '2012 sonrası', yuzde: 30, renk: '#639922' },
+  ],
+  'Yalova-Armutlu': [
+    { donem: '1999 öncesi', yuzde: 40, renk: '#E24B4A' },
+    { donem: '1999–2012', yuzde: 34, renk: '#EF9F27' },
+    { donem: '2012 sonrası', yuzde: 26, renk: '#639922' },
+  ],
 };
 const TARIHI_DEPREMLER: Deprem[] = [
   { buyukluk: 7.8, baslik: 'Kahramanmaraş (Pazarcık)', tarih: '6 Şubat 2023 04:17', derinlik: 8.6 },
