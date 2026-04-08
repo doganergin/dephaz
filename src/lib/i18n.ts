@@ -31,7 +31,7 @@ const TR: Dict = {
   navAilePlani: 'Aile Planı',
   nav72hCanta: '72h Çanta',
   navHarita: 'Harita',
-  navUzman: 'Uzmanlar',
+  navUzman: 'Uzman Görüşleri',
   navYakinda: 'yakında',
   pageTitle: 'Bölge Analizi',
   pageSubtitle: 'İl, ilçe ve mahalle seçerek deprem risk analizini görüntüle',
