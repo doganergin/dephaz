@@ -12,7 +12,7 @@ export default function NavBar() {
     { href: '/', label: t('navBolgeAnalizi'), icon: '🗺️', yakindan: false },
     { href: '/harita', label: t('navHarita'), icon: '🌍', yakindan: false },
     { href: '/uzman', label: t('navUzman'), icon: '🔬', yakindan: false },
-    { href: '/canta', label: t('nav72hCanta'), icon: '🎒', yakindan: false },
+    { href: '/canta', label: t('navDepremCantasi'), icon: '🎒', yakindan: false },
   ];
 
   return (
