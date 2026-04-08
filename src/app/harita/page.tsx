@@ -367,6 +367,11 @@ export default function HaritaSayfasi() {
         </div>
       )}
 
+      {/* Veri kaynağı notu */}
+      <p className="text-[11px] text-[var(--muted)] leading-relaxed px-1">
+        <span className="font-semibold">Veri kaynakları:</span> Kandilli ve AFAD için her iki kaynağın son 500 deprem kaydı anlık olarak alınmaktadır. USGS için Türkiye ve çevresinde gerçekleşen son 90 güne ait depremler sorgulanmaktadır.
+      </p>
+
       {/* Uzman Görüşleri yönlendirme */}
       <Link href="/uzman"
         className="flex items-center justify-between bg-[var(--card-bg)] rounded-2xl shadow-sm border border-[var(--border)] p-4 hover:border-red-300 transition-colors">
