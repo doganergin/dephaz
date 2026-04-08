@@ -2,6 +2,7 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import ThemeToggle from './ThemeToggle';
+import LanguageToggle from './LanguageToggle';
 import { useLanguage } from '@/contexts/LanguageContext';
 
 export default function NavBar() {
@@ -27,6 +28,7 @@ export default function NavBar() {
             <p className="text-[10px] text-[var(--muted)] leading-none mt-0.5">{t('appSubtitle')}</p>
           </div>
           <div className="flex items-center gap-1.5">
+            <LanguageToggle />
             <ThemeToggle />
           </div>
         </div>
