@@ -28,7 +28,7 @@ function parseKandilli(text: string): Deprem[] {
 
   for (const line of lines) {
     const match = line.match(
-      /^(\d{4}\.\d{2}\.\d{2})\s+(\d{2}:\d{2}:\d{2})\s+([\d.]+)\s+([\d.]+)\s+([\d.]+)\s+[\d.-]+\s+([\d.-]+)\s+([\d.-]+)\s+(.+?)\s+(REVIZE|ILKSEL)/
+      /^(\d{4}\.\d{2}\.\d{2})\s+(\d{2}:\d{2}:\d{2})\s+([\d.]+)\s+([\d.]+)\s+([\d.]+)\s+[\d.-]+\s+([\d.-]+)\s+([\d.-]+)\s+(.+?)\s+(REVIZE|[İI]lksel|ILKSEL)/i
     );
     if (!match) continue;
 

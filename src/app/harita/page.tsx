@@ -179,7 +179,7 @@ export default function HaritaSayfasi() {
         <h1 className="text-xl font-bold text-[var(--foreground)]">{t('haritaTitle')}</h1>
         <div className="flex items-center justify-between mt-0.5">
           <p className="text-sm text-[var(--muted)]">
-            {kaynakEtiketi} · Son 90 gün · {kucukGoster ? 'Tüm büyüklükler' : 'M4.0+'}
+            {kaynakEtiketi} · {kucukGoster ? 'Tüm büyüklükler' : 'M4.0+'}
           </p>
           <div className="flex items-center gap-1.5 text-[11px] text-[var(--muted)]">
             {sonGuncelleme && (
