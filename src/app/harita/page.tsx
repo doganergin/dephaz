@@ -171,7 +171,7 @@ export default function HaritaSayfasi() {
   const kaynakEtiketi =
     anaTab === 'dunya' ? 'USGS' :
     trKaynak === 'afad' ? 'AFAD' :
-    trKaynak === 'usgs' ? 'USGS' : 'Kandilli / USGS';
+    trKaynak === 'usgs' ? 'USGS' : 'Kandilli';
 
   return (
     <div className="space-y-4">
