@@ -393,6 +393,7 @@ const ZEMIN_DB: Record<string, BolgeRisk['zemin']> = {
     { ad: 'Kaya', yuzde: 30, risk: 'dusuk', aciklama: 'Görece güvenli' },
     { ad: 'Alüvyon', yuzde: 18, risk: 'yuksek', aciklama: 'Düşük alanlar riskli' },
   ],
+  
 
   // ── KOCAELİ ───────────────────────────────────────────────────────────────
   // Kaynak: 1999 Marmara Depremi sonrası AFAD zemin araştırmaları
@@ -1264,6 +1265,365 @@ const ZEMIN_DB: Record<string, BolgeRisk['zemin']> = {
     { ad: 'Killi zemin', yuzde: 18, risk: 'orta', aciklama: 'Orta risk' },
   ],
 };
+// ── İSTANBUL EKSİK İLÇELER ──────────────────────────────────
+  'İstanbul-Adalar': [
+    { ad: 'Kaya', yuzde: 65, risk: 'dusuk', aciklama: 'Ada kayalık zemin, görece güvenli' },
+    { ad: 'Alüvyon', yuzde: 25, risk: 'yuksek', aciklama: 'Kıyı kesimleri' },
+    { ad: 'Killi zemin', yuzde: 10, risk: 'orta', aciklama: 'Orta risk' },
+  ],
+  'İstanbul-Arnavutköy': [
+    { ad: 'Killi zemin', yuzde: 50, risk: 'orta', aciklama: 'Orta sertlik zemin' },
+    { ad: 'Kaya', yuzde: 32, risk: 'dusuk', aciklama: 'Görece güvenli' },
+    { ad: 'Alüvyon', yuzde: 18, risk: 'yuksek', aciklama: 'Düşük alanlar' },
+  ],
+  'İstanbul-Ataşehir': [
+    { ad: 'Kaya', yuzde: 48, risk: 'dusuk', aciklama: 'Görece sağlam zemin' },
+    { ad: 'Killi zemin', yuzde: 35, risk: 'orta', aciklama: 'Orta risk' },
+    { ad: 'Alüvyon', yuzde: 17, risk: 'yuksek', aciklama: 'Fikirtepe vadisi' },
+  ],
+  'İstanbul-Bağcılar': [
+    { ad: 'Alüvyon', yuzde: 55, risk: 'yuksek', aciklama: 'Ayamama deresi alüvyonu' },
+    { ad: 'Killi zemin', yuzde: 30, risk: 'orta', aciklama: 'Orta risk' },
+    { ad: 'Kaya', yuzde: 15, risk: 'dusuk', aciklama: 'Sınırlı' },
+  ],
+  'İstanbul-Beykoz': [
+    { ad: 'Kaya', yuzde: 65, risk: 'dusuk', aciklama: 'Boğaz kıyısı kaya zemin, görece güvenli' },
+    { ad: 'Killi zemin', yuzde: 25, risk: 'orta', aciklama: 'Orta risk' },
+    { ad: 'Alüvyon', yuzde: 10, risk: 'yuksek', aciklama: 'Dere vadileri' },
+  ],
+  'İstanbul-Beylikdüzü': [
+    { ad: 'Killi zemin', yuzde: 48, risk: 'orta', aciklama: 'Orta sertlik zemin' },
+    { ad: 'Alüvyon', yuzde: 32, risk: 'yuksek', aciklama: 'Kıyı kesimleri' },
+    { ad: 'Kaya', yuzde: 20, risk: 'dusuk', aciklama: 'Görece güvenli' },
+  ],
+  'İstanbul-Çatalca': [
+    { ad: 'Kaya', yuzde: 58, risk: 'dusuk', aciklama: 'Trakya kaya zemin, görece güvenli' },
+    { ad: 'Killi zemin', yuzde: 30, risk: 'orta', aciklama: 'Orta risk' },
+    { ad: 'Alüvyon', yuzde: 12, risk: 'yuksek', aciklama: 'Dere vadileri' },
+  ],
+  'İstanbul-Çekmeköy': [
+    { ad: 'Kaya', yuzde: 52, risk: 'dusuk', aciklama: 'Görece sağlam zemin' },
+    { ad: 'Killi zemin', yuzde: 35, risk: 'orta', aciklama: 'Orta risk' },
+    { ad: 'Alüvyon', yuzde: 13, risk: 'yuksek', aciklama: 'Vadi tabanları' },
+  ],
+  'İstanbul-Esenler': [
+    { ad: 'Alüvyon', yuzde: 52, risk: 'yuksek', aciklama: 'Ayamama deresi alüvyonu' },
+    { ad: 'Killi zemin', yuzde: 33, risk: 'orta', aciklama: 'Orta risk' },
+    { ad: 'Kaya', yuzde: 15, risk: 'dusuk', aciklama: 'Sınırlı' },
+  ],
+  'İstanbul-Eyüpsultan': [
+    { ad: 'Alüvyon', yuzde: 55, risk: 'yuksek', aciklama: 'Haliç kıyısı ve Kağıthane deresi alüvyonu' },
+    { ad: 'Killi zemin', yuzde: 28, risk: 'orta', aciklama: 'Orta risk' },
+    { ad: 'Kaya', yuzde: 17, risk: 'dusuk', aciklama: 'Tepe kesimler' },
+  ],
+  'İstanbul-Gaziosmanpaşa': [
+    { ad: 'Alüvyon', yuzde: 50, risk: 'yuksek', aciklama: 'Kağıthane deresi havzası' },
+    { ad: 'Killi zemin', yuzde: 35, risk: 'orta', aciklama: 'Orta risk' },
+    { ad: 'Kaya', yuzde: 15, risk: 'dusuk', aciklama: 'Sınırlı' },
+  ],
+  'İstanbul-Güngören': [
+    { ad: 'Alüvyon', yuzde: 58, risk: 'yuksek', aciklama: 'Ayamama deresi alüvyonu, sıvılaşma riski' },
+    { ad: 'Killi zemin', yuzde: 28, risk: 'orta', aciklama: 'Orta risk' },
+    { ad: 'Kaya', yuzde: 14, risk: 'dusuk', aciklama: 'Sınırlı' },
+  ],
+  'İstanbul-Kağıthane': [
+    { ad: 'Alüvyon', yuzde: 60, risk: 'yuksek', aciklama: 'Kağıthane deresi alüvyonu' },
+    { ad: 'Killi zemin', yuzde: 28, risk: 'orta', aciklama: 'Orta risk' },
+    { ad: 'Kaya', yuzde: 12, risk: 'dusuk', aciklama: 'Tepe kesimler' },
+  ],
+  'İstanbul-Küçükçekmece': [
+    { ad: 'Alüvyon', yuzde: 68, risk: 'yuksek', aciklama: 'Küçükçekmece gölü çevresi, yüksek sıvılaşma riski' },
+    { ad: 'Killi zemin', yuzde: 22, risk: 'orta', aciklama: 'Orta risk' },
+    { ad: 'Kaya', yuzde: 10, risk: 'dusuk', aciklama: 'Çok sınırlı' },
+  ],
+  'İstanbul-Sancaktepe': [
+    { ad: 'Kaya', yuzde: 50, risk: 'dusuk', aciklama: 'Görece sağlam zemin' },
+    { ad: 'Killi zemin', yuzde: 35, risk: 'orta', aciklama: 'Orta risk' },
+    { ad: 'Alüvyon', yuzde: 15, risk: 'yuksek', aciklama: 'Vadi tabanları' },
+  ],
+  'İstanbul-Silivri': [
+    { ad: 'Kaya', yuzde: 45, risk: 'dusuk', aciklama: 'Trakya kaya zemin' },
+    { ad: 'Alüvyon', yuzde: 35, risk: 'yuksek', aciklama: 'Kıyı şeridi ve dere vadileri' },
+    { ad: 'Killi zemin', yuzde: 20, risk: 'orta', aciklama: 'Orta risk' },
+  ],
+  'İstanbul-Sultanbeyli': [
+    { ad: 'Killi zemin', yuzde: 48, risk: 'orta', aciklama: 'Orta sertlik zemin' },
+    { ad: 'Kaya', yuzde: 35, risk: 'dusuk', aciklama: 'Görece güvenli' },
+    { ad: 'Alüvyon', yuzde: 17, risk: 'yuksek', aciklama: 'Düşük alanlar' },
+  ],
+  'İstanbul-Sultangazi': [
+    { ad: 'Alüvyon', yuzde: 52, risk: 'yuksek', aciklama: 'Kağıthane havzası alüvyonu' },
+    { ad: 'Killi zemin', yuzde: 33, risk: 'orta', aciklama: 'Orta risk' },
+    { ad: 'Kaya', yuzde: 15, risk: 'dusuk', aciklama: 'Sınırlı' },
+  ],
+  'İstanbul-Şile': [
+    { ad: 'Kaya', yuzde: 62, risk: 'dusuk', aciklama: 'Karadeniz kıyısı kaya zemin, görece güvenli' },
+    { ad: 'Killi zemin', yuzde: 28, risk: 'orta', aciklama: 'Orta risk' },
+    { ad: 'Alüvyon', yuzde: 10, risk: 'yuksek', aciklama: 'Dere ağızları' },
+  ],
+  'İstanbul-Tuzla': [
+    { ad: 'Alüvyon', yuzde: 50, risk: 'yuksek', aciklama: 'Kıyı alüvyonu, sanayi bölgesi' },
+    { ad: 'Kaya', yuzde: 32, risk: 'dusuk', aciklama: 'İç kesimler' },
+    { ad: 'Killi zemin', yuzde: 18, risk: 'orta', aciklama: 'Orta risk' },
+  ],
+ 
+// ── KOCAELİ EKSİK ─────────────────────────────────────────────
+  'Kocaeli-Çayırova': [
+    { ad: 'Alüvyon', yuzde: 60, risk: 'yuksek', aciklama: 'KAF yakını sanayi bölgesi alüvyonu' },
+    { ad: 'Killi zemin', yuzde: 28, risk: 'orta', aciklama: 'Orta risk' },
+    { ad: 'Kaya', yuzde: 12, risk: 'dusuk', aciklama: 'Sınırlı' },
+  ],
+  'Kocaeli-Darıca': [
+    { ad: 'Alüvyon', yuzde: 55, risk: 'yuksek', aciklama: 'Marmara kıyısı alüvyon' },
+    { ad: 'Killi zemin', yuzde: 30, risk: 'orta', aciklama: 'Orta risk' },
+    { ad: 'Kaya', yuzde: 15, risk: 'dusuk', aciklama: 'İç kesimler' },
+  ],
+  'Kocaeli-Dilovası': [
+    { ad: 'Alüvyon', yuzde: 52, risk: 'yuksek', aciklama: 'Sanayi bölgesi alüvyon' },
+    { ad: 'Killi zemin', yuzde: 30, risk: 'orta', aciklama: 'Orta risk' },
+    { ad: 'Kaya', yuzde: 18, risk: 'dusuk', aciklama: 'Tepe kesimler' },
+  ],
+ 
+// ── BURSA EKSİK ────────────────────────────────────────────────
+  'Bursa-Büyükorhan': [
+    { ad: 'Kaya', yuzde: 60, risk: 'dusuk', aciklama: 'Dağlık alan kaya zemin' },
+    { ad: 'Killi zemin', yuzde: 28, risk: 'orta', aciklama: 'Orta risk' },
+    { ad: 'Alüvyon', yuzde: 12, risk: 'yuksek', aciklama: 'Vadi tabanları' },
+  ],
+  'Bursa-Gürsu': [
+    { ad: 'Killi zemin', yuzde: 48, risk: 'orta', aciklama: 'Orta sertlik' },
+    { ad: 'Alüvyon', yuzde: 32, risk: 'yuksek', aciklama: 'Ova tabanı' },
+    { ad: 'Kaya', yuzde: 20, risk: 'dusuk', aciklama: 'Tepe kesimler' },
+  ],
+  'Bursa-Harmancık': [
+    { ad: 'Kaya', yuzde: 58, risk: 'dusuk', aciklama: 'Dağlık alan kaya zemin' },
+    { ad: 'Killi zemin', yuzde: 28, risk: 'orta', aciklama: 'Orta risk' },
+    { ad: 'Alüvyon', yuzde: 14, risk: 'yuksek', aciklama: 'Vadi tabanları' },
+  ],
+  'Bursa-Karacabey': [
+    { ad: 'Alüvyon', yuzde: 60, risk: 'yuksek', aciklama: 'Nilüfer çayı alüvyonu, ova tabanı' },
+    { ad: 'Killi zemin', yuzde: 28, risk: 'orta', aciklama: 'Orta risk' },
+    { ad: 'Kaya', yuzde: 12, risk: 'dusuk', aciklama: 'Sınırlı' },
+  ],
+  'Bursa-Keles': [
+    { ad: 'Kaya', yuzde: 55, risk: 'dusuk', aciklama: 'Dağlık alan kaya zemin' },
+    { ad: 'Killi zemin', yuzde: 30, risk: 'orta', aciklama: 'Orta risk' },
+    { ad: 'Alüvyon', yuzde: 15, risk: 'yuksek', aciklama: 'Vadi tabanları' },
+  ],
+  'Bursa-Kestel': [
+    { ad: 'Killi zemin', yuzde: 48, risk: 'orta', aciklama: 'Orta sertlik' },
+    { ad: 'Alüvyon', yuzde: 30, risk: 'yuksek', aciklama: 'Ova alüvyonu' },
+    { ad: 'Kaya', yuzde: 22, risk: 'dusuk', aciklama: 'Uludağ etekleri' },
+  ],
+  'Bursa-Mustafakemalpaşa': [
+    { ad: 'Alüvyon', yuzde: 58, risk: 'yuksek', aciklama: 'Mustafakemalpaşa çayı alüvyonu' },
+    { ad: 'Killi zemin', yuzde: 28, risk: 'orta', aciklama: 'Orta risk' },
+    { ad: 'Kaya', yuzde: 14, risk: 'dusuk', aciklama: 'Tepe kesimler' },
+  ],
+  'Bursa-Orhaneli': [
+    { ad: 'Kaya', yuzde: 52, risk: 'dusuk', aciklama: 'Dağlık alan kaya zemin' },
+    { ad: 'Killi zemin', yuzde: 30, risk: 'orta', aciklama: 'Orta risk' },
+    { ad: 'Alüvyon', yuzde: 18, risk: 'yuksek', aciklama: 'Vadi tabanları' },
+  ],
+  'Bursa-Yenişehir': [
+    { ad: 'Alüvyon', yuzde: 62, risk: 'yuksek', aciklama: 'Yenişehir ovası alüvyonu, İznik fayı etkisi' },
+    { ad: 'Killi zemin', yuzde: 25, risk: 'orta', aciklama: 'Orta risk' },
+    { ad: 'Kaya', yuzde: 13, risk: 'dusuk', aciklama: 'Sınırlı' },
+  ],
+ 
+// ── İZMİR EKSİK ────────────────────────────────────────────────
+  'İzmir-Balçova': [
+    { ad: 'Kaya', yuzde: 50, risk: 'dusuk', aciklama: 'Körfez güneyi kaya zemin' },
+    { ad: 'Killi zemin', yuzde: 32, risk: 'orta', aciklama: 'Orta risk' },
+    { ad: 'Alüvyon', yuzde: 18, risk: 'yuksek', aciklama: 'Kıyı kesimleri' },
+  ],
+  'İzmir-Bayındır': [
+    { ad: 'Alüvyon', yuzde: 55, risk: 'yuksek', aciklama: 'Küçük Menderes alüvyonu' },
+    { ad: 'Killi zemin', yuzde: 28, risk: 'orta', aciklama: 'Orta risk' },
+    { ad: 'Kaya', yuzde: 17, risk: 'dusuk', aciklama: 'Tepe kesimler' },
+  ],
+  'İzmir-Beydağ': [
+    { ad: 'Kaya', yuzde: 55, risk: 'dusuk', aciklama: 'Dağlık alan kaya zemin' },
+    { ad: 'Killi zemin', yuzde: 30, risk: 'orta', aciklama: 'Orta risk' },
+    { ad: 'Alüvyon', yuzde: 15, risk: 'yuksek', aciklama: 'Vadi tabanları' },
+  ],
+  'İzmir-Çeşme': [
+    { ad: 'Kaya', yuzde: 55, risk: 'dusuk', aciklama: 'Yarımada kaya zemin' },
+    { ad: 'Alüvyon', yuzde: 28, risk: 'yuksek', aciklama: 'Kıyı kesimleri' },
+    { ad: 'Killi zemin', yuzde: 17, risk: 'orta', aciklama: 'Orta risk' },
+  ],
+  'İzmir-Dikili': [
+    { ad: 'Alüvyon', yuzde: 52, risk: 'yuksek', aciklama: 'Bakırçay alüvyonu' },
+    { ad: 'Killi zemin', yuzde: 30, risk: 'orta', aciklama: 'Orta risk' },
+    { ad: 'Kaya', yuzde: 18, risk: 'dusuk', aciklama: 'Tepe kesimler' },
+  ],
+  'İzmir-Foça': [
+    { ad: 'Kaya', yuzde: 48, risk: 'dusuk', aciklama: 'Körfez kıyısı kaya zemin' },
+    { ad: 'Alüvyon', yuzde: 35, risk: 'yuksek', aciklama: 'Kıyı kesimleri' },
+    { ad: 'Killi zemin', yuzde: 17, risk: 'orta', aciklama: 'Orta risk' },
+  ],
+  'İzmir-Karaburun': [
+    { ad: 'Kaya', yuzde: 65, risk: 'dusuk', aciklama: 'Yarımada kaya zemin' },
+    { ad: 'Killi zemin', yuzde: 22, risk: 'orta', aciklama: 'Orta risk' },
+    { ad: 'Alüvyon', yuzde: 13, risk: 'yuksek', aciklama: 'Kıyı kesimleri' },
+  ],
+  'İzmir-Kınık': [
+    { ad: 'Alüvyon', yuzde: 58, risk: 'yuksek', aciklama: 'Bakırçay havzası alüvyonu' },
+    { ad: 'Killi zemin', yuzde: 28, risk: 'orta', aciklama: 'Orta risk' },
+    { ad: 'Kaya', yuzde: 14, risk: 'dusuk', aciklama: 'Tepe kesimler' },
+  ],
+  'İzmir-Kiraz': [
+    { ad: 'Kaya', yuzde: 52, risk: 'dusuk', aciklama: 'Dağlık alan kaya zemin' },
+    { ad: 'Killi zemin', yuzde: 30, risk: 'orta', aciklama: 'Orta risk' },
+    { ad: 'Alüvyon', yuzde: 18, risk: 'yuksek', aciklama: 'Vadi tabanları' },
+  ],
+  'İzmir-Menderes': [
+    { ad: 'Alüvyon', yuzde: 60, risk: 'yuksek', aciklama: 'Büyük Menderes havzası' },
+    { ad: 'Killi zemin', yuzde: 25, risk: 'orta', aciklama: 'Orta risk' },
+    { ad: 'Kaya', yuzde: 15, risk: 'dusuk', aciklama: 'Tepe kesimler' },
+  ],
+  'İzmir-Menemen': [
+    { ad: 'Alüvyon', yuzde: 65, risk: 'yuksek', aciklama: 'Gediz alüvyonu, sıvılaşma riski' },
+    { ad: 'Killi zemin', yuzde: 22, risk: 'orta', aciklama: 'Orta risk' },
+    { ad: 'Kaya', yuzde: 13, risk: 'dusuk', aciklama: 'Sınırlı' },
+  ],
+  'İzmir-Ödemiş': [
+    { ad: 'Alüvyon', yuzde: 55, risk: 'yuksek', aciklama: 'Küçük Menderes alüvyonu' },
+    { ad: 'Killi zemin', yuzde: 28, risk: 'orta', aciklama: 'Orta risk' },
+    { ad: 'Kaya', yuzde: 17, risk: 'dusuk', aciklama: 'Tepe kesimler' },
+  ],
+  'İzmir-Seferihisar': [
+    { ad: 'Kaya', yuzde: 48, risk: 'dusuk', aciklama: '2020 Sisam depremi merkez üssüne yakın kaya zemin' },
+    { ad: 'Alüvyon', yuzde: 35, risk: 'yuksek', aciklama: 'Kıyı kesimleri' },
+    { ad: 'Killi zemin', yuzde: 17, risk: 'orta', aciklama: 'Orta risk' },
+  ],
+  'İzmir-Selçuk': [
+    { ad: 'Alüvyon', yuzde: 58, risk: 'yuksek', aciklama: 'Küçük Menderes delta alüvyonu' },
+    { ad: 'Killi zemin', yuzde: 25, risk: 'orta', aciklama: 'Orta risk' },
+    { ad: 'Kaya', yuzde: 17, risk: 'dusuk', aciklama: 'Tepe kesimler' },
+  ],
+  'İzmir-Tire': [
+    { ad: 'Alüvyon', yuzde: 52, risk: 'yuksek', aciklama: 'Küçük Menderes havzası' },
+    { ad: 'Killi zemin', yuzde: 30, risk: 'orta', aciklama: 'Orta risk' },
+    { ad: 'Kaya', yuzde: 18, risk: 'dusuk', aciklama: 'Tepe kesimler' },
+  ],
+  'İzmir-Urla': [
+    { ad: 'Kaya', yuzde: 52, risk: 'dusuk', aciklama: 'Yarımada kaya zemin' },
+    { ad: 'Alüvyon', yuzde: 30, risk: 'yuksek', aciklama: 'Kıyı kesimleri' },
+    { ad: 'Killi zemin', yuzde: 18, risk: 'orta', aciklama: 'Orta risk' },
+  ],
+ 
+// ── ANTALYA EKSİK ──────────────────────────────────────────────
+  'Antalya-Elmalı': [
+    { ad: 'Kaya', yuzde: 55, risk: 'dusuk', aciklama: 'Toros dağları kaya zemin' },
+    { ad: 'Alüvyon', yuzde: 28, risk: 'yuksek', aciklama: 'Ova tabanı' },
+    { ad: 'Killi zemin', yuzde: 17, risk: 'orta', aciklama: 'Orta risk' },
+  ],
+  'Antalya-Finike': [
+    { ad: 'Alüvyon', yuzde: 55, risk: 'yuksek', aciklama: 'Kıyı delta alüvyonu' },
+    { ad: 'Kaya', yuzde: 28, risk: 'dusuk', aciklama: 'Toros etekleri' },
+    { ad: 'Killi zemin', yuzde: 17, risk: 'orta', aciklama: 'Orta risk' },
+  ],
+  'Antalya-Gazipaşa': [
+    { ad: 'Kaya', yuzde: 48, risk: 'dusuk', aciklama: 'Kıyı kaya zemin' },
+    { ad: 'Alüvyon', yuzde: 35, risk: 'yuksek', aciklama: 'Kıyı alüvyonu' },
+    { ad: 'Killi zemin', yuzde: 17, risk: 'orta', aciklama: 'Orta risk' },
+  ],
+  'Antalya-Gündoğmuş': [
+    { ad: 'Kaya', yuzde: 62, risk: 'dusuk', aciklama: 'Dağlık alan kaya zemin' },
+    { ad: 'Killi zemin', yuzde: 25, risk: 'orta', aciklama: 'Orta risk' },
+    { ad: 'Alüvyon', yuzde: 13, risk: 'yuksek', aciklama: 'Vadi tabanları' },
+  ],
+  'Antalya-İbradı': [
+    { ad: 'Kaya', yuzde: 68, risk: 'dusuk', aciklama: 'Dağlık alan kaya zemin' },
+    { ad: 'Killi zemin', yuzde: 22, risk: 'orta', aciklama: 'Orta risk' },
+    { ad: 'Alüvyon', yuzde: 10, risk: 'yuksek', aciklama: 'Vadi tabanları' },
+  ],
+  'Antalya-Kaş': [
+    { ad: 'Kaya', yuzde: 55, risk: 'dusuk', aciklama: 'Kıyı kaya zemin' },
+    { ad: 'Alüvyon', yuzde: 28, risk: 'yuksek', aciklama: 'Kıyı kesimleri' },
+    { ad: 'Killi zemin', yuzde: 17, risk: 'orta', aciklama: 'Orta risk' },
+  ],
+  'Antalya-Kemer': [
+    { ad: 'Kaya', yuzde: 52, risk: 'dusuk', aciklama: 'Toros kıyısı kaya zemin' },
+    { ad: 'Alüvyon', yuzde: 30, risk: 'yuksek', aciklama: 'Kıyı kesimleri' },
+    { ad: 'Killi zemin', yuzde: 18, risk: 'orta', aciklama: 'Orta risk' },
+  ],
+  'Antalya-Korkuteli': [
+    { ad: 'Kaya', yuzde: 50, risk: 'dusuk', aciklama: 'Toros platosu kaya zemin' },
+    { ad: 'Killi zemin', yuzde: 32, risk: 'orta', aciklama: 'Orta risk' },
+    { ad: 'Alüvyon', yuzde: 18, risk: 'yuksek', aciklama: 'Ova tabanı' },
+  ],
+  'Antalya-Kumluca': [
+    { ad: 'Alüvyon', yuzde: 55, risk: 'yuksek', aciklama: 'Kıyı alüvyonu' },
+    { ad: 'Kaya', yuzde: 28, risk: 'dusuk', aciklama: 'Toros etekleri' },
+    { ad: 'Killi zemin', yuzde: 17, risk: 'orta', aciklama: 'Orta risk' },
+  ],
+ 
+// ── MUĞLA EKSİK ────────────────────────────────────────────────
+  'Muğla-Dalaman': [
+    { ad: 'Alüvyon', yuzde: 60, risk: 'yuksek', aciklama: 'Dalaman çayı delta alüvyonu' },
+    { ad: 'Killi zemin', yuzde: 25, risk: 'orta', aciklama: 'Orta risk' },
+    { ad: 'Kaya', yuzde: 15, risk: 'dusuk', aciklama: 'Tepe kesimler' },
+  ],
+  'Muğla-Ortaca': [
+    { ad: 'Alüvyon', yuzde: 58, risk: 'yuksek', aciklama: 'Dalaman havzası alüvyonu' },
+    { ad: 'Killi zemin', yuzde: 27, risk: 'orta', aciklama: 'Orta risk' },
+    { ad: 'Kaya', yuzde: 15, risk: 'dusuk', aciklama: 'Tepe kesimler' },
+  ],
+  'Muğla-Seydikemer': [
+    { ad: 'Kaya', yuzde: 50, risk: 'dusuk', aciklama: 'Toros dağları kaya zemin' },
+    { ad: 'Alüvyon', yuzde: 30, risk: 'yuksek', aciklama: 'Vadi tabanları' },
+    { ad: 'Killi zemin', yuzde: 20, risk: 'orta', aciklama: 'Orta risk' },
+  ],
+  'Muğla-Ula': [
+    { ad: 'Kaya', yuzde: 52, risk: 'dusuk', aciklama: 'Dağlık alan kaya zemin' },
+    { ad: 'Killi zemin', yuzde: 30, risk: 'orta', aciklama: 'Orta risk' },
+    { ad: 'Alüvyon', yuzde: 18, risk: 'yuksek', aciklama: 'Vadi tabanları' },
+  ],
+  'Muğla-Yatağan': [
+    { ad: 'Killi zemin', yuzde: 48, risk: 'orta', aciklama: 'Linyit havzası killi zemin' },
+    { ad: 'Alüvyon', yuzde: 32, risk: 'yuksek', aciklama: 'Ova tabanı' },
+    { ad: 'Kaya', yuzde: 20, risk: 'dusuk', aciklama: 'Tepe kesimler' },
+  ],
+ 
+// ── DENİZLİ EKSİK ──────────────────────────────────────────────
+  'Denizli-Acıpayam': [
+    { ad: 'Kaya', yuzde: 50, risk: 'dusuk', aciklama: 'Dağlık alan kaya zemin' },
+    { ad: 'Killi zemin', yuzde: 30, risk: 'orta', aciklama: 'Orta risk' },
+    { ad: 'Alüvyon', yuzde: 20, risk: 'yuksek', aciklama: 'Ova tabanı' },
+  ],
+  'Denizli-Çal': [
+    { ad: 'Kaya', yuzde: 52, risk: 'dusuk', aciklama: 'Dağlık alan kaya zemin' },
+    { ad: 'Killi zemin', yuzde: 30, risk: 'orta', aciklama: 'Orta risk' },
+    { ad: 'Alüvyon', yuzde: 18, risk: 'yuksek', aciklama: 'Vadi tabanları' },
+  ],
+  'Denizli-Çameli': [
+    { ad: 'Kaya', yuzde: 58, risk: 'dusuk', aciklama: 'Dağlık alan kaya zemin' },
+    { ad: 'Killi zemin', yuzde: 27, risk: 'orta', aciklama: 'Orta risk' },
+    { ad: 'Alüvyon', yuzde: 15, risk: 'yuksek', aciklama: 'Vadi tabanları' },
+  ],
+  'Denizli-Çardak': [
+    { ad: 'Killi zemin', yuzde: 48, risk: 'orta', aciklama: 'Orta sertlik' },
+    { ad: 'Alüvyon', yuzde: 32, risk: 'yuksek', aciklama: 'Ova alüvyonu' },
+    { ad: 'Kaya', yuzde: 20, risk: 'dusuk', aciklama: 'Tepe kesimler' },
+  ],
+  'Denizli-Güney': [
+    { ad: 'Kaya', yuzde: 50, risk: 'dusuk', aciklama: 'Dağlık alan kaya zemin' },
+    { ad: 'Killi zemin', yuzde: 32, risk: 'orta', aciklama: 'Orta risk' },
+    { ad: 'Alüvyon', yuzde: 18, risk: 'yuksek', aciklama: 'Vadi tabanları' }
+  ],
+  'Denizli-Kale': [
+    { ad: 'Killi zemin', yuzde: 45, risk: 'orta', aciklama: 'Orta sertlik' },
+    { ad: 'Alüvyon', yuzde: 35, risk: 'yuksek', aciklama: 'Menderes havzası' },
+    { ad: 'Kaya', yuzde: 20, risk: 'dusuk', aciklama: 'Tepe kesimler' },
+  ],
+  'Denizli-Serinhisar': [
+    { ad: 'Killi zemin', yuzde: 48, risk: 'orta', aciklama: 'Orta sertlik' },
+    { ad: 'Alüvyon', yuzde: 32, risk: 'yuksek', aciklama: 'Ova tabanı' },
+    { ad: 'Kaya', yuzde: 20, risk: 'dusuk', aciklama: 'Tepe kesimler' },
+  ],
+ 
 
 // ─── Bina Stoğu Veritabanı ────────────────────────────────────────────────────
 // Kaynak: TÜİK 2021 Bina Sayımı; Belediye kentsel dönüşüm verileri;
@@ -1328,7 +1688,126 @@ const BINA_DB: Record<string, BolgeRisk['binalar']> = {
     { donem: '1999–2012', yuzde: 38, renk: '#EF9F27' },
     { donem: '2012 sonrası', yuzde: 37, renk: '#639922' },
   ],
-
+'İstanbul-Adalar': [
+    { donem: '1999 öncesi', yuzde: 52, renk: '#E24B4A' },
+    { donem: '1999–2012', yuzde: 30, renk: '#EF9F27' },
+    { donem: '2012 sonrası', yuzde: 18, renk: '#639922' },
+  ],
+  'İstanbul-Arnavutköy': [
+    { donem: '1999 öncesi', yuzde: 22, renk: '#E24B4A' },
+    { donem: '1999–2012', yuzde: 38, renk: '#EF9F27' },
+    { donem: '2012 sonrası', yuzde: 40, renk: '#639922' },
+  ],
+  'İstanbul-Ataşehir': [
+    { donem: '1999 öncesi', yuzde: 30, renk: '#E24B4A' },
+    { donem: '1999–2012', yuzde: 38, renk: '#EF9F27' },
+    { donem: '2012 sonrası', yuzde: 32, renk: '#639922' },
+  ],
+  'İstanbul-Bağcılar': [
+    { donem: '1999 öncesi', yuzde: 48, renk: '#E24B4A' },
+    { donem: '1999–2012', yuzde: 32, renk: '#EF9F27' },
+    { donem: '2012 sonrası', yuzde: 20, renk: '#639922' },
+  ],
+  'İstanbul-Beykoz': [
+    { donem: '1999 öncesi', yuzde: 40, renk: '#E24B4A' },
+    { donem: '1999–2012', yuzde: 35, renk: '#EF9F27' },
+    { donem: '2012 sonrası', yuzde: 25, renk: '#639922' },
+  ],
+  'İstanbul-Beylikdüzü': [
+    { donem: '1999 öncesi', yuzde: 20, renk: '#E24B4A' },
+    { donem: '1999–2012', yuzde: 40, renk: '#EF9F27' },
+    { donem: '2012 sonrası', yuzde: 40, renk: '#639922' },
+  ],
+  'İstanbul-Çatalca': [
+    { donem: '1999 öncesi', yuzde: 38, renk: '#E24B4A' },
+    { donem: '1999–2012', yuzde: 35, renk: '#EF9F27' },
+    { donem: '2012 sonrası', yuzde: 27, renk: '#639922' },
+  ],
+  'İstanbul-Çekmeköy': [
+    { donem: '1999 öncesi', yuzde: 25, renk: '#E24B4A' },
+    { donem: '1999–2012', yuzde: 38, renk: '#EF9F27' },
+    { donem: '2012 sonrası', yuzde: 37, renk: '#639922' },
+  ],
+  'İstanbul-Esenler': [
+    { donem: '1999 öncesi', yuzde: 50, renk: '#E24B4A' },
+    { donem: '1999–2012', yuzde: 30, renk: '#EF9F27' },
+    { donem: '2012 sonrası', yuzde: 20, renk: '#639922' },
+  ],
+  'İstanbul-Eyüpsultan': [
+    { donem: '1999 öncesi', yuzde: 45, renk: '#E24B4A' },
+    { donem: '1999–2012', yuzde: 32, renk: '#EF9F27' },
+    { donem: '2012 sonrası', yuzde: 23, renk: '#639922' },
+  ],
+  'İstanbul-Gaziosmanpaşa': [
+    { donem: '1999 öncesi', yuzde: 50, renk: '#E24B4A' },
+    { donem: '1999–2012', yuzde: 30, renk: '#EF9F27' },
+    { donem: '2012 sonrası', yuzde: 20, renk: '#639922' },
+  ],
+  'İstanbul-Güngören': [
+    { donem: '1999 öncesi', yuzde: 52, renk: '#E24B4A' },
+    { donem: '1999–2012', yuzde: 30, renk: '#EF9F27' },
+    { donem: '2012 sonrası', yuzde: 18, renk: '#639922' },
+  ],
+  'İstanbul-Kağıthane': [
+    { donem: '1999 öncesi', yuzde: 45, renk: '#E24B4A' },
+    { donem: '1999–2012', yuzde: 33, renk: '#EF9F27' },
+    { donem: '2012 sonrası', yuzde: 22, renk: '#639922' },
+  ],
+  'İstanbul-Küçükçekmece': [
+    { donem: '1999 öncesi', yuzde: 48, renk: '#E24B4A' },
+    { donem: '1999–2012', yuzde: 32, renk: '#EF9F27' },
+    { donem: '2012 sonrası', yuzde: 20, renk: '#639922' },
+  ],
+  'İstanbul-Maltepe': [
+    { donem: '1999 öncesi', yuzde: 40, renk: '#E24B4A' },
+    { donem: '1999–2012', yuzde: 35, renk: '#EF9F27' },
+    { donem: '2012 sonrası', yuzde: 25, renk: '#639922' },
+  ],
+  'İstanbul-Pendik': [
+    { donem: '1999 öncesi', yuzde: 35, renk: '#E24B4A' },
+    { donem: '1999–2012', yuzde: 38, renk: '#EF9F27' },
+    { donem: '2012 sonrası', yuzde: 27, renk: '#639922' },
+  ],
+  'İstanbul-Sancaktepe': [
+    { donem: '1999 öncesi', yuzde: 28, renk: '#E24B4A' },
+    { donem: '1999–2012', yuzde: 38, renk: '#EF9F27' },
+    { donem: '2012 sonrası', yuzde: 34, renk: '#639922' },
+  ],
+  'İstanbul-Silivri': [
+    { donem: '1999 öncesi', yuzde: 40, renk: '#E24B4A' },
+    { donem: '1999–2012', yuzde: 35, renk: '#EF9F27' },
+    { donem: '2012 sonrası', yuzde: 25, renk: '#639922' },
+  ],
+  'İstanbul-Sultanbeyli': [
+    { donem: '1999 öncesi', yuzde: 42, renk: '#E24B4A' },
+    { donem: '1999–2012', yuzde: 35, renk: '#EF9F27' },
+    { donem: '2012 sonrası', yuzde: 23, renk: '#639922' },
+  ],
+  'İstanbul-Sultangazi': [
+    { donem: '1999 öncesi', yuzde: 45, renk: '#E24B4A' },
+    { donem: '1999–2012', yuzde: 33, renk: '#EF9F27' },
+    { donem: '2012 sonrası', yuzde: 22, renk: '#639922' },
+  ],
+  'İstanbul-Şile': [
+    { donem: '1999 öncesi', yuzde: 45, renk: '#E24B4A' },
+    { donem: '1999–2012', yuzde: 33, renk: '#EF9F27' },
+    { donem: '2012 sonrası', yuzde: 22, renk: '#639922' },
+  ],
+  'İstanbul-Tuzla': [
+    { donem: '1999 öncesi', yuzde: 32, renk: '#E24B4A' },
+    { donem: '1999–2012', yuzde: 38, renk: '#EF9F27' },
+    { donem: '2012 sonrası', yuzde: 30, renk: '#639922' },
+  ],
+  'İstanbul-Ümraniye': [
+    { donem: '1999 öncesi', yuzde: 38, renk: '#E24B4A' },
+    { donem: '1999–2012', yuzde: 35, renk: '#EF9F27' },
+    { donem: '2012 sonrası', yuzde: 27, renk: '#639922' },
+  ],
+  'İstanbul-Kartal': [
+    { donem: '1999 öncesi', yuzde: 40, renk: '#E24B4A' },
+    { donem: '1999–2012', yuzde: 35, renk: '#EF9F27' },
+    { donem: '2012 sonrası', yuzde: 25, renk: '#639922' },
+  ],
   // ── KOCAELİ ───────────────────────────────────────────────────────────────
   'Kocaeli-Gölcük': [
     { donem: '1999 öncesi', yuzde: 22, renk: '#E24B4A' },
@@ -1344,6 +1823,36 @@ const BINA_DB: Record<string, BolgeRisk['binalar']> = {
     { donem: '1999 öncesi', yuzde: 32, renk: '#E24B4A' },
     { donem: '1999–2012', yuzde: 38, renk: '#EF9F27' },
     { donem: '2012 sonrası', yuzde: 30, renk: '#639922' },
+  ],
+  'Kocaeli-Kandıra': [
+    { donem: '1999 öncesi', yuzde: 35, renk: '#E24B4A' },
+    { donem: '1999–2012', yuzde: 38, renk: '#EF9F27' },
+    { donem: '2012 sonrası', yuzde: 27, renk: '#639922' },
+  ],
+  'Kocaeli-Karamürsel': [
+    { donem: '1999 öncesi', yuzde: 30, renk: '#E24B4A' },
+    { donem: '1999–2012', yuzde: 40, renk: '#EF9F27' },
+    { donem: '2012 sonrası', yuzde: 30, renk: '#639922' },
+  ],
+  'Kocaeli-Kartepe': [
+    { donem: '1999 öncesi', yuzde: 28, renk: '#E24B4A' },
+    { donem: '1999–2012', yuzde: 40, renk: '#EF9F27' },
+    { donem: '2012 sonrası', yuzde: 32, renk: '#639922' },
+  ],
+  'Kocaeli-Başiskele': [
+    { donem: '1999 öncesi', yuzde: 25, renk: '#E24B4A' },
+    { donem: '1999–2012', yuzde: 42, renk: '#EF9F27' },
+    { donem: '2012 sonrası', yuzde: 33, renk: '#639922' },
+  ],
+  'Kocaeli-Körfez': [
+    { donem: '1999 öncesi', yuzde: 22, renk: '#E24B4A' },
+    { donem: '1999–2012', yuzde: 45, renk: '#EF9F27' },
+    { donem: '2012 sonrası', yuzde: 33, renk: '#639922' },
+  ],
+  'Kocaeli-Derince': [
+    { donem: '1999 öncesi', yuzde: 25, renk: '#E24B4A' },
+    { donem: '1999–2012', yuzde: 43, renk: '#EF9F27' },
+    { donem: '2012 sonrası', yuzde: 32, renk: '#639922' },
   ],
 
   // ── SAKARYA ───────────────────────────────────────────────────────────────
@@ -1370,6 +1879,31 @@ const BINA_DB: Record<string, BolgeRisk['binalar']> = {
     { donem: '2012 sonrası', yuzde: 40, renk: '#639922' },
   ],
   'Bursa-Gemlik': [
+    { donem: '1999 öncesi', yuzde: 42, renk: '#E24B4A' },
+    { donem: '1999–2012', yuzde: 35, renk: '#EF9F27' },
+    { donem: '2012 sonrası', yuzde: 23, renk: '#639922' },
+  ],
+  'Bursa-İznik': [
+    { donem: '1999 öncesi', yuzde: 45, renk: '#E24B4A' },
+    { donem: '1999–2012', yuzde: 33, renk: '#EF9F27' },
+    { donem: '2012 sonrası', yuzde: 22, renk: '#639922' },
+  ],
+  'Bursa-İnegöl': [
+    { donem: '1999 öncesi', yuzde: 38, renk: '#E24B4A' },
+    { donem: '1999–2012', yuzde: 35, renk: '#EF9F27' },
+    { donem: '2012 sonrası', yuzde: 27, renk: '#639922' },
+  ],
+  'Bursa-Mudanya': [
+    { donem: '1999 öncesi', yuzde: 42, renk: '#E24B4A' },
+    { donem: '1999–2012', yuzde: 35, renk: '#EF9F27' },
+    { donem: '2012 sonrası', yuzde: 23, renk: '#639922' },
+  ],
+  'Bursa-Orhangazi': [
+    { donem: '1999 öncesi', yuzde: 40, renk: '#E24B4A' },
+    { donem: '1999–2012', yuzde: 35, renk: '#EF9F27' },
+    { donem: '2012 sonrası', yuzde: 25, renk: '#639922' },
+  ],
+  'Bursa-Yıldırım': [
     { donem: '1999 öncesi', yuzde: 42, renk: '#E24B4A' },
     { donem: '1999–2012', yuzde: 35, renk: '#EF9F27' },
     { donem: '2012 sonrası', yuzde: 23, renk: '#639922' },
@@ -1520,6 +2054,26 @@ const BINA_DB: Record<string, BolgeRisk['binalar']> = {
     { donem: '2000 öncesi', yuzde: 32, renk: '#E24B4A' },
     { donem: '2000–2015', yuzde: 38, renk: '#EF9F27' },
     { donem: '2015 sonrası', yuzde: 30, renk: '#639922' },
+  ],
+  'Samsun-Bafra': [
+    { donem: '2000 öncesi', yuzde: 42, renk: '#E24B4A' },
+    { donem: '2000–2015', yuzde: 36, renk: '#EF9F27' },
+    { donem: '2015 sonrası', yuzde: 22, renk: '#639922' },
+  ],
+  'Samsun-Tekkeköy': [
+    { donem: '2000 öncesi', yuzde: 35, renk: '#E24B4A' },
+    { donem: '2000–2015', yuzde: 38, renk: '#EF9F27' },
+    { donem: '2015 sonrası', yuzde: 27, renk: '#639922' },
+  ],
+  'Samsun-Alaçam': [
+    { donem: '2000 öncesi', yuzde: 40, renk: '#E24B4A' },
+    { donem: '2000–2015', yuzde: 36, renk: '#EF9F27' },
+    { donem: '2015 sonrası', yuzde: 24, renk: '#639922' },
+  ],
+  'Samsun-Terme': [
+    { donem: '2000 öncesi', yuzde: 38, renk: '#E24B4A' },
+    { donem: '2000–2015', yuzde: 37, renk: '#EF9F27' },
+    { donem: '2015 sonrası', yuzde: 25, renk: '#639922' },
   ],
 
   // ── ANTALYA ───────────────────────────────────────────────────────────────
@@ -1673,7 +2227,387 @@ const BINA_DB: Record<string, BolgeRisk['binalar']> = {
     { donem: '2000–2015', yuzde: 36, renk: '#EF9F27' },
     { donem: '2015 sonrası', yuzde: 22, renk: '#639922' },
   ],
-
+'Balıkesir-Karesi': [
+    { donem: '2000 öncesi', yuzde: 38, renk: '#E24B4A' },
+    { donem: '2000–2015', yuzde: 37, renk: '#EF9F27' },
+    { donem: '2015 sonrası', yuzde: 25, renk: '#639922' },
+  ],
+  'Balıkesir-Erdek': [
+    { donem: '2000 öncesi', yuzde: 40, renk: '#E24B4A' },
+    { donem: '2000–2015', yuzde: 35, renk: '#EF9F27' },
+    { donem: '2015 sonrası', yuzde: 25, renk: '#639922' },
+  ],
+  'Balıkesir-Gönen': [
+    { donem: '2000 öncesi', yuzde: 42, renk: '#E24B4A' },
+    { donem: '2000–2015', yuzde: 35, renk: '#EF9F27' },
+    { donem: '2015 sonrası', yuzde: 23, renk: '#639922' },
+  ],
+  'Balıkesir-Edremit': [
+    { donem: '2000 öncesi', yuzde: 38, renk: '#E24B4A' },
+    { donem: '2000–2015', yuzde: 37, renk: '#EF9F27' },
+    { donem: '2015 sonrası', yuzde: 25, renk: '#639922' },
+  ],
+  'Balıkesir-Manyas': [
+    { donem: '2000 öncesi', yuzde: 42, renk: '#E24B4A' },
+    { donem: '2000–2015', yuzde: 35, renk: '#EF9F27' },
+    { donem: '2015 sonrası', yuzde: 23, renk: '#639922' },
+  ],
+  'Balıkesir-Susurluk': [
+    { donem: '2000 öncesi', yuzde: 40, renk: '#E24B4A' },
+    { donem: '2000–2015', yuzde: 35, renk: '#EF9F27' },
+    { donem: '2015 sonrası', yuzde: 25, renk: '#639922' },
+  ],
+  'Yalova-Altınova': [
+    { donem: '1999 öncesi', yuzde: 20, renk: '#E24B4A' },
+    { donem: '1999–2012', yuzde: 48, renk: '#EF9F27' },
+    { donem: '2012 sonrası', yuzde: 32, renk: '#639922' },
+  ],
+  'Yalova-Termal': [
+    { donem: '1999 öncesi', yuzde: 22, renk: '#E24B4A' },
+    { donem: '1999–2012', yuzde: 46, renk: '#EF9F27' },
+    { donem: '2012 sonrası', yuzde: 32, renk: '#639922' },
+  ],
+  'Yalova-Çiftlikköy': [
+    { donem: '1999 öncesi', yuzde: 20, renk: '#E24B4A' },
+    { donem: '1999–2012', yuzde: 48, renk: '#EF9F27' },
+    { donem: '2012 sonrası', yuzde: 32, renk: '#639922' },
+  ],
+  'Yalova-Armutlu': [
+    { donem: '1999 öncesi', yuzde: 25, renk: '#E24B4A' },
+    { donem: '1999–2012', yuzde: 45, renk: '#EF9F27' },
+    { donem: '2012 sonrası', yuzde: 30, renk: '#639922' },
+  ],
+  'Düzce-Akçakoca': [
+    { donem: '1999 öncesi', yuzde: 28, renk: '#E24B4A' },
+    { donem: '1999–2012', yuzde: 42, renk: '#EF9F27' },
+    { donem: '2012 sonrası', yuzde: 30, renk: '#639922' },
+  ],
+  'Düzce-Gölyaka': [
+    { donem: '1999 öncesi', yuzde: 25, renk: '#E24B4A' },
+    { donem: '1999–2012', yuzde: 43, renk: '#EF9F27' },
+    { donem: '2012 sonrası', yuzde: 32, renk: '#639922' },
+  ],
+  'Düzce-Çilimli': [
+    { donem: '1999 öncesi', yuzde: 28, renk: '#E24B4A' },
+    { donem: '1999–2012', yuzde: 42, renk: '#EF9F27' },
+    { donem: '2012 sonrası', yuzde: 30, renk: '#639922' },
+  ],
+  'Düzce-Yığılca': [
+    { donem: '1999 öncesi', yuzde: 32, renk: '#E24B4A' },
+    { donem: '1999–2012', yuzde: 40, renk: '#EF9F27' },
+    { donem: '2012 sonrası', yuzde: 28, renk: '#639922' },
+  ],
+  'Bolu-Mudurnu': [
+    { donem: '1999 öncesi', yuzde: 35, renk: '#E24B4A' },
+    { donem: '1999–2012', yuzde: 38, renk: '#EF9F27' },
+    { donem: '2012 sonrası', yuzde: 27, renk: '#639922' },
+  ],
+  'Bolu-Göynük': [
+    { donem: '1999 öncesi', yuzde: 38, renk: '#E24B4A' },
+    { donem: '1999–2012', yuzde: 37, renk: '#EF9F27' },
+    { donem: '2012 sonrası', yuzde: 25, renk: '#639922' },
+  ],
+  'Bolu-Dörtdivan': [
+    { donem: '1999 öncesi', yuzde: 35, renk: '#E24B4A' },
+    { donem: '1999–2012', yuzde: 38, renk: '#EF9F27' },
+    { donem: '2012 sonrası', yuzde: 27, renk: '#639922' },
+  ],
+  'Bolu-Kıbrıscık': [
+    { donem: '1999 öncesi', yuzde: 40, renk: '#E24B4A' },
+    { donem: '1999–2012', yuzde: 35, renk: '#EF9F27' },
+    { donem: '2012 sonrası', yuzde: 25, renk: '#639922' },
+  ],
+  'İzmir-Buca': [
+    { donem: '2000 öncesi', yuzde: 40, renk: '#E24B4A' },
+    { donem: '2000–2015', yuzde: 35, renk: '#EF9F27' },
+    { donem: '2015 sonrası', yuzde: 25, renk: '#639922' },
+  ],
+  'İzmir-Gaziemir': [
+    { donem: '2000 öncesi', yuzde: 35, renk: '#E24B4A' },
+    { donem: '2000–2015', yuzde: 38, renk: '#EF9F27' },
+    { donem: '2015 sonrası', yuzde: 27, renk: '#639922' },
+  ],
+  'İzmir-Karabağlar': [
+    { donem: '2000 öncesi', yuzde: 42, renk: '#E24B4A' },
+    { donem: '2000–2015', yuzde: 35, renk: '#EF9F27' },
+    { donem: '2015 sonrası', yuzde: 23, renk: '#639922' },
+  ],
+  'İzmir-Çiğli': [
+    { donem: '2000 öncesi', yuzde: 38, renk: '#E24B4A' },
+    { donem: '2000–2015', yuzde: 37, renk: '#EF9F27' },
+    { donem: '2015 sonrası', yuzde: 25, renk: '#639922' },
+  ],
+  'İzmir-Narlıdere': [
+    { donem: '2000 öncesi', yuzde: 35, renk: '#E24B4A' },
+    { donem: '2000–2015', yuzde: 38, renk: '#EF9F27' },
+    { donem: '2015 sonrası', yuzde: 27, renk: '#639922' },
+  ],
+  'İzmir-Torbalı': [
+    { donem: '2000 öncesi', yuzde: 38, renk: '#E24B4A' },
+    { donem: '2000–2015', yuzde: 37, renk: '#EF9F27' },
+    { donem: '2015 sonrası', yuzde: 25, renk: '#639922' },
+  ],
+  'İzmir-Kemalpaşa': [
+    { donem: '2000 öncesi', yuzde: 35, renk: '#E24B4A' },
+    { donem: '2000–2015', yuzde: 38, renk: '#EF9F27' },
+    { donem: '2015 sonrası', yuzde: 27, renk: '#639922' },
+  ],
+  'İzmir-Aliağa': [
+    { donem: '2000 öncesi', yuzde: 32, renk: '#E24B4A' },
+    { donem: '2000–2015', yuzde: 38, renk: '#EF9F27' },
+    { donem: '2015 sonrası', yuzde: 30, renk: '#639922' },
+  ],
+  'İzmir-Bergama': [
+    { donem: '2000 öncesi', yuzde: 40, renk: '#E24B4A' },
+    { donem: '2000–2015', yuzde: 35, renk: '#EF9F27' },
+    { donem: '2015 sonrası', yuzde: 25, renk: '#639922' },
+  ],
+  'Hatay-Dörtyol': [
+    { donem: '2023 öncesi', yuzde: 55, renk: '#E24B4A' },
+    { donem: '2023 sonrası', yuzde: 45, renk: '#639922' },
+  ],
+  'Hatay-Reyhanlı': [
+    { donem: '2023 öncesi', yuzde: 58, renk: '#E24B4A' },
+    { donem: '2023 sonrası', yuzde: 42, renk: '#639922' },
+  ],
+  'Hatay-Hassa': [
+    { donem: '2023 öncesi', yuzde: 60, renk: '#E24B4A' },
+    { donem: '2023 sonrası', yuzde: 40, renk: '#639922' },
+  ],
+  'Hatay-Altınözü': [
+    { donem: '2023 öncesi', yuzde: 62, renk: '#E24B4A' },
+    { donem: '2023 sonrası', yuzde: 38, renk: '#639922' },
+  ],
+  'Hatay-Arsuz': [
+    { donem: '2023 öncesi', yuzde: 58, renk: '#E24B4A' },
+    { donem: '2023 sonrası', yuzde: 42, renk: '#639922' },
+  ],
+  'Hatay-Yayladağı': [
+    { donem: '2023 öncesi', yuzde: 55, renk: '#E24B4A' },
+    { donem: '2023 sonrası', yuzde: 45, renk: '#639922' },
+  ],
+  'Hatay-Belen': [
+    { donem: '2023 öncesi', yuzde: 50, renk: '#E24B4A' },
+    { donem: '2023 sonrası', yuzde: 50, renk: '#639922' },
+  ],
+  'Malatya-Doğanşehir': [
+    { donem: '2023 öncesi', yuzde: 60, renk: '#E24B4A' },
+    { donem: '2023 sonrası', yuzde: 40, renk: '#639922' },
+  ],
+  'Malatya-Pütürge': [
+    { donem: '2023 öncesi', yuzde: 58, renk: '#E24B4A' },
+    { donem: '2023 sonrası', yuzde: 42, renk: '#639922' },
+  ],
+  'Malatya-Kale': [
+    { donem: '2023 öncesi', yuzde: 55, renk: '#E24B4A' },
+    { donem: '2023 sonrası', yuzde: 45, renk: '#639922' },
+  ],
+  'Malatya-Akçadağ': [
+    { donem: '2023 öncesi', yuzde: 52, renk: '#E24B4A' },
+    { donem: '2023 sonrası', yuzde: 48, renk: '#639922' },
+  ],
+  'Malatya-Hekimhan': [
+    { donem: '2000 öncesi', yuzde: 42, renk: '#E24B4A' },
+    { donem: '2000–2015', yuzde: 35, renk: '#EF9F27' },
+    { donem: '2015 sonrası', yuzde: 23, renk: '#639922' },
+  ],
+  'Malatya-Arapgir': [
+    { donem: '2000 öncesi', yuzde: 45, renk: '#E24B4A' },
+    { donem: '2000–2015', yuzde: 33, renk: '#EF9F27' },
+    { donem: '2015 sonrası', yuzde: 22, renk: '#639922' },
+  ],
+  'Adıyaman-Kahta': [
+    { donem: '2023 öncesi', yuzde: 58, renk: '#E24B4A' },
+    { donem: '2023 sonrası', yuzde: 42, renk: '#639922' },
+  ],
+  'Adıyaman-Besni': [
+    { donem: '2023 öncesi', yuzde: 55, renk: '#E24B4A' },
+    { donem: '2023 sonrası', yuzde: 45, renk: '#639922' },
+  ],
+  'Adıyaman-Gölbaşı': [
+    { donem: '2023 öncesi', yuzde: 52, renk: '#E24B4A' },
+    { donem: '2023 sonrası', yuzde: 48, renk: '#639922' },
+  ],
+  'Adıyaman-Samsat': [
+    { donem: '2000 öncesi', yuzde: 45, renk: '#E24B4A' },
+    { donem: '2000–2015', yuzde: 33, renk: '#EF9F27' },
+    { donem: '2015 sonrası', yuzde: 22, renk: '#639922' },
+  ],
+  'Adıyaman-Sincik': [
+    { donem: '2000 öncesi', yuzde: 48, renk: '#E24B4A' },
+    { donem: '2000–2015', yuzde: 32, renk: '#EF9F27' },
+    { donem: '2015 sonrası', yuzde: 20, renk: '#639922' },
+  ],
+  'Adıyaman-Çelikhan': [
+    { donem: '2023 öncesi', yuzde: 55, renk: '#E24B4A' },
+    { donem: '2023 sonrası', yuzde: 45, renk: '#639922' },
+  ],
+  'Gaziantep-Araban': [
+    { donem: '2000 öncesi', yuzde: 38, renk: '#E24B4A' },
+    { donem: '2000–2015', yuzde: 37, renk: '#EF9F27' },
+    { donem: '2015 sonrası', yuzde: 25, renk: '#639922' },
+  ],
+  'Gaziantep-Oğuzeli': [
+    { donem: '2000 öncesi', yuzde: 35, renk: '#E24B4A' },
+    { donem: '2000–2015', yuzde: 38, renk: '#EF9F27' },
+    { donem: '2015 sonrası', yuzde: 27, renk: '#639922' },
+  ],
+  'Gaziantep-Karkamış': [
+    { donem: '2000 öncesi', yuzde: 40, renk: '#E24B4A' },
+    { donem: '2000–2015', yuzde: 35, renk: '#EF9F27' },
+    { donem: '2015 sonrası', yuzde: 25, renk: '#639922' },
+  ],
+  'Şanlıurfa-Karaköprü': [
+    { donem: '2000 öncesi', yuzde: 42, renk: '#E24B4A' },
+    { donem: '2000–2015', yuzde: 35, renk: '#EF9F27' },
+    { donem: '2015 sonrası', yuzde: 23, renk: '#639922' },
+  ],
+  'Şanlıurfa-Birecik': [
+    { donem: '2000 öncesi', yuzde: 45, renk: '#E24B4A' },
+    { donem: '2000–2015', yuzde: 33, renk: '#EF9F27' },
+    { donem: '2015 sonrası', yuzde: 22, renk: '#639922' },
+  ],
+  'Şanlıurfa-Bozova': [
+    { donem: '2000 öncesi', yuzde: 45, renk: '#E24B4A' },
+    { donem: '2000–2015', yuzde: 33, renk: '#EF9F27' },
+    { donem: '2015 sonrası', yuzde: 22, renk: '#639922' },
+  ],
+  'Diyarbakır-Yenişehir': [
+    { donem: '2000 öncesi', yuzde: 35, renk: '#E24B4A' },
+    { donem: '2000–2015', yuzde: 38, renk: '#EF9F27' },
+    { donem: '2015 sonrası', yuzde: 27, renk: '#639922' },
+  ],
+  'Diyarbakır-Ergani': [
+    { donem: '2000 öncesi', yuzde: 45, renk: '#E24B4A' },
+    { donem: '2000–2015', yuzde: 33, renk: '#EF9F27' },
+    { donem: '2015 sonrası', yuzde: 22, renk: '#639922' },
+  ],
+  'Diyarbakır-Çermik': [
+    { donem: '2000 öncesi', yuzde: 48, renk: '#E24B4A' },
+    { donem: '2000–2015', yuzde: 32, renk: '#EF9F27' },
+    { donem: '2015 sonrası', yuzde: 20, renk: '#639922' },
+  ],
+  'Kilis-Musabeyli': [
+    { donem: '2000 öncesi', yuzde: 45, renk: '#E24B4A' },
+    { donem: '2000–2015', yuzde: 33, renk: '#EF9F27' },
+    { donem: '2015 sonrası', yuzde: 22, renk: '#639922' },
+  ],
+  'Kilis-Polateli': [
+    { donem: '2000 öncesi', yuzde: 43, renk: '#E24B4A' },
+    { donem: '2000–2015', yuzde: 34, renk: '#EF9F27' },
+    { donem: '2015 sonrası', yuzde: 23, renk: '#639922' },
+  ],
+  'Kilis-Elbeyli': [
+    { donem: '2000 öncesi', yuzde: 42, renk: '#E24B4A' },
+    { donem: '2000–2015', yuzde: 35, renk: '#EF9F27' },
+    { donem: '2015 sonrası', yuzde: 23, renk: '#639922' },
+  ],
+  'Osmaniye-Kadirli': [
+    { donem: '2023 öncesi', yuzde: 55, renk: '#E24B4A' },
+    { donem: '2023 sonrası', yuzde: 45, renk: '#639922' },
+  ],
+  'Osmaniye-Düziçi': [
+    { donem: '2023 öncesi', yuzde: 58, renk: '#E24B4A' },
+    { donem: '2023 sonrası', yuzde: 42, renk: '#639922' },
+  ],
+  'Osmaniye-Toprakkale': [
+    { donem: '2023 öncesi', yuzde: 60, renk: '#E24B4A' },
+    { donem: '2023 sonrası', yuzde: 40, renk: '#639922' },
+  ],
+  'Osmaniye-Bahçe': [
+    { donem: '2023 öncesi', yuzde: 55, renk: '#E24B4A' },
+    { donem: '2023 sonrası', yuzde: 45, renk: '#639922' },
+  ],
+  'Adana-Çukurova': [
+    { donem: '2000 öncesi', yuzde: 32, renk: '#E24B4A' },
+    { donem: '2000–2015', yuzde: 40, renk: '#EF9F27' },
+    { donem: '2015 sonrası', yuzde: 28, renk: '#639922' },
+  ],
+  'Adana-Sarıçam': [
+    { donem: '2000 öncesi', yuzde: 28, renk: '#E24B4A' },
+    { donem: '2000–2015', yuzde: 40, renk: '#EF9F27' },
+    { donem: '2015 sonrası', yuzde: 32, renk: '#639922' },
+  ],
+  'Adana-Kozan': [
+    { donem: '2000 öncesi', yuzde: 40, renk: '#E24B4A' },
+    { donem: '2000–2015', yuzde: 36, renk: '#EF9F27' },
+    { donem: '2015 sonrası', yuzde: 24, renk: '#639922' },
+  ],
+  'Adana-Karataş': [
+    { donem: '2000 öncesi', yuzde: 42, renk: '#E24B4A' },
+    { donem: '2000–2015', yuzde: 35, renk: '#EF9F27' },
+    { donem: '2015 sonrası', yuzde: 23, renk: '#639922' },
+  ],
+  'Adana-İmamoğlu': [
+    { donem: '2000 öncesi', yuzde: 40, renk: '#E24B4A' },
+    { donem: '2000–2015', yuzde: 35, renk: '#EF9F27' },
+    { donem: '2015 sonrası', yuzde: 25, renk: '#639922' },
+  ],
+  'Muğla-Dalaman': [
+    { donem: '2000 öncesi', yuzde: 35, renk: '#E24B4A' },
+    { donem: '2000–2015', yuzde: 38, renk: '#EF9F27' },
+    { donem: '2015 sonrası', yuzde: 27, renk: '#639922' },
+  ],
+  'Muğla-Milas': [
+    { donem: '2000 öncesi', yuzde: 35, renk: '#E24B4A' },
+    { donem: '2000–2015', yuzde: 38, renk: '#EF9F27' },
+    { donem: '2015 sonrası', yuzde: 27, renk: '#639922' },
+  ],
+  'Muğla-Datça': [
+    { donem: '2000 öncesi', yuzde: 32, renk: '#E24B4A' },
+    { donem: '2000–2015', yuzde: 38, renk: '#EF9F27' },
+    { donem: '2015 sonrası', yuzde: 30, renk: '#639922' },
+  ],
+  'Muğla-Köyceğiz': [
+    { donem: '2000 öncesi', yuzde: 35, renk: '#E24B4A' },
+    { donem: '2000–2015', yuzde: 37, renk: '#EF9F27' },
+    { donem: '2015 sonrası', yuzde: 28, renk: '#639922' },
+  ],
+  'Denizli-Honaz': [
+    { donem: '2000 öncesi', yuzde: 38, renk: '#E24B4A' },
+    { donem: '2000–2015', yuzde: 37, renk: '#EF9F27' },
+    { donem: '2015 sonrası', yuzde: 25, renk: '#639922' },
+  ],
+  'Denizli-Buldan': [
+    { donem: '2000 öncesi', yuzde: 40, renk: '#E24B4A' },
+    { donem: '2000–2015', yuzde: 35, renk: '#EF9F27' },
+    { donem: '2015 sonrası', yuzde: 25, renk: '#639922' },
+  ],
+  'Denizli-Sarayköy': [
+    { donem: '2000 öncesi', yuzde: 38, renk: '#E24B4A' },
+    { donem: '2000–2015', yuzde: 37, renk: '#EF9F27' },
+    { donem: '2015 sonrası', yuzde: 25, renk: '#639922' },
+  ],
+  'Denizli-Tavas': [
+    { donem: '2000 öncesi', yuzde: 42, renk: '#E24B4A' },
+    { donem: '2000–2015', yuzde: 35, renk: '#EF9F27' },
+    { donem: '2015 sonrası', yuzde: 23, renk: '#639922' },
+  ],
+  'Antalya-Alanya': [
+    { donem: '2000 öncesi', yuzde: 25, renk: '#E24B4A' },
+    { donem: '2000–2015', yuzde: 40, renk: '#EF9F27' },
+    { donem: '2015 sonrası', yuzde: 35, renk: '#639922' },
+  ],
+  'Antalya-Manavgat': [
+    { donem: '2000 öncesi', yuzde: 28, renk: '#E24B4A' },
+    { donem: '2000–2015', yuzde: 40, renk: '#EF9F27' },
+    { donem: '2015 sonrası', yuzde: 32, renk: '#639922' },
+  ],
+  'Antalya-Serik': [
+    { donem: '2000 öncesi', yuzde: 30, renk: '#E24B4A' },
+    { donem: '2000–2015', yuzde: 40, renk: '#EF9F27' },
+    { donem: '2015 sonrası', yuzde: 30, renk: '#639922' },
+  ],
+  'Antalya-Döşemealtı': [
+    { donem: '2000 öncesi', yuzde: 25, renk: '#E24B4A' },
+    { donem: '2000–2015', yuzde: 40, renk: '#EF9F27' },
+    { donem: '2015 sonrası', yuzde: 35, renk: '#639922' },
+  ],
+  'Antalya-Aksu': [
+    { donem: '2000 öncesi', yuzde: 28, renk: '#E24B4A' },
+    { donem: '2000–2015', yuzde: 40, renk: '#EF9F27' },
+    { donem: '2015 sonrası', yuzde: 32, renk: '#639922' },
+  ],
   // ── İSTANBUL (ek ilçeler) ─────────────────────────────────────────────────
   'İstanbul-Büyükçekmece': [
     { donem: '1999 öncesi', yuzde: 48, renk: '#E24B4A' },
