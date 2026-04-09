@@ -6,7 +6,42 @@ import { bolgeRiskGetir } from '@/api/riskApi';
 import { bilimselKaynaklar } from '@/data/bilimselKaynaklar';
 import { depremAnindaOnlemler, depremSonrasiOnlemler } from '@/data/depremOnlemleri';
 import { useLanguage } from '@/contexts/LanguageContext';
-import type { BolgeRisk } from '@/types';
+import type { BolgeRisk, ZeminTipi } from '@/types';
+
+function IlZeminiDetay({ il, zemin }: { il: string; zemin: ZeminTipi[] }) {
+  const [acik, setAcik] = useState(false);
+  return (
+    <div className="border border-[var(--border)] rounded-xl overflow-hidden">
+      <button
+        onClick={() => setAcik(!acik)}
+        className="w-full flex items-center justify-between px-3 py-2.5 text-left bg-gray-50 dark:bg-gray-800/50 hover:bg-gray-100 dark:hover:bg-gray-700/50 transition-colors"
+      >
+        <span className="text-[11px] font-semibold text-[var(--muted)]">🌍 {il} ili genel zemin profiline bak</span>
+        <span className="text-[var(--muted)] text-xs">{acik ? '▲' : '▼'}</span>
+      </button>
+      {acik && (
+        <div className="p-3 space-y-2">
+          <p className="text-[10px] text-[var(--muted)] mb-2">Bu veri ilçe bazlı değil, {il} ilinin genel zemin karakteristiğini yansıtmaktadır.</p>
+          {zemin.map((z) => {
+            const zr = riskRenk(z.risk);
+            return (
+              <div key={z.ad} className="flex items-center gap-3">
+                <div className="flex items-center gap-1.5 w-28 shrink-0">
+                  <div className="w-2 h-2 rounded-full shrink-0" style={{ backgroundColor: zr.bar }} />
+                  <span className="text-xs font-medium text-[var(--foreground)]">{z.ad}</span>
+                </div>
+                <div className="flex-1 h-2 bg-gray-100 dark:bg-gray-700 rounded-full overflow-hidden">
+                  <div className="h-full rounded-full" style={{ width: `${z.yuzde}%`, backgroundColor: zr.bar }} />
+                </div>
+                <span className="text-xs font-bold text-[var(--foreground)] w-8 text-right">%{z.yuzde}</span>
+              </div>
+            );
+          })}
+        </div>
+      )}
+    </div>
+  );
+}
 
 function riskRenk(sinif: string) {
   if (sinif === 'yuksek') return { bg: '#FEF2F2', border: '#FECACA', text: '#7F1D1D', bar: '#EF4444', badge: '#FEE2E2', badgeText: '#991B1B' };
@@ -318,12 +353,15 @@ export default function BolgeAnalizi() {
           <div className="bg-[var(--card-bg)] rounded-2xl shadow-sm border border-[var(--border)] p-4">
             <p className="text-xs font-bold text-[var(--muted)] uppercase tracking-wide mb-3">{t('sectionZemin')}</p>
             {risk.zemin === null ? (
-              <div className="flex items-start gap-2.5 bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 rounded-xl p-3">
-                <span className="text-amber-500 text-base shrink-0">🔍</span>
-                <div>
-                  <p className="text-xs font-semibold text-amber-700 dark:text-amber-400">{risk.ilce} ilçesine ait zemin verileri incelenmektedir</p>
-                  <p className="text-[11px] text-amber-600 dark:text-amber-500 mt-0.5 leading-relaxed">Bu ilçe için zemin sınıflandırması henüz tamamlanmamıştır. Veriler eklendikçe bu bölüm güncellenecektir.</p>
+              <div className="space-y-2">
+                <div className="flex items-start gap-2.5 bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 rounded-xl p-3">
+                  <span className="text-amber-500 text-base shrink-0">🔍</span>
+                  <div>
+                    <p className="text-xs font-semibold text-amber-700 dark:text-amber-400">{risk.ilce} ilçesine ait zemin verileri incelenmektedir</p>
+                    <p className="text-[11px] text-amber-600 dark:text-amber-500 mt-0.5 leading-relaxed">Bu ilçe için zemin sınıflandırması henüz tamamlanmamıştır. Veriler eklendikçe bu bölüm güncellenecektir.</p>
+                  </div>
                 </div>
+                {risk.ilZemini && <IlZeminiDetay il={risk.il} zemin={risk.ilZemini} />}
               </div>
             ) : (
               <>

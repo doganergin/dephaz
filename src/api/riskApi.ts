@@ -287,6 +287,89 @@ const RISK_DB: Record<string, RiskVeri> = {
   'Yalova-Termal':           { riskSkoru: 85, fayMesafe: 10,  olasilik30: 62, beklenenMw: 'Mw 7.0–7.5', fayAdi: 'KAF Marmara güney' },
   'Yalova-Çiftlikköy':       { riskSkoru: 87, fayMesafe: 8,   olasilik30: 63, beklenenMw: 'Mw 7.0–7.5', fayAdi: 'KAF Marmara güney' },
   'Yalova-Armutlu':          { riskSkoru: 82, fayMesafe: 12,  olasilik30: 58, beklenenMw: 'Mw 7.0–7.5', fayAdi: 'KAF Marmara güney' },
+
+  // ── İSTANBUL EK İLÇELER ──────────────────────────────────────────────────
+  'İstanbul-Adalar':         { riskSkoru: 55, fayMesafe: 20,  olasilik30: 44, beklenenMw: 'Mw 7.2–7.6', fayAdi: 'KAF Marmara' },
+  'İstanbul-Arnavutköy':     { riskSkoru: 58, fayMesafe: 22,  olasilik30: 46, beklenenMw: 'Mw 7.2–7.6', fayAdi: 'KAF Marmara' },
+  'İstanbul-Ataşehir':       { riskSkoru: 65, fayMesafe: 20,  olasilik30: 50, beklenenMw: 'Mw 7.2–7.6', fayAdi: 'KAF Marmara' },
+  'İstanbul-Bağcılar':       { riskSkoru: 78, fayMesafe: 16,  olasilik30: 58, beklenenMw: 'Mw 7.2–7.6', fayAdi: 'KAF Marmara' },
+  'İstanbul-Beykoz':         { riskSkoru: 50, fayMesafe: 28,  olasilik30: 40, beklenenMw: 'Mw 7.2–7.6', fayAdi: 'KAF Marmara' },
+  'İstanbul-Beylikdüzü':     { riskSkoru: 70, fayMesafe: 18,  olasilik30: 54, beklenenMw: 'Mw 7.2–7.6', fayAdi: 'KAF Marmara' },
+  'İstanbul-Çatalca':        { riskSkoru: 45, fayMesafe: 35,  olasilik30: 36, beklenenMw: 'Mw 7.2–7.6', fayAdi: 'KAF Marmara' },
+  'İstanbul-Çekmeköy':       { riskSkoru: 55, fayMesafe: 26,  olasilik30: 44, beklenenMw: 'Mw 7.2–7.6', fayAdi: 'KAF Marmara' },
+  'İstanbul-Esenler':        { riskSkoru: 76, fayMesafe: 17,  olasilik30: 58, beklenenMw: 'Mw 7.2–7.6', fayAdi: 'KAF Marmara' },
+  'İstanbul-Eyüpsultan':     { riskSkoru: 72, fayMesafe: 18,  olasilik30: 54, beklenenMw: 'Mw 7.2–7.6', fayAdi: 'KAF Marmara' },
+  'İstanbul-Gaziosmanpaşa':  { riskSkoru: 74, fayMesafe: 17,  olasilik30: 56, beklenenMw: 'Mw 7.2–7.6', fayAdi: 'KAF Marmara' },
+  'İstanbul-Güngören':       { riskSkoru: 80, fayMesafe: 15,  olasilik30: 60, beklenenMw: 'Mw 7.2–7.6', fayAdi: 'KAF Marmara' },
+  'İstanbul-Kağıthane':      { riskSkoru: 72, fayMesafe: 18,  olasilik30: 54, beklenenMw: 'Mw 7.2–7.6', fayAdi: 'KAF Marmara' },
+  'İstanbul-Küçükçekmece':   { riskSkoru: 84, fayMesafe: 14,  olasilik30: 62, beklenenMw: 'Mw 7.2–7.6', fayAdi: 'KAF Marmara' },
+  'İstanbul-Sancaktepe':     { riskSkoru: 58, fayMesafe: 24,  olasilik30: 46, beklenenMw: 'Mw 7.2–7.6', fayAdi: 'KAF Marmara' },
+  'İstanbul-Silivri':        { riskSkoru: 60, fayMesafe: 22,  olasilik30: 48, beklenenMw: 'Mw 7.2–7.6', fayAdi: 'KAF Marmara' },
+  'İstanbul-Sultanbeyli':    { riskSkoru: 62, fayMesafe: 22,  olasilik30: 48, beklenenMw: 'Mw 7.2–7.6', fayAdi: 'KAF Marmara' },
+  'İstanbul-Sultangazi':     { riskSkoru: 74, fayMesafe: 17,  olasilik30: 56, beklenenMw: 'Mw 7.2–7.6', fayAdi: 'KAF Marmara' },
+  'İstanbul-Şile':           { riskSkoru: 42, fayMesafe: 40,  olasilik30: 32, beklenenMw: 'Mw 7.2–7.6', fayAdi: 'KAF Marmara' },
+  'İstanbul-Tuzla':          { riskSkoru: 64, fayMesafe: 20,  olasilik30: 50, beklenenMw: 'Mw 7.2–7.6', fayAdi: 'KAF Marmara' },
+
+  // ── KOCAELİ EK İLÇELER ───────────────────────────────────────────────────
+  'Kocaeli-Çayırova':        { riskSkoru: 80, fayMesafe: 10,  olasilik30: 58, beklenenMw: 'Mw 7.0–7.5', fayAdi: 'KAF İzmit' },
+  'Kocaeli-Darıca':          { riskSkoru: 78, fayMesafe: 12,  olasilik30: 56, beklenenMw: 'Mw 7.0–7.5', fayAdi: 'KAF İzmit' },
+  'Kocaeli-Dilovası':        { riskSkoru: 76, fayMesafe: 14,  olasilik30: 54, beklenenMw: 'Mw 7.0–7.5', fayAdi: 'KAF İzmit' },
+
+  // ── BURSA EK İLÇELER ─────────────────────────────────────────────────────
+  'Bursa-Büyükorhan':        { riskSkoru: 42, fayMesafe: 60,  olasilik30: 30, beklenenMw: 'Mw 6.0–6.5', fayAdi: 'KAF güney kolu' },
+  'Bursa-Gürsu':             { riskSkoru: 55, fayMesafe: 45,  olasilik30: 38, beklenenMw: 'Mw 6.5–7.0', fayAdi: 'KAF güney kolu' },
+  'Bursa-Harmancık':         { riskSkoru: 40, fayMesafe: 65,  olasilik30: 28, beklenenMw: 'Mw 6.0–6.5', fayAdi: 'KAF güney kolu' },
+  'Bursa-Karacabey':         { riskSkoru: 52, fayMesafe: 50,  olasilik30: 36, beklenenMw: 'Mw 6.5–7.0', fayAdi: 'KAF güney kolu' },
+  'Bursa-Keles':             { riskSkoru: 38, fayMesafe: 70,  olasilik30: 26, beklenenMw: 'Mw 6.0–6.5', fayAdi: 'KAF güney kolu' },
+  'Bursa-Kestel':            { riskSkoru: 57, fayMesafe: 42,  olasilik30: 40, beklenenMw: 'Mw 6.5–7.0', fayAdi: 'KAF güney kolu' },
+  'Bursa-Mustafakemalpaşa':  { riskSkoru: 50, fayMesafe: 55,  olasilik30: 34, beklenenMw: 'Mw 6.5–7.0', fayAdi: 'KAF güney kolu' },
+  'Bursa-Orhaneli':          { riskSkoru: 44, fayMesafe: 58,  olasilik30: 30, beklenenMw: 'Mw 6.0–6.5', fayAdi: 'KAF güney kolu' },
+  'Bursa-Yenişehir':         { riskSkoru: 65, fayMesafe: 20,  olasilik30: 46, beklenenMw: 'Mw 6.5–7.0', fayAdi: 'İznik-Yenişehir Fayı' },
+
+  // ── İZMİR EK İLÇELER ─────────────────────────────────────────────────────
+  'İzmir-Balçova':           { riskSkoru: 62, fayMesafe: 22,  olasilik30: 42, beklenenMw: 'Mw 6.0–6.8', fayAdi: 'İzmir Körfezi Fayı' },
+  'İzmir-Bayındır':          { riskSkoru: 58, fayMesafe: 30,  olasilik30: 38, beklenenMw: 'Mw 6.0–6.8', fayAdi: 'Küçük Menderes Grabeni' },
+  'İzmir-Beydağ':            { riskSkoru: 52, fayMesafe: 42,  olasilik30: 34, beklenenMw: 'Mw 5.5–6.5', fayAdi: 'Küçük Menderes Grabeni' },
+  'İzmir-Çeşme':             { riskSkoru: 65, fayMesafe: 20,  olasilik30: 44, beklenenMw: 'Mw 6.5–7.0', fayAdi: 'Çeşme Fayı' },
+  'İzmir-Dikili':            { riskSkoru: 58, fayMesafe: 32,  olasilik30: 38, beklenenMw: 'Mw 5.5–6.5', fayAdi: 'Bakırçay Fayı' },
+  'İzmir-Foça':              { riskSkoru: 62, fayMesafe: 25,  olasilik30: 42, beklenenMw: 'Mw 6.0–6.8', fayAdi: 'İzmir Körfezi Fayı' },
+  'İzmir-Karaburun':         { riskSkoru: 58, fayMesafe: 30,  olasilik30: 38, beklenenMw: 'Mw 6.0–6.8', fayAdi: 'Karaburun Fayı' },
+  'İzmir-Kınık':             { riskSkoru: 55, fayMesafe: 38,  olasilik30: 36, beklenenMw: 'Mw 5.5–6.5', fayAdi: 'Bakırçay Fayı' },
+  'İzmir-Kiraz':             { riskSkoru: 50, fayMesafe: 45,  olasilik30: 32, beklenenMw: 'Mw 5.5–6.5', fayAdi: 'Küçük Menderes Grabeni' },
+  'İzmir-Menderes':          { riskSkoru: 62, fayMesafe: 24,  olasilik30: 42, beklenenMw: 'Mw 6.0–6.8', fayAdi: 'Büyük Menderes Grabeni' },
+  'İzmir-Menemen':           { riskSkoru: 65, fayMesafe: 20,  olasilik30: 44, beklenenMw: 'Mw 6.0–6.8', fayAdi: 'Gediz Grabeni' },
+  'İzmir-Ödemiş':            { riskSkoru: 60, fayMesafe: 28,  olasilik30: 40, beklenenMw: 'Mw 6.0–6.8', fayAdi: 'Küçük Menderes Grabeni' },
+  'İzmir-Seferihisar':       { riskSkoru: 68, fayMesafe: 18,  olasilik30: 46, beklenenMw: 'Mw 6.5–7.0', fayAdi: 'Seferihisar-Doğanbey Fayı' },
+  'İzmir-Selçuk':            { riskSkoru: 62, fayMesafe: 24,  olasilik30: 42, beklenenMw: 'Mw 6.0–6.8', fayAdi: 'Küçük Menderes Grabeni' },
+  'İzmir-Tire':              { riskSkoru: 58, fayMesafe: 32,  olasilik30: 38, beklenenMw: 'Mw 6.0–6.8', fayAdi: 'Küçük Menderes Grabeni' },
+  'İzmir-Urla':              { riskSkoru: 62, fayMesafe: 22,  olasilik30: 42, beklenenMw: 'Mw 6.5–7.0', fayAdi: 'İzmir Körfezi Fayı' },
+
+  // ── ANTALYA EK İLÇELER ───────────────────────────────────────────────────
+  'Antalya-Elmalı':          { riskSkoru: 45, fayMesafe: 70,  olasilik30: 28, beklenenMw: 'Mw 5.5–6.5', fayAdi: 'Fethiye-Burdur Fayı' },
+  'Antalya-Finike':          { riskSkoru: 50, fayMesafe: 60,  olasilik30: 32, beklenenMw: 'Mw 6.0–6.5', fayAdi: 'Akdeniz Fayları' },
+  'Antalya-Gazipaşa':        { riskSkoru: 48, fayMesafe: 65,  olasilik30: 30, beklenenMw: 'Mw 6.0–6.5', fayAdi: 'Akdeniz Fayları' },
+  'Antalya-Gündoğmuş':       { riskSkoru: 42, fayMesafe: 75,  olasilik30: 26, beklenenMw: 'Mw 5.5–6.5', fayAdi: 'Akdeniz Fayları' },
+  'Antalya-İbradı':          { riskSkoru: 38, fayMesafe: 85,  olasilik30: 22, beklenenMw: 'Mw 5.5–6.5', fayAdi: 'Akdeniz Fayları' },
+  'Antalya-Kaş':             { riskSkoru: 55, fayMesafe: 52,  olasilik30: 36, beklenenMw: 'Mw 6.0–6.5', fayAdi: 'Fethiye-Burdur Fayı' },
+  'Antalya-Kemer':           { riskSkoru: 48, fayMesafe: 62,  olasilik30: 30, beklenenMw: 'Mw 6.0–6.5', fayAdi: 'Akdeniz Fayları' },
+  'Antalya-Korkuteli':       { riskSkoru: 45, fayMesafe: 68,  olasilik30: 28, beklenenMw: 'Mw 5.5–6.5', fayAdi: 'Akdeniz Fayları' },
+  'Antalya-Kumluca':         { riskSkoru: 50, fayMesafe: 58,  olasilik30: 32, beklenenMw: 'Mw 6.0–6.5', fayAdi: 'Akdeniz Fayları' },
+
+  // ── MUĞLA EK İLÇELER ─────────────────────────────────────────────────────
+  'Muğla-Dalaman':           { riskSkoru: 62, fayMesafe: 32,  olasilik30: 42, beklenenMw: 'Mw 6.0–6.8', fayAdi: 'Fethiye-Burdur Fayı' },
+  'Muğla-Ortaca':            { riskSkoru: 60, fayMesafe: 35,  olasilik30: 40, beklenenMw: 'Mw 6.0–6.8', fayAdi: 'Fethiye-Burdur Fayı' },
+  'Muğla-Seydikemer':        { riskSkoru: 65, fayMesafe: 28,  olasilik30: 44, beklenenMw: 'Mw 6.5–7.0', fayAdi: 'Fethiye-Burdur Fayı' },
+  'Muğla-Ula':               { riskSkoru: 58, fayMesafe: 38,  olasilik30: 38, beklenenMw: 'Mw 6.0–6.8', fayAdi: 'Güneybatı Anadolu Fayları' },
+  'Muğla-Yatağan':           { riskSkoru: 60, fayMesafe: 35,  olasilik30: 40, beklenenMw: 'Mw 6.0–6.8', fayAdi: 'Güneybatı Anadolu Fayları' },
+
+  // ── DENİZLİ EK İLÇELER ───────────────────────────────────────────────────
+  'Denizli-Acıpayam':        { riskSkoru: 55, fayMesafe: 42,  olasilik30: 36, beklenenMw: 'Mw 6.0–6.8', fayAdi: 'Güneybatı Anadolu Fayları' },
+  'Denizli-Çal':             { riskSkoru: 52, fayMesafe: 48,  olasilik30: 34, beklenenMw: 'Mw 6.0–6.8', fayAdi: 'Büyük Menderes Grabeni' },
+  'Denizli-Çameli':          { riskSkoru: 55, fayMesafe: 42,  olasilik30: 36, beklenenMw: 'Mw 6.0–6.8', fayAdi: 'Fethiye-Burdur Fayı' },
+  'Denizli-Çardak':          { riskSkoru: 58, fayMesafe: 38,  olasilik30: 38, beklenenMw: 'Mw 6.0–6.8', fayAdi: 'Büyük Menderes Grabeni' },
+  'Denizli-Güney':           { riskSkoru: 55, fayMesafe: 42,  olasilik30: 36, beklenenMw: 'Mw 6.0–6.8', fayAdi: 'Gediz Grabeni' },
+  'Denizli-Kale':            { riskSkoru: 60, fayMesafe: 35,  olasilik30: 40, beklenenMw: 'Mw 6.0–6.8', fayAdi: 'Büyük Menderes Grabeni' },
+  'Denizli-Serinhisar':      { riskSkoru: 58, fayMesafe: 38,  olasilik30: 38, beklenenMw: 'Mw 6.0–6.8', fayAdi: 'Büyük Menderes Grabeni' },
 };
 
 // ─── Zemin Veritabanı ────────────────────────────────────────────────────────
@@ -2680,14 +2763,262 @@ const BINA_DB: Record<string, BolgeRisk['binalar']> = {
     { donem: '2000–2015', yuzde: 36, renk: '#EF9F27' },
     { donem: '2015 sonrası', yuzde: 26, renk: '#639922' },
   ],
+  'Muğla-Ortaca': [
+    { donem: '1999 öncesi', yuzde: 38, renk: '#E24B4A' },
+    { donem: '1999–2012', yuzde: 37, renk: '#EF9F27' },
+    { donem: '2012 sonrası', yuzde: 25, renk: '#639922' },
+  ],
+  'Muğla-Seydikemer': [
+    { donem: '1999 öncesi', yuzde: 40, renk: '#E24B4A' },
+    { donem: '1999–2012', yuzde: 35, renk: '#EF9F27' },
+    { donem: '2012 sonrası', yuzde: 25, renk: '#639922' },
+  ],
+  'Muğla-Ula': [
+    { donem: '1999 öncesi', yuzde: 42, renk: '#E24B4A' },
+    { donem: '1999–2012', yuzde: 35, renk: '#EF9F27' },
+    { donem: '2012 sonrası', yuzde: 23, renk: '#639922' },
+  ],
+  'Muğla-Yatağan': [
+    { donem: '1999 öncesi', yuzde: 40, renk: '#E24B4A' },
+    { donem: '1999–2012', yuzde: 36, renk: '#EF9F27' },
+    { donem: '2012 sonrası', yuzde: 24, renk: '#639922' },
+  ],
 
   // ── DENİZLİ (ek ilçeler) ─────────────────────────────────────────────────
+  'Denizli-Acıpayam': [
+    { donem: '1999 öncesi', yuzde: 42, renk: '#E24B4A' },
+    { donem: '1999–2012', yuzde: 35, renk: '#EF9F27' },
+    { donem: '2012 sonrası', yuzde: 23, renk: '#639922' },
+  ],
+  'Denizli-Çal': [
+    { donem: '1999 öncesi', yuzde: 45, renk: '#E24B4A' },
+    { donem: '1999–2012', yuzde: 33, renk: '#EF9F27' },
+    { donem: '2012 sonrası', yuzde: 22, renk: '#639922' },
+  ],
+  'Denizli-Çameli': [
+    { donem: '1999 öncesi', yuzde: 44, renk: '#E24B4A' },
+    { donem: '1999–2012', yuzde: 34, renk: '#EF9F27' },
+    { donem: '2012 sonrası', yuzde: 22, renk: '#639922' },
+  ],
+  'Denizli-Çardak': [
+    { donem: '1999 öncesi', yuzde: 40, renk: '#E24B4A' },
+    { donem: '1999–2012', yuzde: 36, renk: '#EF9F27' },
+    { donem: '2012 sonrası', yuzde: 24, renk: '#639922' },
+  ],
+  'Denizli-Güney': [
+    { donem: '1999 öncesi', yuzde: 42, renk: '#E24B4A' },
+    { donem: '1999–2012', yuzde: 35, renk: '#EF9F27' },
+    { donem: '2012 sonrası', yuzde: 23, renk: '#639922' },
+  ],
+  'Denizli-Kale': [
+    { donem: '1999 öncesi', yuzde: 40, renk: '#E24B4A' },
+    { donem: '1999–2012', yuzde: 36, renk: '#EF9F27' },
+    { donem: '2012 sonrası', yuzde: 24, renk: '#639922' },
+  ],
+  'Denizli-Serinhisar': [
+    { donem: '1999 öncesi', yuzde: 42, renk: '#E24B4A' },
+    { donem: '1999–2012', yuzde: 35, renk: '#EF9F27' },
+    { donem: '2012 sonrası', yuzde: 23, renk: '#639922' },
+  ],
 
   // ── BOLU (ek ilçeler) ─────────────────────────────────────────────────────
 
   // ── DÜZCE (ek ilçeler) ────────────────────────────────────────────────────
 
   // ── YALOVA (ek ilçeler) ───────────────────────────────────────────────────
+
+  // ── KOCAELİ (ek ilçeler) ─────────────────────────────────────────────────
+  'Kocaeli-Çayırova': [
+    { donem: '1999 öncesi', yuzde: 28, renk: '#E24B4A' },
+    { donem: '1999–2012', yuzde: 42, renk: '#EF9F27' },
+    { donem: '2012 sonrası', yuzde: 30, renk: '#639922' },
+  ],
+  'Kocaeli-Darıca': [
+    { donem: '1999 öncesi', yuzde: 32, renk: '#E24B4A' },
+    { donem: '1999–2012', yuzde: 40, renk: '#EF9F27' },
+    { donem: '2012 sonrası', yuzde: 28, renk: '#639922' },
+  ],
+  'Kocaeli-Dilovası': [
+    { donem: '1999 öncesi', yuzde: 30, renk: '#E24B4A' },
+    { donem: '1999–2012', yuzde: 40, renk: '#EF9F27' },
+    { donem: '2012 sonrası', yuzde: 30, renk: '#639922' },
+  ],
+
+  // ── BURSA (ek ilçeler) ────────────────────────────────────────────────────
+  'Bursa-Büyükorhan': [
+    { donem: '1999 öncesi', yuzde: 50, renk: '#E24B4A' },
+    { donem: '1999–2012', yuzde: 30, renk: '#EF9F27' },
+    { donem: '2012 sonrası', yuzde: 20, renk: '#639922' },
+  ],
+  'Bursa-Gürsu': [
+    { donem: '1999 öncesi', yuzde: 38, renk: '#E24B4A' },
+    { donem: '1999–2012', yuzde: 36, renk: '#EF9F27' },
+    { donem: '2012 sonrası', yuzde: 26, renk: '#639922' },
+  ],
+  'Bursa-Harmancık': [
+    { donem: '1999 öncesi', yuzde: 52, renk: '#E24B4A' },
+    { donem: '1999–2012', yuzde: 30, renk: '#EF9F27' },
+    { donem: '2012 sonrası', yuzde: 18, renk: '#639922' },
+  ],
+  'Bursa-Karacabey': [
+    { donem: '1999 öncesi', yuzde: 42, renk: '#E24B4A' },
+    { donem: '1999–2012', yuzde: 35, renk: '#EF9F27' },
+    { donem: '2012 sonrası', yuzde: 23, renk: '#639922' },
+  ],
+  'Bursa-Keles': [
+    { donem: '1999 öncesi', yuzde: 55, renk: '#E24B4A' },
+    { donem: '1999–2012', yuzde: 28, renk: '#EF9F27' },
+    { donem: '2012 sonrası', yuzde: 17, renk: '#639922' },
+  ],
+  'Bursa-Kestel': [
+    { donem: '1999 öncesi', yuzde: 38, renk: '#E24B4A' },
+    { donem: '1999–2012', yuzde: 36, renk: '#EF9F27' },
+    { donem: '2012 sonrası', yuzde: 26, renk: '#639922' },
+  ],
+  'Bursa-Mustafakemalpaşa': [
+    { donem: '1999 öncesi', yuzde: 44, renk: '#E24B4A' },
+    { donem: '1999–2012', yuzde: 33, renk: '#EF9F27' },
+    { donem: '2012 sonrası', yuzde: 23, renk: '#639922' },
+  ],
+  'Bursa-Orhaneli': [
+    { donem: '1999 öncesi', yuzde: 48, renk: '#E24B4A' },
+    { donem: '1999–2012', yuzde: 32, renk: '#EF9F27' },
+    { donem: '2012 sonrası', yuzde: 20, renk: '#639922' },
+  ],
+  'Bursa-Yenişehir': [
+    { donem: '1999 öncesi', yuzde: 40, renk: '#E24B4A' },
+    { donem: '1999–2012', yuzde: 35, renk: '#EF9F27' },
+    { donem: '2012 sonrası', yuzde: 25, renk: '#639922' },
+  ],
+
+  // ── İZMİR (ek ilçeler) ───────────────────────────────────────────────────
+  'İzmir-Balçova': [
+    { donem: '2000 öncesi', yuzde: 38, renk: '#E24B4A' },
+    { donem: '2000–2015', yuzde: 36, renk: '#EF9F27' },
+    { donem: '2015 sonrası', yuzde: 26, renk: '#639922' },
+  ],
+  'İzmir-Bayındır': [
+    { donem: '2000 öncesi', yuzde: 40, renk: '#E24B4A' },
+    { donem: '2000–2015', yuzde: 35, renk: '#EF9F27' },
+    { donem: '2015 sonrası', yuzde: 25, renk: '#639922' },
+  ],
+  'İzmir-Beydağ': [
+    { donem: '2000 öncesi', yuzde: 45, renk: '#E24B4A' },
+    { donem: '2000–2015', yuzde: 33, renk: '#EF9F27' },
+    { donem: '2015 sonrası', yuzde: 22, renk: '#639922' },
+  ],
+  'İzmir-Çeşme': [
+    { donem: '2000 öncesi', yuzde: 32, renk: '#E24B4A' },
+    { donem: '2000–2015', yuzde: 38, renk: '#EF9F27' },
+    { donem: '2015 sonrası', yuzde: 30, renk: '#639922' },
+  ],
+  'İzmir-Dikili': [
+    { donem: '2000 öncesi', yuzde: 40, renk: '#E24B4A' },
+    { donem: '2000–2015', yuzde: 35, renk: '#EF9F27' },
+    { donem: '2015 sonrası', yuzde: 25, renk: '#639922' },
+  ],
+  'İzmir-Foça': [
+    { donem: '2000 öncesi', yuzde: 38, renk: '#E24B4A' },
+    { donem: '2000–2015', yuzde: 36, renk: '#EF9F27' },
+    { donem: '2015 sonrası', yuzde: 26, renk: '#639922' },
+  ],
+  'İzmir-Karaburun': [
+    { donem: '2000 öncesi', yuzde: 48, renk: '#E24B4A' },
+    { donem: '2000–2015', yuzde: 32, renk: '#EF9F27' },
+    { donem: '2015 sonrası', yuzde: 20, renk: '#639922' },
+  ],
+  'İzmir-Kınık': [
+    { donem: '2000 öncesi', yuzde: 42, renk: '#E24B4A' },
+    { donem: '2000–2015', yuzde: 35, renk: '#EF9F27' },
+    { donem: '2015 sonrası', yuzde: 23, renk: '#639922' },
+  ],
+  'İzmir-Kiraz': [
+    { donem: '2000 öncesi', yuzde: 45, renk: '#E24B4A' },
+    { donem: '2000–2015', yuzde: 33, renk: '#EF9F27' },
+    { donem: '2015 sonrası', yuzde: 22, renk: '#639922' },
+  ],
+  'İzmir-Menderes': [
+    { donem: '2000 öncesi', yuzde: 38, renk: '#E24B4A' },
+    { donem: '2000–2015', yuzde: 36, renk: '#EF9F27' },
+    { donem: '2015 sonrası', yuzde: 26, renk: '#639922' },
+  ],
+  'İzmir-Menemen': [
+    { donem: '2000 öncesi', yuzde: 38, renk: '#E24B4A' },
+    { donem: '2000–2015', yuzde: 36, renk: '#EF9F27' },
+    { donem: '2015 sonrası', yuzde: 26, renk: '#639922' },
+  ],
+  'İzmir-Ödemiş': [
+    { donem: '2000 öncesi', yuzde: 40, renk: '#E24B4A' },
+    { donem: '2000–2015', yuzde: 35, renk: '#EF9F27' },
+    { donem: '2015 sonrası', yuzde: 25, renk: '#639922' },
+  ],
+  'İzmir-Seferihisar': [
+    { donem: '2000 öncesi', yuzde: 38, renk: '#E24B4A' },
+    { donem: '2000–2015', yuzde: 36, renk: '#EF9F27' },
+    { donem: '2015 sonrası', yuzde: 26, renk: '#639922' },
+  ],
+  'İzmir-Selçuk': [
+    { donem: '2000 öncesi', yuzde: 40, renk: '#E24B4A' },
+    { donem: '2000–2015', yuzde: 35, renk: '#EF9F27' },
+    { donem: '2015 sonrası', yuzde: 25, renk: '#639922' },
+  ],
+  'İzmir-Tire': [
+    { donem: '2000 öncesi', yuzde: 42, renk: '#E24B4A' },
+    { donem: '2000–2015', yuzde: 35, renk: '#EF9F27' },
+    { donem: '2015 sonrası', yuzde: 23, renk: '#639922' },
+  ],
+  'İzmir-Urla': [
+    { donem: '2000 öncesi', yuzde: 35, renk: '#E24B4A' },
+    { donem: '2000–2015', yuzde: 38, renk: '#EF9F27' },
+    { donem: '2015 sonrası', yuzde: 27, renk: '#639922' },
+  ],
+
+  // ── ANTALYA (ek ilçeler) ──────────────────────────────────────────────────
+  'Antalya-Elmalı': [
+    { donem: '1999 öncesi', yuzde: 45, renk: '#E24B4A' },
+    { donem: '1999–2012', yuzde: 33, renk: '#EF9F27' },
+    { donem: '2012 sonrası', yuzde: 22, renk: '#639922' },
+  ],
+  'Antalya-Finike': [
+    { donem: '1999 öncesi', yuzde: 38, renk: '#E24B4A' },
+    { donem: '1999–2012', yuzde: 37, renk: '#EF9F27' },
+    { donem: '2012 sonrası', yuzde: 25, renk: '#639922' },
+  ],
+  'Antalya-Gazipaşa': [
+    { donem: '1999 öncesi', yuzde: 40, renk: '#E24B4A' },
+    { donem: '1999–2012', yuzde: 35, renk: '#EF9F27' },
+    { donem: '2012 sonrası', yuzde: 25, renk: '#639922' },
+  ],
+  'Antalya-Gündoğmuş': [
+    { donem: '1999 öncesi', yuzde: 48, renk: '#E24B4A' },
+    { donem: '1999–2012', yuzde: 32, renk: '#EF9F27' },
+    { donem: '2012 sonrası', yuzde: 20, renk: '#639922' },
+  ],
+  'Antalya-İbradı': [
+    { donem: '1999 öncesi', yuzde: 52, renk: '#E24B4A' },
+    { donem: '1999–2012', yuzde: 30, renk: '#EF9F27' },
+    { donem: '2012 sonrası', yuzde: 18, renk: '#639922' },
+  ],
+  'Antalya-Kaş': [
+    { donem: '1999 öncesi', yuzde: 40, renk: '#E24B4A' },
+    { donem: '1999–2012', yuzde: 35, renk: '#EF9F27' },
+    { donem: '2012 sonrası', yuzde: 25, renk: '#639922' },
+  ],
+  'Antalya-Kemer': [
+    { donem: '1999 öncesi', yuzde: 30, renk: '#E24B4A' },
+    { donem: '1999–2012', yuzde: 40, renk: '#EF9F27' },
+    { donem: '2012 sonrası', yuzde: 30, renk: '#639922' },
+  ],
+  'Antalya-Korkuteli': [
+    { donem: '1999 öncesi', yuzde: 45, renk: '#E24B4A' },
+    { donem: '1999–2012', yuzde: 33, renk: '#EF9F27' },
+    { donem: '2012 sonrası', yuzde: 22, renk: '#639922' },
+  ],
+  'Antalya-Kumluca': [
+    { donem: '1999 öncesi', yuzde: 38, renk: '#E24B4A' },
+    { donem: '1999–2012', yuzde: 37, renk: '#EF9F27' },
+    { donem: '2012 sonrası', yuzde: 25, renk: '#639922' },
+  ],
 };
 
 const TARIHI_DEPREMLER: Deprem[] = [
@@ -2703,6 +3034,7 @@ function hesaplaRisk(il: string, ilce: string, mahalle: string, depremler: Depre
   const skor = veri?.riskSkoru ?? 60;
   const bilimsel = bilimselKaynaklar[key] ?? bilimselKaynaklar[il];
   const zemin = ZEMIN_DB[key] ?? bilimsel?.zemin ?? null;
+  const ilZemini = ZEMIN_DB[il] ?? null;
   return {
     mahalle,
     ilce,
@@ -2726,6 +3058,7 @@ function hesaplaRisk(il: string, ilce: string, mahalle: string, depremler: Depre
       ? String(Math.max(...depremler.map((d) => d.buyukluk)).toFixed(1))
       : '—',
     zemin,
+    ilZemini,
     binalar: BINA_DB[key] ?? BINA_VARSAYILAN,
     depremler,
     tavsiyeler: tavsiyeUret(skor),

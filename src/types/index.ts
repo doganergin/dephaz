@@ -50,6 +50,7 @@ export interface BolgeRisk {
   sonDeprem: string;
   maxBuyukluk: string;
   zemin: ZeminTipi[] | null;
+  ilZemini: ZeminTipi[] | null;
   binalar: BinaStok[];
   depremler: Deprem[];
   tavsiyeler: Tavsiye[];
