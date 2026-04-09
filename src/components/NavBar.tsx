@@ -1,5 +1,6 @@
 'use client';
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import ThemeToggle from './ThemeToggle';
 import LanguageToggle from './LanguageToggle';
@@ -20,9 +21,7 @@ export default function NavBar() {
     <header className="bg-[var(--card-bg)] border-b border-[var(--border)] sticky top-0 z-50">
       <div className="max-w-2xl mx-auto px-4">
         <div className="flex items-center gap-3 pt-3 pb-2 border-b border-[var(--border)]">
-          <div className="w-8 h-8 bg-red-500 rounded-lg flex items-center justify-center text-white text-xs font-bold shadow-sm shrink-0">
-            DH
-          </div>
+          <Image src="/gecicilogo.png" alt="Deprem Hattı" width={32} height={32} className="rounded-lg shadow-sm shrink-0" />
           <div className="flex-1">
             <p className="text-sm font-semibold text-[var(--foreground)] leading-none">{t('appName')}</p>
             <p className="text-[10px] text-[var(--muted)] leading-none mt-0.5">{t('appSubtitle')}</p>

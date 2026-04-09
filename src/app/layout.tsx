@@ -9,7 +9,24 @@ const geist = Geist({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Deprem Hattı — Deprem Hazırlık Rehberi",
-  description: "Türkiye için bölgesel deprem risk analizi, 72h çanta ve deprem hazırlık rehberi",
+  description: "Deprem Hattı ile bölgenizin zemin yapısını inceleyin, deprem riskini öğrenin ve hazırlık adımlarını keşfedin.",
+  icons: {
+    icon: "/gecicilogo.png",
+    apple: "/gecicilogo.png",
+  },
+  openGraph: {
+    title: "Deprem Hattı — Deprem Hazırlık Rehberi",
+    description: "Deprem Hattı ile bölgenizin zemin yapısını inceleyin, deprem riskini öğrenin ve hazırlık adımlarını keşfedin.",
+    images: [{ url: "/gecicilogo.png", width: 1200, height: 630, alt: "Deprem Hattı" }],
+    type: "website",
+    locale: "tr_TR",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Deprem Hattı — Deprem Hazırlık Rehberi",
+    description: "Deprem Hattı ile bölgenizin zemin yapısını inceleyin, deprem riskini öğrenin ve hazırlık adımlarını keşfedin.",
+    images: ["/gecicilogo.png"],
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
