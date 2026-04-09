@@ -523,6 +523,11 @@ export default function BolgeAnalizi() {
             className="flex items-center justify-center gap-2 bg-gray-900 dark:bg-gray-700 text-white rounded-xl py-3 text-sm font-semibold hover:bg-gray-800 transition-colors">
             {t('btn72hCanta')}
           </a>
+
+          {/* Sorumluluk reddi */}
+          <p className="text-[10px] text-[var(--muted)] text-center leading-relaxed px-2">
+            Deprem Hattı herhangi bir deprem kehaneti veya kesin sonuç öngöremez. Bu sayfada sunulan veriler; bilimsel kaynaklardan derlenerek istatistiksel yöntemlerle yorumlanmış tahminlerdir. Bilgilendirme amacı taşır, resmi uyarı niteliği yoktur.
+          </p>
         </div>
       )}
 
