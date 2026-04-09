@@ -222,9 +222,6 @@ export default function BolgeAnalizi() {
         <p className="text-sm text-[var(--muted)] mt-0.5">{t('pageSubtitle')}</p>
       </div>
 
-      {/* Deprem Büyüklük Skalası — her zaman göster */}
-      <DepremSkalasi t={t} />
-
       {/* Seçiciler */}
       <div className="bg-[var(--card-bg)] rounded-2xl p-4 shadow-sm border border-[var(--border)]">
         <Select
@@ -256,6 +253,9 @@ export default function BolgeAnalizi() {
           />
         </div>
       </div>
+
+      {/* Deprem Büyüklük Skalası */}
+      <DepremSkalasi t={t} />
 
       {yukleniyor && (
         <div className="bg-[var(--card-bg)] rounded-2xl p-8 shadow-sm border border-[var(--border)] flex items-center justify-center gap-3">
