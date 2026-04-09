@@ -2702,7 +2702,7 @@ function hesaplaRisk(il: string, ilce: string, mahalle: string, depremler: Depre
   const veri = RISK_DB[key];
   const skor = veri?.riskSkoru ?? 60;
   const bilimsel = bilimselKaynaklar[key] ?? bilimselKaynaklar[il];
-  const zemin = ZEMIN_DB[key] ?? bilimsel?.zemin ?? ZEMIN_VARSAYILAN;
+  const zemin = ZEMIN_DB[key] ?? bilimsel?.zemin ?? null;
   return {
     mahalle,
     ilce,
@@ -2749,11 +2749,6 @@ function tavsiyeUret(skor: number): BolgeRisk['tavsiyeler'] {
   return tv;
 }
 
-const ZEMIN_VARSAYILAN: BolgeRisk['zemin'] = [
-  { ad: 'Alüvyon', yuzde: 45, risk: 'yuksek', aciklama: 'Sıvılaşma riski var' },
-  { ad: 'Killi zemin', yuzde: 35, risk: 'orta', aciklama: 'Orta risk' },
-  { ad: 'Kaya', yuzde: 20, risk: 'dusuk', aciklama: 'Görece güvenli' },
-];
 
 const BINA_VARSAYILAN: BolgeRisk['binalar'] = [
   { donem: '1999 öncesi', yuzde: 35, renk: '#E24B4A' },

@@ -310,28 +310,40 @@ export default function BolgeAnalizi() {
           {/* Zemin */}
           <div className="bg-[var(--card-bg)] rounded-2xl shadow-sm border border-[var(--border)] p-4">
             <p className="text-xs font-bold text-[var(--muted)] uppercase tracking-wide mb-3">{t('sectionZemin')}</p>
-            <div className="space-y-2">
-              {risk.zemin.map((z) => {
-                const zr = riskRenk(z.risk);
-                return (
-                  <div key={z.ad} className="flex items-center gap-3">
-                    <div className="flex items-center gap-1.5 w-28 shrink-0">
-                      <div className="w-2 h-2 rounded-full shrink-0" style={{ backgroundColor: zr.bar }} />
-                      <span className="text-xs font-medium text-[var(--foreground)]">{z.ad}</span>
-                    </div>
-                    <div className="flex-1 h-2 bg-gray-100 dark:bg-gray-700 rounded-full overflow-hidden">
-                      <div className="h-full rounded-full" style={{ width: `${z.yuzde}%`, backgroundColor: zr.bar }} />
-                    </div>
-                    <span className="text-xs font-bold text-[var(--foreground)] w-8 text-right">%{z.yuzde}</span>
-                  </div>
-                );
-              })}
-            </div>
-            {risk.zemin.map((z) => z.risk === 'yuksek' && (
-              <p key={z.ad} className="text-[11px] text-[var(--muted)] mt-2 leading-relaxed">
-                <span className="font-semibold">{z.ad}:</span> {z.aciklama}
-              </p>
-            ))}
+            {risk.zemin === null ? (
+              <div className="flex items-start gap-2.5 bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 rounded-xl p-3">
+                <span className="text-amber-500 text-base shrink-0">🔍</span>
+                <div>
+                  <p className="text-xs font-semibold text-amber-700 dark:text-amber-400">{risk.ilce} ilçesine ait zemin verileri incelenmektedir</p>
+                  <p className="text-[11px] text-amber-600 dark:text-amber-500 mt-0.5 leading-relaxed">Bu ilçe için zemin sınıflandırması henüz tamamlanmamıştır. Veriler eklendikçe bu bölüm güncellenecektir.</p>
+                </div>
+              </div>
+            ) : (
+              <>
+                <div className="space-y-2">
+                  {risk.zemin.map((z) => {
+                    const zr = riskRenk(z.risk);
+                    return (
+                      <div key={z.ad} className="flex items-center gap-3">
+                        <div className="flex items-center gap-1.5 w-28 shrink-0">
+                          <div className="w-2 h-2 rounded-full shrink-0" style={{ backgroundColor: zr.bar }} />
+                          <span className="text-xs font-medium text-[var(--foreground)]">{z.ad}</span>
+                        </div>
+                        <div className="flex-1 h-2 bg-gray-100 dark:bg-gray-700 rounded-full overflow-hidden">
+                          <div className="h-full rounded-full" style={{ width: `${z.yuzde}%`, backgroundColor: zr.bar }} />
+                        </div>
+                        <span className="text-xs font-bold text-[var(--foreground)] w-8 text-right">%{z.yuzde}</span>
+                      </div>
+                    );
+                  })}
+                </div>
+                {risk.zemin.map((z) => z.risk === 'yuksek' && (
+                  <p key={z.ad} className="text-[11px] text-[var(--muted)] mt-2 leading-relaxed">
+                    <span className="font-semibold">{z.ad}:</span> {z.aciklama}
+                  </p>
+                ))}
+              </>
+            )}
           </div>
 
           {/* Bina stoğu */}
