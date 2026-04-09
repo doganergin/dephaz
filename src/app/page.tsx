@@ -1,5 +1,5 @@
 'use client';
-import { useState, useCallback, useEffect } from 'react';
+import { useState, useCallback, useEffect, useRef } from 'react';
 import { getProvinces, getDistricts, getNeighbourhoods } from '@/lib/locationHelper';
 import { useAppStore } from '@/store';
 import { bolgeRiskGetir } from '@/api/riskApi';
@@ -115,6 +115,13 @@ export default function BolgeAnalizi() {
   const [yukleniyor, setYukleniyor] = useState(false);
   const [risk, setRisk] = useState<BolgeRisk | null>(null);
   const [hata, setHata] = useState('');
+  const riskRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (risk && riskRef.current) {
+      riskRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }, [risk]);
 
   // Son depremler
   interface GuncelDeprem { buyukluk: number; konum: string; tarih: string; derinlik: number; kaynak?: string; }
@@ -262,7 +269,7 @@ export default function BolgeAnalizi() {
       )}
 
       {risk && renk && (
-        <div className="space-y-3">
+        <div ref={riskRef} className="space-y-3">
 
           {/* Risk skoru kartı */}
           <div className="bg-[var(--card-bg)] rounded-2xl shadow-sm border border-[var(--border)] overflow-hidden">
