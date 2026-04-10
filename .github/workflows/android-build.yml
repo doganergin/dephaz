@@ -1,0 +1,57 @@
+name: Android Build
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Kodu çek
+        uses: actions/checkout@v4
+
+      - name: Node.js kur
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Java kur
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      - name: Bağımlılıkları yükle
+        run: npm ci
+
+      - name: Capacitor sync
+        run: npx cap sync android
+
+      - name: Gradle izni ver
+        run: chmod +x android/gradlew
+
+      - name: Release AAB derle
+        run: |
+          cd android
+          ./gradlew bundleRelease
+
+      - name: AAB imzala
+        uses: r0adkll/sign-android-release@v1
+        id: sign_app
+        with:
+          releaseDirectory: android/app/build/outputs/bundle/release
+          signingKeyBase64: ${{ secrets.KEYSTORE_BASE64 }}
+          alias: ${{ secrets.KEY_ALIAS }}
+          keyStorePassword: ${{ secrets.KEYSTORE_PASSWORD }}
+          keyPassword: ${{ secrets.KEY_PASSWORD }}
+
+      - name: AAB'yi artifact olarak kaydet
+        uses: actions/upload-artifact@v4
+        with:
+          name: deprem-hatti-release.aab
+          path: ${{ steps.sign_app.outputs.signedReleaseFile }}
+          retention-days: 30

@@ -13,20 +13,28 @@ export type LangKey =
   | 'notLabel' | 'notMetin'
   | 'riskCokYuksek' | 'riskYuksek' | 'riskOrta' | 'riskDusukOrta' | 'riskDusuk'
   | 'skalaSectionTitle' | 'skalaSource'
-  | 'depremAnindaTitle' | 'depremAnindaSubtitle'
+  | 'depremAnindaTitle' | 'depremAnindaSubtitle' | 'depremSonrasindaTitle'
   | 'haberlerTitle' | 'haberlerSubtitle'
   | 'kaynakcaTitle'
   | 'haritaTitle' | 'haritaTurkiye' | 'haritaDunya' | 'haritaYukleniyor'
   | 'haritaPopupBuyukluk' | 'haritaPopupTarih' | 'haritaPopupDerinlik'
   | 'atatürkSöz' | 'atatürkAd'
   | 'hissedilenDepremler'
-  | 'ilSec' | 'ilceSec' | 'mahalleSec';
+  | 'ilSec' | 'ilceSec' | 'mahalleSec'
+  | 'sonDepremler' | 'yukleniyor' | 'veriAlinamadi'
+  | 'tarihselDepremler'
+  | 'zeminInceleniyor' | 'zeminInceleniyor2'
+  | 'ilZeminiBtn' | 'ilZeminiAciklama'
+  | 'binaDonemi1' | 'binaDonemi2' | 'binaDonemi3'
+  | 'tavsiye1' | 'tavsiye2' | 'tavsiye3' | 'tavsiye4' | 'tavsiye5' | 'tavsiye6'
+  | 'sorumlulukReddi'
+  | 'yerli';
 
 type Dict = Record<LangKey, string>;
 
 const TR: Dict = {
   appName: 'Deprem Hattı',
-  appSubtitle: 'Bölgeni Tanı Önlemini Al-Deprem Hazırlık Rehberi',
+  appSubtitle: 'Bölgeni Tanı, Önlemini Al',
   navBolgeAnalizi: 'Bölge Analizi',
   navAilePlani: 'Aile Planı',
   navDepremCantasi: 'Deprem Çantası',
@@ -41,14 +49,14 @@ const TR: Dict = {
   badgeSehir: 'şehir',
   badgeIlce: 'ilçe',
   badgeMahalle: 'mahalle',
-  loading: 'Kandilli verisi alınıyor...',
+  loading: 'Deprem verisi alınıyor...',
   error: 'Veri alınamadı, lütfen tekrar deneyin.',
   metricFay: 'Fay mesafesi',
   metricMw: 'Beklenen Mw',
-  metricOlasilik: '30 yıl içerinde olma olasılığı',
+  metricOlasilik: '30 yıl olasılık',
   metricDepremSayisi: 'Son hissedilen (M4+)',
-  sectionZemin: 'Zemin yapısı',
-  sectionBina: 'Bina stoğu',
+  sectionZemin: 'Zemin Yapısı',
+  sectionBina: 'Bina Stoğu',
   sectionDepremler: 'Son Depremler',
   sectionOneriler: 'Öneriler',
   sectionUzman: 'Uzman Görüşleri',
@@ -70,6 +78,7 @@ const TR: Dict = {
   skalaSource: 'Kaynak: USGS Magnitude / Intensity Comparison',
   depremAnindaTitle: 'Deprem Anında Ne Yapılır?',
   depremAnindaSubtitle: 'AFAD & JICA kılavuzlarından derlenen protokol',
+  depremSonrasindaTitle: 'Deprem Sonrasında',
   haberlerTitle: 'Uzman Değerlendirmeleri',
   haberlerSubtitle: 'Bilim insanlarının kaynaklı açıklamaları',
   kaynakcaTitle: 'Kaynakça',
@@ -86,11 +95,30 @@ const TR: Dict = {
   ilSec: '— İl seçin —',
   ilceSec: '— İlçe seçin —',
   mahalleSec: '— Mahalle seçin —',
+  sonDepremler: 'Son Depremler',
+  yukleniyor: 'Yükleniyor...',
+  veriAlinamadi: 'Veri alınamadı',
+  tarihselDepremler: 'Tarihsel Depremler · 100km çapı',
+  zeminInceleniyor: ' ilçesine ait zemin verileri incelenmektedir',
+  zeminInceleniyor2: 'Bu ilçe için zemin sınıflandırması henüz tamamlanmamıştır. Veriler eklendikçe bu bölüm güncellenecektir.',
+  ilZeminiBtn: ' ili genel zemin profiline bak',
+  ilZeminiAciklama: 'Bu veri ilçe bazlı değil, ilin genel zemin karakteristiğini yansıtmaktadır.',
+  binaDonemi1: '1999 öncesi',
+  binaDonemi2: '1999–2012',
+  binaDonemi3: '2012 sonrası',
+  tavsiye1: 'Binanız 1999 veya 2023 öncesi yapılmışsa DERHAL yapısal inceleme yaptırın.',
+  tavsiye2: 'DASK sigortanızın güncel olduğundan emin olun.',
+  tavsiye3: 'Kaçış yollarınızı ve toplanma alanınızı şimdi belirleyin.',
+  tavsiye4: 'Binanızın deprem yönetmeliğine uygunluğunu kontrol ettirin.',
+  tavsiye5: '72 saatlik deprem çantanızı hazırlayın ve erişilebilir yerde tutun.',
+  tavsiye6: 'Aile buluşma noktanızı belirleyin ve herkese bildirin.',
+  sorumlulukReddi: 'Deprem Hattı herhangi bir deprem kehaneti veya kesin sonuç öngöremez. Bu sayfada sunulan veriler; bilimsel kaynaklardan derlenerek istatistiksel yöntemlerle yorumlanmış tahminlerdir. Bilgilendirme amacı taşır, resmi uyarı niteliği yoktur.',
+  yerli: '🇹🇷 Yerli',
 };
 
 const EN: Dict = {
   appName: 'Deprem Hattı',
-  appSubtitle: 'Earthquake Preparedness Guide',
+  appSubtitle: 'Know Your Region, Stay Prepared',
   navBolgeAnalizi: 'Risk Analysis',
   navAilePlani: 'Family Plan',
   navDepremCantasi: 'Emergency Kit',
@@ -111,8 +139,8 @@ const EN: Dict = {
   metricMw: 'Expected magnitude',
   metricOlasilik: '30-yr probability',
   metricDepremSayisi: 'Recently felt (M4+)',
-  sectionZemin: 'Soil conditions',
-  sectionBina: 'Building stock',
+  sectionZemin: 'Soil Conditions',
+  sectionBina: 'Building Stock',
   sectionDepremler: 'Recent Earthquakes',
   sectionOneriler: 'Recommendations',
   sectionUzman: 'Expert Opinions',
@@ -134,6 +162,7 @@ const EN: Dict = {
   skalaSource: 'Source: USGS Magnitude / Intensity Comparison',
   depremAnindaTitle: 'What to Do During an Earthquake',
   depremAnindaSubtitle: 'Protocol based on AFAD & JICA preparedness guidelines',
+  depremSonrasindaTitle: 'After the Earthquake',
   haberlerTitle: 'Expert Assessments',
   haberlerSubtitle: 'Peer-reviewed analyses and sourced expert statements',
   kaynakcaTitle: 'References',
@@ -150,6 +179,25 @@ const EN: Dict = {
   ilSec: '— Select province —',
   ilceSec: '— Select district —',
   mahalleSec: '— Select neighbourhood —',
+  sonDepremler: 'Latest Earthquakes',
+  yukleniyor: 'Loading…',
+  veriAlinamadi: 'No data available',
+  tarihselDepremler: 'Historical Earthquakes · 100km radius',
+  zeminInceleniyor: ' district soil data is under review',
+  zeminInceleniyor2: 'Soil classification for this district has not yet been completed. This section will be updated as data becomes available.',
+  ilZeminiBtn: ' province general soil profile',
+  ilZeminiAciklama: 'This data reflects the general soil characteristics of the province, not the specific district.',
+  binaDonemi1: 'Pre-1999',
+  binaDonemi2: '1999–2012',
+  binaDonemi3: 'Post-2012',
+  tavsiye1: 'If your building was constructed before 1999 or 2023, arrange a structural inspection IMMEDIATELY.',
+  tavsiye2: 'Make sure your DASK earthquake insurance is up to date.',
+  tavsiye3: 'Identify your escape routes and assembly point now.',
+  tavsiye4: 'Have your building checked for compliance with earthquake regulations.',
+  tavsiye5: 'Prepare a 72-hour emergency kit and keep it in an accessible location.',
+  tavsiye6: 'Designate a family meeting point and make sure everyone knows it.',
+  sorumlulukReddi: 'Deprem Hattı cannot predict earthquakes or guarantee any specific outcome. The data presented here is derived from scientific sources and represents statistical estimates. It is for informational purposes only and does not constitute an official warning.',
+  yerli: '🇹🇷 Local',
 };
 
 export function t(key: LangKey, lang: 'TR' | 'EN'): string {

@@ -8,7 +8,7 @@ import { depremAnindaOnlemler, depremSonrasiOnlemler } from '@/data/depremOnleml
 import { useLanguage } from '@/contexts/LanguageContext';
 import type { BolgeRisk, ZeminTipi } from '@/types';
 
-function IlZeminiDetay({ il, zemin }: { il: string; zemin: ZeminTipi[] }) {
+function IlZeminiDetay({ il, zemin, t }: { il: string; zemin: ZeminTipi[]; t: (k: Parameters<typeof import('@/lib/i18n').t>[0]) => string }) {
   const [acik, setAcik] = useState(false);
   return (
     <div className="border border-[var(--border)] rounded-xl overflow-hidden">
@@ -16,12 +16,12 @@ function IlZeminiDetay({ il, zemin }: { il: string; zemin: ZeminTipi[] }) {
         onClick={() => setAcik(!acik)}
         className="w-full flex items-center justify-between px-3 py-2.5 text-left bg-gray-50 dark:bg-gray-800/50 hover:bg-gray-100 dark:hover:bg-gray-700/50 transition-colors"
       >
-        <span className="text-[11px] font-semibold text-[var(--muted)]">🌍 {il} ili genel zemin profiline bak</span>
+        <span className="text-[11px] font-semibold text-[var(--muted)]">🌍 {il}{t('ilZeminiBtn')}</span>
         <span className="text-[var(--muted)] text-xs">{acik ? '▲' : '▼'}</span>
       </button>
       {acik && (
         <div className="p-3 space-y-2">
-          <p className="text-[10px] text-[var(--muted)] mb-2">Bu veri ilçe bazlı değil, {il} ilinin genel zemin karakteristiğini yansıtmaktadır.</p>
+          <p className="text-[10px] text-[var(--muted)] mb-2">{t('ilZeminiAciklama')}</p>
           {zemin.map((z) => {
             const zr = riskRenk(z.risk);
             return (
@@ -357,11 +357,11 @@ export default function BolgeAnalizi() {
                 <div className="flex items-start gap-2.5 bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 rounded-xl p-3">
                   <span className="text-amber-500 text-base shrink-0">🔍</span>
                   <div>
-                    <p className="text-xs font-semibold text-amber-700 dark:text-amber-400">{risk.ilce} ilçesine ait zemin verileri incelenmektedir</p>
-                    <p className="text-[11px] text-amber-600 dark:text-amber-500 mt-0.5 leading-relaxed">Bu ilçe için zemin sınıflandırması henüz tamamlanmamıştır. Veriler eklendikçe bu bölüm güncellenecektir.</p>
+                    <p className="text-xs font-semibold text-amber-700 dark:text-amber-400">{risk.ilce}{t('zeminInceleniyor')}</p>
+                    <p className="text-[11px] text-amber-600 dark:text-amber-500 mt-0.5 leading-relaxed">{t('zeminInceleniyor2')}</p>
                   </div>
                 </div>
-                {risk.ilZemini && <IlZeminiDetay il={risk.il} zemin={risk.ilZemini} />}
+                {risk.ilZemini && <IlZeminiDetay il={risk.il} zemin={risk.ilZemini} t={t} />}
               </div>
             ) : (
               <>
@@ -406,7 +406,9 @@ export default function BolgeAnalizi() {
             <div className="space-y-2.5">
               {risk.binalar.map((b) => (
                 <div key={b.donem} className="flex items-center gap-3">
-                  <span className="text-xs text-[var(--muted)] w-36 shrink-0">{b.donem}</span>
+                  <span className="text-xs text-[var(--muted)] w-36 shrink-0">
+                    {b.donem === '1999 öncesi' ? t('binaDonemi1') : b.donem === '1999–2012' ? t('binaDonemi2') : b.donem === '2012 sonrası' ? t('binaDonemi3') : b.donem}
+                  </span>
                   <div className="flex-1 h-2.5 bg-gray-100 dark:bg-gray-700 rounded-full overflow-hidden">
                     <div className="h-full rounded-full" style={{ width: `${b.yuzde}%`, backgroundColor: b.renk }} />
                   </div>
@@ -420,7 +422,7 @@ export default function BolgeAnalizi() {
           {risk.depremler.length > 0 && (
             <div className="bg-[var(--card-bg)] rounded-2xl shadow-sm border border-[var(--border)] p-4">
               <div className="flex items-center justify-between mb-3">
-                <p className="text-xs font-bold text-[var(--muted)] uppercase tracking-wide">Tarihsel Depremler · 100km çapı</p>
+                <p className="text-xs font-bold text-[var(--muted)] uppercase tracking-wide">{t('tarihselDepremler')}</p>
                 <span className="text-[10px] text-[var(--muted)] bg-gray-50 dark:bg-gray-700 px-2 py-1 rounded-full">USGS</span>
               </div>
               <div className="space-y-2">
@@ -455,7 +457,7 @@ export default function BolgeAnalizi() {
                 return (
                   <div key={i} className="flex items-start gap-2.5 rounded-xl p-3" style={{ backgroundColor: tr.bg }}>
                     <div className="w-1.5 h-1.5 rounded-full mt-1.5 shrink-0" style={{ backgroundColor: tr.dot }} />
-                    <p className="text-xs leading-relaxed" style={{ color: tr.text }}>{tv.metin}</p>
+                    <p className="text-xs leading-relaxed" style={{ color: tr.text }}>{tv.key ? t(tv.key as Parameters<typeof import('@/lib/i18n').t>[0]) : tv.metin}</p>
                   </div>
                 );
               })}
@@ -478,7 +480,7 @@ export default function BolgeAnalizi() {
                         <span className={`text-[10px] px-2 py-0.5 rounded-full font-semibold ${
                           u.ulke === 'TR' ? 'bg-red-50 dark:bg-red-900/30 text-red-600' : 'bg-blue-50 dark:bg-blue-900/30 text-blue-600'
                         }`}>
-                          {u.ulke === 'TR' ? '🇹🇷 Yerli' : `🌍 ${u.ulke}`}
+                          {u.ulke === 'TR' ? t('yerli') : `🌍 ${u.ulke}`}
                         </span>
                         <span className="text-[10px] text-[var(--muted)]">{u.yil}</span>
                       </div>
@@ -564,14 +566,14 @@ export default function BolgeAnalizi() {
 
           {/* Sorumluluk reddi */}
           <p className="text-[10px] text-[var(--muted)] text-center leading-relaxed px-2">
-            Deprem Hattı herhangi bir deprem kehaneti veya kesin sonuç öngöremez. Bu sayfada sunulan veriler; bilimsel kaynaklardan derlenerek istatistiksel yöntemlerle yorumlanmış tahminlerdir. Bilgilendirme amacı taşır, resmi uyarı niteliği yoktur.
+            {t('sorumlulukReddi')}
           </p>
         </div>
       )}
 
       {/* Son Depremler — her zaman göster */}
       <div className="bg-[var(--card-bg)] rounded-2xl shadow-sm border border-[var(--border)] p-4">
-        <p className="text-xs font-bold text-[var(--muted)] uppercase tracking-wide mb-3">Son Depremler</p>
+        <p className="text-xs font-bold text-[var(--muted)] uppercase tracking-wide mb-3">{t('sonDepremler')}</p>
         {/* Kaynak sekmeleri */}
         <div className="flex gap-0 bg-gray-100 dark:bg-gray-700 rounded-xl overflow-hidden mb-3">
           {([
@@ -594,12 +596,12 @@ export default function BolgeAnalizi() {
         {guncelYukleniyor ? (
           <div className="flex items-center justify-center py-6 gap-2 text-sm text-[var(--muted)]">
             <div className="w-4 h-4 border-2 border-red-400 border-t-transparent rounded-full animate-spin" />
-            Yükleniyor...
+            {t('yukleniyor')}
           </div>
         ) : (
           <div className="space-y-2 max-h-72 overflow-y-auto">
             {(guncelTab === 'tr' ? trDepremler : dunyaDepremler).length === 0 ? (
-              <p className="text-xs text-[var(--muted)] text-center py-4">Veri alınamadı</p>
+              <p className="text-xs text-[var(--muted)] text-center py-4">{t('veriAlinamadi')}</p>
             ) : (
               (guncelTab === 'tr' ? trDepremler : dunyaDepremler).map((d, i) => (
                 <div key={i} className="flex items-center gap-3 py-1.5 border-b border-[var(--border)] last:border-0">
@@ -623,7 +625,7 @@ export default function BolgeAnalizi() {
 
       {/* Deprem Anında Ne Yapmalıyız — her zaman göster */}
       <div className="bg-[var(--card-bg)] rounded-2xl shadow-sm border border-[var(--border)] p-4">
-        <p className="text-xs font-bold text-[var(--muted)] uppercase tracking-wide mb-3">Deprem Anında Ne Yapmalıyız?</p>
+        <p className="text-xs font-bold text-[var(--muted)] uppercase tracking-wide mb-3">{t('depremAnindaTitle')}</p>
         <div className="space-y-2 mb-4">
           {depremAnindaOnlemler.map((o) => (
             <div key={o.adim} className="flex items-start gap-3 border border-[var(--border)] rounded-xl p-3 bg-gray-50 dark:bg-gray-800/50">
@@ -635,7 +637,7 @@ export default function BolgeAnalizi() {
             </div>
           ))}
         </div>
-        <p className="text-xs font-bold text-[var(--muted)] uppercase tracking-wide mb-2">Deprem Sonrasında</p>
+        <p className="text-xs font-bold text-[var(--muted)] uppercase tracking-wide mb-2">{t('depremSonrasindaTitle')}</p>
         <div className="space-y-2">
           {depremSonrasiOnlemler.map((o) => (
             <div key={o.adim} className="flex items-start gap-3 border border-[var(--border)] rounded-xl p-3 bg-gray-50 dark:bg-gray-800/50">

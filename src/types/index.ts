@@ -60,6 +60,7 @@ export interface BolgeRisk {
 export interface Tavsiye {
   tur: 'acil' | 'onemli' | 'bilgi';
   metin: string;
+  key?: string;
 }
 
 export interface AileUyesi {

@@ -3069,15 +3069,15 @@ function hesaplaRisk(il: string, ilce: string, mahalle: string, depremler: Depre
 function tavsiyeUret(skor: number): BolgeRisk['tavsiyeler'] {
   const tv = [];
   if (skor >= 85) {
-    tv.push({ tur: 'acil' as const, metin: 'Binanız 1999 veya 2023 öncesi yapılmışsa DERHAL yapısal inceleme yaptırın.' });
-    tv.push({ tur: 'acil' as const, metin: 'DASK sigortanızın güncel olduğundan emin olun.' });
-    tv.push({ tur: 'acil' as const, metin: 'Kaçış yollarınızı ve toplanma alanınızı şimdi belirleyin.' });
+    tv.push({ tur: 'acil' as const, metin: 'Binanız 1999 veya 2023 öncesi yapılmışsa DERHAL yapısal inceleme yaptırın.', key: 'tavsiye1' });
+    tv.push({ tur: 'acil' as const, metin: 'DASK sigortanızın güncel olduğundan emin olun.', key: 'tavsiye2' });
+    tv.push({ tur: 'acil' as const, metin: 'Kaçış yollarınızı ve toplanma alanınızı şimdi belirleyin.', key: 'tavsiye3' });
   } else if (skor >= 70) {
-    tv.push({ tur: 'acil' as const, metin: 'Binanızın deprem yönetmeliğine uygunluğunu kontrol ettirin.' });
-    tv.push({ tur: 'acil' as const, metin: 'DASK sigortanızın güncel olduğundan emin olun.' });
+    tv.push({ tur: 'acil' as const, metin: 'Binanızın deprem yönetmeliğine uygunluğunu kontrol ettirin.', key: 'tavsiye4' });
+    tv.push({ tur: 'acil' as const, metin: 'DASK sigortanızın güncel olduğundan emin olun.', key: 'tavsiye2' });
   }
-  tv.push({ tur: 'onemli' as const, metin: '72 saatlik deprem çantanızı hazırlayın ve erişilebilir yerde tutun.' });
-  tv.push({ tur: 'onemli' as const, metin: 'Aile buluşma noktanızı belirleyin ve herkese bildirin.' });
+  tv.push({ tur: 'onemli' as const, metin: '72 saatlik deprem çantanızı hazırlayın ve erişilebilir yerde tutun.', key: 'tavsiye5' });
+  tv.push({ tur: 'onemli' as const, metin: 'Aile buluşma noktanızı belirleyin ve herkese bildirin.', key: 'tavsiye6' });
   tv.push({ tur: 'bilgi' as const, metin: 'Bölgenizdeki AFAD toplanma alanlarını öğrenin.' });
   return tv;
 }
