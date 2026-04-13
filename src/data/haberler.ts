@@ -12,6 +12,16 @@ export interface Haber {
 export const haberler: Haber[] = [
   // --- NİSAN 2026 ---
   {
+    uzman: 'Prof. Dr. Naci Görür',
+    unvan: 'Jeoloji Profesörü',
+    kurum: 'İstanbul Teknik Üniversitesi / MTA',
+    tarih: 'Nisan 2026',
+    baslik: 'Helen-Kıbrıs Fay Zonu Uyarısı',
+    ozet: 'Antalya açıklarında, Helen-Kıbrıs Fay Zonunda meydana gelen 5,0 km derinliğindeki 4,7 büyüklüğündeki sığ depremin ardından, bu fayın çok daha büyük depremler üretebilecek kapasitede olduğu uyarısında bulundu.',
+    kaynak: 'https://x.com/nacigorur',
+    kaynak_tur: 'universite'
+  },
+  {
     uzman: 'Prof. Dr. Haluk Selim',
     unvan: 'Jeoloji Mühendisliği Bölümü Öğretim Üyesi',
     kurum: 'İstanbul Gelişim Üniversitesi',
