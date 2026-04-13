@@ -18,7 +18,7 @@ export const haberler: Haber[] = [
     tarih: 'Nisan 2026',
     baslik: 'Helen-Kıbrıs Fay Zonu Uyarısı',
     ozet: 'Antalya açıklarında, Helen-Kıbrıs Fay Zonunda meydana gelen 5,0 km derinliğindeki 4,7 büyüklüğündeki sığ depremin ardından, bu fayın çok daha büyük depremler üretebilecek kapasitede olduğu uyarısında bulundu.',
-    kaynak: 'https://x.com/nacigorur',
+    kaynak: 'https://x.com/nacigorur/status/2043601916609847409?s=20',
     kaynak_tur: 'universite'
   },
   {
