@@ -53,24 +53,38 @@ export default function UzmanDegerlendirmeleri() {
       </div>
 
       {/* Sayfalama */}
-      <div className="flex items-center justify-between gap-2">
-        <button
-          onClick={() => { setSayfa((s) => s - 1); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
-          disabled={sayfa === 1}
-          className="flex-1 py-2 text-xs font-semibold rounded-xl border border-[var(--border)] bg-[var(--card-bg)] text-[var(--foreground)] disabled:opacity-30 disabled:cursor-not-allowed hover:border-red-400 transition-colors"
-        >
-          ← Önceki
-        </button>
-        <span className="text-[11px] text-[var(--muted)] shrink-0">
-          {sayfa} / {toplamSayfa}
-        </span>
-        <button
-          onClick={() => { setSayfa((s) => s + 1); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
-          disabled={sayfa === toplamSayfa}
-          className="flex-1 py-2 text-xs font-semibold rounded-xl border border-[var(--border)] bg-[var(--card-bg)] text-[var(--foreground)] disabled:opacity-30 disabled:cursor-not-allowed hover:border-red-400 transition-colors"
-        >
-          Sonraki →
-        </button>
+      <div className="flex flex-col gap-2">
+        <div className="flex items-center justify-between gap-2">
+          <button
+            onClick={() => { setSayfa((s) => s - 1); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+            disabled={sayfa === 1}
+            className="flex-1 py-2 text-xs font-semibold rounded-xl border border-[var(--border)] bg-[var(--card-bg)] text-[var(--foreground)] disabled:opacity-30 disabled:cursor-not-allowed hover:border-red-400 transition-colors"
+          >
+            ← Önceki
+          </button>
+          <div className="flex items-center gap-1">
+            {Array.from({ length: toplamSayfa }, (_, i) => i + 1).map((n) => (
+              <button
+                key={n}
+                onClick={() => { setSayfa(n); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+                className={`w-7 h-7 text-xs font-semibold rounded-lg border transition-colors ${
+                  sayfa === n
+                    ? 'bg-red-500 text-white border-red-500'
+                    : 'bg-[var(--card-bg)] text-[var(--muted)] border-[var(--border)] hover:border-red-400 hover:text-[var(--foreground)]'
+                }`}
+              >
+                {n}
+              </button>
+            ))}
+          </div>
+          <button
+            onClick={() => { setSayfa((s) => s + 1); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+            disabled={sayfa === toplamSayfa}
+            className="flex-1 py-2 text-xs font-semibold rounded-xl border border-[var(--border)] bg-[var(--card-bg)] text-[var(--foreground)] disabled:opacity-30 disabled:cursor-not-allowed hover:border-red-400 transition-colors"
+          >
+            Sonraki →
+          </button>
+        </div>
       </div>
 
       <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-100 dark:border-blue-800 rounded-xl p-3">
