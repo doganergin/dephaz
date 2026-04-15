@@ -13,6 +13,7 @@ export default function NavBar() {
   const tabs = [
     { href: '/', label: t('navBolgeAnalizi'), icon: '🗺️', yakindan: false },
     { href: '/harita', label: t('navHarita'), icon: '🌍', yakindan: false },
+    { href: '/tarihsel', label: t('navTarihsel'), icon: '📜', yakindan: false },
     { href: '/uzman', label: t('navUzman'), icon: '🔬', yakindan: false },
     { href: '/canta', label: t('navDepremCantasi'), icon: '🎒', yakindan: false },
   ];
