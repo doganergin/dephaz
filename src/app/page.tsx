@@ -101,10 +101,10 @@ function RiskBadge({ sinif, etiket }: { sinif: string; etiket: string }) {
 const SKALA = [
   { range: 'M < 4.0',    renk: '#6B7280', etiket: 'Hissedilmez', etap: 1 },
   { range: 'M 4.0–4.9',  renk: '#10B981', etiket: 'Hafif sarsıntı, hasar yok', etap: 2 },
-  { range: 'M 5.0–5.4',  renk: '#F59E0B', etiket: 'Zayıf yapılarda hafif hasar', etap: 3 },
-  { range: 'M 5.5–6.0',  renk: '#F97316', etiket: 'Orta hasar, eski binalar risk altında', etap: 4 },
+  { range: 'M 5.0–5.4',  renk: '#F59E0B', etiket: 'Zayıf yapılarda orta hasar', etap: 3 },
+  { range: 'M 5.5–6.0',  renk: '#F97316', etiket: 'Orta hasar, dayanıksız yapılar risk altında', etap: 4 },
   { range: 'M 6.0–6.5',  renk: '#EF4444', etiket: 'Ciddi hasar', etap: 5 },
-  { range: 'M 6.5–7.0',  renk: '#DC2626', etiket: 'Ağır hasar', etap: 6 },
+  { range: 'M 6.5–7.0',  renk: '#DC2626', etiket: 'Büyük yapısal hasar, can kaybı riski', etap: 6 },
   { range: 'M 7.0+',     renk: '#7F1D1D', etiket: 'Yıkıcı', etap: 7 },
 ];
 
@@ -139,7 +139,20 @@ function DepremSkalasi({ t }: { t: (k: Parameters<typeof import('@/lib/i18n').t>
           </div>
         ))}
       </div>
-      <p className="text-[10px] text-[var(--muted)] mt-2">{t('skalaSource')}</p>
+      <p className="text-[10px] text-[var(--muted)] mt-2">
+        Bar uzunluğu görece hasar şiddetini temsil eder
+      </p>
+      <p className="text-[10px] text-[var(--muted)] mt-1">
+        Kaynak:{' '}
+        <a
+          href="https://www.usgs.gov/programs/earthquake-hazards/magnitude-intensity-comparison"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-blue-500 hover:underline"
+        >
+          USGS Magnitude / Intensity Comparison
+        </a>
+      </p>
     </div>
   );
 }
