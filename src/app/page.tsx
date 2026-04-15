@@ -359,7 +359,7 @@ export default function BolgeAnalizi() {
               <div className="h-2 rounded-full bg-black/10 overflow-hidden">
                 <div className="h-full rounded-full transition-all duration-700" style={{ width: `${risk.riskSkoru}%`, backgroundColor: renk.bar }} />
               </div>
-              {risk.aciklama && (
+              {risk.aciklama && lang === 'TR' && (
                 <p className="text-xs mt-2 leading-relaxed" style={{ color: renk.text }}>{risk.aciklama}</p>
               )}
             </div>
@@ -412,7 +412,7 @@ export default function BolgeAnalizi() {
                     );
                   })}
                 </div>
-                {risk.zemin.map((z) => z.risk === 'yuksek' && (
+                {lang === 'TR' && risk.zemin.map((z) => z.risk === 'yuksek' && (
                   <p key={z.ad} className="text-[11px] text-[var(--muted)] mt-2 leading-relaxed">
                     <span className="font-semibold">{zeminAd(z.ad)}:</span> {z.aciklama}
                   </p>
