@@ -1,9 +1,16 @@
 'use client';
+import { useState } from 'react';
 import { haberler } from '@/data/haberler';
 import { useLanguage } from '@/contexts/LanguageContext';
 
+const SAYFA_BOYUTU = 10;
+
 export default function UzmanDegerlendirmeleri() {
   const { t } = useLanguage();
+  const [sayfa, setSayfa] = useState(1);
+
+  const toplamSayfa = Math.ceil(haberler.length / SAYFA_BOYUTU);
+  const sayfaHaberler = haberler.slice((sayfa - 1) * SAYFA_BOYUTU, sayfa * SAYFA_BOYUTU);
 
   return (
     <div className="space-y-4">
@@ -13,7 +20,7 @@ export default function UzmanDegerlendirmeleri() {
       </div>
 
       <div className="space-y-3">
-        {haberler.map((h, i) => (
+        {sayfaHaberler.map((h, i) => (
           <div key={i} className="bg-[var(--card-bg)] rounded-2xl shadow-sm border border-[var(--border)] p-4">
             <div className="flex items-start gap-2 mb-2">
               <div className="flex-1">
@@ -43,6 +50,27 @@ export default function UzmanDegerlendirmeleri() {
             </a>
           </div>
         ))}
+      </div>
+
+      {/* Sayfalama */}
+      <div className="flex items-center justify-between gap-2">
+        <button
+          onClick={() => { setSayfa((s) => s - 1); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+          disabled={sayfa === 1}
+          className="flex-1 py-2 text-xs font-semibold rounded-xl border border-[var(--border)] bg-[var(--card-bg)] text-[var(--foreground)] disabled:opacity-30 disabled:cursor-not-allowed hover:border-red-400 transition-colors"
+        >
+          ← Önceki
+        </button>
+        <span className="text-[11px] text-[var(--muted)] shrink-0">
+          {sayfa} / {toplamSayfa}
+        </span>
+        <button
+          onClick={() => { setSayfa((s) => s + 1); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+          disabled={sayfa === toplamSayfa}
+          className="flex-1 py-2 text-xs font-semibold rounded-xl border border-[var(--border)] bg-[var(--card-bg)] text-[var(--foreground)] disabled:opacity-30 disabled:cursor-not-allowed hover:border-red-400 transition-colors"
+        >
+          Sonraki →
+        </button>
       </div>
 
       <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-100 dark:border-blue-800 rounded-xl p-3">
