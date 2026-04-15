@@ -4,7 +4,7 @@ import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import { useLanguage } from '@/contexts/LanguageContext';
 
-const MAX_DEPREM = 100;  // listede tutulacak max kayıt
+const MAX_DEPREM = 250;  // listede tutulacak max kayıt
 const YENILEME_SN = 60; // kaç saniyede bir yenile
 
 const DepremHaritasi = dynamic(() => import('@/components/DepremHaritasi'), {
@@ -304,7 +304,7 @@ export default function HaritaSayfasi() {
                   <p className="text-2xl mb-2">🔕</p>
                   <p className="font-semibold mb-1 text-[var(--foreground)]">Son 500 depremde M4.0+ yok</p>
                   <p className="text-[11px] mb-3">
-                    {kaynakEtiketi} verilerinde son {kaynakDepremler.length} deprem içinde<br />
+                    {kaynakEtiketi} verilerinde son 500 deprem içinde<br />
                     4.0 büyüklüğünü geçen deprem gerçekleşmedi.
                   </p>
                   <button
