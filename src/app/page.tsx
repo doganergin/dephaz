@@ -8,7 +8,13 @@ import { depremAnindaOnlemler, depremSonrasiOnlemler } from '@/data/depremOnleml
 import { useLanguage } from '@/contexts/LanguageContext';
 import type { BolgeRisk, ZeminTipi } from '@/types';
 
-function IlZeminiDetay({ il, zemin, t }: { il: string; zemin: ZeminTipi[]; t: (k: Parameters<typeof import('@/lib/i18n').t>[0]) => string }) {
+const ZEMIN_EN: Record<string, string> = {
+  'Kaya': 'Rock', 'Killi zemin': 'Clay soil', 'Alüvyon': 'Alluvium',
+  'Dolgu zemin': 'Fill', 'Kumlu zemin': 'Sandy soil',
+};
+
+function IlZeminiDetay({ il, zemin, t, lang }: { il: string; zemin: ZeminTipi[]; t: (k: Parameters<typeof import('@/lib/i18n').t>[0]) => string; lang: 'TR' | 'EN' }) {
+  const zeminAd = (ad: string) => lang === 'EN' ? (ZEMIN_EN[ad] ?? ad) : ad;
   const [acik, setAcik] = useState(false);
   return (
     <div className="border border-[var(--border)] rounded-xl overflow-hidden">
@@ -262,14 +268,6 @@ export default function BolgeAnalizi() {
     'Düşük':      t('riskDusuk'),
   };
 
-  // Zemin ismi çevirisi
-  const ZEMIN_EN: Record<string, string> = {
-    'Kaya':        'Rock',
-    'Killi zemin': 'Clay soil',
-    'Alüvyon':     'Alluvium',
-    'Dolgu zemin': 'Fill',
-    'Kumlu zemin': 'Sandy soil',
-  };
   const zeminAd = (ad: string) => lang === 'EN' ? (ZEMIN_EN[ad] ?? ad) : ad;
 
   // Risk badge label
@@ -393,7 +391,7 @@ export default function BolgeAnalizi() {
                     <p className="text-[11px] text-amber-600 dark:text-amber-500 mt-0.5 leading-relaxed">{t('zeminInceleniyor2')}</p>
                   </div>
                 </div>
-                {risk.ilZemini && <IlZeminiDetay il={risk.il} zemin={risk.ilZemini} t={t} />}
+                {risk.ilZemini && <IlZeminiDetay il={risk.il} zemin={risk.ilZemini} t={t} lang={lang} />}
               </div>
             ) : (
               <>
