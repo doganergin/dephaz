@@ -179,7 +179,7 @@ export default function HaritaSayfasi() {
         <h1 className="text-xl font-bold text-[var(--foreground)]">{t('haritaTitle')}</h1>
         <div className="flex items-center justify-between mt-0.5">
           <p className="text-sm text-[var(--muted)]">
-            {kaynakEtiketi} · {kucukGoster ? 'Tüm büyüklükler' : 'M4.0+'}
+            {kaynakEtiketi} · {kucukGoster ? t('haritaTumBuyuklukler') : t('haritaM40Ustu')}
           </p>
           <div className="flex items-center gap-1.5 text-[11px] text-[var(--muted)]">
             {sonGuncelleme && (
@@ -225,7 +225,7 @@ export default function HaritaSayfasi() {
                 : 'bg-[var(--card-bg)] text-[var(--muted)] border-[var(--border)]'
             }`}
           >
-            {dunyaKucukGoster ? 'M4.0 altı gizle' : 'M4.0 altını göster'}
+            {dunyaKucukGoster ? t('haritaM40Gizle') : t('haritaM40Goster')}
           </button>
         </div>
       )}
@@ -233,7 +233,7 @@ export default function HaritaSayfasi() {
       {/* Türkiye alt kaynak seçimi */}
       {anaTab === 'turkiye' && (
         <div className="flex gap-1.5 items-center flex-wrap">
-          <span className="text-[10px] text-[var(--muted)] font-semibold uppercase mr-1">Kaynak:</span>
+          <span className="text-[10px] text-[var(--muted)] font-semibold uppercase mr-1">{t('haritaKaynakLabel')}</span>
           {([
             { key: 'kandilli' as const, label: 'Kandilli', ok: kaynakDurum.kandilli },
             { key: 'afad' as const, label: 'AFAD', ok: kaynakDurum.afad },
@@ -264,7 +264,7 @@ export default function HaritaSayfasi() {
                 : 'bg-[var(--card-bg)] text-[var(--muted)] border-[var(--border)]'
             }`}
           >
-            {trKucukGoster ? 'M4.0 altı gizle' : 'M4.0 altını göster'}
+            {trKucukGoster ? t('haritaM40Gizle') : t('haritaM40Goster')}
           </button>
         </div>
       )}
@@ -272,12 +272,12 @@ export default function HaritaSayfasi() {
       {/* İstatistikler */}
       <div className="grid grid-cols-3 gap-2">
         {[
-          { label: 'Toplam', value: yukleniyor ? '…' : String(aktifDepremler.length) },
+          { label: t('haritaToplam'), value: yukleniyor ? '…' : String(aktifDepremler.length) },
           {
-            label: 'Max Büyüklük',
+            label: t('haritaMaxBuyukluk'),
             value: yukleniyor ? '…' : (aktifDepremler.length ? Math.max(...aktifDepremler.map((d) => d.buyukluk)).toFixed(1) : '—'),
           },
-          { label: 'Kaynak', value: kaynakEtiketi },
+          { label: t('haritaKaynakStat'), value: kaynakEtiketi },
         ].map((s) => (
           <div key={s.label} className="bg-[var(--card-bg)] border border-[var(--border)] rounded-xl p-3 text-center">
             <p className="text-[10px] text-[var(--muted)]">{s.label}</p>
@@ -293,7 +293,7 @@ export default function HaritaSayfasi() {
             <div className="flex flex-col items-center gap-3 text-sm text-[var(--muted)]">
               <div className="w-6 h-6 border-2 border-red-400 border-t-transparent rounded-full animate-spin" />
               <span>{t('haritaYukleniyor')}</span>
-              <span className="text-[11px]">Kandilli, AFAD ve USGS verileri alınıyor…</span>
+              <span className="text-[11px]">{t('haritaVeriAliniyor')}</span>
             </div>
           </div>
         ) : aktifDepremler.length === 0 ? (
@@ -302,22 +302,21 @@ export default function HaritaSayfasi() {
               {kaynakDepremler.length > 0 && !kucukGoster ? (
                 <>
                   <p className="text-2xl mb-2">🔕</p>
-                  <p className="font-semibold mb-1 text-[var(--foreground)]">Son 500 depremde M4.0+ yok</p>
+                  <p className="font-semibold mb-1 text-[var(--foreground)]">{t('haritaNo4Plus')}</p>
                   <p className="text-[11px] mb-3">
-                    {kaynakEtiketi} verilerinde son 500 deprem içinde<br />
-                    4.0 büyüklüğünü geçen deprem gerçekleşmedi.
+                    {kaynakEtiketi} {t('haritaNo4PlusAciklama')}
                   </p>
                   <button
                     onClick={() => anaTab === 'turkiye' ? setTrKucukGoster(true) : setDunyaKucukGoster(true)}
                     className="px-4 py-1.5 text-[11px] font-semibold bg-amber-500 text-white rounded-full hover:bg-amber-600 transition-colors"
                   >
-                    M4.0 altını da göster
+                    {t('haritaNo4PlusBtn')}
                   </button>
                 </>
               ) : (
                 <>
-                  <p className="font-semibold mb-1">Veri bulunamadı</p>
-                  <p className="text-[11px]">Bu kaynak şu an erişilebilir değil.</p>
+                  <p className="font-semibold mb-1">{t('haritaVeriBulunamadi')}</p>
+                  <p className="text-[11px]">{t('haritaKaynakErisim')}</p>
                 </>
               )}
             </div>
@@ -335,7 +334,7 @@ export default function HaritaSayfasi() {
 
       {/* Renk açıklaması */}
       <div className="bg-[var(--card-bg)] border border-[var(--border)] rounded-xl p-3">
-        <p className="text-[10px] font-semibold text-[var(--muted)] uppercase mb-2">Büyüklük / Renk</p>
+        <p className="text-[10px] font-semibold text-[var(--muted)] uppercase mb-2">{t('haritaBuyuklukRenk')}</p>
         <div className="flex flex-wrap gap-3">
           {[
             { renk: '#9CA3AF', label: 'M<3' },
@@ -357,7 +356,7 @@ export default function HaritaSayfasi() {
       {aktifDepremler.length > 0 && (
         <div className="bg-[var(--card-bg)] rounded-2xl shadow-sm border border-[var(--border)] p-4">
           <p className="text-xs font-bold text-[var(--muted)] uppercase tracking-wide mb-3">
-            Son Depremler ({aktifDepremler.length})
+            {t('haritaSonDepremlerBaslik')} ({aktifDepremler.length})
           </p>
           <div className="space-y-2 max-h-64 overflow-y-auto">
             {aktifDepremler.map((d, i) => (
@@ -380,7 +379,7 @@ export default function HaritaSayfasi() {
 
       {/* Veri kaynağı notu */}
       <p className="text-[11px] text-[var(--muted)] leading-relaxed px-1">
-        <span className="font-semibold">Veri kaynakları:</span> Kandilli ve AFAD için her iki kaynağın son 500 deprem kaydından en güncel 250'si gösterilmektedir. USGS için Türkiye ve çevresinde gerçekleşen son 90 güne ait depremler sorgulanmaktadır.
+        <span className="font-semibold">{t('haritaKaynakLabel')}</span> {t('haritaVeriKaynaklari')}
       </p>
 
       {/* Uzman Görüşleri yönlendirme */}

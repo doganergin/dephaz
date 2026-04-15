@@ -28,7 +28,24 @@ export type LangKey =
   | 'binaDonemi1' | 'binaDonemi2' | 'binaDonemi3'
   | 'tavsiye1' | 'tavsiye2' | 'tavsiye3' | 'tavsiye4' | 'tavsiye5' | 'tavsiye6'
   | 'sorumlulukReddi'
-  | 'yerli';
+  | 'yerli'
+  | 'haritaTumBuyuklukler' | 'haritaM40Ustu'
+  | 'haritaM40Gizle' | 'haritaM40Goster' | 'haritaM40AltiniGoster'
+  | 'haritaKaynakLabel' | 'haritaToplam' | 'haritaMaxBuyukluk' | 'haritaKaynakStat'
+  | 'haritaVeriAliniyor' | 'haritaNo4Plus' | 'haritaNo4PlusAciklama' | 'haritaNo4PlusBtn'
+  | 'haritaVeriBulunamadi' | 'haritaKaynakErisim'
+  | 'haritaBuyuklukRenk' | 'haritaSonDepremlerBaslik'
+  | 'haritaVeriKaynaklari'
+  | 'tarihselTitle' | 'tarihselSubtitle'
+  | 'tarihselDonemLabel' | 'tarihselTurLabel'
+  | 'tarihselHepsi' | 'tarihselOsmanli' | 'tarihselCumhuriyet'
+  | 'tarihselYikici' | 'tarihselBuyuk' | 'tarihselOncu'
+  | 'tarihselCanKaybi' | 'tarihselYarali' | 'tarihselYikilanBina'
+  | 'tarihselEtkilenenIller' | 'tarihselNeden'
+  | 'tarihselKaynakLabel' | 'tarihselCanKaybiSuffix'
+  | 'tarihselListeleniyor' | 'tarihselTariheGore' | 'tarihselBuyuklugeGore'
+  | 'tarihselNot' | 'tarihselHaritaYukleniyor'
+  | 'uzmanOnceki' | 'uzmanSonraki';
 
 type Dict = Record<LangKey, string>;
 
@@ -115,6 +132,48 @@ const TR: Dict = {
   tavsiye6: 'Aile buluşma noktanızı belirleyin ve herkese bildirin.',
   sorumlulukReddi: 'Deprem Hattı herhangi bir deprem kehaneti veya kesin sonuç öngöremez. Bu sayfada sunulan veriler; bilimsel kaynaklardan derlenerek istatistiksel yöntemlerle yorumlanmış tahminlerdir. Bilgilendirme amacı taşır, resmi uyarı niteliği yoktur.',
   yerli: '🇹🇷 Yerli',
+  haritaTumBuyuklukler: 'Tüm büyüklükler',
+  haritaM40Ustu: 'M4.0+',
+  haritaM40Gizle: 'M4.0 altı gizle',
+  haritaM40Goster: 'M4.0 altını göster',
+  haritaM40AltiniGoster: 'M4.0 altını da göster',
+  haritaKaynakLabel: 'Kaynak:',
+  haritaToplam: 'Toplam',
+  haritaMaxBuyukluk: 'Max Büyüklük',
+  haritaKaynakStat: 'Kaynak',
+  haritaVeriAliniyor: 'Kandilli, AFAD ve USGS verileri alınıyor…',
+  haritaNo4Plus: 'Son 500 depremde M4.0+ yok',
+  haritaNo4PlusAciklama: 'verilerinde son 500 deprem içinde 4.0 büyüklüğünü geçen deprem gerçekleşmedi.',
+  haritaNo4PlusBtn: 'M4.0 altını da göster',
+  haritaVeriBulunamadi: 'Veri bulunamadı',
+  haritaKaynakErisim: 'Bu kaynak şu an erişilebilir değil.',
+  haritaBuyuklukRenk: 'Büyüklük / Renk',
+  haritaSonDepremlerBaslik: 'Son Depremler',
+  haritaVeriKaynaklari: 'Kandilli ve AFAD için her iki kaynağın son 500 deprem kaydından en güncel 250\'si gösterilmektedir. USGS için Türkiye ve çevresinde gerçekleşen son 90 güne ait depremler sorgulanmaktadır.',
+  tarihselTitle: 'Türkiye\'de Tarih Boyunca Yaşanmış Depremler',
+  tarihselSubtitle: 'Osmanlı\'dan günümüze Türkiye\'deki büyük depremler',
+  tarihselDonemLabel: 'Dönem:',
+  tarihselTurLabel: 'Tür:',
+  tarihselHepsi: 'Hepsi',
+  tarihselOsmanli: 'Osmanlı',
+  tarihselCumhuriyet: 'Cumhuriyet (1923+)',
+  tarihselYikici: 'Yıkıcı',
+  tarihselBuyuk: 'Büyük',
+  tarihselOncu: 'Öncü / Uyarı',
+  tarihselCanKaybi: 'Can Kaybı',
+  tarihselYarali: 'Yaralı',
+  tarihselYikilanBina: 'Yıkılan Bina',
+  tarihselEtkilenenIller: 'Etkilenen İller',
+  tarihselNeden: 'Bilim İnsanları Neden Öncü Olduğunu Düşünüyor?',
+  tarihselKaynakLabel: 'Kaynak:',
+  tarihselCanKaybiSuffix: 'can kaybı',
+  tarihselListeleniyor: 'deprem listeleniyor',
+  tarihselTariheGore: 'Tarihe göre',
+  tarihselBuyuklugeGore: 'Büyüklüğe göre',
+  tarihselNot: 'Veriler; Kandilli Rasathanesi, AFAD, USGS ve hakemli bilimsel yayınlardan derlenerek kaynaklı biçimde sunulmuştur. Osmanlı dönemi kayıp verileri tarihi kaynaklara dayalı tahmindir.',
+  tarihselHaritaYukleniyor: 'Harita yükleniyor...',
+  uzmanOnceki: '← Önceki',
+  uzmanSonraki: 'Sonraki →',
 };
 
 const EN: Dict = {
@@ -200,6 +259,48 @@ const EN: Dict = {
   tavsiye6: 'Designate a family meeting point and make sure everyone knows it.',
   sorumlulukReddi: 'Deprem Hattı cannot predict earthquakes or guarantee any specific outcome. The data presented here is derived from scientific sources and represents statistical estimates. It is for informational purposes only and does not constitute an official warning.',
   yerli: '🇹🇷 Local',
+  haritaTumBuyuklukler: 'All magnitudes',
+  haritaM40Ustu: 'M4.0+',
+  haritaM40Gizle: 'Hide below M4.0',
+  haritaM40Goster: 'Show below M4.0',
+  haritaM40AltiniGoster: 'Show below M4.0 too',
+  haritaKaynakLabel: 'Source:',
+  haritaToplam: 'Total',
+  haritaMaxBuyukluk: 'Max Magnitude',
+  haritaKaynakStat: 'Source',
+  haritaVeriAliniyor: 'Fetching Kandilli, AFAD and USGS data…',
+  haritaNo4Plus: 'No M4.0+ in last 500 earthquakes',
+  haritaNo4PlusAciklama: 'data contains no earthquake above magnitude 4.0 in the last 500 records.',
+  haritaNo4PlusBtn: 'Show below M4.0 too',
+  haritaVeriBulunamadi: 'No data found',
+  haritaKaynakErisim: 'This source is currently unavailable.',
+  haritaBuyuklukRenk: 'Magnitude / Colour',
+  haritaSonDepremlerBaslik: 'Recent Earthquakes',
+  haritaVeriKaynaklari: 'For Kandilli and AFAD, the most recent 250 of the last 500 records are displayed. For USGS, earthquakes in and around Turkey from the last 90 days are queried.',
+  tarihselTitle: 'Historical Earthquakes in Turkey',
+  tarihselSubtitle: 'Major earthquakes from the Ottoman era to the present',
+  tarihselDonemLabel: 'Period:',
+  tarihselTurLabel: 'Type:',
+  tarihselHepsi: 'All',
+  tarihselOsmanli: 'Ottoman',
+  tarihselCumhuriyet: 'Republic (1923+)',
+  tarihselYikici: 'Devastating',
+  tarihselBuyuk: 'Major',
+  tarihselOncu: 'Precursor / Warning',
+  tarihselCanKaybi: 'Fatalities',
+  tarihselYarali: 'Injured',
+  tarihselYikilanBina: 'Collapsed Buildings',
+  tarihselEtkilenenIller: 'Affected Provinces',
+  tarihselNeden: 'Why Do Scientists Consider This a Precursor?',
+  tarihselKaynakLabel: 'Source:',
+  tarihselCanKaybiSuffix: 'fatalities',
+  tarihselListeleniyor: 'earthquakes listed',
+  tarihselTariheGore: 'By date',
+  tarihselBuyuklugeGore: 'By magnitude',
+  tarihselNot: 'Data compiled from Kandilli Observatory, AFAD, USGS and peer-reviewed publications. Casualty figures for the Ottoman period are historical estimates.',
+  tarihselHaritaYukleniyor: 'Loading map...',
+  uzmanOnceki: '← Previous',
+  uzmanSonraki: 'Next →',
 };
 
 export function t(key: LangKey, lang: 'TR' | 'EN'): string {

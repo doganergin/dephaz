@@ -60,7 +60,7 @@ export default function UzmanDegerlendirmeleri() {
             disabled={sayfa === 1}
             className="flex-1 py-2 text-xs font-semibold rounded-xl border border-[var(--border)] bg-[var(--card-bg)] text-[var(--foreground)] disabled:opacity-30 disabled:cursor-not-allowed hover:border-red-400 transition-colors"
           >
-            ← Önceki
+            {t('uzmanOnceki')}
           </button>
           <div className="flex items-center gap-1">
             {Array.from({ length: toplamSayfa }, (_, i) => i + 1).map((n) => (
@@ -82,7 +82,7 @@ export default function UzmanDegerlendirmeleri() {
             disabled={sayfa === toplamSayfa}
             className="flex-1 py-2 text-xs font-semibold rounded-xl border border-[var(--border)] bg-[var(--card-bg)] text-[var(--foreground)] disabled:opacity-30 disabled:cursor-not-allowed hover:border-red-400 transition-colors"
           >
-            Sonraki →
+            {t('uzmanSonraki')}
           </button>
         </div>
       </div>
