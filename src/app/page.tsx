@@ -99,16 +99,16 @@ function RiskBadge({ sinif, etiket }: { sinif: string; etiket: string }) {
 
 // Deprem büyüklük skalası
 const SKALA = [
-  { range: 'M < 4.0',    renk: '#6B7280', etiket: 'Hissedilmez', etap: 1 },
-  { range: 'M 4.0–4.9',  renk: '#10B981', etiket: 'Hafif sarsıntı, hasar yok', etap: 2 },
-  { range: 'M 5.0–5.4',  renk: '#F59E0B', etiket: 'Zayıf yapılarda orta hasar', etap: 3 },
-  { range: 'M 5.5–6.0',  renk: '#F97316', etiket: 'Orta hasar, dayanıksız yapılar risk altında', etap: 4 },
-  { range: 'M 6.0–6.5',  renk: '#EF4444', etiket: 'Ciddi hasar', etap: 5 },
-  { range: 'M 6.5–7.0',  renk: '#DC2626', etiket: 'Büyük yapısal hasar, can kaybı riski', etap: 6 },
-  { range: 'M 7.0+',     renk: '#7F1D1D', etiket: 'Yıkıcı', etap: 7 },
+  { range: 'M < 4.0',    renk: '#6B7280', etiket: 'Hissedilmez',                                etiketEN: 'Not felt',                                        etap: 1 },
+  { range: 'M 4.0–4.9',  renk: '#10B981', etiket: 'Hafif sarsıntı, hasar yok',                  etiketEN: 'Light shaking, no damage',                        etap: 2 },
+  { range: 'M 5.0–5.4',  renk: '#F59E0B', etiket: 'Zayıf yapılarda orta hasar',                 etiketEN: 'Moderate damage in weak structures',              etap: 3 },
+  { range: 'M 5.5–6.0',  renk: '#F97316', etiket: 'Orta hasar, dayanıksız yapılar risk altında', etiketEN: 'Moderate damage, vulnerable buildings at risk',  etap: 4 },
+  { range: 'M 6.0–6.5',  renk: '#EF4444', etiket: 'Ciddi hasar',                                etiketEN: 'Serious damage',                                  etap: 5 },
+  { range: 'M 6.5–7.0',  renk: '#DC2626', etiket: 'Büyük yapısal hasar, can kaybı riski',       etiketEN: 'Major structural damage, risk of casualties',     etap: 6 },
+  { range: 'M 7.0+',     renk: '#7F1D1D', etiket: 'Yıkıcı',                                     etiketEN: 'Devastating',                                     etap: 7 },
 ];
 
-function DepremSkalasi({ t }: { t: (k: Parameters<typeof import('@/lib/i18n').t>[0]) => string }) {
+function DepremSkalasi({ t, lang }: { t: (k: Parameters<typeof import('@/lib/i18n').t>[0]) => string; lang: 'TR' | 'EN' }) {
   return (
     <div className="bg-[var(--card-bg)] rounded-2xl shadow-sm border border-[var(--border)] p-4">
       <div className="flex items-center justify-between mb-3">
@@ -135,15 +135,15 @@ function DepremSkalasi({ t }: { t: (k: Parameters<typeof import('@/lib/i18n').t>
                 style={{ width: `${(s.etap / 7) * 100}%`, backgroundColor: s.renk }}
               />
             </div>
-            <span className="text-[11px] text-[var(--muted)] w-48 shrink-0 text-right">{s.etiket}</span>
+            <span className="text-[11px] text-[var(--muted)] w-48 shrink-0 text-right">{lang === 'EN' ? s.etiketEN : s.etiket}</span>
           </div>
         ))}
       </div>
       <p className="text-[10px] text-[var(--muted)] mt-2">
-        Bar uzunluğu görece hasar şiddetini temsil eder
+        {t('skalaNot')}
       </p>
       <p className="text-[10px] text-[var(--muted)] mt-1">
-        Kaynak:{' '}
+        {t('skalaKaynakLabel')}{' '}
         <a
           href="https://www.usgs.gov/programs/earthquake-hazards/earthquake-magnitude-energy-release-and-shaking-intensity"
           target="_blank"
@@ -303,7 +303,7 @@ export default function BolgeAnalizi() {
       </div>
 
       {/* Deprem Büyüklük Skalası */}
-      <DepremSkalasi t={t} />
+      <DepremSkalasi t={t} lang={lang} />
 
       {yukleniyor && (
         <div className="bg-[var(--card-bg)] rounded-2xl p-8 shadow-sm border border-[var(--border)] flex items-center justify-center gap-3">
@@ -644,8 +644,8 @@ export default function BolgeAnalizi() {
             <div key={o.adim} className="flex items-start gap-3 border border-[var(--border)] rounded-xl p-3 bg-gray-50 dark:bg-gray-800/50">
               <span className="text-xl shrink-0">{o.ikon}</span>
               <div>
-                <p className="text-xs font-bold text-[var(--foreground)]">{o.baslik}</p>
-                <p className="text-[11px] text-[var(--muted)] leading-relaxed mt-0.5">{o.aciklama}</p>
+                <p className="text-xs font-bold text-[var(--foreground)]">{lang === 'EN' ? o.baslikEN : o.baslik}</p>
+                <p className="text-[11px] text-[var(--muted)] leading-relaxed mt-0.5">{lang === 'EN' ? o.aciklamaEN : o.aciklama}</p>
               </div>
             </div>
           ))}
@@ -656,8 +656,8 @@ export default function BolgeAnalizi() {
             <div key={o.adim} className="flex items-start gap-3 border border-[var(--border)] rounded-xl p-3 bg-gray-50 dark:bg-gray-800/50">
               <span className="text-xl shrink-0">{o.ikon}</span>
               <div>
-                <p className="text-xs font-bold text-[var(--foreground)]">{o.baslik}</p>
-                <p className="text-[11px] text-[var(--muted)] leading-relaxed mt-0.5">{o.aciklama}</p>
+                <p className="text-xs font-bold text-[var(--foreground)]">{lang === 'EN' ? o.baslikEN : o.baslik}</p>
+                <p className="text-[11px] text-[var(--muted)] leading-relaxed mt-0.5">{lang === 'EN' ? o.aciklamaEN : o.aciklama}</p>
               </div>
             </div>
           ))}

@@ -45,7 +45,8 @@ export type LangKey =
   | 'tarihselKaynakLabel' | 'tarihselCanKaybiSuffix'
   | 'tarihselListeleniyor' | 'tarihselTariheGore' | 'tarihselBuyuklugeGore'
   | 'tarihselNot' | 'tarihselHaritaYukleniyor'
-  | 'uzmanOnceki' | 'uzmanSonraki';
+  | 'uzmanOnceki' | 'uzmanSonraki'
+  | 'skalaNot' | 'skalaKaynakLabel';
 
 type Dict = Record<LangKey, string>;
 
@@ -174,6 +175,8 @@ const TR: Dict = {
   tarihselHaritaYukleniyor: 'Harita yükleniyor...',
   uzmanOnceki: '← Önceki',
   uzmanSonraki: 'Sonraki →',
+  skalaNot: 'Bar uzunluğu görece hasar şiddetini temsil eder',
+  skalaKaynakLabel: 'Kaynak:',
 };
 
 const EN: Dict = {
@@ -301,6 +304,8 @@ const EN: Dict = {
   tarihselHaritaYukleniyor: 'Loading map...',
   uzmanOnceki: '← Previous',
   uzmanSonraki: 'Next →',
+  skalaNot: 'Bar length represents relative damage intensity',
+  skalaKaynakLabel: 'Source:',
 };
 
 export function t(key: LangKey, lang: 'TR' | 'EN'): string {
