@@ -28,7 +28,7 @@ function IlZeminiDetay({ il, zemin, t }: { il: string; zemin: ZeminTipi[]; t: (k
               <div key={z.ad} className="flex items-center gap-3">
                 <div className="flex items-center gap-1.5 w-28 shrink-0">
                   <div className="w-2 h-2 rounded-full shrink-0" style={{ backgroundColor: zr.bar }} />
-                  <span className="text-xs font-medium text-[var(--foreground)]">{z.ad}</span>
+                  <span className="text-xs font-medium text-[var(--foreground)]">{zeminAd(z.ad)}</span>
                 </div>
                 <div className="flex-1 h-2 bg-gray-100 dark:bg-gray-700 rounded-full overflow-hidden">
                   <div className="h-full rounded-full" style={{ width: `${z.yuzde}%`, backgroundColor: zr.bar }} />
@@ -253,6 +253,25 @@ export default function BolgeAnalizi() {
   const renk = risk ? riskRenk(risk.riskSinifi) : null;
   const bilimsel = risk ? (bilimselKaynaklar[`${risk.il}-${risk.ilce}`] ?? bilimselKaynaklar[risk.il]) : null;
 
+  // 30 yıl olasılık etiketi çevirisi
+  const OLASILIK_EN: Record<string, string> = {
+    'Çok Yüksek': t('riskCokYuksek'),
+    'Yüksek':     t('riskYuksek'),
+    'Orta':       t('riskOrta'),
+    'Düşük-Orta': t('riskDusukOrta'),
+    'Düşük':      t('riskDusuk'),
+  };
+
+  // Zemin ismi çevirisi
+  const ZEMIN_EN: Record<string, string> = {
+    'Kaya':        'Rock',
+    'Killi zemin': 'Clay soil',
+    'Alüvyon':     'Alluvium',
+    'Dolgu zemin': 'Fill',
+    'Kumlu zemin': 'Sandy soil',
+  };
+  const zeminAd = (ad: string) => lang === 'EN' ? (ZEMIN_EN[ad] ?? ad) : ad;
+
   // Risk badge label
   const riskEtiket = risk
     ? risk.riskSkoru >= 90 ? `M5.0–5.5+ ${lang === 'EN' ? 'prob. very high' : 'olasılığı çok yüksek'}`
@@ -351,7 +370,7 @@ export default function BolgeAnalizi() {
               {[
                 { label: t('metricFay'), value: `${risk.fayMesafe} km` },
                 { label: t('metricMw'), value: risk.beklenenMax },
-                { label: t('metricOlasilik'), value: risk.olasilik30Yil },
+                { label: t('metricOlasilik'), value: OLASILIK_EN[risk.olasilik30Yil] ?? risk.olasilik30Yil },
                 { label: t('metricDepremSayisi'), value: risk.depremler.length > 0 ? String(risk.depremler.length) : '—' },
               ].map((m) => (
                 <div key={m.label} className="p-3 text-center">
@@ -385,7 +404,7 @@ export default function BolgeAnalizi() {
                       <div key={z.ad} className="flex items-center gap-3">
                         <div className="flex items-center gap-1.5 w-28 shrink-0">
                           <div className="w-2 h-2 rounded-full shrink-0" style={{ backgroundColor: zr.bar }} />
-                          <span className="text-xs font-medium text-[var(--foreground)]">{z.ad}</span>
+                          <span className="text-xs font-medium text-[var(--foreground)]">{zeminAd(z.ad)}</span>
                         </div>
                         <div className="flex-1 h-2 bg-gray-100 dark:bg-gray-700 rounded-full overflow-hidden">
                           <div className="h-full rounded-full" style={{ width: `${z.yuzde}%`, backgroundColor: zr.bar }} />
@@ -397,7 +416,7 @@ export default function BolgeAnalizi() {
                 </div>
                 {risk.zemin.map((z) => z.risk === 'yuksek' && (
                   <p key={z.ad} className="text-[11px] text-[var(--muted)] mt-2 leading-relaxed">
-                    <span className="font-semibold">{z.ad}:</span> {z.aciklama}
+                    <span className="font-semibold">{zeminAd(z.ad)}:</span> {z.aciklama}
                   </p>
                 ))}
               </>
