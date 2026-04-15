@@ -1,7 +1,7 @@
 'use client';
 import { useState } from 'react';
 import dynamic from 'next/dynamic';
-import { tarihselDepremler, type TarihselDeprem } from '@/data/tarihselDepremler';
+import { tarihselDepremler, type TarihselDeprem, type OncuAciklama } from '@/data/tarihselDepremler';
 
 const TarihselHarita = dynamic(() => import('@/components/TarihselHarita'), {
   ssr: false,
@@ -18,7 +18,7 @@ const TarihselHarita = dynamic(() => import('@/components/TarihselHarita'), {
 const DONEM_LABEL: Record<TarihselDeprem['donem'], string> = {
   osmanli: 'Osmanlı',
   cumhuriyet: 'Cumhuriyet',
-  modern: 'Modern',
+  modern: 'Cumhuriyet',
 };
 
 const ONEM_LABEL: Record<TarihselDeprem['onem'], { label: string; renk: string }> = {
@@ -42,12 +42,13 @@ function formatSayi(n?: number) {
 }
 
 export default function TarihselDepremlerSayfasi() {
-  const [donemFiltre, setDonemFiltre] = useState<TarihselDeprem['donem'] | 'hepsi'>('hepsi');
+  const [donemFiltre, setDonemFiltre] = useState<'hepsi' | 'osmanli' | 'cumhuriyet'>('hepsi');
   const [onemFiltre, setOnemFiltre] = useState<TarihselDeprem['onem'] | 'hepsi'>('hepsi');
   const [secilenId, setSecilenId] = useState<string | null>(null);
 
   const filtrelenmis = tarihselDepremler.filter((d) => {
-    if (donemFiltre !== 'hepsi' && d.donem !== donemFiltre) return false;
+    if (donemFiltre === 'osmanli' && d.donem !== 'osmanli') return false;
+    if (donemFiltre === 'cumhuriyet' && d.donem === 'osmanli') return false;
     if (onemFiltre !== 'hepsi' && d.onem !== onemFiltre) return false;
     return true;
   });
@@ -57,7 +58,7 @@ export default function TarihselDepremlerSayfasi() {
   return (
     <div className="space-y-4">
       <div>
-        <h1 className="text-xl font-bold text-[var(--foreground)]">Tarihsel Yıkıcı Depremler</h1>
+        <h1 className="text-xl font-bold text-[var(--foreground)]">Türkiye'de Tarih Boyunca Yaşanmış Depremler</h1>
         <p className="text-sm text-[var(--muted)] mt-0.5">Osmanlı'dan günümüze Türkiye'deki büyük depremler</p>
       </div>
 
@@ -65,17 +66,21 @@ export default function TarihselDepremlerSayfasi() {
       <div className="space-y-2">
         <div className="flex gap-1.5 flex-wrap">
           <span className="text-[10px] text-[var(--muted)] font-semibold uppercase self-center mr-1">Dönem:</span>
-          {(['hepsi', 'osmanli', 'cumhuriyet', 'modern'] as const).map((d) => (
+          {([
+            { key: 'hepsi', label: 'Hepsi' },
+            { key: 'osmanli', label: 'Osmanlı' },
+            { key: 'cumhuriyet', label: 'Cumhuriyet (1923+)' },
+          ] as const).map((d) => (
             <button
-              key={d}
-              onClick={() => setDonemFiltre(d)}
+              key={d.key}
+              onClick={() => setDonemFiltre(d.key)}
               className={`px-3 py-1 text-[11px] font-semibold rounded-full border transition-colors ${
-                donemFiltre === d
+                donemFiltre === d.key
                   ? 'bg-red-500 text-white border-red-500'
                   : 'bg-[var(--card-bg)] text-[var(--muted)] border-[var(--border)] hover:text-[var(--foreground)]'
               }`}
             >
-              {d === 'hepsi' ? 'Hepsi' : DONEM_LABEL[d]}
+              {d.label}
             </button>
           ))}
         </div>
@@ -177,6 +182,30 @@ export default function TarihselDepremlerSayfasi() {
 
           {/* Özet */}
           <p className="text-xs text-[var(--muted)] leading-relaxed">{secilen.ozet}</p>
+
+          {/* Öncü açıklamalar */}
+          {secilen.oncuAciklamalar && secilen.oncuAciklamalar.length > 0 && (
+            <div className="space-y-2">
+              <p className="text-[10px] text-amber-600 dark:text-amber-400 font-semibold uppercase">
+                Bilim İnsanları Neden Öncü Olduğunu Düşünüyor?
+              </p>
+              {secilen.oncuAciklamalar.map((a: OncuAciklama, i: number) => (
+                <div key={i} className="bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 rounded-xl p-3">
+                  <p className="text-[11px] font-bold text-[var(--foreground)]">{a.uzman}</p>
+                  <p className="text-[10px] text-[var(--muted)] mb-1.5">{a.unvan}</p>
+                  <p className="text-xs text-[var(--muted)] leading-relaxed italic">"{a.aciklama}"</p>
+                  <a
+                    href={a.kaynak}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-[10px] text-blue-500 hover:underline mt-1.5 block"
+                  >
+                    {a.kaynakEtiket} →
+                  </a>
+                </div>
+              ))}
+            </div>
+          )}
 
           {/* Kaynak */}
           <a

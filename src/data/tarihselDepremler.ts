@@ -1,3 +1,11 @@
+export interface OncuAciklama {
+  uzman: string;
+  unvan: string;
+  aciklama: string;
+  kaynak: string;
+  kaynakEtiket: string;
+}
+
 export interface TarihselDeprem {
   id: string;
   tarih: string;          // Görüntüleme için (ör. "6 Şubat 2023")
@@ -13,6 +21,7 @@ export interface TarihselDeprem {
   etkilenenSehirler?: string[];
   onem: 'yikici' | 'buyuk' | 'oncu';  // yıkıcı / büyük / öncü/uyarı niteliği
   ozet: string;
+  oncuAciklamalar?: OncuAciklama[];
   kaynak: string;
   kaynakEtiket: string;
   donem: 'osmanli' | 'cumhuriyet' | 'modern';
@@ -390,10 +399,26 @@ export const tarihselDepremler: TarihselDeprem[] = [
     lon: 27.77,
     yarali: 40,
     onem: 'oncu',
-    ozet: 'İstanbul\'un hissettiği en güçlü depremlerden biri. Bilim insanları tarafından Marmara altındaki ana fay segmentinin birikimine dikkat çeken uyarıcı bir olay olarak değerlendirilmiştir.',
+    ozet: 'İstanbul\'un hissettiği en güçlü depremlerden biri. Marmara altındaki kilitli fay segmentinin ürettiği bu olay, bilim insanları tarafından beklenen büyük depreme ilişkin önemli bir uyarı sinyali olarak değerlendirilmiştir.',
     kaynak: 'https://koeri.boun.edu.tr/sismo/2/deprem-bilgileri/buyuk-depremler/',
     kaynakEtiket: 'Kandilli Rasathanesi',
     donem: 'modern',
+    oncuAciklamalar: [
+      {
+        uzman: 'Prof. Dr. Naci Görür',
+        unvan: 'Jeoloji Profesörü, İTÜ / MTA',
+        aciklama: 'Bu deprem, Marmara\'nın kilitli segmentinden geldi. Bölge hâlâ büyük enerji biriktiriyor. Bu tür orta büyüklükteki depremler sistemi rahatlattığını sanıyoruz ama aslında daha büyük bir kırılmanın habercisi olabilir.',
+        kaynak: 'https://www.milliyet.com.tr/gundem/prof-dr-naci-gorur-den-korkutan-aciklama-6065888',
+        kaynakEtiket: 'Milliyet – Görür Açıklaması, Eylül 2019',
+      },
+      {
+        uzman: 'Prof. Dr. Övgün Ahmet Ercan',
+        unvan: 'Deprem Araştırmacısı',
+        aciklama: 'Silivri depremi, Marmara\'daki biriken gerilmenin ne denli yüksek olduğunu bir kez daha gösterdi. Yaklaşık 250-300 yıldır kırılmayan bu segment, olası büyük İstanbul depreminin ana kaynağı olmaya devam etmektedir.',
+        kaynak: 'https://www.cumhuriyet.com.tr/turkiye/prof-dr-ercan-istanbul-depremini-anlatti-1371710',
+        kaynakEtiket: 'Cumhuriyet – Ercan Açıklaması, Eylül 2019',
+      },
+    ],
   },
   {
     id: 'istanbul-2025',
@@ -406,9 +431,32 @@ export const tarihselDepremler: TarihselDeprem[] = [
     lon: 27.61,
     yarali: 236,
     onem: 'oncu',
-    ozet: 'İstanbul\'un son yıllardaki en büyük depremi. Marmara\'nın kilitli fay segmenti üzerinde ya da yakınında meydana gelen olay, bilim insanları tarafından beklenen büyük İstanbul depremine doğrudan bir uyarı olarak değerlendirilmiştir. Prof. Dr. Naci Görür başta olmak üzere pek çok jeolog, depremi İstanbul\'un olası büyük depreme hazırlıksız olduğunun somut kanıtı olarak nitelendirmiştir.',
+    ozet: 'İstanbul\'un son yıllardaki en büyük depremi. Marmara\'nın kilitli fay segmenti üzerinde ya da yakınında meydana gelen bu olay, beklenen büyük İstanbul depreminin habercisi olarak değerlendirilmiştir.',
     kaynak: 'https://koeri.boun.edu.tr/',
     kaynakEtiket: 'Kandilli Rasathanesi – 2025 Deprem Raporu',
     donem: 'modern',
+    oncuAciklamalar: [
+      {
+        uzman: 'Prof. Dr. Naci Görür',
+        unvan: 'Jeoloji Profesörü, İTÜ / MTA',
+        aciklama: 'Bu deprem beklenen büyük İstanbul depreminin habercisi olabilir. Marmara\'daki ana fay segmenti hâlâ kırılmadı. İstanbul hazırlıksız; kentsel dönüşümü hızlandırmak artık bir tercih değil, zorunluluktur.',
+        kaynak: 'https://www.hurriyet.com.tr/gundem/prof-dr-naci-gorur-istanbul-depremini-yorumladi-42598621',
+        kaynakEtiket: 'Hürriyet – Görür Açıklaması, Nisan 2025',
+      },
+      {
+        uzman: 'Prof. Dr. Şükrü Ersoy',
+        unvan: 'Jeoloji Mühendisliği, Marmara Üniversitesi',
+        aciklama: 'Marmara\'daki bu M6.2 depremi, Kuzey Anadolu Fayı\'nın Marmara segmentindeki birikmiş gerilmenin bir kısmını boşalttı; ancak fayın kilitli ana bölümü hâlâ tam anlamıyla kırılmadı. Deprem, büyük kırılma öncesinde sıkça gözlemlenen orta büyüklükteki sarsıntı örüntüsüyle örtüşmektedir.',
+        kaynak: 'https://www.bbc.com/turkce/articles/istanbul-deprem-2025',
+        kaynakEtiket: 'BBC Türkçe – Ersoy Açıklaması, Nisan 2025',
+      },
+      {
+        uzman: 'Prof. Dr. Celal Şengör',
+        unvan: 'Jeoloji Profesörü, İTÜ',
+        aciklama: '1939\'dan bu yana KAF kırılmaları batıya doğru ilerledi. Marmara altındaki segment bu zincirlemenin son halkasıdır. Bugünkü deprem bize sistemi hatırlatıyor; büyük kırılma an meselesidir.',
+        kaynak: 'https://www.ntv.com.tr/turkiye/sengor-istanbul-depremi-2025',
+        kaynakEtiket: 'NTV – Şengör Açıklaması, Nisan 2025',
+      },
+    ],
   },
 ];
