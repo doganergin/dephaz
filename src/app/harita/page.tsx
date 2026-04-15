@@ -299,15 +299,26 @@ export default function HaritaSayfasi() {
         ) : aktifDepremler.length === 0 ? (
           <div className="flex items-center justify-center h-full bg-gray-50 dark:bg-gray-800">
             <div className="text-center text-sm text-[var(--muted)]">
-              <p className="font-semibold mb-1">Veri bulunamadı</p>
-              <p className="text-[11px]">Bu kaynak şu an erişilebilir değil veya filtre çok kısıtlayıcı.</p>
-              {!kucukGoster && (
-                <button
-                  onClick={() => anaTab === 'turkiye' ? setTrKucukGoster(true) : setDunyaKucukGoster(true)}
-                  className="mt-2 px-3 py-1 text-[11px] bg-amber-500 text-white rounded-full"
-                >
-                  Tüm büyüklükleri göster
-                </button>
+              {kaynakDepremler.length > 0 && !kucukGoster ? (
+                <>
+                  <p className="text-2xl mb-2">🔕</p>
+                  <p className="font-semibold mb-1 text-[var(--foreground)]">Son 500 depremde M4.0+ yok</p>
+                  <p className="text-[11px] mb-3">
+                    {kaynakEtiketi} verilerinde son {kaynakDepremler.length} deprem içinde<br />
+                    4.0 büyüklüğünü geçen deprem gerçekleşmedi.
+                  </p>
+                  <button
+                    onClick={() => anaTab === 'turkiye' ? setTrKucukGoster(true) : setDunyaKucukGoster(true)}
+                    className="px-4 py-1.5 text-[11px] font-semibold bg-amber-500 text-white rounded-full hover:bg-amber-600 transition-colors"
+                  >
+                    M4.0 altını da göster
+                  </button>
+                </>
+              ) : (
+                <>
+                  <p className="font-semibold mb-1">Veri bulunamadı</p>
+                  <p className="text-[11px]">Bu kaynak şu an erişilebilir değil.</p>
+                </>
               )}
             </div>
           </div>
