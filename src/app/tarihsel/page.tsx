@@ -44,6 +44,7 @@ function formatSayi(n?: number) {
 export default function TarihselDepremlerSayfasi() {
   const [donemFiltre, setDonemFiltre] = useState<'hepsi' | 'osmanli' | 'cumhuriyet'>('hepsi');
   const [onemFiltre, setOnemFiltre] = useState<TarihselDeprem['onem'] | 'hepsi'>('hepsi');
+  const [siralama, setSiralama] = useState<'tarih' | 'buyukluk'>('tarih');
   const [secilenId, setSecilenId] = useState<string | null>(null);
 
   const filtrelenmis = tarihselDepremler.filter((d) => {
@@ -52,6 +53,10 @@ export default function TarihselDepremlerSayfasi() {
     if (onemFiltre !== 'hepsi' && d.onem !== onemFiltre) return false;
     return true;
   });
+
+  const sirali = [...filtrelenmis].sort((a, b) =>
+    siralama === 'buyukluk' ? b.buyukluk - a.buyukluk : b.yil - a.yil
+  );
 
   const secilen = tarihselDepremler.find((d) => d.id === secilenId) ?? null;
 
@@ -221,10 +226,30 @@ export default function TarihselDepremlerSayfasi() {
 
       {/* Liste */}
       <div className="space-y-2">
-        <p className="text-[10px] text-[var(--muted)] font-semibold uppercase">
-          {filtrelenmis.length} deprem listeleniyor
-        </p>
-        {filtrelenmis.map((d) => (
+        <div className="flex items-center justify-between">
+          <p className="text-[10px] text-[var(--muted)] font-semibold uppercase">
+            {sirali.length} deprem listeleniyor
+          </p>
+          <div className="flex gap-1">
+            {([
+              { key: 'tarih', label: 'Tarihe göre' },
+              { key: 'buyukluk', label: 'Büyüklüğe göre' },
+            ] as const).map((s) => (
+              <button
+                key={s.key}
+                onClick={() => setSiralama(s.key)}
+                className={`px-2.5 py-1 text-[10px] font-semibold rounded-full border transition-colors ${
+                  siralama === s.key
+                    ? 'bg-red-500 text-white border-red-500'
+                    : 'bg-[var(--card-bg)] text-[var(--muted)] border-[var(--border)] hover:text-[var(--foreground)]'
+                }`}
+              >
+                {s.label}
+              </button>
+            ))}
+          </div>
+        </div>
+        {sirali.map((d) => (
           <button
             key={d.id}
             onClick={() => setSecilenId(secilenId === d.id ? null : d.id)}
