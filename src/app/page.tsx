@@ -145,7 +145,7 @@ function DepremSkalasi({ t }: { t: (k: Parameters<typeof import('@/lib/i18n').t>
       <p className="text-[10px] text-[var(--muted)] mt-1">
         Kaynak:{' '}
         <a
-          href="https://www.usgs.gov/programs/earthquake-hazards/magnitude-intensity-comparison"
+          href="https://www.usgs.gov/programs/earthquake-hazards/earthquake-magnitude-energy-release-and-shaking-intensity"
           target="_blank"
           rel="noopener noreferrer"
           className="text-blue-500 hover:underline"
