@@ -82,7 +82,7 @@ export default function HakkimizdaPage() {
                 ? 'Yazılım geliştirici. Deprem Hattı, 2023 Kahramanmaraş depremleri sonrasında toplumsal deprem bilincini artırmak amacıyla başlatılmış bağımsız bir projedir.'
                 : 'Software developer. Deprem Hattı is an independent project launched after the February 2023 Kahramanmaraş earthquakes to raise public earthquake awareness.'}
             </p>
-            <a href="mailto:doganergin15@gmail.com" className="text-[11px] text-blue-500 hover:underline mt-1.5 block">doganergin15@gmail.com</a>
+            <a href="mailto:dogan.ergin@depremhatti.com" className="text-[11px] text-blue-500 hover:underline mt-1.5 block">doganergin15@gmail.com</a>
           </div>
         </div>
       </section>
