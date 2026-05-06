@@ -1,685 +1,137 @@
 'use client';
-import { useState, useCallback, useEffect, useRef } from 'react';
-import { getProvinces, getDistricts, getNeighbourhoods } from '@/lib/locationHelper';
-import { useAppStore } from '@/store';
-import { bolgeRiskGetir } from '@/api/riskApi';
-import { bilimselKaynaklar } from '@/data/bilimselKaynaklar';
-import { depremAnindaOnlemler, depremSonrasiOnlemler } from '@/data/depremOnlemleri';
+import Link from 'next/link';
 import { useLanguage } from '@/contexts/LanguageContext';
-import type { BolgeRisk, ZeminTipi } from '@/types';
 
-const ZEMIN_EN: Record<string, string> = {
-  'Kaya': 'Rock', 'Killi zemin': 'Clay soil', 'Alüvyon': 'Alluvium',
-  'Dolgu zemin': 'Fill', 'Kumlu zemin': 'Sandy soil',
-};
+export default function HomePage() {
+  const { lang } = useLanguage();
+  const TR = lang === 'TR';
 
-function IlZeminiDetay({ il, zemin, t, lang }: { il: string; zemin: ZeminTipi[]; t: (k: Parameters<typeof import('@/lib/i18n').t>[0]) => string; lang: 'TR' | 'EN' }) {
-  const zeminAd = (ad: string) => lang === 'EN' ? (ZEMIN_EN[ad] ?? ad) : ad;
-  const [acik, setAcik] = useState(false);
+  const features = TR ? [
+    { href: '/bolge-analizi', icon: '🗺️', title: 'Bölge Analizi', desc: 'İl, ilçe ve mahalle seçerek fay mesafesi, zemin yapısı ve deprem risk skorunu öğrenin.', color: 'red' },
+    { href: '/harita', icon: '🌍', title: 'Canlı Deprem Haritası', desc: 'Kandilli, AFAD ve USGS verilerini gerçek zamanlı haritada izleyin.', color: 'blue' },
+    { href: '/tarihsel', icon: '📜', title: 'Tarihsel Depremler', desc: "Osmanlı'dan günümüze Türkiye'nin büyük deprem tarihini inceleyin.", color: 'purple' },
+    { href: '/uzman', icon: '🔬', title: 'Uzman Görüşleri', desc: 'Seismologların ve jeologların bilimsel değerlendirmelerini okuyun.', color: 'green' },
+    { href: '/canta', icon: '🎒', title: 'Deprem Çantası', desc: '72 saatlik acil durum çantası için kontrol listesi oluşturun.', color: 'amber' },
+    { href: '/aile-plani', icon: '👨‍👩‍👧', title: 'Aile Planı', desc: 'Toplanma noktası ve acil iletişim planı hazırlayın.', color: 'orange' },
+  ] : [
+    { href: '/bolge-analizi', icon: '🗺️', title: 'Risk Analysis', desc: 'Select province, district and neighbourhood to find fault distance, soil type, and risk score.', color: 'red' },
+    { href: '/harita', icon: '🌍', title: 'Live Earthquake Map', desc: 'Monitor Kandilli, AFAD and USGS data on a real-time interactive map.', color: 'blue' },
+    { href: '/tarihsel', icon: '📜', title: 'Historical Earthquakes', desc: "Explore Turkey's major earthquake history from the Ottoman era to the present.", color: 'purple' },
+    { href: '/uzman', icon: '🔬', title: 'Expert Opinions', desc: 'Read scientific assessments from seismologists and geologists.', color: 'green' },
+    { href: '/canta', icon: '🎒', title: 'Emergency Kit', desc: 'Build a 72-hour emergency supply checklist for your household.', color: 'amber' },
+    { href: '/aile-plani', icon: '👨‍👩‍👧', title: 'Family Plan', desc: 'Set up a meeting point and emergency contact plan with your family.', color: 'orange' },
+  ];
+
+  const colorMap: Record<string, { card: string; icon: string; label: string }> = {
+    red:    { card: 'bg-red-50 dark:bg-red-900/10 border-red-100 dark:border-red-900/30',       icon: 'bg-red-100 dark:bg-red-900/30 text-red-600',       label: 'text-red-700 dark:text-red-400' },
+    blue:   { card: 'bg-blue-50 dark:bg-blue-900/10 border-blue-100 dark:border-blue-900/30',   icon: 'bg-blue-100 dark:bg-blue-900/30 text-blue-600',    label: 'text-blue-700 dark:text-blue-400' },
+    purple: { card: 'bg-purple-50 dark:bg-purple-900/10 border-purple-100 dark:border-purple-900/30', icon: 'bg-purple-100 dark:bg-purple-900/30 text-purple-600', label: 'text-purple-700 dark:text-purple-400' },
+    green:  { card: 'bg-green-50 dark:bg-green-900/10 border-green-100 dark:border-green-900/30', icon: 'bg-green-100 dark:bg-green-900/30 text-green-600', label: 'text-green-700 dark:text-green-400' },
+    amber:  { card: 'bg-amber-50 dark:bg-amber-900/10 border-amber-100 dark:border-amber-900/30', icon: 'bg-amber-100 dark:bg-amber-900/30 text-amber-600', label: 'text-amber-700 dark:text-amber-400' },
+    orange: { card: 'bg-orange-50 dark:bg-orange-900/10 border-orange-100 dark:border-orange-900/30', icon: 'bg-orange-100 dark:bg-orange-900/30 text-orange-600', label: 'text-orange-700 dark:text-orange-400' },
+  };
+
+  const articles = [
+    { href: '/deprem-nedir',           tr: 'Deprem Nedir? Nasıl Oluşur?',           en: 'What Is an Earthquake?' },
+    { href: '/depreme-hazirlik',       tr: 'Depreme Hazırlık Rehberi',               en: 'Earthquake Preparedness Guide' },
+    { href: '/turkiyede-deprem-riski', tr: "Türkiye'de Deprem Riski",                en: 'Earthquake Risk in Turkey' },
+    { href: '/fay-hatlari',            tr: 'Türkiye\'deki Fay Hatları',              en: 'Fault Lines in Turkey' },
+    { href: '/zemin-tipleri',          tr: 'Zemin Tipleri ve Deprem Riski',          en: 'Soil Types and Earthquake Risk' },
+    { href: '/deprem-cantasi-rehberi', tr: '72 Saatlik Deprem Çantası Rehberi',      en: '72-Hour Earthquake Kit Guide' },
+  ];
+
   return (
-    <div className="border border-[var(--border)] rounded-xl overflow-hidden">
-      <button
-        onClick={() => setAcik(!acik)}
-        className="w-full flex items-center justify-between px-3 py-2.5 text-left bg-gray-50 dark:bg-gray-800/50 hover:bg-gray-100 dark:hover:bg-gray-700/50 transition-colors"
+    <div className="space-y-6">
+      {/* Hero */}
+      <div className="text-center pt-1 pb-2">
+        <p className="text-xs font-semibold text-red-500 uppercase tracking-wide mb-2">
+          {TR ? 'Türkiye Deprem Bilgi Platformu' : 'Turkey Earthquake Information Platform'}
+        </p>
+        <h1 className="text-2xl font-bold text-[var(--foreground)] mb-2">
+          {TR ? 'Bölgenizi Tanıyın,\nHazırlıklı Olun' : 'Know Your Region,\nStay Prepared'}
+        </h1>
+        <p className="text-sm text-[var(--muted)] leading-relaxed">
+          {TR
+            ? 'Bilimsel verilerle desteklenen deprem risk analizi, canlı deprem takibi ve hazırlık rehberleri.'
+            : 'Science-backed earthquake risk analysis, live tracking and preparedness guides for Turkey.'}
+        </p>
+      </div>
+
+      {/* Primary CTA */}
+      <Link
+        href="/bolge-analizi"
+        className="flex items-center justify-between bg-red-600 hover:bg-red-700 text-white rounded-2xl p-4 transition-colors"
       >
-        <span className="text-[11px] font-semibold text-[var(--muted)]">🌍 {il}{t('ilZeminiBtn')}</span>
-        <span className="text-[var(--muted)] text-xs">{acik ? '▲' : '▼'}</span>
-      </button>
-      {acik && (
-        <div className="p-3 space-y-2">
-          <p className="text-[10px] text-[var(--muted)] mb-2">{t('ilZeminiAciklama')}</p>
-          {zemin.map((z) => {
-            const zr = riskRenk(z.risk);
+        <div>
+          <p className="font-bold text-sm">{TR ? 'Bölge Riski Analizi Yap' : 'Run Risk Analysis'}</p>
+          <p className="text-[11px] text-red-100 mt-0.5">
+            {TR ? 'İl ve ilçenizi seçin, risk skorunuzu öğrenin' : 'Select your province and district, find your risk score'}
+          </p>
+        </div>
+        <span className="text-2xl shrink-0">🗺️</span>
+      </Link>
+
+      {/* Features grid */}
+      <div>
+        <p className="text-xs font-semibold text-[var(--muted)] uppercase tracking-wide mb-3">
+          {TR ? 'Tüm Özellikler' : 'All Features'}
+        </p>
+        <div className="grid grid-cols-2 gap-3">
+          {features.map((f) => {
+            const c = colorMap[f.color];
             return (
-              <div key={z.ad} className="flex items-center gap-3">
-                <div className="flex items-center gap-1.5 w-28 shrink-0">
-                  <div className="w-2 h-2 rounded-full shrink-0" style={{ backgroundColor: zr.bar }} />
-                  <span className="text-xs font-medium text-[var(--foreground)]">{zeminAd(z.ad)}</span>
+              <Link
+                key={f.href}
+                href={f.href}
+                className={`border rounded-2xl p-3.5 flex flex-col gap-2 hover:shadow-sm transition-shadow ${c.card}`}
+              >
+                <div className={`w-9 h-9 rounded-xl flex items-center justify-center text-lg ${c.icon}`}>
+                  {f.icon}
                 </div>
-                <div className="flex-1 h-2 bg-gray-100 dark:bg-gray-700 rounded-full overflow-hidden">
-                  <div className="h-full rounded-full" style={{ width: `${z.yuzde}%`, backgroundColor: zr.bar }} />
-                </div>
-                <span className="text-xs font-bold text-[var(--foreground)] w-8 text-right">%{z.yuzde}</span>
-              </div>
+                <p className={`text-xs font-bold leading-snug ${c.label}`}>{f.title}</p>
+                <p className="text-[11px] text-[var(--muted)] leading-relaxed">{f.desc}</p>
+              </Link>
             );
           })}
         </div>
-      )}
-    </div>
-  );
-}
-
-function riskRenk(sinif: string) {
-  if (sinif === 'yuksek') return { bg: '#FEF2F2', border: '#FECACA', text: '#7F1D1D', bar: '#EF4444', badge: '#FEE2E2', badgeText: '#991B1B' };
-  if (sinif === 'orta') return { bg: '#FFFBEB', border: '#FDE68A', text: '#78350F', bar: '#F59E0B', badge: '#FEF3C7', badgeText: '#92400E' };
-  return { bg: '#F0FDF4', border: '#BBF7D0', text: '#14532D', bar: '#22C55E', badge: '#DCFCE7', badgeText: '#166534' };
-}
-
-interface SelectProps {
-  label: string;
-  items: { value: number | string; label: string }[];
-  value: number | string | null;
-  onChange: (val: number | string) => void;
-  disabled?: boolean;
-  badge?: string;
-  placeholder?: string;
-}
-
-function Select({ label, items, value, onChange, disabled, badge, placeholder }: SelectProps) {
-  return (
-    <div className="mb-3">
-      <div className="flex items-center gap-2 mb-1.5">
-        <span className="text-xs font-semibold text-[var(--muted)] uppercase tracking-wider">{label}</span>
-        {badge && (
-          <span className="text-[10px] px-2 py-0.5 bg-gray-100 dark:bg-gray-700 text-[var(--muted)] rounded-full font-medium">{badge}</span>
-        )}
       </div>
-      <select
-        value={value ?? ''}
-        onChange={(e) => {
-          const v = e.target.value;
-          onChange(isNaN(Number(v)) || v === '' ? v : Number(v));
-        }}
-        disabled={disabled}
-        className="w-full border border-[var(--border)] rounded-xl px-3.5 py-3 text-sm text-[var(--foreground)] bg-[var(--card-bg)] disabled:opacity-40 focus:outline-none focus:ring-2 focus:ring-red-100 focus:border-red-300 transition-colors shadow-sm"
-      >
-        <option value="">{placeholder ?? `— ${label} seçin —`}</option>
-        {items.map((item) => (
-          <option key={item.value} value={item.value}>{item.label}</option>
-        ))}
-      </select>
-    </div>
-  );
-}
 
-function RiskBadge({ sinif, etiket }: { sinif: string; etiket: string }) {
-  const r = riskRenk(sinif);
-  return (
-    <span className="inline-flex items-center gap-1 text-xs font-semibold px-2.5 py-1 rounded-full"
-      style={{ backgroundColor: r.badge, color: r.badgeText }}>
-      <span className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: r.bar }} />
-      {etiket}
-    </span>
-  );
-}
-
-// Deprem büyüklük skalası
-const SKALA = [
-  { range: 'M < 4.0',    renk: '#6B7280', etiket: 'Hissedilmez',                                etiketEN: 'Not felt',                                        etap: 1 },
-  { range: 'M 4.0–4.9',  renk: '#10B981', etiket: 'Hafif sarsıntı, hasar yok',                  etiketEN: 'Light shaking, no damage',                        etap: 2 },
-  { range: 'M 5.0–5.4',  renk: '#F59E0B', etiket: 'Zayıf yapılarda orta hasar',                 etiketEN: 'Moderate damage in weak structures',              etap: 3 },
-  { range: 'M 5.5–6.0',  renk: '#F97316', etiket: 'Orta hasar, dayanıksız yapılar risk altında', etiketEN: 'Moderate damage, vulnerable buildings at risk',  etap: 4 },
-  { range: 'M 6.0–6.5',  renk: '#EF4444', etiket: 'Ciddi hasar',                                etiketEN: 'Serious damage',                                  etap: 5 },
-  { range: 'M 6.5–7.0',  renk: '#DC2626', etiket: 'Büyük yapısal hasar, can kaybı riski',       etiketEN: 'Major structural damage, risk of casualties',     etap: 6 },
-  { range: 'M 7.0+',     renk: '#7F1D1D', etiket: 'Yıkıcı',                                     etiketEN: 'Devastating',                                     etap: 7 },
-];
-
-function DepremSkalasi({ t, lang }: { t: (k: Parameters<typeof import('@/lib/i18n').t>[0]) => string; lang: 'TR' | 'EN' }) {
-  return (
-    <div className="bg-[var(--card-bg)] rounded-2xl shadow-sm border border-[var(--border)] p-4">
-      <div className="flex items-center justify-between mb-3">
-        <p className="text-xs font-bold text-[var(--muted)] uppercase tracking-wide">{t('skalaSectionTitle')}</p>
-        <a
-          href="https://www.usgs.gov/programs/earthquake-hazards"
-          target="_blank" rel="noopener noreferrer"
-          className="text-[10px] text-blue-500 hover:underline"
-        >
-          USGS →
-        </a>
-      </div>
-      <div className="space-y-1.5">
-        {SKALA.map((s) => (
-          <div key={s.range} className="flex items-center gap-3">
-            <div
-              className="w-2.5 h-2.5 rounded-full shrink-0"
-              style={{ backgroundColor: s.renk }}
-            />
-            <span className="text-[11px] font-bold text-[var(--foreground)] w-20 shrink-0">{s.range}</span>
-            <div className="flex-1 h-1.5 rounded-full bg-gray-100 dark:bg-gray-700 overflow-hidden">
-              <div
-                className="h-full rounded-full"
-                style={{ width: `${(s.etap / 7) * 100}%`, backgroundColor: s.renk }}
-              />
-            </div>
-            <span className="text-[11px] text-[var(--muted)] w-48 shrink-0 text-right">{lang === 'EN' ? s.etiketEN : s.etiket}</span>
+      {/* Stats */}
+      <div className="grid grid-cols-3 gap-2">
+        {[
+          { n: 'M4.0+', tr: 'Anlık deprem takibi', en: 'Live earthquake tracking' },
+          { n: '81', tr: 'İl risk analizi', en: 'Province analyses' },
+          { n: '900+', tr: 'İlçe risk skoru', en: 'District risk scores' },
+        ].map((s) => (
+          <div key={s.n} className="bg-[var(--card-bg)] border border-[var(--border)] rounded-xl p-3 text-center">
+            <p className="text-base font-bold text-red-600">{s.n}</p>
+            <p className="text-[10px] text-[var(--muted)] mt-0.5 leading-tight">{TR ? s.tr : s.en}</p>
           </div>
         ))}
       </div>
-      <p className="text-[10px] text-[var(--muted)] mt-2">
-        {t('skalaNot')}
-      </p>
-      <p className="text-[10px] text-[var(--muted)] mt-1">
-        {t('skalaKaynakLabel')}{' '}
-        <a
-          href="https://www.usgs.gov/programs/earthquake-hazards/earthquake-magnitude-energy-release-and-shaking-intensity"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-blue-500 hover:underline"
-        >
-          USGS Magnitude / Intensity Comparison
-        </a>
-      </p>
-    </div>
-  );
-}
 
-export default function BolgeAnalizi() {
-  const { t, lang } = useLanguage();
-  const { setIl, setIlce, setMahalle, setBolgeRisk, secilenIl, secilenIlce, secilenMahalle } = useAppStore();
-  const [yukleniyor, setYukleniyor] = useState(false);
-  const [risk, setRisk] = useState<BolgeRisk | null>(null);
-  const [hata, setHata] = useState('');
-  const riskRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    if (risk && riskRef.current) {
-      riskRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-  }, [risk]);
-
-  // Son depremler
-  interface GuncelDeprem { buyukluk: number; konum: string; tarih: string; derinlik: number; kaynak?: string; }
-  const [guncelTab, setGuncelTab] = useState<'tr' | 'dunya'>('tr');
-  const [trDepremler, setTrDepremler] = useState<GuncelDeprem[]>([]);
-  const [dunyaDepremler, setDunyaDepremler] = useState<GuncelDeprem[]>([]);
-  const [guncelYukleniyor, setGuncelYukleniyor] = useState(true);
-
-  useEffect(() => {
-    async function fetchGuncel() {
-      setGuncelYukleniyor(true);
-      const [kandilliRes, afadRes, dunyaRes] = await Promise.allSettled([
-        fetch('/api/kandilli?limit=20'),
-        fetch('/api/afad?limit=20&minmag=3.5'),
-        fetch('/api/usgs'),
-      ]);
-      const combined: GuncelDeprem[] = [];
-      if (kandilliRes.status === 'fulfilled' && kandilliRes.value.ok) {
-        const d = await kandilliRes.value.json();
-        if (Array.isArray(d)) combined.push(...d.map((x: { buyukluk: number; konum: string; tarih: string; saat?: string; derinlik: number }) => ({
-          buyukluk: x.buyukluk, konum: x.konum,
-          tarih: x.saat ? `${x.tarih} ${x.saat}` : x.tarih,
-          derinlik: x.derinlik, kaynak: 'Kandilli',
-        })));
-      }
-      if (afadRes.status === 'fulfilled' && afadRes.value.ok) {
-        const d = await afadRes.value.json();
-        if (Array.isArray(d)) combined.push(...d.map((x: { buyukluk: number; konum: string; tarih: string; derinlik: number }) => ({
-          buyukluk: x.buyukluk, konum: x.konum, tarih: x.tarih, derinlik: x.derinlik, kaynak: 'AFAD',
-        })));
-      }
-      setTrDepremler(combined.sort((a, b) => b.buyukluk - a.buyukluk));
-      if (dunyaRes.status === 'fulfilled' && dunyaRes.value.ok) {
-        const d = await dunyaRes.value.json();
-        if (d.features) {
-          setDunyaDepremler(d.features.slice(0, 20).map((f: { properties: { mag: number; place: string; time: number }; geometry: { coordinates: [number, number, number] } }) => ({
-            buyukluk: f.properties.mag,
-            konum: f.properties.place,
-            tarih: new Date(f.properties.time).toLocaleDateString('tr-TR'),
-            derinlik: Math.round(f.geometry.coordinates[2]),
-            kaynak: 'USGS',
-          })));
-        }
-      }
-      setGuncelYukleniyor(false);
-    }
-    fetchGuncel();
-  }, []);
-
-  const iller = getProvinces().map((il) => ({ value: il.id, label: il.name }));
-  const ilceler = secilenIl ? getDistricts(secilenIl.id).map((i) => ({ value: i.id, label: i.name })) : [];
-  const mahalleler = secilenIlce ? getNeighbourhoods(secilenIlce.id).map((m) => ({ value: m.id, label: m.name })) : [];
-
-  const onIlSec = useCallback((id: number | string) => {
-    const il = getProvinces().find((i) => i.id === id);
-    if (il) setIl({ id: il.id, name: il.name });
-    setRisk(null); setHata('');
-  }, [setIl]);
-
-  const onIlceSec = useCallback((id: number | string) => {
-    const ilce = getDistricts(secilenIl!.id).find((i) => i.id === id);
-    if (ilce) setIlce({ id: ilce.id, name: ilce.name, provinceId: secilenIl!.id });
-    setRisk(null);
-  }, [secilenIl, setIlce]);
-
-  const onMahalleSec = useCallback(async (id: number | string) => {
-    const mah = getNeighbourhoods(secilenIlce!.id).find((m) => m.id === id);
-    if (!mah) return;
-    setMahalle({ id: mah.id, name: mah.name, districtId: secilenIlce!.id });
-    setYukleniyor(true); setHata('');
-    try {
-      const data = await bolgeRiskGetir(secilenIl!.name, secilenIlce!.name, mah.name);
-      setRisk(data); setBolgeRisk(data);
-    } catch {
-      setHata(t('error'));
-    } finally {
-      setYukleniyor(false);
-    }
-  }, [secilenIl, secilenIlce, setMahalle, setBolgeRisk, t]);
-
-  const renk = risk ? riskRenk(risk.riskSinifi) : null;
-  const bilimsel = risk ? (bilimselKaynaklar[`${risk.il}-${risk.ilce}`] ?? bilimselKaynaklar[risk.il]) : null;
-
-  // 30 yıl olasılık etiketi çevirisi
-  const OLASILIK_EN: Record<string, string> = {
-    'Çok Yüksek': t('riskCokYuksek'),
-    'Yüksek':     t('riskYuksek'),
-    'Orta':       t('riskOrta'),
-    'Düşük-Orta': t('riskDusukOrta'),
-    'Düşük':      t('riskDusuk'),
-  };
-
-  const zeminAd = (ad: string) => lang === 'EN' ? (ZEMIN_EN[ad] ?? ad) : ad;
-
-  // Risk badge label
-  const riskEtiket = risk
-    ? risk.riskSkoru >= 90 ? `M5.0–5.5+ ${lang === 'EN' ? 'prob. very high' : 'olasılığı çok yüksek'}`
-      : risk.riskSkoru >= 75 ? `M5.0–5.5+ ${lang === 'EN' ? 'prob. high' : 'olasılığı yüksek'}`
-      : risk.riskSkoru >= 50 ? `M5.0–5.5+ ${lang === 'EN' ? 'prob. medium-high' : 'olasılığı orta-yüksek'}`
-      : risk.riskSkoru >= 35 ? `M5.0–5.5+ ${lang === 'EN' ? 'prob. medium' : 'olasılığı orta'}`
-      : `M5.0–5.5+ ${lang === 'EN' ? 'prob. low' : 'olasılığı düşük'}`
-    : '';
-
-  return (
-    <div className="space-y-4">
-      {/* Başlık */}
+      {/* Knowledge guide */}
       <div>
-        <h1 className="text-xl font-bold text-[var(--foreground)]">{t('pageTitle')}</h1>
-        <p className="text-sm text-[var(--muted)] mt-0.5">{t('pageSubtitle')}</p>
-      </div>
-
-      {/* Seçiciler */}
-      <div className="bg-[var(--card-bg)] rounded-2xl p-4 shadow-sm border border-[var(--border)]">
-        <Select
-          label={t('selectIl')}
-          items={iller}
-          value={secilenIl?.id ?? null}
-          onChange={onIlSec}
-          badge={`${iller.length} ${t('badgeSehir')}`}
-          placeholder={t('ilSec')}
-        />
-        <Select
-          label={t('selectIlce')}
-          items={ilceler}
-          value={secilenIlce?.id ?? null}
-          onChange={onIlceSec}
-          disabled={!secilenIl}
-          badge={ilceler.length ? `${ilceler.length} ${t('badgeIlce')}` : undefined}
-          placeholder={t('ilceSec')}
-        />
-        <div className="mb-0">
-          <Select
-            label={t('selectMahalle')}
-            items={mahalleler}
-            value={secilenMahalle?.id ?? null}
-            onChange={onMahalleSec}
-            disabled={!secilenIlce}
-            badge={mahalleler.length ? `${mahalleler.length} ${t('badgeMahalle')}` : undefined}
-            placeholder={t('mahalleSec')}
-          />
-        </div>
-      </div>
-
-      {/* Deprem Büyüklük Skalası */}
-      <DepremSkalasi t={t} lang={lang} />
-
-      {yukleniyor && (
-        <div className="bg-[var(--card-bg)] rounded-2xl p-8 shadow-sm border border-[var(--border)] flex items-center justify-center gap-3">
-          <div className="w-5 h-5 border-2 border-red-400 border-t-transparent rounded-full animate-spin" />
-          <span className="text-sm text-[var(--muted)]">{t('loading')}</span>
-        </div>
-      )}
-
-      {hata && (
-        <div className="bg-red-50 dark:bg-red-900/20 border border-red-100 dark:border-red-800 rounded-2xl p-4 text-sm text-red-600 dark:text-red-400">{hata}</div>
-      )}
-
-      {risk && renk && (
-        <div ref={riskRef} className="space-y-3">
-
-          {/* Risk skoru kartı */}
-          <div className="bg-[var(--card-bg)] rounded-2xl shadow-sm border border-[var(--border)] overflow-hidden">
-            <div className="p-4" style={{ backgroundColor: renk.bg }}>
-              <div className="flex items-start justify-between mb-3">
-                <div>
-                  <p className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-1">
-                    {risk.mahalle} · {risk.ilce} · {risk.il}
-                  </p>
-                  <RiskBadge sinif={risk.riskSinifi} etiket={riskEtiket} />
-                </div>
-                <div className="text-right">
-                  <p className="text-sm font-bold leading-tight" style={{ color: renk.text }}>
-                    {risk.riskSkoru >= 90 ? (lang === 'EN' ? 'Very High Risk' : 'Çok Yüksek Risk')
-                     : risk.riskSkoru >= 70 ? (lang === 'EN' ? 'High Risk' : 'Yüksek Risk')
-                     : risk.riskSkoru >= 40 ? (lang === 'EN' ? 'Medium Risk' : 'Orta Risk')
-                     : risk.riskSkoru >= 20 ? (lang === 'EN' ? 'Low-Medium Risk' : 'Düşük-Orta Risk')
-                     : (lang === 'EN' ? 'Low Risk' : 'Düşük Risk')}
-                  </p>
-                </div>
-              </div>
-              <div className="h-2 rounded-full bg-black/10 overflow-hidden">
-                <div className="h-full rounded-full transition-all duration-700" style={{ width: `${risk.riskSkoru}%`, backgroundColor: renk.bar }} />
-              </div>
-              {risk.aciklama && lang === 'TR' && (
-                <p className="text-xs mt-2 leading-relaxed" style={{ color: renk.text }}>{risk.aciklama}</p>
-              )}
-            </div>
-            {/* Metrikler */}
-            <div className="grid grid-cols-4 divide-x divide-[var(--border)] border-t border-[var(--border)]">
-              {[
-                { label: t('metricFay'), value: `${risk.fayMesafe} km` },
-                { label: t('metricMw'), value: risk.beklenenMax },
-                { label: t('metricOlasilik'), value: OLASILIK_EN[risk.olasilik30Yil] ?? risk.olasilik30Yil },
-                { label: t('metricDepremSayisi'), value: risk.depremler.length > 0 ? String(risk.depremler.length) : '—' },
-              ].map((m) => (
-                <div key={m.label} className="p-3 text-center">
-                  <p className="text-[10px] text-[var(--muted)] leading-tight mb-1">{m.label}</p>
-                  <p className="text-xs font-bold text-[var(--foreground)]">{m.value}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Zemin */}
-          <div className="bg-[var(--card-bg)] rounded-2xl shadow-sm border border-[var(--border)] p-4">
-            <p className="text-xs font-bold text-[var(--muted)] uppercase tracking-wide mb-3">{t('sectionZemin')}</p>
-            {risk.zemin === null ? (
-              <div className="space-y-2">
-                <div className="flex items-start gap-2.5 bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 rounded-xl p-3">
-                  <span className="text-amber-500 text-base shrink-0">🔍</span>
-                  <div>
-                    <p className="text-xs font-semibold text-amber-700 dark:text-amber-400">{risk.ilce}{t('zeminInceleniyor')}</p>
-                    <p className="text-[11px] text-amber-600 dark:text-amber-500 mt-0.5 leading-relaxed">{t('zeminInceleniyor2')}</p>
-                  </div>
-                </div>
-                {risk.ilZemini && <IlZeminiDetay il={risk.il} zemin={risk.ilZemini} t={t} lang={lang} />}
-              </div>
-            ) : (
-              <>
-                <div className="space-y-2">
-                  {risk.zemin.map((z) => {
-                    const zr = riskRenk(z.risk);
-                    return (
-                      <div key={z.ad} className="flex items-center gap-3">
-                        <div className="flex items-center gap-1.5 w-28 shrink-0">
-                          <div className="w-2 h-2 rounded-full shrink-0" style={{ backgroundColor: zr.bar }} />
-                          <span className="text-xs font-medium text-[var(--foreground)]">{zeminAd(z.ad)}</span>
-                        </div>
-                        <div className="flex-1 h-2 bg-gray-100 dark:bg-gray-700 rounded-full overflow-hidden">
-                          <div className="h-full rounded-full" style={{ width: `${z.yuzde}%`, backgroundColor: zr.bar }} />
-                        </div>
-                        <span className="text-xs font-bold text-[var(--foreground)] w-8 text-right">%{z.yuzde}</span>
-                      </div>
-                    );
-                  })}
-                </div>
-                {lang === 'TR' && risk.zemin.map((z) => z.risk === 'yuksek' && (
-                  <p key={z.ad} className="text-[11px] text-[var(--muted)] mt-2 leading-relaxed">
-                    <span className="font-semibold">{zeminAd(z.ad)}:</span> {z.aciklama}
-                  </p>
-                ))}
-              </>
-            )}
-          </div>
-
-          {/* Bina stoğu */}
-          <div className="bg-[var(--card-bg)] rounded-2xl shadow-sm border border-[var(--border)] p-4">
-            <div className="flex items-center justify-between mb-3">
-              <p className="text-xs font-bold text-[var(--muted)] uppercase tracking-wide">{t('sectionBina')}</p>
-              <a
-                href="https://www.tuik.gov.tr"
-                target="_blank" rel="noopener noreferrer"
-                className="text-[10px] text-blue-500 hover:underline"
-              >
-                TÜİK 2021 →
-              </a>
-            </div>
-            <div className="space-y-2.5">
-              {risk.binalar.map((b) => (
-                <div key={b.donem} className="flex items-center gap-3">
-                  <span className="text-xs text-[var(--muted)] w-36 shrink-0">
-                    {b.donem === '1999 öncesi' ? t('binaDonemi1') : b.donem === '1999–2012' ? t('binaDonemi2') : b.donem === '2012 sonrası' ? t('binaDonemi3') : b.donem}
-                  </span>
-                  <div className="flex-1 h-2.5 bg-gray-100 dark:bg-gray-700 rounded-full overflow-hidden">
-                    <div className="h-full rounded-full" style={{ width: `${b.yuzde}%`, backgroundColor: b.renk }} />
-                  </div>
-                  <span className="text-xs font-bold text-[var(--foreground)] w-8 text-right">%{b.yuzde}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Son depremler */}
-          {risk.depremler.length > 0 && (
-            <div className="bg-[var(--card-bg)] rounded-2xl shadow-sm border border-[var(--border)] p-4">
-              <div className="flex items-center justify-between mb-3">
-                <p className="text-xs font-bold text-[var(--muted)] uppercase tracking-wide">{t('tarihselDepremler')}</p>
-                <span className="text-[10px] text-[var(--muted)] bg-gray-50 dark:bg-gray-700 px-2 py-1 rounded-full">USGS</span>
-              </div>
-              <div className="space-y-2">
-                {risk.depremler.slice(0, 20).map((d, i) => (
-                  <div key={i} className="flex items-center gap-3 py-1.5 border-b border-[var(--border)] last:border-0">
-                    <div className={`w-10 h-10 rounded-xl flex items-center justify-center text-sm font-bold shrink-0 ${
-                      d.buyukluk >= 6 ? 'bg-red-50 dark:bg-red-900/30 text-red-600' :
-                      d.buyukluk >= 4 ? 'bg-amber-50 dark:bg-amber-900/30 text-amber-600' :
-                      'bg-gray-50 dark:bg-gray-700 text-gray-500'
-                    }`}>
-                      {d.buyukluk.toFixed(1)}
-                    </div>
-                    <div className="flex-1 min-w-0">
-                      <p className="text-xs font-medium text-[var(--foreground)] truncate">{d.baslik}</p>
-                      <p className="text-[11px] text-[var(--muted)]">{d.tarih} · {d.derinlik} km</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          )}
-
-          {/* Tavsiyeler */}
-          <div className="bg-[var(--card-bg)] rounded-2xl shadow-sm border border-[var(--border)] p-4">
-            <p className="text-xs font-bold text-[var(--muted)] uppercase tracking-wide mb-3">{t('sectionOneriler')}</p>
-            <div className="space-y-2">
-              {risk.tavsiyeler.map((tv, i) => {
-                const tr =
-                  tv.tur === 'acil' ? { bg: '#FEF2F2', dot: '#EF4444', text: '#7F1D1D' } :
-                  tv.tur === 'onemli' ? { bg: '#FFFBEB', dot: '#F59E0B', text: '#78350F' } :
-                  { bg: '#EFF6FF', dot: '#3B82F6', text: '#1E3A8A' };
-                return (
-                  <div key={i} className="flex items-start gap-2.5 rounded-xl p-3" style={{ backgroundColor: tr.bg }}>
-                    <div className="w-1.5 h-1.5 rounded-full mt-1.5 shrink-0" style={{ backgroundColor: tr.dot }} />
-                    <p className="text-xs leading-relaxed" style={{ color: tr.text }}>{tv.key ? t(tv.key as Parameters<typeof import('@/lib/i18n').t>[0]) : tv.metin}</p>
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-
-          {/* Uzman görüşleri */}
-          {bilimsel && bilimsel.uzmanGorusleri && bilimsel.uzmanGorusleri.length > 0 && (
-            <div className="bg-[var(--card-bg)] rounded-2xl shadow-sm border border-[var(--border)] p-4">
-              <p className="text-xs font-bold text-[var(--muted)] uppercase tracking-wide mb-3">{t('sectionUzman')}</p>
-              <div className="space-y-3">
-                {bilimsel.uzmanGorusleri.map((u, i) => (
-                  <div key={i} className="border border-[var(--border)] rounded-xl p-3 bg-gray-50 dark:bg-gray-800/50">
-                    <div className="flex items-start justify-between gap-2 mb-2">
-                      <div>
-                        <p className="text-xs font-bold text-[var(--foreground)]">{u.uzman}</p>
-                        <p className="text-[11px] text-[var(--muted)]">{u.unvan}</p>
-                      </div>
-                      <div className="flex items-center gap-1 shrink-0">
-                        <span className={`text-[10px] px-2 py-0.5 rounded-full font-semibold ${
-                          u.ulke === 'TR' ? 'bg-red-50 dark:bg-red-900/30 text-red-600' : 'bg-blue-50 dark:bg-blue-900/30 text-blue-600'
-                        }`}>
-                          {u.ulke === 'TR' ? t('yerli') : `🌍 ${u.ulke}`}
-                        </span>
-                        <span className="text-[10px] text-[var(--muted)]">{u.yil}</span>
-                      </div>
-                    </div>
-                    <p className="text-xs text-[var(--foreground)] leading-relaxed italic border-l-2 border-amber-300 pl-2.5">
-                      {u.gorus}
-                    </p>
-                    {u.kaynak && (
-                      <a href={u.kaynak} target="_blank" rel="noopener noreferrer"
-                        className="text-[11px] text-blue-500 hover:text-blue-700 mt-1.5 block">
-                        {t('kaynagaGit')}
-                      </a>
-                    )}
-                  </div>
-                ))}
-              </div>
-            </div>
-          )}
-
-          {/* Kaynakça bölümü */}
-          {bilimsel && bilimsel.kaynaklar.length > 0 && (
-            <div className="bg-[var(--card-bg)] rounded-2xl shadow-sm border border-[var(--border)] p-4">
-              <p className="text-xs font-bold text-[var(--muted)] uppercase tracking-wide mb-3">{t('kaynakcaTitle')}</p>
-              <div className="space-y-3">
-                {bilimsel.kaynaklar.map((k, i) => (
-                  <div key={i} className="border border-[var(--border)] rounded-xl p-3 bg-gray-50 dark:bg-gray-800/50">
-                    <p className="text-[11px] text-[var(--muted)] font-semibold">[{i + 1}]</p>
-                    <p className="text-xs font-semibold text-[var(--foreground)] leading-snug mt-0.5">{k.baslik}</p>
-                    <p className="text-[11px] text-[var(--muted)] mt-1">{k.yazar} · {k.yil}{k.dergi ? ` · ${k.dergi}` : ''}</p>
-                    {k.alinti && (
-                      <p className="text-[11px] text-[var(--muted)] mt-2 italic border-l-2 border-gray-300 dark:border-gray-600 pl-2.5 leading-relaxed">&ldquo;{k.alinti}&rdquo;</p>
-                    )}
-                    {k.doi && (
-                      <a
-                        href={`https://doi.org/${k.doi}`}
-                        target="_blank" rel="noopener noreferrer"
-                        className="text-[11px] text-blue-500 hover:underline mt-1 block"
-                      >
-                        {t('doiLabel')} {k.doi}
-                      </a>
-                    )}
-                    {k.link && !k.doi && (
-                      <a href={k.link} target="_blank" rel="noopener noreferrer"
-                        className="text-[11px] text-blue-500 hover:text-blue-700 mt-1 block">
-                        {t('kaynagaGit')}
-                      </a>
-                    )}
-                  </div>
-                ))}
-                {/* Sabit veri kaynakları */}
-                <div className="border border-[var(--border)] rounded-xl p-3 bg-gray-50 dark:bg-gray-800/50">
-                  <p className="text-xs font-semibold text-[var(--foreground)]">Veri Kaynakları</p>
-                  <div className="mt-1.5 space-y-1">
-                    {[
-                      { ad: 'Kandilli Rasathanesi (KOERI)', link: 'https://www.koeri.boun.edu.tr' },
-                      { ad: 'AFAD Türkiye Deprem Tehlike Haritası 2018', link: 'https://www.afad.gov.tr' },
-                      { ad: 'MTA Aktif Fay Haritası', link: 'https://www.mta.gov.tr' },
-                      { ad: 'TÜİK 2021 Bina Sayımı', link: 'https://data.tuik.gov.tr' },
-                    ].map((v) => (
-                      <a key={v.ad} href={v.link} target="_blank" rel="noopener noreferrer"
-                        className="text-[11px] text-blue-500 hover:underline block">
-                        · {v.ad}
-                      </a>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </div>
-          )}
-
-          {/* Bilgi notu */}
-          <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-100 dark:border-blue-800 rounded-xl p-3">
-            <p className="text-[11px] text-blue-700 dark:text-blue-400 leading-relaxed">
-              <span className="font-semibold">{t('notLabel')}</span> {t('notMetin')}
-            </p>
-          </div>
-
-          {/* Aksiyon butonu */}
-          <a href="/canta"
-            className="flex items-center justify-center gap-2 bg-gray-900 dark:bg-gray-700 text-white rounded-xl py-3 text-sm font-semibold hover:bg-gray-800 transition-colors">
-            {t('btn72hCanta')}
-          </a>
-
-          {/* Sorumluluk reddi */}
-          <p className="text-[10px] text-[var(--muted)] text-center leading-relaxed px-2">
-            {t('sorumlulukReddi')}
-          </p>
-        </div>
-      )}
-
-      {/* Son Depremler — her zaman göster */}
-      <div className="bg-[var(--card-bg)] rounded-2xl shadow-sm border border-[var(--border)] p-4">
-        <p className="text-xs font-bold text-[var(--muted)] uppercase tracking-wide mb-3">{t('sonDepremler')}</p>
-        {/* Kaynak sekmeleri */}
-        <div className="flex gap-0 bg-gray-100 dark:bg-gray-700 rounded-xl overflow-hidden mb-3">
-          {([
-            { key: 'tr' as const, label: '🇹🇷 Türkiye', sub: 'Kandilli + AFAD · M3.5+' },
-            { key: 'dunya' as const, label: '🌍 Dünya', sub: 'USGS · M6.5+' },
-          ] as const).map((tab) => (
-            <button
-              key={tab.key}
-              onClick={() => setGuncelTab(tab.key)}
-              className={`flex-1 py-2 text-[11px] font-semibold transition-colors ${
-                guncelTab === tab.key
-                  ? 'bg-white dark:bg-gray-600 text-red-600 shadow-sm rounded-xl'
-                  : 'text-[var(--muted)]'
-              }`}
-            >
-              {tab.label}
-            </button>
-          ))}
-        </div>
-        {guncelYukleniyor ? (
-          <div className="flex items-center justify-center py-6 gap-2 text-sm text-[var(--muted)]">
-            <div className="w-4 h-4 border-2 border-red-400 border-t-transparent rounded-full animate-spin" />
-            {t('yukleniyor')}
-          </div>
-        ) : (
-          <div className="space-y-2 max-h-72 overflow-y-auto">
-            {(guncelTab === 'tr' ? trDepremler : dunyaDepremler).length === 0 ? (
-              <p className="text-xs text-[var(--muted)] text-center py-4">{t('veriAlinamadi')}</p>
-            ) : (
-              (guncelTab === 'tr' ? trDepremler : dunyaDepremler).map((d, i) => (
-                <div key={i} className="flex items-center gap-3 py-1.5 border-b border-[var(--border)] last:border-0">
-                  <div className={`w-10 h-10 rounded-xl flex items-center justify-center text-sm font-bold shrink-0 ${
-                    d.buyukluk >= 6 ? 'bg-red-50 dark:bg-red-900/30 text-red-600' :
-                    d.buyukluk >= 4 ? 'bg-amber-50 dark:bg-amber-900/30 text-amber-600' :
-                    'bg-gray-50 dark:bg-gray-700 text-gray-500'
-                  }`}>
-                    {d.buyukluk.toFixed(1)}
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <p className="text-xs font-medium text-[var(--foreground)] truncate">{d.konum}</p>
-                    <p className="text-[11px] text-[var(--muted)]">{d.tarih} · {d.derinlik} km{d.kaynak ? ` · ${d.kaynak}` : ''}</p>
-                  </div>
-                </div>
-              ))
-            )}
-          </div>
-        )}
-      </div>
-
-      {/* Deprem Anında Ne Yapmalıyız — her zaman göster */}
-      <div className="bg-[var(--card-bg)] rounded-2xl shadow-sm border border-[var(--border)] p-4">
-        <p className="text-xs font-bold text-[var(--muted)] uppercase tracking-wide mb-3">{t('depremAnindaTitle')}</p>
-        <div className="space-y-2 mb-4">
-          {depremAnindaOnlemler.map((o) => (
-            <div key={o.adim} className="flex items-start gap-3 border border-[var(--border)] rounded-xl p-3 bg-gray-50 dark:bg-gray-800/50">
-              <span className="text-xl shrink-0">{o.ikon}</span>
-              <div>
-                <p className="text-xs font-bold text-[var(--foreground)]">{lang === 'EN' ? o.baslikEN : o.baslik}</p>
-                <p className="text-[11px] text-[var(--muted)] leading-relaxed mt-0.5">{lang === 'EN' ? o.aciklamaEN : o.aciklama}</p>
-              </div>
-            </div>
-          ))}
-        </div>
-        <p className="text-xs font-bold text-[var(--muted)] uppercase tracking-wide mb-2">{t('depremSonrasindaTitle')}</p>
+        <p className="text-xs font-semibold text-[var(--muted)] uppercase tracking-wide mb-3">
+          {TR ? 'Bilgi Rehberi' : 'Knowledge Guide'}
+        </p>
         <div className="space-y-2">
-          {depremSonrasiOnlemler.map((o) => (
-            <div key={o.adim} className="flex items-start gap-3 border border-[var(--border)] rounded-xl p-3 bg-gray-50 dark:bg-gray-800/50">
-              <span className="text-xl shrink-0">{o.ikon}</span>
-              <div>
-                <p className="text-xs font-bold text-[var(--foreground)]">{lang === 'EN' ? o.baslikEN : o.baslik}</p>
-                <p className="text-[11px] text-[var(--muted)] leading-relaxed mt-0.5">{lang === 'EN' ? o.aciklamaEN : o.aciklama}</p>
-              </div>
-            </div>
+          {articles.map((a) => (
+            <Link
+              key={a.href}
+              href={a.href}
+              className="flex items-center justify-between bg-[var(--card-bg)] border border-[var(--border)] rounded-xl px-4 py-3 hover:border-red-200 transition-colors"
+            >
+              <span className="text-xs font-medium text-[var(--foreground)]">{TR ? a.tr : a.en}</span>
+              <span className="text-[var(--muted)] text-xs shrink-0 ml-2">→</span>
+            </Link>
           ))}
         </div>
       </div>
+
+      <p className="text-[10px] text-[var(--muted)] text-center pb-2">
+        {TR ? 'Veri kaynakları: Kandilli · AFAD · USGS · MTA · TÜİK' : 'Data sources: Kandilli · AFAD · USGS · MTA · TÜİK'}
+      </p>
     </div>
   );
 }

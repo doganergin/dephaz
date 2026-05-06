@@ -1,146 +1,111 @@
-import type { Metadata } from 'next';
+'use client';
 import Link from 'next/link';
-
-export const metadata: Metadata = {
-  title: 'Deprem Nedir? Nasıl Oluşur? — Deprem Hattı',
-  description: 'Deprem nedir, nasıl oluşur? Tektonik plakalar, fay hatları ve sismik dalgalar hakkında kapsamlı bilgi.',
-};
+import { useLanguage } from '@/contexts/LanguageContext';
 
 export default function DepremNedirPage() {
+  const { lang } = useLanguage();
+  const TR = lang === 'TR';
+
   return (
     <article className="space-y-6">
       <div>
-        <p className="text-xs font-semibold text-red-500 uppercase tracking-wide mb-1">Temel Bilgi</p>
-        <h1 className="text-2xl font-bold text-[var(--foreground)]">Deprem Nedir? Nasıl Oluşur?</h1>
-        <p className="text-sm text-[var(--muted)] mt-1">Tektonik plakalardan sismik dalgalara deprem bilimi</p>
+        <p className="text-xs font-semibold text-red-500 uppercase tracking-wide mb-1">{TR ? 'Temel Bilgi' : 'Fundamentals'}</p>
+        <h1 className="text-2xl font-bold text-[var(--foreground)]">{TR ? 'Deprem Nedir? Nasıl Oluşur?' : 'What is an Earthquake? How Does It Form?'}</h1>
+        <p className="text-sm text-[var(--muted)] mt-1">{TR ? 'Tektonik plakalardan sismik dalgalara deprem bilimi' : 'Earthquake science from tectonic plates to seismic waves'}</p>
       </div>
 
       <section className="space-y-3">
-        <h2 className="text-base font-bold text-[var(--foreground)]">Depremin Tanımı</h2>
+        <h2 className="text-base font-bold text-[var(--foreground)]">{TR ? 'Depremin Tanımı' : 'Definition'}</h2>
         <p className="text-sm text-[var(--foreground)] leading-relaxed">
-          Deprem, yer kabuğundaki kayaçların ani kırılması sonucu açığa çıkan enerjinin sismik dalgalar
-          halinde yayılmasıyla oluşan doğal bir yer sarsıntısıdır. Günümüzde dünya genelinde her yıl
-          yaklaşık 500.000 deprem meydana gelmekte, bunların yaklaşık 100.000'i insanlar tarafından
-          hissedilebilmekte ve yaklaşık 100 tanesi hasar oluşturabilmektedir.
+          {TR
+            ? 'Deprem, yer kabuğundaki kayaçların ani kırılması sonucu açığa çıkan enerjinin sismik dalgalar halinde yayılmasıyla oluşan doğal bir yer sarsıntısıdır. Günümüzde dünya genelinde her yıl yaklaşık 500.000 deprem meydana gelmekte, bunların yaklaşık 100.000\'i insanlar tarafından hissedilebilmekte ve yaklaşık 100 tanesi hasar oluşturabilmektedir.'
+            : 'An earthquake is a natural ground shaking caused by the sudden rupture of rocks in the Earth\'s crust, releasing energy in the form of seismic waves. About 500,000 earthquakes occur worldwide every year; around 100,000 can be felt by humans and roughly 100 cause damage.'}
         </p>
         <p className="text-sm text-[var(--foreground)] leading-relaxed">
-          Depremin oluştuğu noktaya <strong>odak noktası (hiposantr)</strong>, yeryüzündeki dikey
-          projeksiyonuna ise <strong>merkez üs (episantr)</strong> adı verilir. Depremin etkisi, merkez
-          üsden uzaklaştıkça azalmakla birlikte zemin yapısına, bina kalitesine ve derinliğe bağlı olarak
-          farklılık gösterebilir.
+          {TR
+            ? 'Depremin oluştuğu noktaya odak noktası (hiposantr), yeryüzündeki dikey projeksiyonuna ise merkez üs (episantr) adı verilir.'
+            : 'The point where the earthquake originates underground is called the focus (hypocenter), while its projection on the Earth\'s surface is called the epicenter.'}
         </p>
       </section>
 
       <section className="space-y-3">
-        <h2 className="text-base font-bold text-[var(--foreground)]">Tektonik Plakalar ve Fay Hatları</h2>
+        <h2 className="text-base font-bold text-[var(--foreground)]">{TR ? 'Tektonik Plakalar ve Fay Hatları' : 'Tectonic Plates and Fault Lines'}</h2>
         <p className="text-sm text-[var(--foreground)] leading-relaxed">
-          Dünya'nın katı dış kabuğu olan litosfer, <strong>tektonik plakalar</strong> adı verilen büyük
-          parçalara bölünmüştür. Bu plakalar, altındaki akışkan astenosfer üzerinde yavaşça hareket eder.
-          Yılda ortalama birkaç santimetre olan bu hareket, milyonlarca yıl boyunca dağları, ovaları ve
-          okyanusları şekillendirmiştir.
-        </p>
-        <p className="text-sm text-[var(--foreground)] leading-relaxed">
-          Plakalar birbirlerine sürtündükçe, birbirinin altına dalınca ya da birbirinden uzaklaştıkça
-          kayaçlarda gerilim birikir. Bu gerilim belirli bir eşiği aştığında kayaç aniden kırılır ve
-          biriken enerji sismik dalgalar halinde çevreye yayılır. Bu kırıklar, <strong>fay hatları</strong>
-          olarak bilinir.
+          {TR
+            ? 'Dünya\'nın katı dış kabuğu olan litosfer, tektonik plakalar adı verilen büyük parçalara bölünmüştür. Bu plakalar birbirlerine sürtündükçe, birbirinin altına dalınca ya da birbirinden uzaklaştıkça kayaçlarda gerilim birikir. Bu gerilim belirli bir eşiği aştığında kayaç aniden kırılır; bu kırıklar fay hatları olarak bilinir.'
+            : 'The Earth\'s solid outer shell (lithosphere) is divided into large pieces called tectonic plates. As these plates grind against each other, subduct, or pull apart, stress builds up in the rocks. When this stress exceeds a threshold, the rock ruptures suddenly — these ruptures are known as fault lines.'}
         </p>
         <div className="bg-gray-50 dark:bg-gray-800/50 border border-[var(--border)] rounded-xl p-4 space-y-2">
-          <p className="text-xs font-bold text-[var(--muted)] uppercase tracking-wide">Fay Türleri</p>
+          <p className="text-xs font-bold text-[var(--muted)] uppercase tracking-wide">{TR ? 'Fay Türleri' : 'Fault Types'}</p>
           <ul className="text-sm text-[var(--foreground)] space-y-2 leading-relaxed">
-            <li><strong>Normal Fay:</strong> Plakalar birbirinden uzaklaştığında oluşur. Bir blok diğerinin altına düşer.</li>
-            <li><strong>Ters Fay:</strong> Plakalar birbirine yaklaştığında oluşur. Bir blok diğerinin üzerine çıkar.</li>
-            <li><strong>Doğrultu Atımlı Fay:</strong> Plakalar yatay yönde birbirine sürtünür. Kuzey Anadolu Fay Hattı bu türdedir.</li>
+            {TR ? (
+              <>
+                <li><strong>Normal Fay:</strong> Plakalar birbirinden uzaklaştığında oluşur.</li>
+                <li><strong>Ters Fay:</strong> Plakalar birbirine yaklaştığında oluşur.</li>
+                <li><strong>Doğrultu Atımlı Fay:</strong> Plakalar yatay yönde birbirine sürtünür. Kuzey Anadolu Fay Hattı bu türdedir.</li>
+              </>
+            ) : (
+              <>
+                <li><strong>Normal Fault:</strong> Forms when plates move apart.</li>
+                <li><strong>Reverse Fault:</strong> Forms when plates converge.</li>
+                <li><strong>Strike-Slip Fault:</strong> Plates slide horizontally past each other. The North Anatolian Fault is this type.</li>
+              </>
+            )}
           </ul>
         </div>
       </section>
 
       <section className="space-y-3">
-        <h2 className="text-base font-bold text-[var(--foreground)]">Türkiye Neden Bu Kadar Çok Deprem Yaşıyor?</h2>
+        <h2 className="text-base font-bold text-[var(--foreground)]">{TR ? 'Türkiye Neden Bu Kadar Çok Deprem Yaşıyor?' : 'Why Does Turkey Experience So Many Earthquakes?'}</h2>
         <p className="text-sm text-[var(--foreground)] leading-relaxed">
-          Türkiye, üç büyük tektonik plakanın (Avrasya, Afrika ve Arap plakaları) sıkıştırdığı Anadolu
-          Levhası üzerinde yer almaktadır. Arap Levhası'nın kuzeye doğru hareketi, Anadolu Levhası'nı
-          batıya doğru itmektedir. Bu durum iki kritik fay sisteminin oluşmasına yol açmıştır:
-        </p>
-        <ul className="text-sm text-[var(--foreground)] space-y-2 pl-4 leading-relaxed">
-          <li>
-            • <strong>Kuzey Anadolu Fay Hattı (KAFH):</strong> İran sınırından Marmara Denizi'ne kadar
-            uzanan yaklaşık 1.500 km'lik bir sağ yanal doğrultu atımlı faydır. 1939'dan bu yana batıya
-            doğru ilerleyen deprem serisine sahne olmuştur.
-          </li>
-          <li>
-            • <strong>Doğu Anadolu Fay Hattı (DAFH):</strong> Karlıova'dan Hatay'a uzanan bu fay hattı,
-            Şubat 2023'te Kahramanmaraş merkezli yıkıcı depremlere neden olmuştur.
-          </li>
-        </ul>
-        <p className="text-sm text-[var(--foreground)] leading-relaxed">
-          Türkiye topraklarının yaklaşık yüzde 92'si deprem bölgelerinde, nüfusun ise yaklaşık yüzde
-          95'i deprem riski taşıyan alanlarda yaşamaktadır.
+          {TR
+            ? 'Türkiye, üç büyük tektonik plakanın (Avrasya, Afrika ve Arap plakaları) sıkıştırdığı Anadolu Levhası üzerinde yer almaktadır. Bu durum iki kritik fay sisteminin oluşmasına yol açmıştır: Kuzey Anadolu Fay Hattı (KAFH) ve Doğu Anadolu Fay Hattı (DAFH).'
+            : 'Turkey sits on the Anatolian Plate, which is squeezed by three major tectonic plates (Eurasian, African, and Arabian). This has produced two critical fault systems: the North Anatolian Fault (NAF) and the East Anatolian Fault (EAF). Around 92% of Turkey\'s territory lies in earthquake zones.'}
         </p>
       </section>
 
       <section className="space-y-3">
-        <h2 className="text-base font-bold text-[var(--foreground)]">Sismik Dalgalar</h2>
-        <p className="text-sm text-[var(--foreground)] leading-relaxed">
-          Depremin açığa çıkardığı enerji farklı türlerde sismik dalgalar halinde yayılır:
-        </p>
+        <h2 className="text-base font-bold text-[var(--foreground)]">{TR ? 'Sismik Dalgalar' : 'Seismic Waves'}</h2>
         <div className="space-y-2">
           {[
-            { ad: 'P Dalgası (Birincil)', aciklama: 'En hızlı dalgadır; hem katı hem de sıvı ortamda ilerleyebilir. Sıkışma ve genleşme hareketi yapar. Depremden önce uğultu şeklinde hissedilebilir.' },
-            { ad: 'S Dalgası (İkincil)', aciklama: 'P dalgasından daha yavaştır ve yalnızca katı ortamda ilerler. Yatay sarsıntıya neden olur; yapılar için daha yıkıcıdır.' },
-            { ad: 'Yüzey Dalgaları', aciklama: 'Yeryüzü boyunca ilerleyen en yavaş ama genellikle en yıkıcı dalgalardır. Love ve Rayleigh dalgaları olarak iki türü vardır.' },
-          ].map((dalga) => (
-            <div key={dalga.ad} className="bg-[var(--card-bg)] border border-[var(--border)] rounded-xl p-3">
-              <p className="text-xs font-bold text-[var(--foreground)]">{dalga.ad}</p>
-              <p className="text-[11px] text-[var(--muted)] mt-0.5 leading-relaxed">{dalga.aciklama}</p>
+            { tr: 'P Dalgası (Birincil)', en: 'P-Wave (Primary)', trA: 'En hızlı dalgadır; hem katı hem sıvı ortamda ilerler. Sıkışma ve genleşme hareketi yapar.', enA: 'The fastest wave; travels through both solid and liquid. Produces compression and expansion motion.' },
+            { tr: 'S Dalgası (İkincil)', en: 'S-Wave (Secondary)', trA: 'P dalgasından daha yavaştır, yalnızca katı ortamda ilerler. Yapılar için daha yıkıcıdır.', enA: 'Slower than P-waves; travels only through solids. More destructive to structures.' },
+            { tr: 'Yüzey Dalgaları', en: 'Surface Waves', trA: 'Yeryüzü boyunca ilerleyen en yavaş ama genellikle en yıkıcı dalgalardır.', enA: 'The slowest but usually most destructive waves; travel along the Earth\'s surface.' },
+          ].map((d) => (
+            <div key={d.tr} className="bg-[var(--card-bg)] border border-[var(--border)] rounded-xl p-3">
+              <p className="text-xs font-bold text-[var(--foreground)]">{TR ? d.tr : d.en}</p>
+              <p className="text-[11px] text-[var(--muted)] mt-0.5 leading-relaxed">{TR ? d.trA : d.enA}</p>
             </div>
           ))}
         </div>
       </section>
 
       <section className="space-y-3">
-        <h2 className="text-base font-bold text-[var(--foreground)]">Richter ve Moment Magnitüd Ölçekleri</h2>
+        <h2 className="text-base font-bold text-[var(--foreground)]">{TR ? 'Moment Magnitüd Ölçeği' : 'Moment Magnitude Scale'}</h2>
         <p className="text-sm text-[var(--foreground)] leading-relaxed">
-          Deprem büyüklüğü ölçmek için kullanılan en yaygın iki sistem şunlardır:
-        </p>
-        <p className="text-sm text-[var(--foreground)] leading-relaxed">
-          <strong>Richter Ölçeği (ML):</strong> 1935'te Charles Richter tarafından geliştirilen logaritmik
-          bir ölçektir. Her bir tam sayılık artış, sismografta ölçülen genlikte 10 kat, açığa çıkan enerjide
-          ise yaklaşık 31,6 kat artışa karşılık gelir.
-        </p>
-        <p className="text-sm text-[var(--foreground)] leading-relaxed">
-          <strong>Moment Magnitüd (Mw):</strong> Günümüzde bilim insanlarının tercih ettiği bu ölçek,
-          fayın kırılan alanı, kayma miktarı ve kayaç sertliği gibi fiziksel parametrelere dayanır.
-          Büyük depremler için daha güvenilir sonuçlar verir.
-        </p>
-      </section>
-
-      <section className="space-y-3">
-        <h2 className="text-base font-bold text-[var(--foreground)]">Artçı Sarsıntılar</h2>
-        <p className="text-sm text-[var(--foreground)] leading-relaxed">
-          Ana depremin ardından aynı bölgede daha küçük depremler oluşabilir. Bu artçı sarsıntılar
-          günler, haftalar hatta aylarca sürebilir. Hasar görmüş yapılar için artçı sarsıntılar ek
-          risk oluşturabilir. Öte yandan bazı "artçı" sarsıntılar, asıl büyük depremin öncülü de
-          olabilir; bu nedenle depremin hemen ardından binalara girmek tehlikeli olabilir.
+          {TR
+            ? 'Günümüzde bilim insanlarının tercih ettiği Moment Magnitüd (Mw) ölçeği, fayın kırılan alanı, kayma miktarı ve kayaç sertliği gibi fiziksel parametrelere dayanır. Logaritmik bir ölçektir: her bir tam sayılık artış, açığa çıkan enerjide yaklaşık 31,6 kat artışa karşılık gelir.'
+            : 'The Moment Magnitude (Mw) scale preferred by modern scientists is based on physical parameters such as the ruptured fault area, slip amount, and rock stiffness. It is logarithmic: each whole-number increase corresponds to roughly 31.6 times more energy released.'}
         </p>
       </section>
 
       <div className="bg-red-50 dark:bg-red-900/10 border border-red-100 dark:border-red-900/30 rounded-xl p-4">
-        <p className="text-xs font-bold text-red-700 dark:text-red-400 mb-2">Bölgenizin Deprem Riskini Öğrenin</p>
+        <p className="text-xs font-bold text-red-700 dark:text-red-400 mb-2">{TR ? 'Bölgenizin Deprem Riskini Öğrenin' : 'Check Your Region\'s Earthquake Risk'}</p>
         <p className="text-xs text-red-800 dark:text-red-300 leading-relaxed mb-3">
-          Türkiye'nin herhangi bir ilçesi için fay mesafesi, zemin yapısı ve tarihsel deprem verilerini
-          Deprem Hattı üzerinden analiz edebilirsiniz.
+          {TR
+            ? 'Türkiye\'nin herhangi bir ilçesi için fay mesafesi, zemin yapısı ve tarihsel deprem verilerini analiz edebilirsiniz.'
+            : 'Analyse fault distance, soil conditions, and historical earthquake data for any district in Turkey.'}
         </p>
-        <Link href="/" className="inline-block bg-red-600 text-white text-xs font-semibold px-4 py-2 rounded-lg hover:bg-red-700 transition-colors">
-          Bölge Analizi Yap →
+        <Link href="/bolge-analizi" className="inline-block bg-red-600 text-white text-xs font-semibold px-4 py-2 rounded-lg hover:bg-red-700 transition-colors">
+          {TR ? 'Bölge Analizi Yap →' : 'Run Risk Analysis →'}
         </Link>
       </div>
 
       <div className="text-[11px] text-[var(--muted)] space-y-1 border-t border-[var(--border)] pt-4">
-        <p className="font-semibold">Kaynaklar</p>
+        <p className="font-semibold">{TR ? 'Kaynaklar' : 'Sources'}</p>
         <p>• USGS Earthquake Hazards Program — earthquake.usgs.gov</p>
-        <p>• Kandilli Rasathanesi ve Deprem Araştırma Enstitüsü — koeri.boun.edu.tr</p>
-        <p>• AFAD Deprem Dairesi Başkanlığı — afad.gov.tr</p>
+        <p>• Kandilli Rasathanesi (KOERI) — koeri.boun.edu.tr</p>
+        <p>• AFAD Deprem Dairesi — afad.gov.tr</p>
       </div>
     </article>
   );

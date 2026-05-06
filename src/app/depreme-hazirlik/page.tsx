@@ -1,160 +1,67 @@
-import type { Metadata } from 'next';
+'use client';
 import Link from 'next/link';
-
-export const metadata: Metadata = {
-  title: 'Depreme Hazırlık Rehberi — Deprem Hattı',
-  description: 'Depreme nasıl hazırlanılır? Ev güvenliği, acil durum planı, deprem çantası ve deprem anında yapılacaklar rehberi.',
-};
+import { useLanguage } from '@/contexts/LanguageContext';
 
 export default function DepremHazirlikPage() {
+  const { lang } = useLanguage();
+  const TR = lang === 'TR';
+
+  const steps = TR ? [
+    { n: '1', t: 'Ev Güvenliği', a: 'Dolap ve kitaplıkları duvara sabitleyin. Yatak ve koltuk üzerindeki çerçeveleri kaldırın. Gaz vanasının yerini öğrenin. Binanızın deprem yönetmeliğine uygunluğunu kontrol ettirin.' },
+    { n: '2', t: 'Aile Planı', a: 'Eviniz yakınında bir buluşma noktası belirleyin. Tüm aile üyelerinin birbirinin numarasını ve şehir dışı referans kişiyi bilmesini sağlayın. Çocuklarınızın okulunun tahliye prosedürünü öğrenin.' },
+    { n: '3', t: '72 Saatlik Çanta', a: 'Kişi başı 9 litre su, 3 günlük konserve gıda, ilk yardım kiti, el feneri, pilli radyo, powerbank, ilaçlar (7 günlük) ve önemli belgeler.' },
+    { n: '4', t: 'Deprem Anında', a: 'Çök — Kapan — Tutun. Sağlam bir masa altına girin, baş ve boynu koruyun. Dışarı koşmayın, camlardan uzak durun, asansör kullanmayın.' },
+    { n: '5', t: 'Deprem Sonrasında', a: 'Gaz kokusu varsa uzaklaşın. Hasarlı binaya girmeyin. Artçı sarsıntılara hazırlıklı olun. Resmi açıklamalar için AFAD\'ı takip edin.' },
+  ] : [
+    { n: '1', t: 'Home Safety', a: 'Secure bookshelves and wardrobes to walls. Remove frames above beds. Learn where the gas shut-off is. Have your building checked for compliance with earthquake regulations.' },
+    { n: '2', t: 'Family Plan', a: 'Designate a meeting point near your home. Make sure everyone knows each other\'s numbers and has an out-of-town contact. Learn your children\'s school evacuation procedure.' },
+    { n: '3', t: '72-Hour Kit', a: '9 litres of water per person, 3 days of canned food, first aid kit, flashlight, battery radio, powerbank, medications (7-day supply), and important documents.' },
+    { n: '4', t: 'During the Earthquake', a: 'Drop — Cover — Hold On. Get under a sturdy table, protect your head and neck. Do not run outside, stay away from windows, do not use the lift.' },
+    { n: '5', t: 'After the Earthquake', a: 'If you smell gas, leave the area. Do not enter damaged buildings. Expect aftershocks. Follow AFAD for official announcements.' },
+  ];
+
   return (
     <article className="space-y-6">
       <div>
-        <p className="text-xs font-semibold text-red-500 uppercase tracking-wide mb-1">Hazırlık Rehberi</p>
-        <h1 className="text-2xl font-bold text-[var(--foreground)]">Depreme Hazırlık Rehberi</h1>
-        <p className="text-sm text-[var(--muted)] mt-1">Depremden önce, sırasında ve sonrasında yapılacaklar</p>
+        <p className="text-xs font-semibold text-red-500 uppercase tracking-wide mb-1">{TR ? 'Hazırlık Rehberi' : 'Preparedness Guide'}</p>
+        <h1 className="text-2xl font-bold text-[var(--foreground)]">{TR ? 'Depreme Hazırlık Rehberi' : 'Earthquake Preparedness Guide'}</h1>
+        <p className="text-sm text-[var(--muted)] mt-1">{TR ? 'Depremden önce, sırasında ve sonrasında yapılacaklar' : 'What to do before, during, and after an earthquake'}</p>
       </div>
 
       <div className="bg-amber-50 dark:bg-amber-900/10 border border-amber-200 dark:border-amber-800 rounded-xl p-4">
         <p className="text-xs text-amber-800 dark:text-amber-300 leading-relaxed">
-          <strong>Neden şimdi hazırlanmalısınız?</strong> Türkiye'de bir deprem, hiçbir uyarı olmaksızın
-          günün herhangi bir saatinde gerçekleşebilir. Hazırlık; panik değil, plan yapmaktır. Bu rehber
-          AFAD, JICA ve FEMA kılavuzları esas alınarak hazırlanmıştır.
+          {TR
+            ? 'Türkiye\'de bir deprem hiçbir uyarı olmaksızın günün herhangi bir saatinde gerçekleşebilir. Hazırlık; panik değil, plan yapmaktır. Bu rehber AFAD, JICA ve FEMA kılavuzları esas alınarak hazırlanmıştır.'
+            : 'An earthquake in Turkey can strike at any hour without warning. Preparedness means planning, not panicking. This guide is based on AFAD, JICA, and FEMA guidelines.'}
         </p>
       </div>
 
-      <section className="space-y-4">
-        <h2 className="text-base font-bold text-[var(--foreground)]">1. Ev Güvenliği Önlemleri</h2>
-        <p className="text-sm text-[var(--foreground)] leading-relaxed">
-          Depreme hazırlığın ilk adımı, yaşadığınız mekanı güvenli hale getirmektir. Deprem sırasında
-          düşen eşyalar, ciddi yaralanmaların en yaygın nedenleri arasında yer almaktadır.
-        </p>
-        <div className="space-y-2">
-          {[
-            { icon: '📚', aciklama: 'Kitaplık, dolap ve büyük mobilyaları duvara sabitleyip sabitlemeyin. Devrilmesi halinde kaçış yolunu kapatabilecek eşyaları yeniden konumlandırın.' },
-            { icon: '🖼️', aciklama: 'Yatak ve koltuk gibi üzerinde oturduğunuz alanların üstüne çerçeve, ayna veya ağır dekoratif eşya asmaktan kaçının.' },
-            { icon: '🔌', aciklama: 'Gaz tesisatını ve elektrik panosunu öğrenin. Deprem sonrası gaz kaçağı olup olmadığını nasıl anlayacağınızı ve vanayı kapatmayı öğrenin.' },
-            { icon: '🏠', aciklama: 'Binanızın deprem yönetmeliğine uygunluğunu uzman bir inşaat mühendisine kontrol ettirin. Özellikle 1999 öncesi yapılar için bu kritik önem taşımaktadır.' },
-            { icon: '💊', aciklama: 'İlaçlarınızı, pasaportunuzu ve önemli belgelerinizi hızlıca alabilecekiniz, kolay ulaşılır bir yerde saklayın.' },
-          ].map((item, i) => (
-            <div key={i} className="flex gap-3 bg-[var(--card-bg)] border border-[var(--border)] rounded-xl p-3">
-              <span className="text-lg shrink-0">{item.icon}</span>
-              <p className="text-xs text-[var(--foreground)] leading-relaxed">{item.aciklama}</p>
+      <div className="space-y-3">
+        {steps.map((s) => (
+          <div key={s.n} className="flex gap-3 bg-[var(--card-bg)] border border-[var(--border)] rounded-xl p-4">
+            <div className="w-7 h-7 rounded-full bg-red-100 dark:bg-red-900/30 text-red-600 text-sm font-bold flex items-center justify-center shrink-0">{s.n}</div>
+            <div>
+              <p className="text-sm font-bold text-[var(--foreground)]">{s.t}</p>
+              <p className="text-xs text-[var(--muted)] mt-0.5 leading-relaxed">{s.a}</p>
             </div>
-          ))}
-        </div>
-      </section>
+          </div>
+        ))}
+      </div>
 
-      <section className="space-y-4">
-        <h2 className="text-base font-bold text-[var(--foreground)]">2. Aile Acil Durum Planı</h2>
-        <p className="text-sm text-[var(--foreground)] leading-relaxed">
-          Deprem anında aile üyeleri farklı yerlerde (iş, okul, market) olabilir. Önceden belirlenmiş
-          bir plan kaos ortamında hayat kurtarır.
-        </p>
-        <div className="space-y-2">
-          {[
-            { baslik: 'Buluşma Noktası Belirleyin', aciklama: 'Evinizin yakınında herkesçe bilinen, açık bir buluşma noktası seçin. İkinci bir alternatif nokta da belirleyin.' },
-            { baslik: 'Acil İletişim Planı', aciklama: 'Tüm aile üyelerinin birbirinin cep telefonu numarasını ve şehir dışında bir referans kişinin numarasını ezbere bilmesini sağlayın. Deprem sonrası yerel hatlar meşgul olabilir; şehir dışından aramak daha kolay olabilir.' },
-            { baslik: 'Okul ve İş Yeri Planları', aciklama: 'Çocuklarınızın okulundaki tahliye ve teslim prosedürünü öğrenin. İş yerinizin acil durum planını gözden geçirin.' },
-            { baslik: 'Özel İhtiyaçlar', aciklama: 'Yaşlı, engelli veya hareket kısıtlılığı olan aile üyeleri için özel tahliye planı hazırlayın.' },
-          ].map((item) => (
-            <div key={item.baslik} className="bg-[var(--card-bg)] border border-[var(--border)] rounded-xl p-3">
-              <p className="text-xs font-bold text-[var(--foreground)]">{item.baslik}</p>
-              <p className="text-[11px] text-[var(--muted)] mt-1 leading-relaxed">{item.aciklama}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      <section className="space-y-3">
-        <h2 className="text-base font-bold text-[var(--foreground)]">3. 72 Saatlik Deprem Çantası</h2>
-        <p className="text-sm text-[var(--foreground)] leading-relaxed">
-          Bir deprem sonrasında acil yardım ekiplerinin ilk 72 saatte tüm bölgelere ulaşması mümkün
-          olmayabilir. Bu nedenle her hanenin en az 72 saatlik su, gıda ve temel malzeme içeren hazır
-          bir çantası olmalıdır.
-        </p>
-        <div className="grid grid-cols-2 gap-2">
-          {[
-            { icon: '💧', ad: 'Su (9 lt/kişi)' },
-            { icon: '🥫', ad: 'Konserve Gıda' },
-            { icon: '🩹', ad: 'İlk Yardım Kiti' },
-            { icon: '🔦', ad: 'El Feneri + Pil' },
-            { icon: '📻', ad: 'Pilli Radyo' },
-            { icon: '📄', ad: 'Önemli Belgeler' },
-            { icon: '💊', ad: 'İlaçlar (7 günlük)' },
-            { icon: '📱', ad: 'Powerbank' },
-          ].map((item) => (
-            <div key={item.ad} className="flex items-center gap-2 bg-[var(--card-bg)] border border-[var(--border)] rounded-xl p-3">
-              <span>{item.icon}</span>
-              <span className="text-xs font-medium text-[var(--foreground)]">{item.ad}</span>
-            </div>
-          ))}
-        </div>
-        <Link href="/canta" className="block text-center text-sm text-blue-500 hover:underline mt-1">
-          Tam çanta listesi için tıklayın →
+      <div className="grid grid-cols-2 gap-3">
+        <Link href="/canta" className="flex items-center justify-center gap-2 bg-gray-900 dark:bg-gray-700 text-white rounded-xl py-3 text-xs font-semibold hover:bg-gray-800 transition-colors">
+          🎒 {TR ? 'Çanta Listesi' : 'Kit Checklist'}
         </Link>
-      </section>
-
-      <section className="space-y-3">
-        <h2 className="text-base font-bold text-[var(--foreground)]">4. Deprem Anında Ne Yapmalısınız?</h2>
-        <p className="text-sm text-[var(--foreground)] leading-relaxed">
-          Deprem başladığında paniklemek yerine önceden öğrenilmiş adımları uygulamak hayat kurtarır.
-          AFAD ve uluslararası deprem kuruluşlarının önerdiği protokol şudur:
-        </p>
-        <div className="space-y-2">
-          {[
-            { adim: '1', baslik: 'Çök, Kapan, Tutun', aciklama: 'Hemen yere çömelip sağlam bir masanın altına girin. Masa yoksa iç duvara yaslanın, başınızı ve boynunuzu kollarınızla koruyun. Sarsıntı durana kadar hareket etmeyin.' },
-            { adim: '2', baslik: 'Camdan Uzak Durun', aciklama: 'Pencerelerin kırılarak fırlayan camları ağır yaralanmalara neden olabilir. Dış duvarlardan ve camlardan uzak durun.' },
-            { adim: '3', baslik: 'Asansör Kullanmayın', aciklama: 'Deprem sırasında ve hemen sonrasında asansör kesinlikle kullanılmamalıdır. Merdivenler daha güvenlidir.' },
-            { adim: '4', baslik: 'Dışarı Koşmayın', aciklama: 'Sarsıntı sırasında dışarı fırlamak tehlikelidir. Düşen moloz ve cam parçaları ciddi risk oluşturur. Sarsıntı durunca sakin ve kontrollü şekilde birayı terk edin.' },
-          ].map((item) => (
-            <div key={item.adim} className="flex gap-3 bg-[var(--card-bg)] border border-[var(--border)] rounded-xl p-3">
-              <div className="w-6 h-6 rounded-full bg-red-100 dark:bg-red-900/30 text-red-600 text-xs font-bold flex items-center justify-center shrink-0">{item.adim}</div>
-              <div>
-                <p className="text-xs font-bold text-[var(--foreground)]">{item.baslik}</p>
-                <p className="text-[11px] text-[var(--muted)] mt-0.5 leading-relaxed">{item.aciklama}</p>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      <section className="space-y-3">
-        <h2 className="text-base font-bold text-[var(--foreground)]">5. Deprem Sonrasında</h2>
-        <div className="space-y-2">
-          {[
-            'Gaz kokusu varsa hemen bölgeden uzaklaşın ve yetkilileri arayın.',
-            'Çatlak veya hasar gördüğünüz binaya kesinlikle girmeyin.',
-            'Artçı sarsıntılara hazırlıklı olun; artçılar günlerce sürebilir.',
-            'Resmi açıklamalar için AFAD ve yerel yönetim kanallarını takip edin.',
-            'Sosyal medyada dolaşan doğrulanmamış bilgilere itibar etmeyin.',
-            'Yaralılar için 112\'yi arayın; gereksiz aramaları sınırlayın.',
-          ].map((madde, i) => (
-            <div key={i} className="flex gap-2 text-sm text-[var(--foreground)] leading-relaxed">
-              <span className="text-green-500 shrink-0">✓</span>
-              <span>{madde}</span>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      <div className="bg-red-50 dark:bg-red-900/10 border border-red-100 dark:border-red-900/30 rounded-xl p-4">
-        <p className="text-xs font-bold text-red-700 dark:text-red-400 mb-2">Bölgenizin Riskini Öğrenin</p>
-        <p className="text-xs text-red-800 dark:text-red-300 leading-relaxed mb-3">
-          Hazırlık yaparken bölgenizin zemin yapısını, fay mesafesini ve risk skorunu bilmek önceliklendirme
-          açısından kritik önem taşır.
-        </p>
-        <Link href="/" className="inline-block bg-red-600 text-white text-xs font-semibold px-4 py-2 rounded-lg hover:bg-red-700 transition-colors">
-          Bölge Analizi Yap →
+        <Link href="/bolge-analizi" className="flex items-center justify-center gap-2 border border-[var(--border)] text-[var(--foreground)] rounded-xl py-3 text-xs font-semibold hover:border-red-300 transition-colors">
+          🗺️ {TR ? 'Bölge Analizi' : 'Risk Analysis'}
         </Link>
       </div>
 
       <div className="text-[11px] text-[var(--muted)] space-y-1 border-t border-[var(--border)] pt-4">
-        <p className="font-semibold">Kaynaklar</p>
-        <p>• AFAD Deprem Hazırlık Kılavuzu — afad.gov.tr</p>
-        <p>• JICA Türkiye Deprem Hazırlık Projesi</p>
-        <p>• FEMA — Ready.gov Earthquake Safety</p>
-        <p>• Kızılay Afet Hazırlık Kılavuzu</p>
+        <p className="font-semibold">{TR ? 'Kaynaklar' : 'Sources'}</p>
+        <p>• AFAD {TR ? 'Deprem Hazırlık Kılavuzu' : 'Earthquake Preparedness Guide'} — afad.gov.tr</p>
+        <p>• FEMA — Ready.gov</p>
+        <p>• JICA {TR ? 'Türkiye Deprem Hazırlık Projesi' : 'Turkey Earthquake Preparedness Project'}</p>
       </div>
     </article>
   );
