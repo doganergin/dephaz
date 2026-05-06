@@ -108,11 +108,11 @@ export default function HomePage() {
       {/* Primary CTA */}
       <Link
         href="/bolge-analizi"
-        className="flex items-center justify-between bg-red-600 hover:bg-red-700 text-white rounded-2xl p-4 transition-colors"
+        className="flex items-center justify-between bg-[var(--card-bg)] border border-red-500/40 hover:border-red-500 rounded-2xl p-4 transition-colors group"
       >
         <div>
-          <p className="font-bold text-sm">{TR ? 'Bölge Riski Analizi Yap' : 'Run Risk Analysis'}</p>
-          <p className="text-[11px] text-red-100 mt-0.5">
+          <p className="font-bold text-sm text-red-500 group-hover:text-red-400 transition-colors">{TR ? 'Bölge Riski Analizi Yap' : 'Run Risk Analysis'}</p>
+          <p className="text-[11px] text-[var(--muted)] mt-0.5">
             {TR ? 'İl ve ilçenizi seçin, risk skorunuzu öğrenin' : 'Select your province and district, find your risk score'}
           </p>
         </div>
