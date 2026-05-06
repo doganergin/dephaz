@@ -82,7 +82,7 @@ export default function HakkimizdaPage() {
                 ? 'Doğan Ergin, teknolojiyle pratik çözümler üretmeye odaklanan bir yazılım mühendisliği öğrencisidir. 2023 depremlerinin ardından tasarladığı bağımsız Deprem Hattı projesiyle, zemin kontrolü ve acil durum hazırlıklarını modern bir dijital altyapıya taşımayı amaçlıyor.'
                 : 'Doğan Ergin is a software engineering student focused on building practical, tech-driven solutions. With his independent project Deprem Hatti , he aims to modernize disaster awareness and emergency preparedness.'}
             </p>
-            <a href="mailto:dogan.ergin@depremhatti.com" className="text-[11px] text-blue-500 hover:underline mt-1.5 block">doganergin15@gmail.com</a>
+            <a href="mailto:dogan.ergin@depremhatti.com" className="text-[11px] text-blue-500 hover:underline mt-1.5 block">dogan.ergin@derpemhatti.com</a>
           </div>
         </div>
       </section>
