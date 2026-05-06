@@ -20,7 +20,6 @@ export default function IletisimPage() {
           <div>
             <p className="text-sm font-bold text-[var(--foreground)]">{TR ? 'E-posta' : 'Email'}</p>
             <a href="mailto:info@depremhatti.com" className="text-sm text-blue-500 hover:underline">info@depremhatti.com</a>
-            <a href="mailto:doganergin15@gmail.com" className="text-xs text-[var(--muted)] hover:underline block mt-0.5">doganergin15@gmail.com</a>
           </div>
         </div>
         <p className="text-xs text-[var(--muted)] leading-relaxed border-t border-[var(--border)] pt-4">
