@@ -106,7 +106,7 @@ export default function GizlilikPage() {
         </p>
         <p className="text-sm text-[var(--foreground)] leading-relaxed">
           {TR ? 'İletişim:' : 'Contact:'}{' '}
-          <a href="mailto:doganergin15@gmail.com" className="text-blue-500 hover:underline">doganergin15@gmail.com</a>
+          <a href="mailto:info@depremhatti.com" className="text-blue-500 hover:underline">info@depremhatti.com</a>
         </p>
       </section>
 
