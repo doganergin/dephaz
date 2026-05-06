@@ -1,151 +1,136 @@
 'use client';
 import { useState } from 'react';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 interface Esya {
   id: string;
-  ad: string;
-  aciklama?: string;
+  adTR: string; adEN: string;
+  aciklamaTR?: string; aciklamaEN?: string;
   kritik?: boolean;
 }
 
 interface Kategori {
   icon: string;
-  baslik: string;
+  baslikTR: string; baslikEN: string;
   renk: string;
   esyalar: Esya[];
 }
 
 const KATEGORILER: Kategori[] = [
   {
-    icon: '💧',
-    baslik: 'Su ve Gıda',
-    renk: 'blue',
+    icon: '💧', baslikTR: 'Su ve Gıda', baslikEN: 'Water and Food', renk: 'blue',
     esyalar: [
-      { id: 'su', ad: 'Su (kişi başı min. 9 litre)', aciklama: '3 lt/gün × 3 gün × kişi sayısı', kritik: true },
-      { id: 'su-tablet', ad: 'Su arıtma tabletleri', aciklama: 'Aquatabs veya benzeri' },
-      { id: 'konserve', ad: 'Konserve gıda (3 günlük)', aciklama: 'Fasulye, ton balığı, zeytin vb.', kritik: true },
-      { id: 'kuruyemis', ad: 'Kuruyemiş ve kuru meyve', aciklama: 'Yüksek kalori, uzun raf ömrü' },
-      { id: 'enerji-bar', ad: 'Enerji barı / bisküvi', aciklama: 'En az 6 adet' },
-      { id: 'bebek-mama', ad: 'Bebek maması / mama (varsa)', aciklama: 'Gerekiyorsa' },
-      { id: 'acici', ad: 'Mama açacağı', kritik: true },
-      { id: 'kasik-catal', ad: 'Çatal, kaşık, plastik tabak', aciklama: 'Tek kullanımlık olabilir' },
+      { id: 'su', adTR: 'Su (kişi başı min. 9 litre)', adEN: 'Water (min. 9 litres per person)', aciklamaTR: '3 lt/gün × 3 gün × kişi sayısı', aciklamaEN: '3 L/day × 3 days × number of people', kritik: true },
+      { id: 'su-tablet', adTR: 'Su arıtma tabletleri', adEN: 'Water purification tablets', aciklamaTR: 'Aquatabs veya benzeri', aciklamaEN: 'Aquatabs or similar' },
+      { id: 'konserve', adTR: 'Konserve gıda (3 günlük)', adEN: 'Canned food (3-day supply)', aciklamaTR: 'Fasulye, ton balığı, zeytin vb.', aciklamaEN: 'Beans, tuna, olives, etc.', kritik: true },
+      { id: 'kuruyemis', adTR: 'Kuruyemiş ve kuru meyve', adEN: 'Dried nuts and fruit', aciklamaTR: 'Yüksek kalori, uzun raf ömrü', aciklamaEN: 'High calorie, long shelf life' },
+      { id: 'enerji-bar', adTR: 'Enerji barı / bisküvi', adEN: 'Energy bars / biscuits', aciklamaTR: 'En az 6 adet', aciklamaEN: 'At least 6' },
+      { id: 'bebek-mama', adTR: 'Bebek maması / mama (varsa)', adEN: 'Baby food / formula (if needed)', aciklamaTR: 'Gerekiyorsa', aciklamaEN: 'If required' },
+      { id: 'acici', adTR: 'Mama açacağı', adEN: 'Manual can opener', kritik: true },
+      { id: 'kasik-catal', adTR: 'Çatal, kaşık, plastik tabak', adEN: 'Fork, spoon, plastic plate', aciklamaTR: 'Tek kullanımlık olabilir', aciklamaEN: 'Can be disposable' },
     ],
   },
   {
-    icon: '🩹',
-    baslik: 'İlk Yardım ve Sağlık',
-    renk: 'red',
+    icon: '🩹', baslikTR: 'İlk Yardım ve Sağlık', baslikEN: 'First Aid and Health', renk: 'red',
     esyalar: [
-      { id: 'ilk-yardim-canta', ad: 'Hazır ilk yardım çantası', kritik: true },
-      { id: 'yara-bandi', ad: 'Yara bandı (çeşitli boyut)', kritik: true },
-      { id: 'gazli-bez', ad: 'Gazlı bez ve rulo flaster' },
-      { id: 'antiseptik', ad: 'Antiseptik solüsyon (tentürdiyot vb.)' },
-      { id: 'agri-kesici', ad: 'Ağrı kesici (parasetamol, ibuprofen)', kritik: true },
-      { id: 'recete-ilac', ad: 'Reçeteli ilaçlar (en az 7 günlük)', aciklama: 'Tansiyon, diyabet, kalp vb.', kritik: true },
-      { id: 'alerji', ad: 'Alerji ilacı / epipen (gerekiyorsa)' },
-      { id: 'ishal', ad: 'İshal ve mide ilaçları' },
-      { id: 'makas-pens', ad: 'Makas, cımbız, güvenlik iğnesi' },
-      { id: 'turnike', ad: 'Turnike / basınç bandajı' },
-      { id: 'termometre', ad: 'Termometre' },
-      { id: 'dezenfektan', ad: 'El dezenfektanı (en az 2 şişe)', kritik: true },
-      { id: 'maske', ad: 'FFP2/N95 maske (en az 5 adet)', aciklama: 'Enkaz tozu için kritik', kritik: true },
-      { id: 'eldiven-tek', ad: 'Tek kullanımlık lateks eldiven (10 çift)' },
+      { id: 'ilk-yardim-canta', adTR: 'Hazır ilk yardım çantası', adEN: 'Ready-made first aid kit', kritik: true },
+      { id: 'yara-bandi', adTR: 'Yara bandı (çeşitli boyut)', adEN: 'Bandages (various sizes)', kritik: true },
+      { id: 'gazli-bez', adTR: 'Gazlı bez ve rulo flaster', adEN: 'Gauze pads and roll plaster' },
+      { id: 'antiseptik', adTR: 'Antiseptik solüsyon (tentürdiyot vb.)', adEN: 'Antiseptic solution (iodine etc.)' },
+      { id: 'agri-kesici', adTR: 'Ağrı kesici (parasetamol, ibuprofen)', adEN: 'Pain relief (paracetamol, ibuprofen)', kritik: true },
+      { id: 'recete-ilac', adTR: 'Reçeteli ilaçlar (en az 7 günlük)', adEN: 'Prescription medications (7-day supply)', aciklamaTR: 'Tansiyon, diyabet, kalp vb.', aciklamaEN: 'Blood pressure, diabetes, cardiac, etc.', kritik: true },
+      { id: 'alerji', adTR: 'Alerji ilacı / epipen (gerekiyorsa)', adEN: 'Allergy medication / EpiPen (if needed)' },
+      { id: 'ishal', adTR: 'İshal ve mide ilaçları', adEN: 'Diarrhoea and stomach medication' },
+      { id: 'makas-pens', adTR: 'Makas, cımbız, güvenlik iğnesi', adEN: 'Scissors, tweezers, safety pin' },
+      { id: 'turnike', adTR: 'Turnike / basınç bandajı', adEN: 'Tourniquet / pressure bandage' },
+      { id: 'termometre', adTR: 'Termometre', adEN: 'Thermometer' },
+      { id: 'dezenfektan', adTR: 'El dezenfektanı (en az 2 şişe)', adEN: 'Hand sanitiser (at least 2 bottles)', kritik: true },
+      { id: 'maske', adTR: 'FFP2/N95 maske (en az 5 adet)', adEN: 'FFP2/N95 mask (at least 5)', aciklamaTR: 'Enkaz tozu için kritik', aciklamaEN: 'Critical for rubble dust', kritik: true },
+      { id: 'eldiven-tek', adTR: 'Tek kullanımlık lateks eldiven (10 çift)', adEN: 'Disposable latex gloves (10 pairs)' },
     ],
   },
   {
-    icon: '📄',
-    baslik: 'Belgeler ve Para',
-    renk: 'amber',
+    icon: '📄', baslikTR: 'Belgeler ve Para', baslikEN: 'Documents and Cash', renk: 'amber',
     esyalar: [
-      { id: 'kimlik', ad: 'Kimlik kartı / nüfus cüzdanı fotokopisi', kritik: true },
-      { id: 'pasaport', ad: 'Pasaport (geçerliyse)' },
-      { id: 'saglik-karti', ad: 'Sağlık kartı ve sigorta bilgileri' },
-      { id: 'tapu', ad: 'Tapu / kira sözleşmesi fotokopisi' },
-      { id: 'arac-evrak', ad: 'Araç ruhsatı ve sürücü belgesi fotokopisi' },
-      { id: 'banka', ad: 'Banka / kredi kartı bilgileri (not kağıdı)' },
-      { id: 'nakit', ad: 'Nakit para (küçük banknotlar)', aciklama: 'ATM\'ler çalışmayabilir', kritik: true },
-      { id: 'fotoğraf', ad: 'Aile fotoğrafı (kayıp ilanı için)' },
-      { id: 'acil-numara', ad: 'Önemli telefon numaraları (kağıda yazılı)', kritik: true },
+      { id: 'kimlik', adTR: 'Kimlik kartı / nüfus cüzdanı fotokopisi', adEN: 'ID card / national ID photocopy', kritik: true },
+      { id: 'pasaport', adTR: 'Pasaport (geçerliyse)', adEN: 'Passport (if valid)' },
+      { id: 'saglik-karti', adTR: 'Sağlık kartı ve sigorta bilgileri', adEN: 'Health card and insurance details' },
+      { id: 'tapu', adTR: 'Tapu / kira sözleşmesi fotokopisi', adEN: 'Title deed / lease agreement photocopy' },
+      { id: 'arac-evrak', adTR: 'Araç ruhsatı ve sürücü belgesi fotokopisi', adEN: 'Vehicle registration and driving licence photocopy' },
+      { id: 'banka', adTR: 'Banka / kredi kartı bilgileri (not kağıdı)', adEN: 'Bank / credit card details (written note)' },
+      { id: 'nakit', adTR: 'Nakit para (küçük banknotlar)', adEN: 'Cash (small banknotes)', aciklamaTR: 'ATM\'ler çalışmayabilir', aciklamaEN: 'ATMs may not work', kritik: true },
+      { id: 'fotoğraf', adTR: 'Aile fotoğrafı (kayıp ilanı için)', adEN: 'Family photo (for missing person notice)' },
+      { id: 'acil-numara', adTR: 'Önemli telefon numaraları (kağıda yazılı)', adEN: 'Important phone numbers (written on paper)', kritik: true },
     ],
   },
   {
-    icon: '🔦',
-    baslik: 'Aydınlatma ve İletişim',
-    renk: 'yellow',
+    icon: '🔦', baslikTR: 'Aydınlatma ve İletişim', baslikEN: 'Lighting and Communication', renk: 'yellow',
     esyalar: [
-      { id: 'el-feneri', ad: 'El feneri (LED)', kritik: true },
-      { id: 'pil', ad: 'Yedek pil (AA ve AAA)', kritik: true },
-      { id: 'kafa-lambasi', ad: 'Kafa lambası', aciklama: 'Eller serbest çalışmak için' },
-      { id: 'duduk', ad: 'Düdük (plastik)', aciklama: 'Enkaz altında konum bildirme', kritik: true },
-      { id: 'radyo', ad: 'Pilli / şarjlı taşınabilir radyo', aciklama: 'Elektrik kesilmesinde haberler için', kritik: true },
-      { id: 'powerbank', ad: 'Powerbank (yüksek kapasiteli)', kritik: true },
-      { id: 'sarj-kablosu', ad: 'Şarj kabloları (farklı tip)' },
-      { id: 'mum', ad: 'Mum ve çakmak / kibrit' },
-      { id: 'ayna', ad: 'Sinyal aynası', aciklama: 'Güneşe yansıtarak konum bildirme' },
+      { id: 'el-feneri', adTR: 'El feneri (LED)', adEN: 'LED torch', kritik: true },
+      { id: 'pil', adTR: 'Yedek pil (AA ve AAA)', adEN: 'Spare batteries (AA and AAA)', kritik: true },
+      { id: 'kafa-lambasi', adTR: 'Kafa lambası', adEN: 'Head torch', aciklamaTR: 'Eller serbest çalışmak için', aciklamaEN: 'For hands-free work' },
+      { id: 'duduk', adTR: 'Düdük (plastik)', adEN: 'Whistle (plastic)', aciklamaTR: 'Enkaz altında konum bildirme', aciklamaEN: 'Signal location from under rubble', kritik: true },
+      { id: 'radyo', adTR: 'Pilli / şarjlı taşınabilir radyo', adEN: 'Battery / hand-crank portable radio', aciklamaTR: 'Elektrik kesilmesinde haberler için', aciklamaEN: 'For news when power is cut', kritik: true },
+      { id: 'powerbank', adTR: 'Powerbank (yüksek kapasiteli)', adEN: 'High-capacity powerbank', kritik: true },
+      { id: 'sarj-kablosu', adTR: 'Şarj kabloları (farklı tip)', adEN: 'Charging cables (various types)' },
+      { id: 'mum', adTR: 'Mum ve çakmak / kibrit', adEN: 'Candles and lighter / matches' },
+      { id: 'ayna', adTR: 'Sinyal aynası', adEN: 'Signal mirror', aciklamaTR: 'Güneşe yansıtarak konum bildirme', aciklamaEN: 'Reflect sunlight to signal position' },
     ],
   },
   {
-    icon: '👕',
-    baslik: 'Kıyafet ve Koruma',
-    renk: 'green',
+    icon: '👕', baslikTR: 'Kıyafet ve Koruma', baslikEN: 'Clothing and Protection', renk: 'green',
     esyalar: [
-      { id: 'degisim-kiyafet', ad: 'Değişim kıyafeti (2 set)', kritik: true },
-      { id: 'sağlam-ayakkabi', ad: 'Sağlam, kapalı burunlu ayakkabı', aciklama: 'Kırık cam ve enkaz için', kritik: true },
-      { id: 'corap', ad: 'Kalın çorap (3 çift)' },
-      { id: 'yağmurluk', ad: 'Yağmurluk veya anorak' },
-      { id: 'battaniye', ad: 'Termal battaniye (folyo)', kritik: true },
-      { id: 'uyku-tulumu', ad: 'Uyku tulumu veya ince battaniye' },
-      { id: 'is-eldiveni', ad: 'Kalın çalışma eldiveni', aciklama: 'Enkaz kaldırmak için', kritik: true },
-      { id: 'baret', ad: 'Baret veya inşaat kaskı', aciklama: 'Düşen nesnelere karşı', kritik: true },
-      { id: 'güneş-gözlük', ad: 'Güneş gözlüğü / toz gözlüğü' },
+      { id: 'degisim-kiyafet', adTR: 'Değişim kıyafeti (2 set)', adEN: 'Change of clothes (2 sets)', kritik: true },
+      { id: 'sağlam-ayakkabi', adTR: 'Sağlam, kapalı burunlu ayakkabı', adEN: 'Sturdy, closed-toe shoes', aciklamaTR: 'Kırık cam ve enkaz için', aciklamaEN: 'For broken glass and rubble', kritik: true },
+      { id: 'corap', adTR: 'Kalın çorap (3 çift)', adEN: 'Thick socks (3 pairs)' },
+      { id: 'yağmurluk', adTR: 'Yağmurluk veya anorak', adEN: 'Raincoat or anorak' },
+      { id: 'battaniye', adTR: 'Termal battaniye (folyo)', adEN: 'Thermal blanket (foil)', kritik: true },
+      { id: 'uyku-tulumu', adTR: 'Uyku tulumu veya ince battaniye', adEN: 'Sleeping bag or thin blanket' },
+      { id: 'is-eldiveni', adTR: 'Kalın çalışma eldiveni', adEN: 'Heavy work gloves', aciklamaTR: 'Enkaz kaldırmak için', aciklamaEN: 'For debris removal', kritik: true },
+      { id: 'baret', adTR: 'Baret veya inşaat kaskı', adEN: 'Hard hat or construction helmet', aciklamaTR: 'Düşen nesnelere karşı', aciklamaEN: 'Against falling objects', kritik: true },
+      { id: 'güneş-gözlük', adTR: 'Güneş gözlüğü / toz gözlüğü', adEN: 'Sunglasses / dust goggles' },
     ],
   },
   {
-    icon: '🧼',
-    baslik: 'Hijyen ve Temizlik',
-    renk: 'purple',
+    icon: '🧼', baslikTR: 'Hijyen ve Temizlik', baslikEN: 'Hygiene and Cleaning', renk: 'purple',
     esyalar: [
-      { id: 'islak-mendil', ad: 'Islak mendil (çok paket)', kritik: true },
-      { id: 'tuvalet-kagidi', ad: 'Tuvalet kağıdı (en az 4 rulo)', kritik: true },
-      { id: 'sabun', ad: 'Katı sabun' },
-      { id: 'dis-fircasi', ad: 'Diş fırçası ve macun' },
-      { id: 'sampuan-dry', ad: 'Kuru şampuan' },
-      { id: 'hijyen', ad: 'Kadın hijyen ürünleri (gerekiyorsa)' },
-      { id: 'bebek-bezi', ad: 'Bebek bezi (gerekiyorsa)' },
-      { id: 'cop-poseti', ad: 'Büyük çöp poşeti (10 adet)', aciklama: 'Tuvalet, barınak, yağmurluk yerine' },
-      { id: 'kese-kagidi', ad: 'Kese kağıdı veya fermuarlı poşet' },
+      { id: 'islak-mendil', adTR: 'Islak mendil (çok paket)', adEN: 'Wet wipes (multiple packs)', kritik: true },
+      { id: 'tuvalet-kagidi', adTR: 'Tuvalet kağıdı (en az 4 rulo)', adEN: 'Toilet paper (at least 4 rolls)', kritik: true },
+      { id: 'sabun', adTR: 'Katı sabun', adEN: 'Bar soap' },
+      { id: 'dis-fircasi', adTR: 'Diş fırçası ve macun', adEN: 'Toothbrush and toothpaste' },
+      { id: 'sampuan-dry', adTR: 'Kuru şampuan', adEN: 'Dry shampoo' },
+      { id: 'hijyen', adTR: 'Kadın hijyen ürünleri (gerekiyorsa)', adEN: 'Feminine hygiene products (if needed)' },
+      { id: 'bebek-bezi', adTR: 'Bebek bezi (gerekiyorsa)', adEN: 'Nappies (if needed)' },
+      { id: 'cop-poseti', adTR: 'Büyük çöp poşeti (10 adet)', adEN: 'Large bin bags (10)', aciklamaTR: 'Tuvalet, barınak, yağmurluk yerine', aciklamaEN: 'For toilet, shelter, and as a rain cover' },
+      { id: 'kese-kagidi', adTR: 'Kese kağıdı veya fermuarlı poşet', adEN: 'Paper bags or zip-lock bags' },
     ],
   },
   {
-    icon: '🔧',
-    baslik: 'Alet ve Ekipman',
-    renk: 'gray',
+    icon: '🔧', baslikTR: 'Alet ve Ekipman', baslikEN: 'Tools and Equipment', renk: 'gray',
     esyalar: [
-      { id: 'caki', ad: 'Çakı veya çok amaçlı alet (Swiss Army vb.)', kritik: true },
-      { id: 'bant', ad: 'Duct tape / yapışkan bant', aciklama: 'Her şeye yarar' },
-      { id: 'ip', ad: 'Sağlam naylon ip (10+ metre)' },
-      { id: 'tarp', ad: 'Naylon örtü / tarp', aciklama: 'Barınak ve yağmur koruması' },
-      { id: 'p3-maske', ad: 'P3 toz maskesi (yedek)', aciklama: 'Enkaz çalışmaları için' },
-      { id: 'kalem-defter', ad: 'Kalem ve not defteri', kritik: true },
-      { id: 'harita', ad: 'Kağıt harita (il/ilçe)', aciklama: 'Telefon ve internet olmadığında' },
-      { id: 'kompas', ad: 'Pusula / kompas' },
-      { id: 'kilidi', ad: 'Küçük asma kilit', aciklama: 'Çantanı korumak için' },
-      { id: 'kablo-baği', ad: 'Kablo bağı / kelepçe (20 adet)' },
+      { id: 'caki', adTR: 'Çakı veya çok amaçlı alet (Swiss Army vb.)', adEN: 'Pocket knife or multi-tool (Swiss Army etc.)', kritik: true },
+      { id: 'bant', adTR: 'Duct tape / yapışkan bant', adEN: 'Duct tape', aciklamaTR: 'Her şeye yarar', aciklamaEN: 'Useful for everything' },
+      { id: 'ip', adTR: 'Sağlam naylon ip (10+ metre)', adEN: 'Strong nylon rope (10+ metres)' },
+      { id: 'tarp', adTR: 'Naylon örtü / tarp', adEN: 'Tarpaulin / tarp', aciklamaTR: 'Barınak ve yağmur koruması', aciklamaEN: 'For shelter and rain protection' },
+      { id: 'p3-maske', adTR: 'P3 toz maskesi (yedek)', adEN: 'P3 dust mask (spare)', aciklamaTR: 'Enkaz çalışmaları için', aciklamaEN: 'For debris work' },
+      { id: 'kalem-defter', adTR: 'Kalem ve not defteri', adEN: 'Pen and notepad', kritik: true },
+      { id: 'harita', adTR: 'Kağıt harita (il/ilçe)', adEN: 'Paper map (province/district)', aciklamaTR: 'Telefon ve internet olmadığında', aciklamaEN: 'When phone and internet fail' },
+      { id: 'kompas', adTR: 'Pusula / kompas', adEN: 'Compass' },
+      { id: 'kilidi', adTR: 'Küçük asma kilit', adEN: 'Small padlock', aciklamaTR: 'Çantanı korumak için', aciklamaEN: 'To secure your bag' },
+      { id: 'kablo-baği', adTR: 'Kablo bağı / kelepçe (20 adet)', adEN: 'Cable ties / zip ties (20)' },
     ],
   },
   {
-    icon: '👶',
-    baslik: 'Özel İhtiyaçlar',
-    renk: 'pink',
+    icon: '👶', baslikTR: 'Özel İhtiyaçlar', baslikEN: 'Special Needs', renk: 'pink',
     esyalar: [
-      { id: 'bebek-mama2', ad: 'Bebek maması veya mama (gerekiyorsa)', aciklama: '72 saatlik stok' },
-      { id: 'bebek-bezi2', ad: 'Yeterli bebek bezi (gerekiyorsa)' },
-      { id: 'oyuncak', ad: 'Küçük oyuncak / kitap (çocuk için)', aciklama: 'Psikolojik destek' },
-      { id: 'yasli-ilac', ad: 'Yaşlı/engelli bireylerin ilaçları', kritik: true },
-      { id: 'gozluk', ad: 'Yedek gözlük veya lens solüsyonu' },
-      { id: 'isitme-cihazi', ad: 'Yedek işitme cihazı pili (gerekiyorsa)' },
-      { id: 'evcil-mama', ad: 'Evcil hayvan maması (gerekiyorsa)' },
-      { id: 'stres-top', ad: 'Stres topu / oyun kartı', aciklama: 'Uzun bekleme süreleri için' },
+      { id: 'bebek-mama2', adTR: 'Bebek maması veya mama (gerekiyorsa)', adEN: 'Baby food or formula (if needed)', aciklamaTR: '72 saatlik stok', aciklamaEN: '72-hour supply' },
+      { id: 'bebek-bezi2', adTR: 'Yeterli bebek bezi (gerekiyorsa)', adEN: 'Adequate nappies (if needed)' },
+      { id: 'oyuncak', adTR: 'Küçük oyuncak / kitap (çocuk için)', adEN: 'Small toy / book (for children)', aciklamaTR: 'Psikolojik destek', aciklamaEN: 'Psychological support' },
+      { id: 'yasli-ilac', adTR: 'Yaşlı/engelli bireylerin ilaçları', adEN: 'Medications for elderly/disabled', kritik: true },
+      { id: 'gozluk', adTR: 'Yedek gözlük veya lens solüsyonu', adEN: 'Spare glasses or contact lens solution' },
+      { id: 'isitme-cihazi', adTR: 'Yedek işitme cihazı pili (gerekiyorsa)', adEN: 'Spare hearing aid battery (if needed)' },
+      { id: 'evcil-mama', adTR: 'Evcil hayvan maması (gerekiyorsa)', adEN: 'Pet food (if needed)' },
+      { id: 'stres-top', adTR: 'Stres topu / oyun kartı', adEN: 'Stress ball / card game', aciklamaTR: 'Uzun bekleme süreleri için', aciklamaEN: 'For long waiting periods' },
     ],
   },
 ];
@@ -176,6 +161,9 @@ const TOPLAM = KATEGORILER.reduce((t, k) => t + k.esyalar.length, 0);
 const KRITIK = KATEGORILER.reduce((t, k) => t + k.esyalar.filter((e) => e.kritik).length, 0);
 
 export default function CantaPage() {
+  const { lang } = useLanguage();
+  const TR = lang === 'TR';
+
   const [tamamlanan, setTamamlanan] = useState<Set<string>>(new Set());
   const [sadaceKritik, setSadaceKritik] = useState(false);
 
@@ -211,9 +199,11 @@ export default function CantaPage() {
     <div className="space-y-4">
       {/* Başlık */}
       <div>
-        <h1 className="text-xl font-bold text-[var(--foreground)]">🎒 72 Saatlik Deprem Çantası</h1>
+        <h1 className="text-xl font-bold text-[var(--foreground)]">
+          🎒 {TR ? '72 Saatlik Deprem Çantası' : '72-Hour Earthquake Kit'}
+        </h1>
         <p className="text-sm text-[var(--muted)] mt-0.5">
-          {TOPLAM} eşya · {KRITIK} kritik · Depremden sonra ilk 72 saat için hazırlık listesi
+          {TOPLAM} {TR ? 'eşya' : 'items'} · {KRITIK} {TR ? 'kritik' : 'critical'} · {TR ? 'Depremden sonra ilk 72 saat için hazırlık listesi' : 'Preparedness checklist for the first 72 hours after an earthquake'}
         </p>
       </div>
 
@@ -221,9 +211,9 @@ export default function CantaPage() {
       <div className="bg-[var(--card-bg)] border border-[var(--border)] rounded-2xl p-4">
         <div className="flex items-center justify-between mb-2">
           <span className="text-xs font-semibold text-[var(--foreground)]">
-            {tamamlananSayi} / {gosterilenToplam} tamamlandı
+            {tamamlananSayi} / {gosterilenToplam} {TR ? 'tamamlandı' : 'completed'}
           </span>
-          <span className="text-sm font-bold text-[var(--foreground)]">%{yuzde}</span>
+          <span className="text-sm font-bold text-[var(--foreground)]">{TR ? `%${yuzde}` : `${yuzde}%`}</span>
         </div>
         <div className="w-full bg-gray-100 dark:bg-gray-700 rounded-full h-3">
           <div
@@ -236,7 +226,7 @@ export default function CantaPage() {
         </div>
         {yuzde === 100 && (
           <p className="text-xs text-green-600 dark:text-green-400 font-semibold mt-2 text-center">
-            ✅ Çantanız hazır! Depreme hazırsınız.
+            {TR ? '✅ Çantanız hazır! Depreme hazırsınız.' : '✅ Your kit is ready! You are prepared.'}
           </p>
         )}
       </div>
@@ -251,13 +241,15 @@ export default function CantaPage() {
               : 'bg-[var(--card-bg)] text-[var(--muted)] border-[var(--border)]'
           }`}
         >
-          🔴 Yalnız kritik eşyalar
+          🔴 {TR ? 'Yalnız kritik eşyalar' : 'Critical items only'}
         </button>
         <button
           onClick={tumunuIsaretle}
           className="px-3 py-1.5 text-[11px] font-semibold rounded-full border bg-[var(--card-bg)] text-[var(--muted)] border-[var(--border)] transition-colors hover:text-[var(--foreground)]"
         >
-          {gosterilenEsyalar.every((e) => tamamlanan.has(e.id)) ? '☐ Tümünü kaldır' : '☑ Tümünü işaretle'}
+          {gosterilenEsyalar.every((e) => tamamlanan.has(e.id))
+            ? (TR ? '☐ Tümünü kaldır' : '☐ Uncheck all')
+            : (TR ? '☑ Tümünü işaretle' : '☑ Check all')}
         </button>
       </div>
 
@@ -268,21 +260,19 @@ export default function CantaPage() {
         const katTamamlanan = gorunenler.filter((e) => tamamlanan.has(e.id)).length;
 
         return (
-          <div key={kat.baslik} className="bg-[var(--card-bg)] border border-[var(--border)] rounded-2xl overflow-hidden">
-            {/* Kategori başlık */}
-            <div className={`flex items-center justify-between px-4 py-3 border-b border-[var(--border)] ${RENK_MAP[kat.renk].split(' ').slice(0,2).join(' ')}`}>
+          <div key={kat.baslikTR} className="bg-[var(--card-bg)] border border-[var(--border)] rounded-2xl overflow-hidden">
+            <div className={`flex items-center justify-between px-4 py-3 border-b border-[var(--border)] ${RENK_MAP[kat.renk].split(' ').slice(0, 2).join(' ')}`}>
               <div className="flex items-center gap-2">
                 <span className={`w-7 h-7 flex items-center justify-center rounded-lg text-base ${ICON_BG[kat.renk]}`}>
                   {kat.icon}
                 </span>
-                <span className="text-sm font-bold text-[var(--foreground)]">{kat.baslik}</span>
+                <span className="text-sm font-bold text-[var(--foreground)]">{TR ? kat.baslikTR : kat.baslikEN}</span>
               </div>
               <span className="text-[11px] font-semibold text-[var(--muted)]">
                 {katTamamlanan}/{gorunenler.length}
               </span>
             </div>
 
-            {/* Eşyalar */}
             <div className="divide-y divide-[var(--border)]">
               {gorunenler.map((esya) => {
                 const tamam = tamamlanan.has(esya.id);
@@ -302,16 +292,18 @@ export default function CantaPage() {
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center gap-1.5 flex-wrap">
                         <span className={`text-xs font-medium ${tamam ? 'line-through text-[var(--muted)]' : 'text-[var(--foreground)]'}`}>
-                          {esya.ad}
+                          {TR ? esya.adTR : esya.adEN}
                         </span>
                         {esya.kritik && !tamam && (
                           <span className="text-[9px] font-bold px-1.5 py-0.5 rounded-full bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400 leading-none">
-                            KRİTİK
+                            {TR ? 'KRİTİK' : 'CRITICAL'}
                           </span>
                         )}
                       </div>
-                      {esya.aciklama && (
-                        <p className="text-[11px] text-[var(--muted)] mt-0.5">{esya.aciklama}</p>
+                      {(TR ? esya.aciklamaTR : esya.aciklamaEN) && (
+                        <p className="text-[11px] text-[var(--muted)] mt-0.5">
+                          {TR ? esya.aciklamaTR : esya.aciklamaEN}
+                        </p>
                       )}
                     </div>
                   </button>
@@ -325,13 +317,19 @@ export default function CantaPage() {
       {/* Bilgi notu */}
       <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-100 dark:border-blue-800 rounded-xl p-3">
         <p className="text-[11px] text-blue-700 dark:text-blue-300 leading-relaxed">
-          <span className="font-semibold">💡 İpucu:</span> Çantanı serin, kuru ve hızlı ulaşılabilir bir yerde (kapı kenarı, dolap önü) saklayın. 6 ayda bir kontrol edip ilaç ve gıdaların son kullanma tarihlerini yenileyin.
+          <span className="font-semibold">💡 {TR ? 'İpucu:' : 'Tip:'}</span>{' '}
+          {TR
+            ? 'Çantanı serin, kuru ve hızlı ulaşılabilir bir yerde (kapı kenarı, dolap önü) saklayın. 6 ayda bir kontrol edip ilaç ve gıdaların son kullanma tarihlerini yenileyin.'
+            : 'Store your kit in a cool, dry, easily accessible place (by the door, in front of a cupboard). Check it every 6 months and refresh medication and food expiry dates.'}
         </p>
       </div>
 
       <div className="bg-amber-50 dark:bg-amber-900/20 border border-amber-100 dark:border-amber-800 rounded-xl p-3">
         <p className="text-[11px] text-amber-700 dark:text-amber-300 leading-relaxed">
-          <span className="font-semibold">⚠️ Kaynak:</span> Bu liste AFAD, FEMA ve Kızılay deprem hazırlık kılavuzları esas alınarak hazırlanmıştır. Aile büyüklüğünüze ve özel ihtiyaçlarınıza göre uyarlayın.
+          <span className="font-semibold">⚠️ {TR ? 'Kaynak:' : 'Source:'}</span>{' '}
+          {TR
+            ? 'Bu liste AFAD, FEMA ve Kızılay deprem hazırlık kılavuzları esas alınarak hazırlanmıştır. Aile büyüklüğünüze ve özel ihtiyaçlarınıza göre uyarlayın.'
+            : 'This list is based on AFAD, FEMA, and Turkish Red Crescent earthquake preparedness guides. Adapt it to your household size and special needs.'}
         </p>
       </div>
     </div>

@@ -386,8 +386,8 @@ export default function HaritaSayfasi() {
       <Link href="/uzman"
         className="flex items-center justify-between bg-[var(--card-bg)] rounded-2xl shadow-sm border border-[var(--border)] p-4 hover:border-red-300 transition-colors">
         <div>
-          <p className="text-xs font-bold text-[var(--foreground)]">Uzman Görüşleri</p>
-          <p className="text-[11px] text-[var(--muted)] mt-0.5">Bilimsel değerlendirmeler ve uzman analizleri</p>
+          <p className="text-xs font-bold text-[var(--foreground)]">{t('navUzman')}</p>
+          <p className="text-[11px] text-[var(--muted)] mt-0.5">{t('haberlerSubtitle')}</p>
         </div>
         <span className="text-[var(--muted)] text-sm">→</span>
       </Link>

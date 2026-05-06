@@ -3,6 +3,7 @@ import { Geist } from "next/font/google";
 import "./globals.css";
 import NavBar from "@/components/NavBar";
 import AtaturkBanner from "@/components/AtaturkBanner";
+import BackBar from "@/components/BackBar";
 import { LanguageProvider } from "@/contexts/LanguageContext";
 import Link from "next/link";
 
@@ -55,6 +56,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <div className="max-w-2xl mx-auto w-full px-4 pt-3">
             <AtaturkBanner />
           </div>
+          <BackBar />
           <main className="flex-1 max-w-2xl mx-auto w-full px-4 py-4 pb-12">
             {children}
           </main>

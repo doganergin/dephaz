@@ -52,7 +52,7 @@ export default function FayHatlariPage() {
       ad: 'East Anatolian Fault System (EAF)',
       tip: 'Left-Lateral Strike-Slip',
       uzunluk: '~580 km',
-      rota: 'Karlıova → Hatay (Gulf of İskenderun)',
+      rota: 'Karlıova → Hatay (Gulf of Iskenderun)',
       aciklama: 'This is the fault responsible for the Mw 7.7 and Mw 7.6 earthquakes centred on Kahramanmaraş in February 2023. Before those earthquakes, much of the fault had been accumulating energy for roughly 500 years. Long periods of seismic silence make such faults especially dangerous.',
       renk: 'red',
     },
@@ -61,7 +61,7 @@ export default function FayHatlariPage() {
       tip: 'Normal Faults',
       uzunluk: 'Multiple segments',
       rota: 'Aegean Region',
-      aciklama: 'Western Anatolia is a tectonically extending region. The normal faults here run along grabens such as the Büyük Menderes, Gediz, and Bakırçay valleys. The 2020 İzmir earthquake (Mw 6.9) occurred on the Seferihisar fault of this system.',
+      aciklama: 'Western Anatolia is a tectonically extending region. The normal faults here run along grabens such as the Büyük Menderes, Gediz, and Bakırçay valleys. The 2020 Izmir earthquake (Mw 6.9) occurred on the Seferihisar fault of this system.',
       renk: 'orange',
     },
     {

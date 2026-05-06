@@ -6,7 +6,7 @@ import { useLanguage } from '@/contexts/LanguageContext';
 const SAYFA_BOYUTU = 10;
 
 export default function UzmanDegerlendirmeleri() {
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
   const [sayfa, setSayfa] = useState(1);
 
   const toplamSayfa = Math.ceil(haberler.length / SAYFA_BOYUTU);
@@ -33,7 +33,7 @@ export default function UzmanDegerlendirmeleri() {
                     ? 'bg-green-50 dark:bg-green-900/30 text-green-700 dark:text-green-400'
                     : 'bg-blue-50 dark:bg-blue-900/30 text-blue-600'
                 }`}>
-                  {h.kaynak_tur === 'doi' ? 'DOI' : h.kaynak_tur === 'kurum' ? 'Resmi' : 'Üniv.'}
+                  {h.kaynak_tur === 'doi' ? 'DOI' : h.kaynak_tur === 'kurum' ? (lang === 'TR' ? 'Resmi' : 'Official') : (lang === 'TR' ? 'Üniv.' : 'Univ.')}
                 </span>
                 <span className="text-[10px] text-[var(--muted)]">{h.tarih}</span>
               </div>

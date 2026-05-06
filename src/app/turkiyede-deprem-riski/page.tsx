@@ -14,7 +14,7 @@ export default function TurkiyeDepremRiskiPage() {
     { b: 'Karadeniz', r: 'Orta-Düşük', renk: 'green', a: 'Genel olarak daha az aktif; ancak kuzey kıyı şeridi risk taşır.' },
   ] : [
     { b: 'Marmara Region', r: 'Very High', renk: 'red', a: 'Istanbul, Kocaeli, Sakarya, Bursa. Active western segment of NAF.' },
-    { b: 'Aegean Region', r: 'High', renk: 'orange', a: 'İzmir, Manisa, Denizli. Western Anatolia graben system.' },
+    { b: 'Aegean Region', r: 'High', renk: 'orange', a: 'Izmir, Manisa, Denizli. Western Anatolia graben system.' },
     { b: 'Eastern Anatolia', r: 'Very High', renk: 'red', a: 'Kahramanmaraş, Hatay, Malatya. EAF and surrounding faults.' },
     { b: 'Central Anatolia', r: 'Moderate', renk: 'amber', a: 'Lower risk around Ankara; some districts close to active faults.' },
     { b: 'Black Sea Region', r: 'Low–Moderate', renk: 'green', a: 'Generally less active; northern coastal strip carries some risk.' },
@@ -24,7 +24,7 @@ export default function TurkiyeDepremRiskiPage() {
     { tarih: '17.08.1999', yer: TR ? 'Gölcük / Kocaeli' : 'Gölcük / Kocaeli', mag: 'Mw 7.4', kayip: '17,000+' },
     { tarih: '12.11.1999', yer: 'Düzce', mag: 'Mw 7.2', kayip: '845' },
     { tarih: '23.10.2011', yer: 'Van', mag: 'Mw 7.1', kayip: '604' },
-    { tarih: '30.10.2020', yer: TR ? 'İzmir-Seferihisar' : 'İzmir-Seferihisar', mag: 'Mw 6.9', kayip: '114' },
+    { tarih: '30.10.2020', yer: TR ? 'İzmir-Seferihisar' : 'Izmir-Seferihisar', mag: 'Mw 6.9', kayip: '114' },
     { tarih: '06.02.2023', yer: 'Kahramanmaraş', mag: 'Mw 7.7 + 7.6', kayip: '50,000+' },
   ];
 
