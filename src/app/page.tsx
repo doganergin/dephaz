@@ -178,7 +178,7 @@ export default function HomePage() {
             <span className="text-xs">{TR ? 'Yükleniyor...' : 'Loading...'}</span>
           </div>
         ) : (
-          <div className="space-y-2">
+          <div className="space-y-2 max-h-[216px] overflow-y-auto">
             {(eqTab === 'tr' ? trEqs : worldEqs).length === 0 ? (
               <p className="text-xs text-[var(--muted)] text-center py-4">{TR ? 'Veri alınamadı' : 'No data available'}</p>
             ) : (
