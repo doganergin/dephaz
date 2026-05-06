@@ -79,8 +79,8 @@ export default function HakkimizdaPage() {
             <p className="text-sm font-bold text-[var(--foreground)]">Doğan Ergin</p>
             <p className="text-xs text-[var(--muted)] mt-0.5 leading-relaxed">
               {TR
-                ? 'Yazılım geliştirici. Deprem Hattı, 2023 Kahramanmaraş depremleri sonrasında toplumsal deprem bilincini artırmak amacıyla başlatılmış bağımsız bir projedir.'
-                : 'Software developer. Deprem Hattı is an independent project launched after the February 2023 Kahramanmaraş earthquakes to raise public earthquake awareness.'}
+                ? 'Doğan Ergin, teknolojiyle pratik çözümler üretmeye odaklanan bir yazılım mühendisliği öğrencisidir. 2023 depremlerinin ardından tasarladığı bağımsız Deprem Hattı projesiyle, zemin kontrolü ve acil durum hazırlıklarını modern bir dijital altyapıya taşımayı amaçlıyor.'
+                : 'Doğan Ergin is a software engineering student focused on building practical, tech-driven solutions. With his independent project Deprem Hatti , he aims to modernize disaster awareness and emergency preparedness.'}
             </p>
             <a href="mailto:dogan.ergin@depremhatti.com" className="text-[11px] text-blue-500 hover:underline mt-1.5 block">doganergin15@gmail.com</a>
           </div>
