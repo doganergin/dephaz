@@ -26,6 +26,7 @@ export default function NavBar() {
   const rehber = [
     { href: '/deprem-nedir',           tr: 'Deprem Nedir?',                 en: 'What Is an Earthquake?' },
     { href: '/depreme-hazirlik',       tr: 'Depreme Hazırlık',              en: 'Earthquake Preparedness' },
+    { href: '/deprem-aninda',          tr: 'Deprem Anında Ne Yapmalı?',      en: 'What to Do in an Earthquake?' },
     { href: '/turkiyede-deprem-riski', tr: "Türkiye'de Deprem Riski",        en: 'Earthquake Risk in Turkey' },
     { href: '/fay-hatlari',            tr: 'Fay Hatları',                   en: 'Fault Lines' },
     { href: '/zemin-tipleri',          tr: 'Zemin Tipleri',                 en: 'Soil Types' },
