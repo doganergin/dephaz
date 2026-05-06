@@ -61,24 +61,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             {children}
           </main>
           <footer className="max-w-2xl mx-auto w-full px-4 py-6 border-t border-[var(--border)] space-y-4">
-            {/* İçerik linkleri */}
-            <div className="space-y-2">
-              <p className="text-[10px] font-semibold text-[var(--muted)] uppercase tracking-wide">Deprem Bilgi Rehberi</p>
-              <div className="flex flex-wrap gap-x-4 gap-y-1.5">
-                {[
-                  { href: '/deprem-nedir', label: 'Deprem Nedir?' },
-                  { href: '/depreme-hazirlik', label: 'Depreme Hazırlık' },
-                  { href: '/turkiyede-deprem-riski', label: "Türkiye'de Deprem Riski" },
-                  { href: '/fay-hatlari', label: 'Fay Hatları' },
-                  { href: '/zemin-tipleri', label: 'Zemin Tipleri' },
-                  { href: '/deprem-cantasi-rehberi', label: 'Deprem Çantası Rehberi' },
-                ].map((link) => (
-                  <Link key={link.href} href={link.href} className="text-[11px] text-[var(--muted)] hover:text-[var(--foreground)] transition-colors">
-                    {link.label}
-                  </Link>
-                ))}
-              </div>
-            </div>
             {/* Kurumsal linkler */}
             <div className="flex flex-wrap justify-center gap-x-4 gap-y-1">
               <Link href="/hakkimizda" className="text-[11px] text-[var(--muted)] hover:text-[var(--foreground)] transition-colors">Hakkımızda</Link>

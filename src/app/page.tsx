@@ -1,10 +1,58 @@
 'use client';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useLanguage } from '@/contexts/LanguageContext';
+
+interface LatestEq { buyukluk: number; konum: string; tarih: string; derinlik: number; kaynak?: string; }
 
 export default function HomePage() {
   const { lang } = useLanguage();
   const TR = lang === 'TR';
+
+  const [eqTab, setEqTab] = useState<'tr' | 'world'>('tr');
+  const [trEqs, setTrEqs] = useState<LatestEq[]>([]);
+  const [worldEqs, setWorldEqs] = useState<LatestEq[]>([]);
+  const [eqLoading, setEqLoading] = useState(true);
+
+  useEffect(() => {
+    async function fetchEqs() {
+      const [kandilliRes, afadRes, usgsRes] = await Promise.allSettled([
+        fetch('/api/kandilli?limit=20'),
+        fetch('/api/afad?limit=20&minmag=3.5'),
+        fetch('/api/usgs'),
+      ]);
+      const combined: LatestEq[] = [];
+      if (kandilliRes.status === 'fulfilled' && kandilliRes.value.ok) {
+        const d: Array<{ buyukluk: number; konum: string; tarih: string; saat?: string; derinlik: number }> = await kandilliRes.value.json();
+        if (Array.isArray(d)) combined.push(...d.map((x) => ({
+          buyukluk: x.buyukluk, konum: x.konum,
+          tarih: x.saat ? `${x.tarih} ${x.saat}` : x.tarih,
+          derinlik: x.derinlik, kaynak: 'Kandilli',
+        })));
+      }
+      if (afadRes.status === 'fulfilled' && afadRes.value.ok) {
+        const d: Array<{ buyukluk: number; konum: string; tarih: string; derinlik: number }> = await afadRes.value.json();
+        if (Array.isArray(d)) combined.push(...d.map((x) => ({
+          buyukluk: x.buyukluk, konum: x.konum, tarih: x.tarih, derinlik: x.derinlik, kaynak: 'AFAD',
+        })));
+      }
+      setTrEqs(combined.sort((a, b) => b.tarih.localeCompare(a.tarih)).slice(0, 10));
+      if (usgsRes.status === 'fulfilled' && usgsRes.value.ok) {
+        const d = await usgsRes.value.json();
+        if (d.features) {
+          setWorldEqs(d.features.slice(0, 10).map((f: { properties: { mag: number; place: string; time: number }; geometry: { coordinates: [number, number, number] } }) => ({
+            buyukluk: f.properties.mag,
+            konum: f.properties.place,
+            tarih: new Date(f.properties.time).toLocaleString('tr-TR'),
+            derinlik: Math.round(f.geometry.coordinates[2]),
+            kaynak: 'USGS',
+          })));
+        }
+      }
+      setEqLoading(false);
+    }
+    fetchEqs();
+  }, []);
 
   const features = TR ? [
     { href: '/bolge-analizi', icon: '🗺️', title: 'Bölge Analizi', desc: 'İl, ilçe ve mahalle seçerek fay mesafesi, zemin yapısı ve deprem risk skorunu öğrenin.', color: 'red' },
@@ -96,6 +144,64 @@ export default function HomePage() {
         </div>
       </div>
 
+      {/* Latest Earthquakes */}
+      <div className="bg-[var(--card-bg)] rounded-2xl shadow-sm border border-[var(--border)] p-4">
+        <div className="flex items-center justify-between mb-3">
+          <p className="text-xs font-bold text-[var(--muted)] uppercase tracking-wide">
+            {TR ? 'Son Depremler' : 'Latest Earthquakes'}
+          </p>
+          <Link href="/harita" className="text-[11px] text-red-500 hover:underline">
+            {TR ? 'Tümünü Gör →' : 'See all →'}
+          </Link>
+        </div>
+        <div className="flex gap-0 bg-gray-100 dark:bg-gray-700 rounded-xl overflow-hidden mb-3">
+          {([
+            { key: 'tr' as const, label: `🇹🇷 ${TR ? 'Türkiye' : 'Turkey'}` },
+            { key: 'world' as const, label: `🌍 ${TR ? 'Dünya' : 'World'}` },
+          ] as const).map((tab) => (
+            <button
+              key={tab.key}
+              onClick={() => setEqTab(tab.key)}
+              className={`flex-1 py-2 text-[11px] font-semibold transition-colors ${
+                eqTab === tab.key
+                  ? 'bg-white dark:bg-gray-600 text-red-600 shadow-sm rounded-xl'
+                  : 'text-[var(--muted)]'
+              }`}
+            >
+              {tab.label}
+            </button>
+          ))}
+        </div>
+        {eqLoading ? (
+          <div className="flex items-center justify-center py-6 gap-2 text-[var(--muted)]">
+            <div className="w-4 h-4 border-2 border-red-400 border-t-transparent rounded-full animate-spin" />
+            <span className="text-xs">{TR ? 'Yükleniyor...' : 'Loading...'}</span>
+          </div>
+        ) : (
+          <div className="space-y-2">
+            {(eqTab === 'tr' ? trEqs : worldEqs).length === 0 ? (
+              <p className="text-xs text-[var(--muted)] text-center py-4">{TR ? 'Veri alınamadı' : 'No data available'}</p>
+            ) : (
+              (eqTab === 'tr' ? trEqs : worldEqs).map((d, i) => (
+                <div key={i} className="flex items-center gap-3 py-1.5 border-b border-[var(--border)] last:border-0">
+                  <div className={`w-10 h-10 rounded-xl flex items-center justify-center text-sm font-bold shrink-0 ${
+                    d.buyukluk >= 6 ? 'bg-red-50 dark:bg-red-900/30 text-red-600' :
+                    d.buyukluk >= 4 ? 'bg-amber-50 dark:bg-amber-900/30 text-amber-600' :
+                    'bg-gray-50 dark:bg-gray-700 text-gray-500'
+                  }`}>
+                    {d.buyukluk.toFixed(1)}
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <p className="text-xs font-medium text-[var(--foreground)] truncate">{d.konum}</p>
+                    <p className="text-[11px] text-[var(--muted)]">{d.tarih} · {d.derinlik} km · {d.kaynak}</p>
+                  </div>
+                </div>
+              ))
+            )}
+          </div>
+        )}
+      </div>
+
       {/* Stats */}
       <div className="grid grid-cols-3 gap-2">
         {[
@@ -113,7 +219,7 @@ export default function HomePage() {
       {/* Knowledge guide */}
       <div>
         <p className="text-xs font-semibold text-[var(--muted)] uppercase tracking-wide mb-3">
-          {TR ? 'Bilgi Rehberi' : 'Knowledge Guide'}
+          {TR ? 'Deprem Bilgi Rehberi' : 'Earthquake Knowledge Guide'}
         </p>
         <div className="space-y-2">
           {articles.map((a) => (

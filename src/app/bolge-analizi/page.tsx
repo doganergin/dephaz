@@ -607,8 +607,8 @@ export default function BolgeAnalizi() {
         {/* Kaynak sekmeleri */}
         <div className="flex gap-0 bg-gray-100 dark:bg-gray-700 rounded-xl overflow-hidden mb-3">
           {([
-            { key: 'tr' as const, label: '🇹🇷 Türkiye', sub: 'Kandilli + AFAD · M3.5+' },
-            { key: 'dunya' as const, label: '🌍 Dünya', sub: 'USGS · M6.5+' },
+            { key: 'tr' as const, label: `🇹🇷 ${t('haritaTurkiye')}`, sub: 'Kandilli + AFAD · M3.5+' },
+            { key: 'dunya' as const, label: `🌍 ${t('haritaDunya')}`, sub: 'USGS · M6.5+' },
           ] as const).map((tab) => (
             <button
               key={tab.key}
