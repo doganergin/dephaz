@@ -127,21 +127,23 @@ function DepremSkalasi({ t, lang }: { t: (k: Parameters<typeof import('@/lib/i18
           USGS →
         </a>
       </div>
-      <div className="space-y-1.5">
+      <div className="space-y-2.5">
         {SKALA.map((s) => (
-          <div key={s.range} className="flex items-center gap-3">
-            <div
-              className="w-2.5 h-2.5 rounded-full shrink-0"
-              style={{ backgroundColor: s.renk }}
-            />
-            <span className="text-[11px] font-bold text-[var(--foreground)] w-20 shrink-0">{s.range}</span>
-            <div className="flex-1 h-1.5 rounded-full bg-gray-100 dark:bg-gray-700 overflow-hidden">
+          <div key={s.range}>
+            <div className="flex items-center gap-2 mb-0.5">
               <div
-                className="h-full rounded-full"
-                style={{ width: `${(s.etap / 7) * 100}%`, backgroundColor: s.renk }}
+                className="w-2.5 h-2.5 rounded-full shrink-0"
+                style={{ backgroundColor: s.renk }}
               />
+              <span className="text-[11px] font-bold text-[var(--foreground)] w-20 shrink-0">{s.range}</span>
+              <div className="flex-1 h-1.5 rounded-full bg-gray-100 dark:bg-gray-700 overflow-hidden">
+                <div
+                  className="h-full rounded-full"
+                  style={{ width: `${(s.etap / 7) * 100}%`, backgroundColor: s.renk }}
+                />
+              </div>
             </div>
-            <span className="text-[11px] text-[var(--muted)] w-48 shrink-0 text-right">{lang === 'EN' ? s.etiketEN : s.etiket}</span>
+            <p className="text-[10px] text-[var(--muted)] pl-[22px]">{lang === 'EN' ? s.etiketEN : s.etiket}</p>
           </div>
         ))}
       </div>
