@@ -4,6 +4,7 @@ import "./globals.css";
 import NavBar from "@/components/NavBar";
 import AtaturkBanner from "@/components/AtaturkBanner";
 import { LanguageProvider } from "@/contexts/LanguageContext";
+import Link from "next/link";
 
 const geist = Geist({ subsets: ["latin"] });
 
@@ -57,10 +58,34 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <main className="flex-1 max-w-2xl mx-auto w-full px-4 py-4 pb-12">
             {children}
           </main>
-          <footer className="max-w-2xl mx-auto w-full px-4 py-5 border-t border-[var(--border)] space-y-3">
-            <div className="space-y-1">
+          <footer className="max-w-2xl mx-auto w-full px-4 py-6 border-t border-[var(--border)] space-y-4">
+            {/* İçerik linkleri */}
+            <div className="space-y-2">
+              <p className="text-[10px] font-semibold text-[var(--muted)] uppercase tracking-wide">Deprem Bilgi Rehberi</p>
+              <div className="flex flex-wrap gap-x-4 gap-y-1.5">
+                {[
+                  { href: '/deprem-nedir', label: 'Deprem Nedir?' },
+                  { href: '/depreme-hazirlik', label: 'Depreme Hazırlık' },
+                  { href: '/turkiyede-deprem-riski', label: "Türkiye'de Deprem Riski" },
+                  { href: '/fay-hatlari', label: 'Fay Hatları' },
+                  { href: '/zemin-tipleri', label: 'Zemin Tipleri' },
+                  { href: '/deprem-cantasi-rehberi', label: 'Deprem Çantası Rehberi' },
+                ].map((link) => (
+                  <Link key={link.href} href={link.href} className="text-[11px] text-[var(--muted)] hover:text-[var(--foreground)] transition-colors">
+                    {link.label}
+                  </Link>
+                ))}
+              </div>
+            </div>
+            {/* Kurumsal linkler */}
+            <div className="flex flex-wrap justify-center gap-x-4 gap-y-1">
+              <Link href="/hakkimizda" className="text-[11px] text-[var(--muted)] hover:text-[var(--foreground)] transition-colors">Hakkımızda</Link>
+              <Link href="/iletisim" className="text-[11px] text-[var(--muted)] hover:text-[var(--foreground)] transition-colors">İletişim</Link>
+              <Link href="/gizlilik" className="text-[11px] text-[var(--muted)] hover:text-[var(--foreground)] transition-colors">Gizlilik Politikası</Link>
+            </div>
+            <div className="space-y-1 border-t border-[var(--border)] pt-3">
               <p className="text-[11px] text-[var(--muted)] text-center">
-                Deprem verileri: <span className="font-medium">Kandilli Rasathanesi (KOERI)</span> · <span className="font-medium">AFAD</span> · <span className="font-medium">USGS</span> · Fay verileri: <span className="font-medium">MTA Aktif Fay Haritası</span>
+                Deprem verileri: <span className="font-medium">Kandilli (KOERI)</span> · <span className="font-medium">AFAD</span> · <span className="font-medium">USGS</span> · Fay: <span className="font-medium">MTA</span>
               </p>
               <p className="text-[11px] text-[var(--muted)] text-center">
                 © 2026 <span className="font-semibold">Doğan Ergin</span> · Tüm haklar saklıdır.
