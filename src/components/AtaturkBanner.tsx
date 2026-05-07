@@ -1,8 +1,14 @@
 'use client';
 import { useState } from 'react';
+import { usePathname } from 'next/navigation';
+
+const GOSTER_SAYFALARI = ['/', '/hakkimizda', '/uzman'];
 
 export default function AtaturkBanner() {
+  const pathname = usePathname();
   const [imgHata, setImgHata] = useState(false);
+
+  if (!GOSTER_SAYFALARI.includes(pathname)) return null;
 
   return (
     <div className="flex items-center gap-3 bg-[var(--card-bg)] border border-[var(--border)] rounded-xl px-4 py-3 shadow-sm">
