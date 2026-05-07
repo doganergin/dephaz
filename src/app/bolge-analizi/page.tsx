@@ -1,12 +1,16 @@
 'use client';
 import { useState, useCallback, useEffect, useRef } from 'react';
+import dynamic from 'next/dynamic';
 import { getProvinces, getDistricts, getNeighbourhoods } from '@/lib/locationHelper';
 import { useAppStore } from '@/store';
 import { bolgeRiskGetir } from '@/api/riskApi';
 import { bilimselKaynaklar } from '@/data/bilimselKaynaklar';
 import { depremAnindaOnlemler, depremSonrasiOnlemler } from '@/data/depremOnlemleri';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { IL_KOORDINATLARI } from '@/lib/ilKoordinatlari';
 import type { BolgeRisk, ZeminTipi } from '@/types';
+
+const BolgeHaritasi = dynamic(() => import('@/components/BolgeHaritasi'), { ssr: false });
 
 const ZEMIN_EN: Record<string, string> = {
   'Kaya': 'Rock', 'Killi zemin': 'Clay soil', 'Alüvyon': 'Alluvium',
@@ -380,6 +384,25 @@ export default function BolgeAnalizi() {
               ))}
             </div>
           </div>
+
+          {/* Bölge Haritası */}
+          {IL_KOORDINATLARI[risk.il] && (
+            <div className="bg-[var(--card-bg)] rounded-2xl shadow-sm border border-[var(--border)] overflow-hidden">
+              <p className="text-xs font-bold text-[var(--muted)] uppercase tracking-wide px-4 pt-4 pb-2">
+                {lang === 'TR' ? 'Konum' : 'Location'}
+              </p>
+              <div style={{ height: '220px' }}>
+                <BolgeHaritasi
+                  merkez={IL_KOORDINATLARI[risk.il]}
+                  il={risk.il}
+                  ilce={risk.ilce}
+                  riskSkoru={risk.riskSkoru}
+                  fayMesafe={risk.fayMesafe}
+                  riskRenk={renk.bar}
+                />
+              </div>
+            </div>
+          )}
 
           {/* Zemin */}
           <div className="bg-[var(--card-bg)] rounded-2xl shadow-sm border border-[var(--border)] p-4">
