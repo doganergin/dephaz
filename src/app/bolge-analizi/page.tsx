@@ -175,12 +175,28 @@ export default function BolgeAnalizi() {
   const [yukleniyor, setYukleniyor] = useState(false);
   const [risk, setRisk] = useState<BolgeRisk | null>(null);
   const [hata, setHata] = useState('');
+  const [haritaMerkez, setHaritaMerkez] = useState<[number, number] | null>(null);
   const riskRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (risk && riskRef.current) {
       riskRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
+  }, [risk]);
+
+  useEffect(() => {
+    if (!risk) return;
+    const sorgu = encodeURIComponent(`${risk.ilce}, ${risk.il}, Turkey`);
+    fetch(`https://nominatim.openstreetmap.org/search?q=${sorgu}&format=json&limit=1`)
+      .then((r) => r.json())
+      .then((data) => {
+        if (data[0]) {
+          setHaritaMerkez([parseFloat(data[0].lat), parseFloat(data[0].lon)]);
+        } else {
+          setHaritaMerkez(IL_KOORDINATLARI[risk.il] ?? null);
+        }
+      })
+      .catch(() => setHaritaMerkez(IL_KOORDINATLARI[risk.il] ?? null));
   }, [risk]);
 
   // Son depremler
@@ -238,13 +254,13 @@ export default function BolgeAnalizi() {
   const onIlSec = useCallback((id: number | string) => {
     const il = getProvinces().find((i) => i.id === id);
     if (il) setIl({ id: il.id, name: il.name });
-    setRisk(null); setHata('');
+    setRisk(null); setHata(''); setHaritaMerkez(null);
   }, [setIl]);
 
   const onIlceSec = useCallback((id: number | string) => {
     const ilce = getDistricts(secilenIl!.id).find((i) => i.id === id);
     if (ilce) setIlce({ id: ilce.id, name: ilce.name, provinceId: secilenIl!.id });
-    setRisk(null);
+    setRisk(null); setHaritaMerkez(null);
   }, [secilenIl, setIlce]);
 
   const onMahalleSec = useCallback(async (id: number | string) => {
@@ -386,23 +402,28 @@ export default function BolgeAnalizi() {
           </div>
 
           {/* Bölge Haritası */}
-          {IL_KOORDINATLARI[risk.il] && (
-            <div className="bg-[var(--card-bg)] rounded-2xl shadow-sm border border-[var(--border)] overflow-hidden">
-              <p className="text-xs font-bold text-[var(--muted)] uppercase tracking-wide px-4 pt-4 pb-2">
-                {lang === 'TR' ? 'Konum' : 'Location'}
-              </p>
-              <div style={{ height: '220px' }}>
+          <div className="bg-[var(--card-bg)] rounded-2xl shadow-sm border border-[var(--border)] overflow-hidden">
+            <p className="text-xs font-bold text-[var(--muted)] uppercase tracking-wide px-4 pt-4 pb-2">
+              {lang === 'TR' ? 'Konum' : 'Location'}
+            </p>
+            <div style={{ height: '220px' }}>
+              {haritaMerkez ? (
                 <BolgeHaritasi
-                  merkez={IL_KOORDINATLARI[risk.il]}
+                  merkez={haritaMerkez}
                   il={risk.il}
                   ilce={risk.ilce}
                   riskSkoru={risk.riskSkoru}
                   fayMesafe={risk.fayMesafe}
                   riskRenk={renk.bar}
                 />
-              </div>
+              ) : (
+                <div className="flex items-center justify-center h-full text-xs text-[var(--muted)] gap-2">
+                  <div className="w-3 h-3 border-2 border-red-400 border-t-transparent rounded-full animate-spin" />
+                  {lang === 'TR' ? 'Konum yükleniyor...' : 'Loading location...'}
+                </div>
+              )}
             </div>
-          )}
+          </div>
 
           {/* Zemin */}
           <div className="bg-[var(--card-bg)] rounded-2xl shadow-sm border border-[var(--border)] p-4">
