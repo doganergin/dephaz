@@ -423,6 +423,11 @@ export default function BolgeAnalizi() {
                 </div>
               )}
             </div>
+            <p className="text-[10px] text-[var(--muted)] px-4 py-2">
+              {lang === 'TR'
+                ? 'Harita ilçe merkezini göstermektedir. Mahallenizin tam konumu farklılık gösterebilir.'
+                : 'The map shows the district centre. Your neighbourhood\'s exact location may differ.'}
+            </p>
           </div>
 
           {/* Zemin */}

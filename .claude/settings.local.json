@@ -8,7 +8,8 @@
       "Bash(git commit -m 'feat: show region map with fault distance circle in bolge-analizi *)",
       "Bash(git commit -m 'fix: use Nominatim geocoding for exact district coordinates on map *)",
       "Bash(git commit -m 'fix: include neighbourhood name in geocoding query for precise map location *)",
-      "Bash(git commit -m 'fix: restrict Nominatim geocoding to Turkey, use district-level only *)"
+      "Bash(git commit -m 'fix: restrict Nominatim geocoding to Turkey, use district-level only *)",
+      "Bash(git commit -m 'fix: add disclaimer note below region map for neighbourhood precision *)"
     ]
   }
 }
