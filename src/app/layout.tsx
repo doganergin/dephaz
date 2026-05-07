@@ -10,23 +10,32 @@ import { LanguageProvider } from "@/contexts/LanguageContext";
 const geist = Geist({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Deprem Hattı — Deprem Hazırlık Rehberi",
-  description: "Deprem Hattı ile bölgenizin zemin yapısını inceleyin, deprem riskini öğrenin ve hazırlık adımlarını keşfedin.",
+  title: "Deprem Hattı — Deprem Risk Analizi ve Hazırlık Rehberi",
+  description: "Bölgenizin deprem riskini öğrenin. Fay mesafesi, zemin yapısı, risk skoru. Canlı deprem takibi, tarihsel depremler ve hazırlık rehberleri.",
+  keywords: [
+    "deprem riski", "deprem hazırlık", "fay hattı", "zemin analizi", "deprem risk skoru",
+    "Türkiye deprem", "İstanbul deprem riski", "AFAD", "Kandilli", "deprem çantası",
+    "deprem anında ne yapmalı", "earthquake risk Turkey", "depremhatti"
+  ],
+  metadataBase: new URL("https://depremhatti.com"),
+  alternates: { canonical: "/" },
   icons: {
     icon: "/gecicilogo.png",
     apple: "/gecicilogo.png",
   },
   openGraph: {
-    title: "Deprem Hattı — Deprem Hazırlık Rehberi",
-    description: "Deprem Hattı ile bölgenizin zemin yapısını inceleyin, deprem riskini öğrenin ve hazırlık adımlarını keşfedin.",
+    title: "Deprem Hattı — Deprem Risk Analizi ve Hazırlık Rehberi",
+    description: "Bölgenizin deprem riskini öğrenin. Fay mesafesi, zemin yapısı, risk skoru. Canlı deprem takibi ve hazırlık rehberleri.",
     images: [{ url: "/gecicilogo.png", width: 1200, height: 630, alt: "Deprem Hattı" }],
     type: "website",
     locale: "tr_TR",
+    siteName: "Deprem Hattı",
+    url: "https://depremhatti.com",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Deprem Hattı — Deprem Hazırlık Rehberi",
-    description: "Deprem Hattı ile bölgenizin zemin yapısını inceleyin, deprem riskini öğrenin ve hazırlık adımlarını keşfedin.",
+    title: "Deprem Hattı — Deprem Risk Analizi ve Hazırlık Rehberi",
+    description: "Bölgenizin deprem riskini öğrenin. Fay mesafesi, zemin yapısı, risk skoru.",
     images: ["/gecicilogo.png"],
   },
 };
