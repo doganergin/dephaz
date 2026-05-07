@@ -6,7 +6,8 @@
       "Bash(curl -s --max-time 8 \"http://www.koeri.boun.edu.tr/scripts/lst0.asp\")",
       "Bash(git commit -m 'fix: add ads.txt for AdSense verification *)",
       "Bash(git commit -m 'feat: show region map with fault distance circle in bolge-analizi *)",
-      "Bash(git commit -m 'fix: use Nominatim geocoding for exact district coordinates on map *)"
+      "Bash(git commit -m 'fix: use Nominatim geocoding for exact district coordinates on map *)",
+      "Bash(git commit -m 'fix: include neighbourhood name in geocoding query for precise map location *)"
     ]
   }
 }

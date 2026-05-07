@@ -186,7 +186,12 @@ export default function BolgeAnalizi() {
 
   useEffect(() => {
     if (!risk) return;
-    const sorgu = encodeURIComponent(`${risk.ilce}, ${risk.il}, Turkey`);
+    const mahalleFarklı = risk.mahalle && risk.mahalle !== risk.ilce;
+    const sorgu = encodeURIComponent(
+      mahalleFarklı
+        ? `${risk.mahalle}, ${risk.ilce}, ${risk.il}, Turkey`
+        : `${risk.ilce}, ${risk.il}, Turkey`
+    );
     fetch(`https://nominatim.openstreetmap.org/search?q=${sorgu}&format=json&limit=1`)
       .then((r) => r.json())
       .then((data) => {
