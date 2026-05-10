@@ -370,6 +370,136 @@ const RISK_DB: Record<string, RiskVeri> = {
   'Denizli-Güney':           { riskSkoru: 55, fayMesafe: 42,  olasilik30: 36, beklenenMw: 'Mw 6.0–6.8', fayAdi: 'Gediz Grabeni' },
   'Denizli-Kale':            { riskSkoru: 60, fayMesafe: 35,  olasilik30: 40, beklenenMw: 'Mw 6.0–6.8', fayAdi: 'Büyük Menderes Grabeni' },
   'Denizli-Serinhisar':      { riskSkoru: 58, fayMesafe: 38,  olasilik30: 38, beklenenMw: 'Mw 6.0–6.8', fayAdi: 'Büyük Menderes Grabeni' },
+
+  // ── ANKARA ────────────────────────────────────────────────────────────────
+  // Kaynak: AFAD Türkiye Deprem Tehlike Haritası 2018; Haymana, Polatlı ve Eskişehir fayları
+  'Ankara-Çankaya':          { riskSkoru: 42, fayMesafe: 55,  olasilik30: 28, beklenenMw: 'Mw 5.5–6.5', fayAdi: 'Haymana Fayı' },
+  'Ankara-Keçiören':         { riskSkoru: 40, fayMesafe: 58,  olasilik30: 26, beklenenMw: 'Mw 5.5–6.5', fayAdi: 'Haymana Fayı' },
+  'Ankara-Mamak':            { riskSkoru: 38, fayMesafe: 62,  olasilik30: 24, beklenenMw: 'Mw 5.5–6.5', fayAdi: 'Haymana Fayı' },
+  'Ankara-Sincan':           { riskSkoru: 50, fayMesafe: 32,  olasilik30: 32, beklenenMw: 'Mw 6.0–6.5', fayAdi: 'Polatlı Fayı' },
+  'Ankara-Etimesgut':        { riskSkoru: 46, fayMesafe: 40,  olasilik30: 29, beklenenMw: 'Mw 6.0–6.5', fayAdi: 'Polatlı Fayı' },
+  'Ankara-Yenimahalle':      { riskSkoru: 44, fayMesafe: 48,  olasilik30: 28, beklenenMw: 'Mw 5.5–6.5', fayAdi: 'Haymana Fayı' },
+  'Ankara-Altındağ':         { riskSkoru: 40, fayMesafe: 60,  olasilik30: 26, beklenenMw: 'Mw 5.5–6.5', fayAdi: 'Haymana Fayı' },
+  'Ankara-Pursaklar':        { riskSkoru: 36, fayMesafe: 68,  olasilik30: 22, beklenenMw: 'Mw 5.5–6.5', fayAdi: 'Haymana Fayı' },
+  'Ankara-Gölbaşı':          { riskSkoru: 52, fayMesafe: 28,  olasilik30: 34, beklenenMw: 'Mw 6.0–6.5', fayAdi: 'Haymana Fayı' },
+  'Ankara-Polatlı':          { riskSkoru: 55, fayMesafe: 18,  olasilik30: 36, beklenenMw: 'Mw 6.0–6.5', fayAdi: 'Polatlı Fayı' },
+
+  // ── MANİSA ────────────────────────────────────────────────────────────────
+  // Kaynak: AFAD Türkiye Deprem Tehlike Haritası 2018; Gediz ve Büyük Menderes grabenlerinin kuzeyi
+  'Manisa-Şehzadeler':       { riskSkoru: 70, fayMesafe: 18,  olasilik30: 48, beklenenMw: 'Mw 6.5–7.0', fayAdi: 'Gediz Grabeni' },
+  'Manisa-Yunusemre':        { riskSkoru: 68, fayMesafe: 20,  olasilik30: 46, beklenenMw: 'Mw 6.5–7.0', fayAdi: 'Gediz Grabeni' },
+  'Manisa-Salihli':          { riskSkoru: 78, fayMesafe: 8,   olasilik30: 54, beklenenMw: 'Mw 6.5–7.0', fayAdi: 'Gediz Grabeni' },
+  'Manisa-Akhisar':          { riskSkoru: 65, fayMesafe: 28,  olasilik30: 44, beklenenMw: 'Mw 6.0–6.8', fayAdi: 'Gediz Grabeni' },
+  'Manisa-Turgutlu':         { riskSkoru: 70, fayMesafe: 15,  olasilik30: 48, beklenenMw: 'Mw 6.5–7.0', fayAdi: 'Gediz Grabeni' },
+  'Manisa-Soma':             { riskSkoru: 72, fayMesafe: 12,  olasilik30: 50, beklenenMw: 'Mw 6.5–7.0', fayAdi: 'Soma Fayı' },
+  'Manisa-Alaşehir':         { riskSkoru: 80, fayMesafe: 5,   olasilik30: 56, beklenenMw: 'Mw 6.5–7.0', fayAdi: 'Gediz Grabeni' },
+
+  // ── AYDIN ─────────────────────────────────────────────────────────────────
+  // Kaynak: AFAD Türkiye Deprem Tehlike Haritası 2018; Büyük Menderes Grabeni
+  'Aydın-Efeler':            { riskSkoru: 72, fayMesafe: 12,  olasilik30: 50, beklenenMw: 'Mw 6.5–7.0', fayAdi: 'Büyük Menderes Grabeni' },
+  'Aydın-Nazilli':           { riskSkoru: 78, fayMesafe: 6,   olasilik30: 54, beklenenMw: 'Mw 6.5–7.0', fayAdi: 'Büyük Menderes Grabeni' },
+  'Aydın-Söke':              { riskSkoru: 70, fayMesafe: 15,  olasilik30: 48, beklenenMw: 'Mw 6.5–7.0', fayAdi: 'Büyük Menderes Grabeni' },
+  'Aydın-Kuşadası':          { riskSkoru: 68, fayMesafe: 18,  olasilik30: 46, beklenenMw: 'Mw 6.5–7.0', fayAdi: 'Büyük Menderes Grabeni' },
+  'Aydın-Didim':             { riskSkoru: 65, fayMesafe: 22,  olasilik30: 44, beklenenMw: 'Mw 6.0–6.8', fayAdi: 'Güneybatı Anadolu Fayları' },
+  'Aydın-İncirliova':        { riskSkoru: 74, fayMesafe: 10,  olasilik30: 52, beklenenMw: 'Mw 6.5–7.0', fayAdi: 'Büyük Menderes Grabeni' },
+  'Aydın-Sultanhisar':       { riskSkoru: 76, fayMesafe: 8,   olasilik30: 53, beklenenMw: 'Mw 6.5–7.0', fayAdi: 'Büyük Menderes Grabeni' },
+
+  // ── TEKİRDAĞ ──────────────────────────────────────────────────────────────
+  // Kaynak: AFAD Türkiye Deprem Tehlike Haritası 2018; KAF Marmara güney kolu
+  'Tekirdağ-Süleymanpaşa':   { riskSkoru: 65, fayMesafe: 25,  olasilik30: 44, beklenenMw: 'Mw 6.5–7.0', fayAdi: 'KAF Marmara güney' },
+  'Tekirdağ-Çorlu':          { riskSkoru: 62, fayMesafe: 28,  olasilik30: 42, beklenenMw: 'Mw 6.5–7.0', fayAdi: 'KAF Marmara güney' },
+  'Tekirdağ-Çerkezköy':      { riskSkoru: 60, fayMesafe: 32,  olasilik30: 40, beklenenMw: 'Mw 6.5–7.0', fayAdi: 'KAF Marmara güney' },
+  'Tekirdağ-Malkara':        { riskSkoru: 58, fayMesafe: 38,  olasilik30: 38, beklenenMw: 'Mw 6.5–7.0', fayAdi: 'KAF Marmara güney' },
+  'Tekirdağ-Ergene':         { riskSkoru: 55, fayMesafe: 42,  olasilik30: 36, beklenenMw: 'Mw 6.0–6.8', fayAdi: 'KAF Marmara güney' },
+
+  // ── ESKİŞEHİR ─────────────────────────────────────────────────────────────
+  // Kaynak: AFAD Türkiye Deprem Tehlike Haritası 2018; Eskişehir Fayı (KAF kuzey kolu)
+  'Eskişehir-Odunpazarı':    { riskSkoru: 68, fayMesafe: 10,  olasilik30: 46, beklenenMw: 'Mw 6.5–7.0', fayAdi: 'Eskişehir Fayı' },
+  'Eskişehir-Tepebaşı':      { riskSkoru: 65, fayMesafe: 12,  olasilik30: 44, beklenenMw: 'Mw 6.5–7.0', fayAdi: 'Eskişehir Fayı' },
+  'Eskişehir-Mihalıçcık':    { riskSkoru: 55, fayMesafe: 28,  olasilik30: 36, beklenenMw: 'Mw 6.0–6.5', fayAdi: 'Eskişehir Fayı' },
+  'Eskişehir-Sivrihisar':    { riskSkoru: 60, fayMesafe: 20,  olasilik30: 40, beklenenMw: 'Mw 6.0–6.5', fayAdi: 'Eskişehir Fayı' },
+
+  // ── KONYA ─────────────────────────────────────────────────────────────────
+  // Kaynak: AFAD Türkiye Deprem Tehlike Haritası 2018; Konya Grabeni, Tuz Gölü Fayı
+  'Konya-Meram':             { riskSkoru: 45, fayMesafe: 55,  olasilik30: 28, beklenenMw: 'Mw 5.5–6.5', fayAdi: 'Konya Grabeni' },
+  'Konya-Selçuklu':          { riskSkoru: 42, fayMesafe: 58,  olasilik30: 26, beklenenMw: 'Mw 5.5–6.5', fayAdi: 'Konya Grabeni' },
+  'Konya-Karatay':           { riskSkoru: 40, fayMesafe: 62,  olasilik30: 24, beklenenMw: 'Mw 5.5–6.5', fayAdi: 'Konya Grabeni' },
+  'Konya-Ereğli':            { riskSkoru: 50, fayMesafe: 40,  olasilik30: 32, beklenenMw: 'Mw 6.0–6.5', fayAdi: 'Tuz Gölü Fayı' },
+  'Konya-Akşehir':           { riskSkoru: 55, fayMesafe: 32,  olasilik30: 36, beklenenMw: 'Mw 6.0–6.5', fayAdi: 'Akşehir-Simav Fayı' },
+
+  // ── MERSİN ────────────────────────────────────────────────────────────────
+  // Kaynak: AFAD Türkiye Deprem Tehlike Haritası 2018; Ecemiş Fayı, DAF güney uzantısı
+  'Mersin-Yenişehir':        { riskSkoru: 65, fayMesafe: 35,  olasilik30: 44, beklenenMw: 'Mw 6.5–7.0', fayAdi: 'Ecemiş Fayı' },
+  'Mersin-Toroslar':         { riskSkoru: 60, fayMesafe: 42,  olasilik30: 40, beklenenMw: 'Mw 6.5–7.0', fayAdi: 'Ecemiş Fayı' },
+  'Mersin-Akdeniz':          { riskSkoru: 62, fayMesafe: 38,  olasilik30: 42, beklenenMw: 'Mw 6.5–7.0', fayAdi: 'Ecemiş Fayı' },
+  'Mersin-Mezitli':          { riskSkoru: 60, fayMesafe: 40,  olasilik30: 40, beklenenMw: 'Mw 6.5–7.0', fayAdi: 'Ecemiş Fayı' },
+  'Mersin-Tarsus':           { riskSkoru: 68, fayMesafe: 28,  olasilik30: 46, beklenenMw: 'Mw 6.5–7.0', fayAdi: 'Ecemiş Fayı' },
+  'Mersin-Erdemli':          { riskSkoru: 58, fayMesafe: 45,  olasilik30: 38, beklenenMw: 'Mw 6.0–6.8', fayAdi: 'Ecemiş Fayı' },
+
+  // ── VAN ───────────────────────────────────────────────────────────────────
+  // Kaynak: AFAD; 2011 Van depremi (Mw 7.1 ve 7.2); Van Fayı aktif segmenti
+  'Van-İpekyolu':            { riskSkoru: 95, fayMesafe: 8,   olasilik30: 72, beklenenMw: 'Mw 7.0–7.5', fayAdi: 'Van Fayı' },
+  'Van-Tuşba':               { riskSkoru: 93, fayMesafe: 10,  olasilik30: 70, beklenenMw: 'Mw 7.0–7.5', fayAdi: 'Van Fayı' },
+  'Van-Erciş':               { riskSkoru: 97, fayMesafe: 4,   olasilik30: 75, beklenenMw: 'Mw 7.0–7.5', fayAdi: 'Van Fayı (Erciş segmenti)' },
+  'Van-Edremit':             { riskSkoru: 92, fayMesafe: 12,  olasilik30: 68, beklenenMw: 'Mw 7.0–7.5', fayAdi: 'Van Fayı' },
+  'Van-Gevaş':               { riskSkoru: 90, fayMesafe: 14,  olasilik30: 66, beklenenMw: 'Mw 7.0–7.5', fayAdi: 'Van Fayı' },
+  'Van-Özalp':               { riskSkoru: 88, fayMesafe: 18,  olasilik30: 64, beklenenMw: 'Mw 7.0–7.5', fayAdi: 'Van Fayı' },
+
+  // ── ELAZIĞ ────────────────────────────────────────────────────────────────
+  // Kaynak: AFAD; 2020 Sivrice depremi (Mw 6.8); Doğu Anadolu Fayı
+  'Elazığ-Merkez':           { riskSkoru: 90, fayMesafe: 10,  olasilik30: 66, beklenenMw: 'Mw 7.0–7.5', fayAdi: 'DAF Sivrice' },
+  'Elazığ-Sivrice':          { riskSkoru: 98, fayMesafe: 2,   olasilik30: 76, beklenenMw: 'Mw 7.0–7.5', fayAdi: 'DAF Sivrice (2020 merkez üssü)' },
+  'Elazığ-Kovancılar':       { riskSkoru: 85, fayMesafe: 15,  olasilik30: 62, beklenenMw: 'Mw 7.0–7.5', fayAdi: 'DAF' },
+  'Elazığ-Karakoçan':        { riskSkoru: 82, fayMesafe: 20,  olasilik30: 58, beklenenMw: 'Mw 7.0–7.5', fayAdi: 'DAF' },
+  'Elazığ-Baskil':           { riskSkoru: 80, fayMesafe: 22,  olasilik30: 56, beklenenMw: 'Mw 7.0–7.5', fayAdi: 'DAF' },
+
+  // ── ERZURUM ───────────────────────────────────────────────────────────────
+  // Kaynak: AFAD Türkiye Deprem Tehlike Haritası 2018; Karlıova üçlü kavşak bölgesi
+  'Erzurum-Yakutiye':        { riskSkoru: 62, fayMesafe: 45,  olasilik30: 42, beklenenMw: 'Mw 6.5–7.0', fayAdi: 'KAF doğu segmenti' },
+  'Erzurum-Aziziye':         { riskSkoru: 60, fayMesafe: 48,  olasilik30: 40, beklenenMw: 'Mw 6.5–7.0', fayAdi: 'KAF doğu segmenti' },
+  'Erzurum-Palandöken':      { riskSkoru: 64, fayMesafe: 42,  olasilik30: 43, beklenenMw: 'Mw 6.5–7.0', fayAdi: 'KAF doğu segmenti' },
+  'Erzurum-Horasan':         { riskSkoru: 72, fayMesafe: 22,  olasilik30: 50, beklenenMw: 'Mw 6.5–7.0', fayAdi: 'KAF doğu segmenti' },
+  'Erzurum-Aşkale':          { riskSkoru: 65, fayMesafe: 38,  olasilik30: 44, beklenenMw: 'Mw 6.5–7.0', fayAdi: 'KAF doğu segmenti' },
+
+  // ── TRABZON ───────────────────────────────────────────────────────────────
+  // Kaynak: AFAD Türkiye Deprem Tehlike Haritası 2018; Karadeniz kıyısı görece düşük risk
+  'Trabzon-Ortahisar':       { riskSkoru: 38, fayMesafe: 90,  olasilik30: 22, beklenenMw: 'Mw 5.5–6.5', fayAdi: 'KAF doğu uzantısı' },
+  'Trabzon-Akçaabat':        { riskSkoru: 35, fayMesafe: 95,  olasilik30: 20, beklenenMw: 'Mw 5.5–6.5', fayAdi: 'KAF doğu uzantısı' },
+  'Trabzon-Araklı':          { riskSkoru: 32, fayMesafe: 100, olasilik30: 18, beklenenMw: 'Mw 5.5–6.5', fayAdi: 'KAF doğu uzantısı' },
+  'Trabzon-Yomra':           { riskSkoru: 36, fayMesafe: 92,  olasilik30: 21, beklenenMw: 'Mw 5.5–6.5', fayAdi: 'KAF doğu uzantısı' },
+  'Trabzon-Of':              { riskSkoru: 30, fayMesafe: 105, olasilik30: 16, beklenenMw: 'Mw 5.5–6.5', fayAdi: 'KAF doğu uzantısı' },
+
+  // ── KAYSERİ ───────────────────────────────────────────────────────────────
+  // Kaynak: AFAD Türkiye Deprem Tehlike Haritası 2018; Erciyes volkanik bölgesi, yerel fay sistemleri
+  'Kayseri-Melikgazi':       { riskSkoru: 48, fayMesafe: 50,  olasilik30: 30, beklenenMw: 'Mw 5.5–6.5', fayAdi: 'Sarıoğlan-Tomarza Fayı' },
+  'Kayseri-Kocasinan':       { riskSkoru: 45, fayMesafe: 55,  olasilik30: 28, beklenenMw: 'Mw 5.5–6.5', fayAdi: 'Sarıoğlan-Tomarza Fayı' },
+  'Kayseri-Talas':           { riskSkoru: 50, fayMesafe: 48,  olasilik30: 32, beklenenMw: 'Mw 5.5–6.5', fayAdi: 'Sarıoğlan-Tomarza Fayı' },
+  'Kayseri-Develi':          { riskSkoru: 52, fayMesafe: 42,  olasilik30: 34, beklenenMw: 'Mw 5.5–6.5', fayAdi: 'Sarıoğlan-Tomarza Fayı' },
+  'Kayseri-İncesu':          { riskSkoru: 46, fayMesafe: 52,  olasilik30: 29, beklenenMw: 'Mw 5.5–6.5', fayAdi: 'Sarıoğlan-Tomarza Fayı' },
+
+  // ── ÇANAKKALE ─────────────────────────────────────────────────────────────
+  // Kaynak: AFAD Türkiye Deprem Tehlike Haritası 2018; Biga Yarımadası fayları, KAF güney kolu uzantısı
+  'Çanakkale-Merkez':        { riskSkoru: 62, fayMesafe: 28,  olasilik30: 42, beklenenMw: 'Mw 6.5–7.0', fayAdi: 'Biga-Çanakkale Fayı' },
+  'Çanakkale-Gelibolu':      { riskSkoru: 65, fayMesafe: 22,  olasilik30: 44, beklenenMw: 'Mw 6.5–7.0', fayAdi: 'KAF Marmara güney' },
+  'Çanakkale-Biga':          { riskSkoru: 60, fayMesafe: 32,  olasilik30: 40, beklenenMw: 'Mw 6.0–6.8', fayAdi: 'Biga-Çanakkale Fayı' },
+  'Çanakkale-Çan':           { riskSkoru: 58, fayMesafe: 38,  olasilik30: 38, beklenenMw: 'Mw 6.0–6.8', fayAdi: 'Biga-Çanakkale Fayı' },
+  'Çanakkale-Lapseki':       { riskSkoru: 62, fayMesafe: 26,  olasilik30: 42, beklenenMw: 'Mw 6.5–7.0', fayAdi: 'KAF Marmara güney' },
+
+  // ── BİNGÖL ────────────────────────────────────────────────────────────────
+  // Kaynak: AFAD; 1971 Bingöl depremi (Mw 6.8), 2003 Bingöl depremi (Mw 6.4); DAF kuzey koluna yakın
+  'Bingöl-Merkez':           { riskSkoru: 92, fayMesafe: 8,   olasilik30: 68, beklenenMw: 'Mw 7.0–7.5', fayAdi: 'DAF kuzey kolu' },
+  'Bingöl-Genç':             { riskSkoru: 88, fayMesafe: 14,  olasilik30: 64, beklenenMw: 'Mw 7.0–7.5', fayAdi: 'DAF kuzey kolu' },
+  'Bingöl-Karlıova':         { riskSkoru: 96, fayMesafe: 4,   olasilik30: 74, beklenenMw: 'Mw 7.0–7.5', fayAdi: 'Karlıova (KAF-DAF kavşağı)' },
+  'Bingöl-Kiğı':             { riskSkoru: 85, fayMesafe: 18,  olasilik30: 62, beklenenMw: 'Mw 7.0–7.5', fayAdi: 'DAF kuzey kolu' },
+
+  // ── AFYONKARAHİSAR ────────────────────────────────────────────────────────
+  // Kaynak: AFAD Türkiye Deprem Tehlike Haritası 2018; 1995 Dinar depremi (Mw 6.1); Fethiye-Burdur Fayı
+  'Afyonkarahisar-Merkez':   { riskSkoru: 60, fayMesafe: 35,  olasilik30: 40, beklenenMw: 'Mw 6.0–6.5', fayAdi: 'Afyon Fayı' },
+  'Afyonkarahisar-Sandıklı': { riskSkoru: 65, fayMesafe: 28,  olasilik30: 44, beklenenMw: 'Mw 6.5–7.0', fayAdi: 'Fethiye-Burdur Fayı' },
+  'Afyonkarahisar-Dinar':    { riskSkoru: 78, fayMesafe: 10,  olasilik30: 54, beklenenMw: 'Mw 6.5–7.0', fayAdi: 'Dinar Fayı (1995 Mw 6.1)' },
+  'Afyonkarahisar-İscehisar':{ riskSkoru: 55, fayMesafe: 42,  olasilik30: 36, beklenenMw: 'Mw 6.0–6.5', fayAdi: 'Afyon Fayı' },
+  'Afyonkarahisar-Emirdağ':  { riskSkoru: 52, fayMesafe: 48,  olasilik30: 34, beklenenMw: 'Mw 6.0–6.5', fayAdi: 'Akşehir-Simav Fayı' },
+  'Afyonkarahisar-Bolvadin': { riskSkoru: 58, fayMesafe: 38,  olasilik30: 38, beklenenMw: 'Mw 6.0–6.5', fayAdi: 'Akşehir-Simav Fayı' },
 };
 
 // ─── Zemin Veritabanı ────────────────────────────────────────────────────────
@@ -1706,6 +1836,461 @@ const ZEMIN_DB: Record<string, BolgeRisk['zemin']> = {
     { ad: 'Alüvyon', yuzde: 32, risk: 'yuksek', aciklama: 'Ova tabanı' },
     { ad: 'Kaya', yuzde: 20, risk: 'dusuk', aciklama: 'Tepe kesimler' },
   ],
+
+  // ── ANKARA ────────────────────────────────────────────────────────────────
+  'Ankara-Çankaya': [
+    { ad: 'Kaya', yuzde: 45, risk: 'dusuk', aciklama: 'Ankara taşı (volkanik tüf) sağlam zemin' },
+    { ad: 'Killi zemin', yuzde: 35, risk: 'orta', aciklama: 'Vadi tabanı killi dolgu' },
+    { ad: 'Alüvyon', yuzde: 20, risk: 'yuksek', aciklama: 'Dikmen vadisi alüvyon' },
+  ],
+  'Ankara-Keçiören': [
+    { ad: 'Kaya', yuzde: 42, risk: 'dusuk', aciklama: 'Volkanik tüf ve kireçtaşı' },
+    { ad: 'Killi zemin', yuzde: 40, risk: 'orta', aciklama: 'Orta sertlik' },
+    { ad: 'Alüvyon', yuzde: 18, risk: 'yuksek', aciklama: 'Düşük kesimlerde alüvyon' },
+  ],
+  'Ankara-Mamak': [
+    { ad: 'Killi zemin', yuzde: 50, risk: 'orta', aciklama: 'Orta sertlik' },
+    { ad: 'Kaya', yuzde: 30, risk: 'dusuk', aciklama: 'Kayalık kesimler' },
+    { ad: 'Alüvyon', yuzde: 20, risk: 'yuksek', aciklama: 'Bent deresi alüvyonu' },
+  ],
+  'Ankara-Sincan': [
+    { ad: 'Alüvyon', yuzde: 55, risk: 'yuksek', aciklama: 'Sakarya havzası alüvyon yatakları' },
+    { ad: 'Killi zemin', yuzde: 35, risk: 'orta', aciklama: 'Orta risk' },
+    { ad: 'Kaya', yuzde: 10, risk: 'dusuk', aciklama: 'Sınırlı' },
+  ],
+  'Ankara-Etimesgut': [
+    { ad: 'Alüvyon', yuzde: 48, risk: 'yuksek', aciklama: 'Alüvyal düzlük, zemin sıvılaşma riski var' },
+    { ad: 'Killi zemin', yuzde: 38, risk: 'orta', aciklama: 'Orta risk' },
+    { ad: 'Kaya', yuzde: 14, risk: 'dusuk', aciklama: 'Sınırlı' },
+  ],
+  'Ankara-Yenimahalle': [
+    { ad: 'Killi zemin', yuzde: 45, risk: 'orta', aciklama: 'Orta sertlik' },
+    { ad: 'Alüvyon', yuzde: 35, risk: 'yuksek', aciklama: 'İmrahor vadisi alüvyon' },
+    { ad: 'Kaya', yuzde: 20, risk: 'dusuk', aciklama: 'Sınırlı kayalık kesim' },
+  ],
+  'Ankara-Altındağ': [
+    { ad: 'Kaya', yuzde: 50, risk: 'dusuk', aciklama: 'Ankara kalesi çevresi sağlam kaya' },
+    { ad: 'Killi zemin', yuzde: 35, risk: 'orta', aciklama: 'Orta risk' },
+    { ad: 'Alüvyon', yuzde: 15, risk: 'yuksek', aciklama: 'Kıyı kesimleri' },
+  ],
+  'Ankara-Pursaklar': [
+    { ad: 'Killi zemin', yuzde: 50, risk: 'orta', aciklama: 'Orta sertlik' },
+    { ad: 'Kaya', yuzde: 32, risk: 'dusuk', aciklama: 'Görece güvenli' },
+    { ad: 'Alüvyon', yuzde: 18, risk: 'yuksek', aciklama: 'Düşük kesimlerde' },
+  ],
+  'Ankara-Gölbaşı': [
+    { ad: 'Alüvyon', yuzde: 45, risk: 'yuksek', aciklama: 'Gölbaşı gölü çevresi alüvyon' },
+    { ad: 'Killi zemin', yuzde: 38, risk: 'orta', aciklama: 'Orta risk' },
+    { ad: 'Kaya', yuzde: 17, risk: 'dusuk', aciklama: 'Sınırlı' },
+  ],
+  'Ankara-Polatlı': [
+    { ad: 'Alüvyon', yuzde: 58, risk: 'yuksek', aciklama: 'Sakarya nehri alüvyal ovası, fay yakını' },
+    { ad: 'Killi zemin', yuzde: 30, risk: 'orta', aciklama: 'Orta risk' },
+    { ad: 'Kaya', yuzde: 12, risk: 'dusuk', aciklama: 'Sınırlı' },
+  ],
+
+  // ── MANİSA ────────────────────────────────────────────────────────────────
+  'Manisa-Şehzadeler': [
+    { ad: 'Alüvyon', yuzde: 60, risk: 'yuksek', aciklama: 'Gediz grabeni taban alüvyonu, sıvılaşma riski' },
+    { ad: 'Killi zemin', yuzde: 28, risk: 'orta', aciklama: 'Orta risk' },
+    { ad: 'Kaya', yuzde: 12, risk: 'dusuk', aciklama: 'Çevre tepeler' },
+  ],
+  'Manisa-Yunusemre': [
+    { ad: 'Alüvyon', yuzde: 55, risk: 'yuksek', aciklama: 'Gediz grabeni alüvyonu' },
+    { ad: 'Killi zemin', yuzde: 32, risk: 'orta', aciklama: 'Orta risk' },
+    { ad: 'Kaya', yuzde: 13, risk: 'dusuk', aciklama: 'Sınırlı' },
+  ],
+  'Manisa-Salihli': [
+    { ad: 'Alüvyon', yuzde: 70, risk: 'yuksek', aciklama: 'Gediz grabeni fay taban alüvyonu, 1969 depremi hasar alanı' },
+    { ad: 'Killi zemin', yuzde: 22, risk: 'orta', aciklama: 'Orta risk' },
+    { ad: 'Kaya', yuzde: 8, risk: 'dusuk', aciklama: 'Çok sınırlı' },
+  ],
+  'Manisa-Akhisar': [
+    { ad: 'Alüvyon', yuzde: 55, risk: 'yuksek', aciklama: 'Gediz alüvyal düzlüğü' },
+    { ad: 'Killi zemin', yuzde: 32, risk: 'orta', aciklama: 'Orta risk' },
+    { ad: 'Kaya', yuzde: 13, risk: 'dusuk', aciklama: 'Sınırlı' },
+  ],
+  'Manisa-Turgutlu': [
+    { ad: 'Alüvyon', yuzde: 62, risk: 'yuksek', aciklama: 'Gediz grabeni alüvyonu' },
+    { ad: 'Killi zemin', yuzde: 28, risk: 'orta', aciklama: 'Orta risk' },
+    { ad: 'Kaya', yuzde: 10, risk: 'dusuk', aciklama: 'Sınırlı' },
+  ],
+  'Manisa-Soma': [
+    { ad: 'Killi zemin', yuzde: 45, risk: 'orta', aciklama: 'Orta sertlik' },
+    { ad: 'Alüvyon', yuzde: 40, risk: 'yuksek', aciklama: 'Havza tabanı alüvyon' },
+    { ad: 'Kaya', yuzde: 15, risk: 'dusuk', aciklama: 'Çevre tepeler' },
+  ],
+  'Manisa-Alaşehir': [
+    { ad: 'Alüvyon', yuzde: 72, risk: 'yuksek', aciklama: 'Gediz grabeni fay sahasında, çok yüksek sıvılaşma riski' },
+    { ad: 'Killi zemin', yuzde: 20, risk: 'orta', aciklama: 'Orta risk' },
+    { ad: 'Kaya', yuzde: 8, risk: 'dusuk', aciklama: 'Çok sınırlı' },
+  ],
+
+  // ── AYDIN ─────────────────────────────────────────────────────────────────
+  'Aydın-Efeler': [
+    { ad: 'Alüvyon', yuzde: 65, risk: 'yuksek', aciklama: 'Büyük Menderes alüvyal düzlüğü' },
+    { ad: 'Killi zemin', yuzde: 25, risk: 'orta', aciklama: 'Orta risk' },
+    { ad: 'Kaya', yuzde: 10, risk: 'dusuk', aciklama: 'Çevre tepeler' },
+  ],
+  'Aydın-Nazilli': [
+    { ad: 'Alüvyon', yuzde: 72, risk: 'yuksek', aciklama: 'Büyük Menderes grabeni taban alüvyonu, fay yakını' },
+    { ad: 'Killi zemin', yuzde: 20, risk: 'orta', aciklama: 'Orta risk' },
+    { ad: 'Kaya', yuzde: 8, risk: 'dusuk', aciklama: 'Çok sınırlı' },
+  ],
+  'Aydın-Söke': [
+    { ad: 'Alüvyon', yuzde: 68, risk: 'yuksek', aciklama: 'Büyük Menderes deltası alüvyonu' },
+    { ad: 'Killi zemin', yuzde: 24, risk: 'orta', aciklama: 'Orta risk' },
+    { ad: 'Kaya', yuzde: 8, risk: 'dusuk', aciklama: 'Sınırlı' },
+  ],
+  'Aydın-Kuşadası': [
+    { ad: 'Alüvyon', yuzde: 55, risk: 'yuksek', aciklama: 'Kıyı alüvyonu ve dolgu alanları' },
+    { ad: 'Killi zemin', yuzde: 30, risk: 'orta', aciklama: 'Orta risk' },
+    { ad: 'Kaya', yuzde: 15, risk: 'dusuk', aciklama: 'Çevre tepeler' },
+  ],
+  'Aydın-Didim': [
+    { ad: 'Alüvyon', yuzde: 52, risk: 'yuksek', aciklama: 'Kıyı alüvyonu' },
+    { ad: 'Killi zemin', yuzde: 32, risk: 'orta', aciklama: 'Orta risk' },
+    { ad: 'Kaya', yuzde: 16, risk: 'dusuk', aciklama: 'Görece güvenli' },
+  ],
+  'Aydın-İncirliova': [
+    { ad: 'Alüvyon', yuzde: 68, risk: 'yuksek', aciklama: 'Büyük Menderes alüvyal düzlüğü' },
+    { ad: 'Killi zemin', yuzde: 24, risk: 'orta', aciklama: 'Orta risk' },
+    { ad: 'Kaya', yuzde: 8, risk: 'dusuk', aciklama: 'Sınırlı' },
+  ],
+  'Aydın-Sultanhisar': [
+    { ad: 'Alüvyon', yuzde: 70, risk: 'yuksek', aciklama: 'Büyük Menderes grabeni fay tabanı alüvyonu' },
+    { ad: 'Killi zemin', yuzde: 22, risk: 'orta', aciklama: 'Orta risk' },
+    { ad: 'Kaya', yuzde: 8, risk: 'dusuk', aciklama: 'Çok sınırlı' },
+  ],
+
+  // ── TEKİRDAĞ ──────────────────────────────────────────────────────────────
+  'Tekirdağ-Süleymanpaşa': [
+    { ad: 'Killi zemin', yuzde: 50, risk: 'orta', aciklama: 'Orta sertlik, Marmara kıyısı' },
+    { ad: 'Alüvyon', yuzde: 30, risk: 'yuksek', aciklama: 'Kıyı kesimi alüvyon' },
+    { ad: 'Kaya', yuzde: 20, risk: 'dusuk', aciklama: 'Görece güvenli iç kesim' },
+  ],
+  'Tekirdağ-Çorlu': [
+    { ad: 'Killi zemin', yuzde: 52, risk: 'orta', aciklama: 'Orta sertlik' },
+    { ad: 'Alüvyon', yuzde: 30, risk: 'yuksek', aciklama: 'Ergene havzası alüvyon' },
+    { ad: 'Kaya', yuzde: 18, risk: 'dusuk', aciklama: 'Sınırlı' },
+  ],
+  'Tekirdağ-Çerkezköy': [
+    { ad: 'Killi zemin', yuzde: 55, risk: 'orta', aciklama: 'Orta sertlik' },
+    { ad: 'Alüvyon', yuzde: 28, risk: 'yuksek', aciklama: 'Ergene havzası alüvyon' },
+    { ad: 'Kaya', yuzde: 17, risk: 'dusuk', aciklama: 'Sınırlı' },
+  ],
+  'Tekirdağ-Malkara': [
+    { ad: 'Killi zemin', yuzde: 55, risk: 'orta', aciklama: 'Orta sertlik' },
+    { ad: 'Alüvyon', yuzde: 28, risk: 'yuksek', aciklama: 'Ergene havzası alüvyon' },
+    { ad: 'Kaya', yuzde: 17, risk: 'dusuk', aciklama: 'Sınırlı' },
+  ],
+  'Tekirdağ-Ergene': [
+    { ad: 'Alüvyon', yuzde: 60, risk: 'yuksek', aciklama: 'Ergene nehri alüvyal ovası' },
+    { ad: 'Killi zemin', yuzde: 30, risk: 'orta', aciklama: 'Orta risk' },
+    { ad: 'Kaya', yuzde: 10, risk: 'dusuk', aciklama: 'Sınırlı' },
+  ],
+
+  // ── ESKİŞEHİR ─────────────────────────────────────────────────────────────
+  'Eskişehir-Odunpazarı': [
+    { ad: 'Alüvyon', yuzde: 62, risk: 'yuksek', aciklama: 'Porsuk çayı alüvyal tabanı, fay üzerinde' },
+    { ad: 'Killi zemin', yuzde: 28, risk: 'orta', aciklama: 'Orta risk' },
+    { ad: 'Kaya', yuzde: 10, risk: 'dusuk', aciklama: 'Sınırlı' },
+  ],
+  'Eskişehir-Tepebaşı': [
+    { ad: 'Alüvyon', yuzde: 58, risk: 'yuksek', aciklama: 'Porsuk çayı alüvyonu' },
+    { ad: 'Killi zemin', yuzde: 30, risk: 'orta', aciklama: 'Orta risk' },
+    { ad: 'Kaya', yuzde: 12, risk: 'dusuk', aciklama: 'Sınırlı' },
+  ],
+  'Eskişehir-Mihalıçcık': [
+    { ad: 'Killi zemin', yuzde: 50, risk: 'orta', aciklama: 'Orta sertlik' },
+    { ad: 'Kaya', yuzde: 30, risk: 'dusuk', aciklama: 'Görece güvenli' },
+    { ad: 'Alüvyon', yuzde: 20, risk: 'yuksek', aciklama: 'Havza tabanı' },
+  ],
+  'Eskişehir-Sivrihisar': [
+    { ad: 'Killi zemin', yuzde: 48, risk: 'orta', aciklama: 'Orta sertlik' },
+    { ad: 'Alüvyon', yuzde: 35, risk: 'yuksek', aciklama: 'Havza tabanı alüvyon' },
+    { ad: 'Kaya', yuzde: 17, risk: 'dusuk', aciklama: 'Sınırlı' },
+  ],
+
+  // ── KONYA ─────────────────────────────────────────────────────────────────
+  'Konya-Meram': [
+    { ad: 'Killi zemin', yuzde: 55, risk: 'orta', aciklama: 'Konya ovası killi zemin' },
+    { ad: 'Alüvyon', yuzde: 30, risk: 'yuksek', aciklama: 'Ova tabanı alüvyon' },
+    { ad: 'Kaya', yuzde: 15, risk: 'dusuk', aciklama: 'Sınırlı' },
+  ],
+  'Konya-Selçuklu': [
+    { ad: 'Killi zemin', yuzde: 52, risk: 'orta', aciklama: 'Konya ovası killi zemin' },
+    { ad: 'Alüvyon', yuzde: 32, risk: 'yuksek', aciklama: 'Ova tabanı alüvyon' },
+    { ad: 'Kaya', yuzde: 16, risk: 'dusuk', aciklama: 'Sınırlı' },
+  ],
+  'Konya-Karatay': [
+    { ad: 'Killi zemin', yuzde: 55, risk: 'orta', aciklama: 'Konya ovası killi zemin' },
+    { ad: 'Alüvyon', yuzde: 30, risk: 'yuksek', aciklama: 'Ova tabanı alüvyon' },
+    { ad: 'Kaya', yuzde: 15, risk: 'dusuk', aciklama: 'Sınırlı' },
+  ],
+  'Konya-Ereğli': [
+    { ad: 'Alüvyon', yuzde: 55, risk: 'yuksek', aciklama: 'Tuz gölü havzası alüvyonu' },
+    { ad: 'Killi zemin', yuzde: 35, risk: 'orta', aciklama: 'Orta risk' },
+    { ad: 'Kaya', yuzde: 10, risk: 'dusuk', aciklama: 'Sınırlı' },
+  ],
+  'Konya-Akşehir': [
+    { ad: 'Alüvyon', yuzde: 52, risk: 'yuksek', aciklama: 'Akşehir gölü çevresi alüvyon' },
+    { ad: 'Killi zemin', yuzde: 35, risk: 'orta', aciklama: 'Orta risk' },
+    { ad: 'Kaya', yuzde: 13, risk: 'dusuk', aciklama: 'Sınırlı' },
+  ],
+
+  // ── MERSİN ────────────────────────────────────────────────────────────────
+  'Mersin-Yenişehir': [
+    { ad: 'Alüvyon', yuzde: 55, risk: 'yuksek', aciklama: 'Akdeniz kıyısı alüvyal düzlük' },
+    { ad: 'Killi zemin', yuzde: 30, risk: 'orta', aciklama: 'Orta risk' },
+    { ad: 'Kaya', yuzde: 15, risk: 'dusuk', aciklama: 'Görece güvenli' },
+  ],
+  'Mersin-Toroslar': [
+    { ad: 'Kaya', yuzde: 40, risk: 'dusuk', aciklama: 'Toros dağ etekleri kaya zemin' },
+    { ad: 'Killi zemin', yuzde: 38, risk: 'orta', aciklama: 'Orta risk' },
+    { ad: 'Alüvyon', yuzde: 22, risk: 'yuksek', aciklama: 'Vadi tabanları' },
+  ],
+  'Mersin-Akdeniz': [
+    { ad: 'Alüvyon', yuzde: 58, risk: 'yuksek', aciklama: 'Kıyı alüvyonu' },
+    { ad: 'Killi zemin', yuzde: 28, risk: 'orta', aciklama: 'Orta risk' },
+    { ad: 'Kaya', yuzde: 14, risk: 'dusuk', aciklama: 'Sınırlı' },
+  ],
+  'Mersin-Mezitli': [
+    { ad: 'Alüvyon', yuzde: 55, risk: 'yuksek', aciklama: 'Kıyı alüvyonu' },
+    { ad: 'Killi zemin', yuzde: 30, risk: 'orta', aciklama: 'Orta risk' },
+    { ad: 'Kaya', yuzde: 15, risk: 'dusuk', aciklama: 'Sınırlı' },
+  ],
+  'Mersin-Tarsus': [
+    { ad: 'Alüvyon', yuzde: 65, risk: 'yuksek', aciklama: 'Tarsus çayı alüvyal ovası, Ecemiş Fayı yakını' },
+    { ad: 'Killi zemin', yuzde: 25, risk: 'orta', aciklama: 'Orta risk' },
+    { ad: 'Kaya', yuzde: 10, risk: 'dusuk', aciklama: 'Sınırlı' },
+  ],
+  'Mersin-Erdemli': [
+    { ad: 'Killi zemin', yuzde: 48, risk: 'orta', aciklama: 'Orta sertlik' },
+    { ad: 'Alüvyon', yuzde: 35, risk: 'yuksek', aciklama: 'Kıyı alüvyonu' },
+    { ad: 'Kaya', yuzde: 17, risk: 'dusuk', aciklama: 'Sınırlı' },
+  ],
+
+  // ── VAN ───────────────────────────────────────────────────────────────────
+  'Van-İpekyolu': [
+    { ad: 'Alüvyon', yuzde: 60, risk: 'yuksek', aciklama: 'Van gölü kıyısı alüvyon, 2011 depreminde hasar gören bölge' },
+    { ad: 'Killi zemin', yuzde: 28, risk: 'orta', aciklama: 'Orta risk' },
+    { ad: 'Kaya', yuzde: 12, risk: 'dusuk', aciklama: 'Sınırlı' },
+  ],
+  'Van-Tuşba': [
+    { ad: 'Alüvyon', yuzde: 55, risk: 'yuksek', aciklama: 'Van gölü çevresi alüvyon' },
+    { ad: 'Killi zemin', yuzde: 30, risk: 'orta', aciklama: 'Orta risk' },
+    { ad: 'Kaya', yuzde: 15, risk: 'dusuk', aciklama: 'Sınırlı' },
+  ],
+  'Van-Erciş': [
+    { ad: 'Alüvyon', yuzde: 65, risk: 'yuksek', aciklama: '2011 Mw 7.2 depremi merkez üssü, yüksek sıvılaşma riski' },
+    { ad: 'Killi zemin', yuzde: 25, risk: 'orta', aciklama: 'Orta risk' },
+    { ad: 'Kaya', yuzde: 10, risk: 'dusuk', aciklama: 'Sınırlı' },
+  ],
+  'Van-Edremit': [
+    { ad: 'Alüvyon', yuzde: 52, risk: 'yuksek', aciklama: 'Van gölü güney kıyısı alüvyon' },
+    { ad: 'Killi zemin', yuzde: 32, risk: 'orta', aciklama: 'Orta risk' },
+    { ad: 'Kaya', yuzde: 16, risk: 'dusuk', aciklama: 'Görece güvenli' },
+  ],
+  'Van-Gevaş': [
+    { ad: 'Killi zemin', yuzde: 45, risk: 'orta', aciklama: 'Orta sertlik' },
+    { ad: 'Alüvyon', yuzde: 38, risk: 'yuksek', aciklama: 'Kıyı alüvyonu' },
+    { ad: 'Kaya', yuzde: 17, risk: 'dusuk', aciklama: 'Sınırlı' },
+  ],
+  'Van-Özalp': [
+    { ad: 'Kaya', yuzde: 45, risk: 'dusuk', aciklama: 'Volkanik bazalt zemin' },
+    { ad: 'Killi zemin', yuzde: 35, risk: 'orta', aciklama: 'Orta risk' },
+    { ad: 'Alüvyon', yuzde: 20, risk: 'yuksek', aciklama: 'Havza tabanı' },
+  ],
+
+  // ── ELAZIĞ ────────────────────────────────────────────────────────────────
+  'Elazığ-Merkez': [
+    { ad: 'Alüvyon', yuzde: 55, risk: 'yuksek', aciklama: 'Uluova alüvyal düzlüğü, 2020 depreminde hasar gören bölge' },
+    { ad: 'Killi zemin', yuzde: 30, risk: 'orta', aciklama: 'Orta risk' },
+    { ad: 'Kaya', yuzde: 15, risk: 'dusuk', aciklama: 'Çevre tepeler' },
+  ],
+  'Elazığ-Sivrice': [
+    { ad: 'Killi zemin', yuzde: 45, risk: 'orta', aciklama: 'Fay üzerinde, orta sertlik' },
+    { ad: 'Kaya', yuzde: 35, risk: 'dusuk', aciklama: 'Kaya zemin, 2020 deprem merkez üssü' },
+    { ad: 'Alüvyon', yuzde: 20, risk: 'yuksek', aciklama: 'Hazar gölü çevresi' },
+  ],
+  'Elazığ-Kovancılar': [
+    { ad: 'Killi zemin', yuzde: 50, risk: 'orta', aciklama: 'Orta sertlik' },
+    { ad: 'Alüvyon', yuzde: 30, risk: 'yuksek', aciklama: 'Havza tabanı' },
+    { ad: 'Kaya', yuzde: 20, risk: 'dusuk', aciklama: 'Sınırlı' },
+  ],
+  'Elazığ-Karakoçan': [
+    { ad: 'Killi zemin', yuzde: 50, risk: 'orta', aciklama: 'Orta sertlik' },
+    { ad: 'Kaya', yuzde: 30, risk: 'dusuk', aciklama: 'Görece güvenli' },
+    { ad: 'Alüvyon', yuzde: 20, risk: 'yuksek', aciklama: 'Vadi tabanı' },
+  ],
+  'Elazığ-Baskil': [
+    { ad: 'Kaya', yuzde: 40, risk: 'dusuk', aciklama: 'Kayalık zemin' },
+    { ad: 'Killi zemin', yuzde: 42, risk: 'orta', aciklama: 'Orta risk' },
+    { ad: 'Alüvyon', yuzde: 18, risk: 'yuksek', aciklama: 'Vadi tabanları' },
+  ],
+
+  // ── ERZURUM ───────────────────────────────────────────────────────────────
+  'Erzurum-Yakutiye': [
+    { ad: 'Killi zemin', yuzde: 45, risk: 'orta', aciklama: 'Erzurum ovası killi zemin' },
+    { ad: 'Alüvyon', yuzde: 35, risk: 'yuksek', aciklama: 'Karasu havzası alüvyonu' },
+    { ad: 'Kaya', yuzde: 20, risk: 'dusuk', aciklama: 'Çevre tepeler' },
+  ],
+  'Erzurum-Aziziye': [
+    { ad: 'Killi zemin', yuzde: 48, risk: 'orta', aciklama: 'Erzurum ovası killi zemin' },
+    { ad: 'Alüvyon', yuzde: 32, risk: 'yuksek', aciklama: 'Havza tabanı' },
+    { ad: 'Kaya', yuzde: 20, risk: 'dusuk', aciklama: 'Sınırlı' },
+  ],
+  'Erzurum-Palandöken': [
+    { ad: 'Kaya', yuzde: 40, risk: 'dusuk', aciklama: 'Palandöken dağ etekleri kaya zemin' },
+    { ad: 'Killi zemin', yuzde: 42, risk: 'orta', aciklama: 'Orta risk' },
+    { ad: 'Alüvyon', yuzde: 18, risk: 'yuksek', aciklama: 'Vadi tabanları' },
+  ],
+  'Erzurum-Horasan': [
+    { ad: 'Alüvyon', yuzde: 52, risk: 'yuksek', aciklama: 'Aras havzası alüvyonu, fay yakını' },
+    { ad: 'Killi zemin', yuzde: 32, risk: 'orta', aciklama: 'Orta risk' },
+    { ad: 'Kaya', yuzde: 16, risk: 'dusuk', aciklama: 'Sınırlı' },
+  ],
+  'Erzurum-Aşkale': [
+    { ad: 'Killi zemin', yuzde: 48, risk: 'orta', aciklama: 'Orta sertlik' },
+    { ad: 'Alüvyon', yuzde: 35, risk: 'yuksek', aciklama: 'Fırat havzası alüvyonu' },
+    { ad: 'Kaya', yuzde: 17, risk: 'dusuk', aciklama: 'Sınırlı' },
+  ],
+
+  // ── TRABZON ───────────────────────────────────────────────────────────────
+  'Trabzon-Ortahisar': [
+    { ad: 'Kaya', yuzde: 50, risk: 'dusuk', aciklama: 'Karadeniz kıyı kaya zemin' },
+    { ad: 'Killi zemin', yuzde: 35, risk: 'orta', aciklama: 'Orta risk' },
+    { ad: 'Alüvyon', yuzde: 15, risk: 'yuksek', aciklama: 'Kıyı alüvyonu' },
+  ],
+  'Trabzon-Akçaabat': [
+    { ad: 'Kaya', yuzde: 48, risk: 'dusuk', aciklama: 'Kıyı kaya zemin' },
+    { ad: 'Killi zemin', yuzde: 36, risk: 'orta', aciklama: 'Orta risk' },
+    { ad: 'Alüvyon', yuzde: 16, risk: 'yuksek', aciklama: 'Kıyı alüvyonu' },
+  ],
+  'Trabzon-Araklı': [
+    { ad: 'Kaya', yuzde: 52, risk: 'dusuk', aciklama: 'Kıyı kaya zemin' },
+    { ad: 'Killi zemin', yuzde: 33, risk: 'orta', aciklama: 'Orta risk' },
+    { ad: 'Alüvyon', yuzde: 15, risk: 'yuksek', aciklama: 'Kıyı alüvyonu' },
+  ],
+  'Trabzon-Yomra': [
+    { ad: 'Kaya', yuzde: 50, risk: 'dusuk', aciklama: 'Kıyı kaya zemin' },
+    { ad: 'Killi zemin', yuzde: 35, risk: 'orta', aciklama: 'Orta risk' },
+    { ad: 'Alüvyon', yuzde: 15, risk: 'yuksek', aciklama: 'Kıyı alüvyonu' },
+  ],
+  'Trabzon-Of': [
+    { ad: 'Kaya', yuzde: 55, risk: 'dusuk', aciklama: 'Kıyı kaya zemin' },
+    { ad: 'Killi zemin', yuzde: 32, risk: 'orta', aciklama: 'Orta risk' },
+    { ad: 'Alüvyon', yuzde: 13, risk: 'yuksek', aciklama: 'Kıyı alüvyonu' },
+  ],
+
+  // ── KAYSERİ ───────────────────────────────────────────────────────────────
+  'Kayseri-Melikgazi': [
+    { ad: 'Killi zemin', yuzde: 50, risk: 'orta', aciklama: 'Kayseri ovası killi zemin' },
+    { ad: 'Alüvyon', yuzde: 32, risk: 'yuksek', aciklama: 'Kızılırmak havzası alüvyon' },
+    { ad: 'Kaya', yuzde: 18, risk: 'dusuk', aciklama: 'Erciyes etekleri' },
+  ],
+  'Kayseri-Kocasinan': [
+    { ad: 'Killi zemin', yuzde: 52, risk: 'orta', aciklama: 'Kayseri ovası killi zemin' },
+    { ad: 'Alüvyon', yuzde: 30, risk: 'yuksek', aciklama: 'Ova tabanı alüvyon' },
+    { ad: 'Kaya', yuzde: 18, risk: 'dusuk', aciklama: 'Sınırlı' },
+  ],
+  'Kayseri-Talas': [
+    { ad: 'Kaya', yuzde: 40, risk: 'dusuk', aciklama: 'Erciyes volkanik kaya zemin' },
+    { ad: 'Killi zemin', yuzde: 40, risk: 'orta', aciklama: 'Orta risk' },
+    { ad: 'Alüvyon', yuzde: 20, risk: 'yuksek', aciklama: 'Vadi tabanları' },
+  ],
+  'Kayseri-Develi': [
+    { ad: 'Killi zemin', yuzde: 50, risk: 'orta', aciklama: 'Orta sertlik' },
+    { ad: 'Alüvyon', yuzde: 35, risk: 'yuksek', aciklama: 'Ova tabanı alüvyon' },
+    { ad: 'Kaya', yuzde: 15, risk: 'dusuk', aciklama: 'Sınırlı' },
+  ],
+  'Kayseri-İncesu': [
+    { ad: 'Killi zemin', yuzde: 48, risk: 'orta', aciklama: 'Orta sertlik' },
+    { ad: 'Alüvyon', yuzde: 34, risk: 'yuksek', aciklama: 'Ova tabanı' },
+    { ad: 'Kaya', yuzde: 18, risk: 'dusuk', aciklama: 'Sınırlı' },
+  ],
+
+  // ── ÇANAKKALE ─────────────────────────────────────────────────────────────
+  'Çanakkale-Merkez': [
+    { ad: 'Killi zemin', yuzde: 48, risk: 'orta', aciklama: 'Çanakkale boğazı kıyısı' },
+    { ad: 'Alüvyon', yuzde: 32, risk: 'yuksek', aciklama: 'Kıyı alüvyonu' },
+    { ad: 'Kaya', yuzde: 20, risk: 'dusuk', aciklama: 'Görece güvenli iç kesim' },
+  ],
+  'Çanakkale-Gelibolu': [
+    { ad: 'Killi zemin', yuzde: 50, risk: 'orta', aciklama: 'Marmara kıyısı' },
+    { ad: 'Alüvyon', yuzde: 30, risk: 'yuksek', aciklama: 'Kıyı alüvyonu' },
+    { ad: 'Kaya', yuzde: 20, risk: 'dusuk', aciklama: 'Sınırlı' },
+  ],
+  'Çanakkale-Biga': [
+    { ad: 'Alüvyon', yuzde: 55, risk: 'yuksek', aciklama: 'Gönen çayı alüvyal düzlüğü' },
+    { ad: 'Killi zemin', yuzde: 32, risk: 'orta', aciklama: 'Orta risk' },
+    { ad: 'Kaya', yuzde: 13, risk: 'dusuk', aciklama: 'Sınırlı' },
+  ],
+  'Çanakkale-Çan': [
+    { ad: 'Killi zemin', yuzde: 50, risk: 'orta', aciklama: 'Orta sertlik' },
+    { ad: 'Alüvyon', yuzde: 32, risk: 'yuksek', aciklama: 'Havza tabanı' },
+    { ad: 'Kaya', yuzde: 18, risk: 'dusuk', aciklama: 'Sınırlı' },
+  ],
+  'Çanakkale-Lapseki': [
+    { ad: 'Killi zemin', yuzde: 48, risk: 'orta', aciklama: 'Marmara kıyısı' },
+    { ad: 'Alüvyon', yuzde: 32, risk: 'yuksek', aciklama: 'Kıyı alüvyonu' },
+    { ad: 'Kaya', yuzde: 20, risk: 'dusuk', aciklama: 'Görece güvenli' },
+  ],
+
+  // ── BİNGÖL ────────────────────────────────────────────────────────────────
+  'Bingöl-Merkez': [
+    { ad: 'Alüvyon', yuzde: 55, risk: 'yuksek', aciklama: 'Bingöl ovası alüvyonu, 1971 ve 2003 depremlerinde hasar gören bölge' },
+    { ad: 'Killi zemin', yuzde: 30, risk: 'orta', aciklama: 'Orta risk' },
+    { ad: 'Kaya', yuzde: 15, risk: 'dusuk', aciklama: 'Çevre tepeler' },
+  ],
+  'Bingöl-Genç': [
+    { ad: 'Killi zemin', yuzde: 45, risk: 'orta', aciklama: 'Orta sertlik' },
+    { ad: 'Alüvyon', yuzde: 40, risk: 'yuksek', aciklama: 'Fırat havzası alüvyonu' },
+    { ad: 'Kaya', yuzde: 15, risk: 'dusuk', aciklama: 'Sınırlı' },
+  ],
+  'Bingöl-Karlıova': [
+    { ad: 'Killi zemin', yuzde: 40, risk: 'orta', aciklama: 'KAF-DAF kavşağı yakını' },
+    { ad: 'Alüvyon', yuzde: 40, risk: 'yuksek', aciklama: 'Fırat havzası alüvyonu' },
+    { ad: 'Kaya', yuzde: 20, risk: 'dusuk', aciklama: 'Sınırlı' },
+  ],
+  'Bingöl-Kiğı': [
+    { ad: 'Kaya', yuzde: 45, risk: 'dusuk', aciklama: 'Kayalık zemin' },
+    { ad: 'Killi zemin', yuzde: 38, risk: 'orta', aciklama: 'Orta risk' },
+    { ad: 'Alüvyon', yuzde: 17, risk: 'yuksek', aciklama: 'Vadi tabanları' },
+  ],
+
+  // ── AFYONKARAHİSAR ────────────────────────────────────────────────────────
+  'Afyonkarahisar-Merkez': [
+    { ad: 'Killi zemin', yuzde: 50, risk: 'orta', aciklama: 'Afyon ovası killi zemin' },
+    { ad: 'Alüvyon', yuzde: 35, risk: 'yuksek', aciklama: 'Ova tabanı alüvyon' },
+    { ad: 'Kaya', yuzde: 15, risk: 'dusuk', aciklama: 'Afyon kalesi çevresi' },
+  ],
+  'Afyonkarahisar-Sandıklı': [
+    { ad: 'Alüvyon', yuzde: 55, risk: 'yuksek', aciklama: 'Fethiye-Burdur fay yakını, havza tabanı' },
+    { ad: 'Killi zemin', yuzde: 32, risk: 'orta', aciklama: 'Orta risk' },
+    { ad: 'Kaya', yuzde: 13, risk: 'dusuk', aciklama: 'Sınırlı' },
+  ],
+  'Afyonkarahisar-Dinar': [
+    { ad: 'Alüvyon', yuzde: 68, risk: 'yuksek', aciklama: 'Dinar fayı üzerinde alüvyal düzlük, 1995 Mw 6.1 depremi hasar alanı' },
+    { ad: 'Killi zemin', yuzde: 24, risk: 'orta', aciklama: 'Orta risk' },
+    { ad: 'Kaya', yuzde: 8, risk: 'dusuk', aciklama: 'Çok sınırlı' },
+  ],
+  'Afyonkarahisar-İscehisar': [
+    { ad: 'Killi zemin', yuzde: 52, risk: 'orta', aciklama: 'Orta sertlik' },
+    { ad: 'Alüvyon', yuzde: 32, risk: 'yuksek', aciklama: 'Ova tabanı' },
+    { ad: 'Kaya', yuzde: 16, risk: 'dusuk', aciklama: 'Sınırlı' },
+  ],
+  'Afyonkarahisar-Emirdağ': [
+    { ad: 'Killi zemin', yuzde: 50, risk: 'orta', aciklama: 'Orta sertlik' },
+    { ad: 'Alüvyon', yuzde: 33, risk: 'yuksek', aciklama: 'Ova tabanı' },
+    { ad: 'Kaya', yuzde: 17, risk: 'dusuk', aciklama: 'Sınırlı' },
+  ],
+  'Afyonkarahisar-Bolvadin': [
+    { ad: 'Alüvyon', yuzde: 55, risk: 'yuksek', aciklama: 'Akşehir gölü havzası alüvyonu' },
+    { ad: 'Killi zemin', yuzde: 32, risk: 'orta', aciklama: 'Orta risk' },
+    { ad: 'Kaya', yuzde: 13, risk: 'dusuk', aciklama: 'Sınırlı' },
+  ],
 };
 
 // ─── Bina Stoğu Veritabanı ────────────────────────────────────────────────────
@@ -3018,6 +3603,461 @@ const BINA_DB: Record<string, BolgeRisk['binalar']> = {
     { donem: '1999 öncesi', yuzde: 38, renk: '#E24B4A' },
     { donem: '1999–2012', yuzde: 37, renk: '#EF9F27' },
     { donem: '2012 sonrası', yuzde: 25, renk: '#639922' },
+  ],
+
+  // ── ANKARA ────────────────────────────────────────────────────────────────
+  'Ankara-Çankaya': [
+    { donem: '1999 öncesi', yuzde: 28, renk: '#E24B4A' },
+    { donem: '1999–2012', yuzde: 40, renk: '#EF9F27' },
+    { donem: '2012 sonrası', yuzde: 32, renk: '#639922' },
+  ],
+  'Ankara-Keçiören': [
+    { donem: '1999 öncesi', yuzde: 32, renk: '#E24B4A' },
+    { donem: '1999–2012', yuzde: 38, renk: '#EF9F27' },
+    { donem: '2012 sonrası', yuzde: 30, renk: '#639922' },
+  ],
+  'Ankara-Mamak': [
+    { donem: '1999 öncesi', yuzde: 38, renk: '#E24B4A' },
+    { donem: '1999–2012', yuzde: 38, renk: '#EF9F27' },
+    { donem: '2012 sonrası', yuzde: 24, renk: '#639922' },
+  ],
+  'Ankara-Sincan': [
+    { donem: '1999 öncesi', yuzde: 30, renk: '#E24B4A' },
+    { donem: '1999–2012', yuzde: 40, renk: '#EF9F27' },
+    { donem: '2012 sonrası', yuzde: 30, renk: '#639922' },
+  ],
+  'Ankara-Etimesgut': [
+    { donem: '1999 öncesi', yuzde: 25, renk: '#E24B4A' },
+    { donem: '1999–2012', yuzde: 40, renk: '#EF9F27' },
+    { donem: '2012 sonrası', yuzde: 35, renk: '#639922' },
+  ],
+  'Ankara-Yenimahalle': [
+    { donem: '1999 öncesi', yuzde: 30, renk: '#E24B4A' },
+    { donem: '1999–2012', yuzde: 38, renk: '#EF9F27' },
+    { donem: '2012 sonrası', yuzde: 32, renk: '#639922' },
+  ],
+  'Ankara-Altındağ': [
+    { donem: '1999 öncesi', yuzde: 42, renk: '#E24B4A' },
+    { donem: '1999–2012', yuzde: 36, renk: '#EF9F27' },
+    { donem: '2012 sonrası', yuzde: 22, renk: '#639922' },
+  ],
+  'Ankara-Pursaklar': [
+    { donem: '1999 öncesi', yuzde: 22, renk: '#E24B4A' },
+    { donem: '1999–2012', yuzde: 40, renk: '#EF9F27' },
+    { donem: '2012 sonrası', yuzde: 38, renk: '#639922' },
+  ],
+  'Ankara-Gölbaşı': [
+    { donem: '1999 öncesi', yuzde: 25, renk: '#E24B4A' },
+    { donem: '1999–2012', yuzde: 40, renk: '#EF9F27' },
+    { donem: '2012 sonrası', yuzde: 35, renk: '#639922' },
+  ],
+  'Ankara-Polatlı': [
+    { donem: '1999 öncesi', yuzde: 40, renk: '#E24B4A' },
+    { donem: '1999–2012', yuzde: 36, renk: '#EF9F27' },
+    { donem: '2012 sonrası', yuzde: 24, renk: '#639922' },
+  ],
+
+  // ── MANİSA ────────────────────────────────────────────────────────────────
+  'Manisa-Şehzadeler': [
+    { donem: '1999 öncesi', yuzde: 38, renk: '#E24B4A' },
+    { donem: '1999–2012', yuzde: 36, renk: '#EF9F27' },
+    { donem: '2012 sonrası', yuzde: 26, renk: '#639922' },
+  ],
+  'Manisa-Yunusemre': [
+    { donem: '1999 öncesi', yuzde: 35, renk: '#E24B4A' },
+    { donem: '1999–2012', yuzde: 37, renk: '#EF9F27' },
+    { donem: '2012 sonrası', yuzde: 28, renk: '#639922' },
+  ],
+  'Manisa-Salihli': [
+    { donem: '1969 öncesi', yuzde: 45, renk: '#E24B4A' },
+    { donem: '1969–2012', yuzde: 35, renk: '#EF9F27' },
+    { donem: '2012 sonrası', yuzde: 20, renk: '#639922' },
+  ],
+  'Manisa-Akhisar': [
+    { donem: '1999 öncesi', yuzde: 40, renk: '#E24B4A' },
+    { donem: '1999–2012', yuzde: 35, renk: '#EF9F27' },
+    { donem: '2012 sonrası', yuzde: 25, renk: '#639922' },
+  ],
+  'Manisa-Turgutlu': [
+    { donem: '1999 öncesi', yuzde: 38, renk: '#E24B4A' },
+    { donem: '1999–2012', yuzde: 36, renk: '#EF9F27' },
+    { donem: '2012 sonrası', yuzde: 26, renk: '#639922' },
+  ],
+  'Manisa-Soma': [
+    { donem: '1999 öncesi', yuzde: 42, renk: '#E24B4A' },
+    { donem: '1999–2012', yuzde: 35, renk: '#EF9F27' },
+    { donem: '2012 sonrası', yuzde: 23, renk: '#639922' },
+  ],
+  'Manisa-Alaşehir': [
+    { donem: '1969 öncesi', yuzde: 48, renk: '#E24B4A' },
+    { donem: '1969–2012', yuzde: 33, renk: '#EF9F27' },
+    { donem: '2012 sonrası', yuzde: 19, renk: '#639922' },
+  ],
+
+  // ── AYDIN ─────────────────────────────────────────────────────────────────
+  'Aydın-Efeler': [
+    { donem: '1999 öncesi', yuzde: 38, renk: '#E24B4A' },
+    { donem: '1999–2012', yuzde: 36, renk: '#EF9F27' },
+    { donem: '2012 sonrası', yuzde: 26, renk: '#639922' },
+  ],
+  'Aydın-Nazilli': [
+    { donem: '1999 öncesi', yuzde: 42, renk: '#E24B4A' },
+    { donem: '1999–2012', yuzde: 35, renk: '#EF9F27' },
+    { donem: '2012 sonrası', yuzde: 23, renk: '#639922' },
+  ],
+  'Aydın-Söke': [
+    { donem: '1999 öncesi', yuzde: 40, renk: '#E24B4A' },
+    { donem: '1999–2012', yuzde: 35, renk: '#EF9F27' },
+    { donem: '2012 sonrası', yuzde: 25, renk: '#639922' },
+  ],
+  'Aydın-Kuşadası': [
+    { donem: '1999 öncesi', yuzde: 28, renk: '#E24B4A' },
+    { donem: '1999–2012', yuzde: 38, renk: '#EF9F27' },
+    { donem: '2012 sonrası', yuzde: 34, renk: '#639922' },
+  ],
+  'Aydın-Didim': [
+    { donem: '1999 öncesi', yuzde: 25, renk: '#E24B4A' },
+    { donem: '1999–2012', yuzde: 40, renk: '#EF9F27' },
+    { donem: '2012 sonrası', yuzde: 35, renk: '#639922' },
+  ],
+  'Aydın-İncirliova': [
+    { donem: '1999 öncesi', yuzde: 42, renk: '#E24B4A' },
+    { donem: '1999–2012', yuzde: 35, renk: '#EF9F27' },
+    { donem: '2012 sonrası', yuzde: 23, renk: '#639922' },
+  ],
+  'Aydın-Sultanhisar': [
+    { donem: '1999 öncesi', yuzde: 45, renk: '#E24B4A' },
+    { donem: '1999–2012', yuzde: 34, renk: '#EF9F27' },
+    { donem: '2012 sonrası', yuzde: 21, renk: '#639922' },
+  ],
+
+  // ── TEKİRDAĞ ──────────────────────────────────────────────────────────────
+  'Tekirdağ-Süleymanpaşa': [
+    { donem: '1999 öncesi', yuzde: 35, renk: '#E24B4A' },
+    { donem: '1999–2012', yuzde: 38, renk: '#EF9F27' },
+    { donem: '2012 sonrası', yuzde: 27, renk: '#639922' },
+  ],
+  'Tekirdağ-Çorlu': [
+    { donem: '1999 öncesi', yuzde: 30, renk: '#E24B4A' },
+    { donem: '1999–2012', yuzde: 40, renk: '#EF9F27' },
+    { donem: '2012 sonrası', yuzde: 30, renk: '#639922' },
+  ],
+  'Tekirdağ-Çerkezköy': [
+    { donem: '1999 öncesi', yuzde: 32, renk: '#E24B4A' },
+    { donem: '1999–2012', yuzde: 40, renk: '#EF9F27' },
+    { donem: '2012 sonrası', yuzde: 28, renk: '#639922' },
+  ],
+  'Tekirdağ-Malkara': [
+    { donem: '1999 öncesi', yuzde: 40, renk: '#E24B4A' },
+    { donem: '1999–2012', yuzde: 36, renk: '#EF9F27' },
+    { donem: '2012 sonrası', yuzde: 24, renk: '#639922' },
+  ],
+  'Tekirdağ-Ergene': [
+    { donem: '1999 öncesi', yuzde: 35, renk: '#E24B4A' },
+    { donem: '1999–2012', yuzde: 38, renk: '#EF9F27' },
+    { donem: '2012 sonrası', yuzde: 27, renk: '#639922' },
+  ],
+
+  // ── ESKİŞEHİR ─────────────────────────────────────────────────────────────
+  'Eskişehir-Odunpazarı': [
+    { donem: '1999 öncesi', yuzde: 35, renk: '#E24B4A' },
+    { donem: '1999–2012', yuzde: 38, renk: '#EF9F27' },
+    { donem: '2012 sonrası', yuzde: 27, renk: '#639922' },
+  ],
+  'Eskişehir-Tepebaşı': [
+    { donem: '1999 öncesi', yuzde: 33, renk: '#E24B4A' },
+    { donem: '1999–2012', yuzde: 38, renk: '#EF9F27' },
+    { donem: '2012 sonrası', yuzde: 29, renk: '#639922' },
+  ],
+  'Eskişehir-Mihalıçcık': [
+    { donem: '1999 öncesi', yuzde: 45, renk: '#E24B4A' },
+    { donem: '1999–2012', yuzde: 35, renk: '#EF9F27' },
+    { donem: '2012 sonrası', yuzde: 20, renk: '#639922' },
+  ],
+  'Eskişehir-Sivrihisar': [
+    { donem: '1999 öncesi', yuzde: 45, renk: '#E24B4A' },
+    { donem: '1999–2012', yuzde: 35, renk: '#EF9F27' },
+    { donem: '2012 sonrası', yuzde: 20, renk: '#639922' },
+  ],
+
+  // ── KONYA ─────────────────────────────────────────────────────────────────
+  'Konya-Meram': [
+    { donem: '1999 öncesi', yuzde: 32, renk: '#E24B4A' },
+    { donem: '1999–2012', yuzde: 38, renk: '#EF9F27' },
+    { donem: '2012 sonrası', yuzde: 30, renk: '#639922' },
+  ],
+  'Konya-Selçuklu': [
+    { donem: '1999 öncesi', yuzde: 28, renk: '#E24B4A' },
+    { donem: '1999–2012', yuzde: 38, renk: '#EF9F27' },
+    { donem: '2012 sonrası', yuzde: 34, renk: '#639922' },
+  ],
+  'Konya-Karatay': [
+    { donem: '1999 öncesi', yuzde: 40, renk: '#E24B4A' },
+    { donem: '1999–2012', yuzde: 36, renk: '#EF9F27' },
+    { donem: '2012 sonrası', yuzde: 24, renk: '#639922' },
+  ],
+  'Konya-Ereğli': [
+    { donem: '1999 öncesi', yuzde: 42, renk: '#E24B4A' },
+    { donem: '1999–2012', yuzde: 35, renk: '#EF9F27' },
+    { donem: '2012 sonrası', yuzde: 23, renk: '#639922' },
+  ],
+  'Konya-Akşehir': [
+    { donem: '1999 öncesi', yuzde: 45, renk: '#E24B4A' },
+    { donem: '1999–2012', yuzde: 33, renk: '#EF9F27' },
+    { donem: '2012 sonrası', yuzde: 22, renk: '#639922' },
+  ],
+
+  // ── MERSİN ────────────────────────────────────────────────────────────────
+  'Mersin-Yenişehir': [
+    { donem: '1999 öncesi', yuzde: 30, renk: '#E24B4A' },
+    { donem: '1999–2012', yuzde: 38, renk: '#EF9F27' },
+    { donem: '2012 sonrası', yuzde: 32, renk: '#639922' },
+  ],
+  'Mersin-Toroslar': [
+    { donem: '1999 öncesi', yuzde: 32, renk: '#E24B4A' },
+    { donem: '1999–2012', yuzde: 38, renk: '#EF9F27' },
+    { donem: '2012 sonrası', yuzde: 30, renk: '#639922' },
+  ],
+  'Mersin-Akdeniz': [
+    { donem: '1999 öncesi', yuzde: 30, renk: '#E24B4A' },
+    { donem: '1999–2012', yuzde: 38, renk: '#EF9F27' },
+    { donem: '2012 sonrası', yuzde: 32, renk: '#639922' },
+  ],
+  'Mersin-Mezitli': [
+    { donem: '1999 öncesi', yuzde: 28, renk: '#E24B4A' },
+    { donem: '1999–2012', yuzde: 38, renk: '#EF9F27' },
+    { donem: '2012 sonrası', yuzde: 34, renk: '#639922' },
+  ],
+  'Mersin-Tarsus': [
+    { donem: '1999 öncesi', yuzde: 40, renk: '#E24B4A' },
+    { donem: '1999–2012', yuzde: 36, renk: '#EF9F27' },
+    { donem: '2012 sonrası', yuzde: 24, renk: '#639922' },
+  ],
+  'Mersin-Erdemli': [
+    { donem: '1999 öncesi', yuzde: 38, renk: '#E24B4A' },
+    { donem: '1999–2012', yuzde: 36, renk: '#EF9F27' },
+    { donem: '2012 sonrası', yuzde: 26, renk: '#639922' },
+  ],
+
+  // ── VAN ───────────────────────────────────────────────────────────────────
+  'Van-İpekyolu': [
+    { donem: '2011 öncesi', yuzde: 55, renk: '#E24B4A' },
+    { donem: '2011–2018', yuzde: 30, renk: '#EF9F27' },
+    { donem: '2018 sonrası', yuzde: 15, renk: '#639922' },
+  ],
+  'Van-Tuşba': [
+    { donem: '2011 öncesi', yuzde: 52, renk: '#E24B4A' },
+    { donem: '2011–2018', yuzde: 30, renk: '#EF9F27' },
+    { donem: '2018 sonrası', yuzde: 18, renk: '#639922' },
+  ],
+  'Van-Erciş': [
+    { donem: '2011 öncesi', yuzde: 60, renk: '#E24B4A' },
+    { donem: '2011–2018', yuzde: 28, renk: '#EF9F27' },
+    { donem: '2018 sonrası', yuzde: 12, renk: '#639922' },
+  ],
+  'Van-Edremit': [
+    { donem: '2011 öncesi', yuzde: 50, renk: '#E24B4A' },
+    { donem: '2011–2018', yuzde: 30, renk: '#EF9F27' },
+    { donem: '2018 sonrası', yuzde: 20, renk: '#639922' },
+  ],
+  'Van-Gevaş': [
+    { donem: '1999 öncesi', yuzde: 55, renk: '#E24B4A' },
+    { donem: '1999–2015', yuzde: 30, renk: '#EF9F27' },
+    { donem: '2015 sonrası', yuzde: 15, renk: '#639922' },
+  ],
+  'Van-Özalp': [
+    { donem: '1999 öncesi', yuzde: 58, renk: '#E24B4A' },
+    { donem: '1999–2015', yuzde: 28, renk: '#EF9F27' },
+    { donem: '2015 sonrası', yuzde: 14, renk: '#639922' },
+  ],
+
+  // ── ELAZIĞ ────────────────────────────────────────────────────────────────
+  'Elazığ-Merkez': [
+    { donem: '2020 öncesi', yuzde: 48, renk: '#E24B4A' },
+    { donem: '2020–2022', yuzde: 32, renk: '#EF9F27' },
+    { donem: '2022 sonrası', yuzde: 20, renk: '#639922' },
+  ],
+  'Elazığ-Sivrice': [
+    { donem: '2020 öncesi', yuzde: 58, renk: '#E24B4A' },
+    { donem: '2020–2022', yuzde: 28, renk: '#EF9F27' },
+    { donem: '2022 sonrası', yuzde: 14, renk: '#639922' },
+  ],
+  'Elazığ-Kovancılar': [
+    { donem: '1999 öncesi', yuzde: 50, renk: '#E24B4A' },
+    { donem: '1999–2015', yuzde: 32, renk: '#EF9F27' },
+    { donem: '2015 sonrası', yuzde: 18, renk: '#639922' },
+  ],
+  'Elazığ-Karakoçan': [
+    { donem: '1999 öncesi', yuzde: 52, renk: '#E24B4A' },
+    { donem: '1999–2015', yuzde: 30, renk: '#EF9F27' },
+    { donem: '2015 sonrası', yuzde: 18, renk: '#639922' },
+  ],
+  'Elazığ-Baskil': [
+    { donem: '1999 öncesi', yuzde: 55, renk: '#E24B4A' },
+    { donem: '1999–2015', yuzde: 28, renk: '#EF9F27' },
+    { donem: '2015 sonrası', yuzde: 17, renk: '#639922' },
+  ],
+
+  // ── ERZURUM ───────────────────────────────────────────────────────────────
+  'Erzurum-Yakutiye': [
+    { donem: '1999 öncesi', yuzde: 45, renk: '#E24B4A' },
+    { donem: '1999–2015', yuzde: 35, renk: '#EF9F27' },
+    { donem: '2015 sonrası', yuzde: 20, renk: '#639922' },
+  ],
+  'Erzurum-Aziziye': [
+    { donem: '1999 öncesi', yuzde: 45, renk: '#E24B4A' },
+    { donem: '1999–2015', yuzde: 35, renk: '#EF9F27' },
+    { donem: '2015 sonrası', yuzde: 20, renk: '#639922' },
+  ],
+  'Erzurum-Palandöken': [
+    { donem: '1999 öncesi', yuzde: 42, renk: '#E24B4A' },
+    { donem: '1999–2015', yuzde: 36, renk: '#EF9F27' },
+    { donem: '2015 sonrası', yuzde: 22, renk: '#639922' },
+  ],
+  'Erzurum-Horasan': [
+    { donem: '1999 öncesi', yuzde: 52, renk: '#E24B4A' },
+    { donem: '1999–2015', yuzde: 30, renk: '#EF9F27' },
+    { donem: '2015 sonrası', yuzde: 18, renk: '#639922' },
+  ],
+  'Erzurum-Aşkale': [
+    { donem: '1999 öncesi', yuzde: 50, renk: '#E24B4A' },
+    { donem: '1999–2015', yuzde: 30, renk: '#EF9F27' },
+    { donem: '2015 sonrası', yuzde: 20, renk: '#639922' },
+  ],
+
+  // ── TRABZON ───────────────────────────────────────────────────────────────
+  'Trabzon-Ortahisar': [
+    { donem: '1999 öncesi', yuzde: 32, renk: '#E24B4A' },
+    { donem: '1999–2012', yuzde: 38, renk: '#EF9F27' },
+    { donem: '2012 sonrası', yuzde: 30, renk: '#639922' },
+  ],
+  'Trabzon-Akçaabat': [
+    { donem: '1999 öncesi', yuzde: 35, renk: '#E24B4A' },
+    { donem: '1999–2012', yuzde: 38, renk: '#EF9F27' },
+    { donem: '2012 sonrası', yuzde: 27, renk: '#639922' },
+  ],
+  'Trabzon-Araklı': [
+    { donem: '1999 öncesi', yuzde: 38, renk: '#E24B4A' },
+    { donem: '1999–2012', yuzde: 36, renk: '#EF9F27' },
+    { donem: '2012 sonrası', yuzde: 26, renk: '#639922' },
+  ],
+  'Trabzon-Yomra': [
+    { donem: '1999 öncesi', yuzde: 30, renk: '#E24B4A' },
+    { donem: '1999–2012', yuzde: 38, renk: '#EF9F27' },
+    { donem: '2012 sonrası', yuzde: 32, renk: '#639922' },
+  ],
+  'Trabzon-Of': [
+    { donem: '1999 öncesi', yuzde: 35, renk: '#E24B4A' },
+    { donem: '1999–2012', yuzde: 36, renk: '#EF9F27' },
+    { donem: '2012 sonrası', yuzde: 29, renk: '#639922' },
+  ],
+
+  // ── KAYSERİ ───────────────────────────────────────────────────────────────
+  'Kayseri-Melikgazi': [
+    { donem: '1999 öncesi', yuzde: 38, renk: '#E24B4A' },
+    { donem: '1999–2012', yuzde: 37, renk: '#EF9F27' },
+    { donem: '2012 sonrası', yuzde: 25, renk: '#639922' },
+  ],
+  'Kayseri-Kocasinan': [
+    { donem: '1999 öncesi', yuzde: 36, renk: '#E24B4A' },
+    { donem: '1999–2012', yuzde: 38, renk: '#EF9F27' },
+    { donem: '2012 sonrası', yuzde: 26, renk: '#639922' },
+  ],
+  'Kayseri-Talas': [
+    { donem: '1999 öncesi', yuzde: 30, renk: '#E24B4A' },
+    { donem: '1999–2012', yuzde: 40, renk: '#EF9F27' },
+    { donem: '2012 sonrası', yuzde: 30, renk: '#639922' },
+  ],
+  'Kayseri-Develi': [
+    { donem: '1999 öncesi', yuzde: 45, renk: '#E24B4A' },
+    { donem: '1999–2012', yuzde: 33, renk: '#EF9F27' },
+    { donem: '2012 sonrası', yuzde: 22, renk: '#639922' },
+  ],
+  'Kayseri-İncesu': [
+    { donem: '1999 öncesi', yuzde: 40, renk: '#E24B4A' },
+    { donem: '1999–2012', yuzde: 36, renk: '#EF9F27' },
+    { donem: '2012 sonrası', yuzde: 24, renk: '#639922' },
+  ],
+
+  // ── ÇANAKKALE ─────────────────────────────────────────────────────────────
+  'Çanakkale-Merkez': [
+    { donem: '1999 öncesi', yuzde: 38, renk: '#E24B4A' },
+    { donem: '1999–2012', yuzde: 37, renk: '#EF9F27' },
+    { donem: '2012 sonrası', yuzde: 25, renk: '#639922' },
+  ],
+  'Çanakkale-Gelibolu': [
+    { donem: '1999 öncesi', yuzde: 40, renk: '#E24B4A' },
+    { donem: '1999–2012', yuzde: 36, renk: '#EF9F27' },
+    { donem: '2012 sonrası', yuzde: 24, renk: '#639922' },
+  ],
+  'Çanakkale-Biga': [
+    { donem: '1999 öncesi', yuzde: 42, renk: '#E24B4A' },
+    { donem: '1999–2012', yuzde: 35, renk: '#EF9F27' },
+    { donem: '2012 sonrası', yuzde: 23, renk: '#639922' },
+  ],
+  'Çanakkale-Çan': [
+    { donem: '1999 öncesi', yuzde: 45, renk: '#E24B4A' },
+    { donem: '1999–2012', yuzde: 33, renk: '#EF9F27' },
+    { donem: '2012 sonrası', yuzde: 22, renk: '#639922' },
+  ],
+  'Çanakkale-Lapseki': [
+    { donem: '1999 öncesi', yuzde: 40, renk: '#E24B4A' },
+    { donem: '1999–2012', yuzde: 36, renk: '#EF9F27' },
+    { donem: '2012 sonrası', yuzde: 24, renk: '#639922' },
+  ],
+
+  // ── BİNGÖL ────────────────────────────────────────────────────────────────
+  'Bingöl-Merkez': [
+    { donem: '2003 öncesi', yuzde: 55, renk: '#E24B4A' },
+    { donem: '2003–2015', yuzde: 30, renk: '#EF9F27' },
+    { donem: '2015 sonrası', yuzde: 15, renk: '#639922' },
+  ],
+  'Bingöl-Genç': [
+    { donem: '1999 öncesi', yuzde: 55, renk: '#E24B4A' },
+    { donem: '1999–2015', yuzde: 28, renk: '#EF9F27' },
+    { donem: '2015 sonrası', yuzde: 17, renk: '#639922' },
+  ],
+  'Bingöl-Karlıova': [
+    { donem: '1999 öncesi', yuzde: 60, renk: '#E24B4A' },
+    { donem: '1999–2015', yuzde: 25, renk: '#EF9F27' },
+    { donem: '2015 sonrası', yuzde: 15, renk: '#639922' },
+  ],
+  'Bingöl-Kiğı': [
+    { donem: '1999 öncesi', yuzde: 58, renk: '#E24B4A' },
+    { donem: '1999–2015', yuzde: 27, renk: '#EF9F27' },
+    { donem: '2015 sonrası', yuzde: 15, renk: '#639922' },
+  ],
+
+  // ── AFYONKARAHİSAR ────────────────────────────────────────────────────────
+  'Afyonkarahisar-Merkez': [
+    { donem: '1999 öncesi', yuzde: 40, renk: '#E24B4A' },
+    { donem: '1999–2012', yuzde: 36, renk: '#EF9F27' },
+    { donem: '2012 sonrası', yuzde: 24, renk: '#639922' },
+  ],
+  'Afyonkarahisar-Sandıklı': [
+    { donem: '1999 öncesi', yuzde: 45, renk: '#E24B4A' },
+    { donem: '1999–2012', yuzde: 33, renk: '#EF9F27' },
+    { donem: '2012 sonrası', yuzde: 22, renk: '#639922' },
+  ],
+  'Afyonkarahisar-Dinar': [
+    { donem: '1995 öncesi', yuzde: 55, renk: '#E24B4A' },
+    { donem: '1995–2012', yuzde: 30, renk: '#EF9F27' },
+    { donem: '2012 sonrası', yuzde: 15, renk: '#639922' },
+  ],
+  'Afyonkarahisar-İscehisar': [
+    { donem: '1999 öncesi', yuzde: 42, renk: '#E24B4A' },
+    { donem: '1999–2012', yuzde: 35, renk: '#EF9F27' },
+    { donem: '2012 sonrası', yuzde: 23, renk: '#639922' },
+  ],
+  'Afyonkarahisar-Emirdağ': [
+    { donem: '1999 öncesi', yuzde: 42, renk: '#E24B4A' },
+    { donem: '1999–2012', yuzde: 35, renk: '#EF9F27' },
+    { donem: '2012 sonrası', yuzde: 23, renk: '#639922' },
+  ],
+  'Afyonkarahisar-Bolvadin': [
+    { donem: '1999 öncesi', yuzde: 45, renk: '#E24B4A' },
+    { donem: '1999–2012', yuzde: 33, renk: '#EF9F27' },
+    { donem: '2012 sonrası', yuzde: 22, renk: '#639922' },
   ],
 };
 

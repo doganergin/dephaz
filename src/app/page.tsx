@@ -1,7 +1,10 @@
 'use client';
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import dynamic from 'next/dynamic';
 import { useLanguage } from '@/contexts/LanguageContext';
+
+const FayHaritasi = dynamic(() => import('@/components/FayHaritasi'), { ssr: false });
 
 interface LatestEq { buyukluk: number; konum: string; tarih: string; derinlik: number; kaynak?: string; }
 
@@ -9,7 +12,7 @@ export default function HomePage() {
   const { lang } = useLanguage();
   const TR = lang === 'TR';
 
-  const [eqTab, setEqTab] = useState<'tr' | 'world'>('tr');
+  const [eqTab, setEqTab] = useState<'tr' | 'world' | 'fay'>('tr');
   const [trEqs, setTrEqs] = useState<LatestEq[]>([]);
   const [worldEqs, setWorldEqs] = useState<LatestEq[]>([]);
   const [eqLoading, setEqLoading] = useState(true);
@@ -120,12 +123,12 @@ export default function HomePage() {
         <span className="text-2xl shrink-0">🗺️</span>
       </Link>
 
-      {/* Features grid */}
+      {/* Features grid — 2-col mobile, 3-col desktop */}
       <div>
         <p className="text-xs font-semibold text-[var(--muted)] uppercase tracking-wide mb-3">
           {TR ? 'Tüm Özellikler' : 'All Features'}
         </p>
-        <div className="grid grid-cols-2 gap-3">
+        <div className="grid grid-cols-2 lg:grid-cols-3 gap-3">
           {features.map((f) => {
             const c = colorMap[f.color];
             return (
@@ -145,8 +148,11 @@ export default function HomePage() {
         </div>
       </div>
 
+      {/* Latest Earthquakes + Knowledge Guide — side by side on desktop */}
+      <div className="lg:grid lg:grid-cols-5 lg:gap-5 space-y-6 lg:space-y-0">
+
       {/* Latest Earthquakes */}
-      <div className="bg-[var(--card-bg)] rounded-2xl shadow-sm border border-[var(--border)] p-4">
+      <div className="bg-[var(--card-bg)] rounded-2xl shadow-sm border border-[var(--border)] p-4 lg:col-span-3">
         <div className="flex items-center justify-between mb-3">
           <p className="text-xs font-bold text-[var(--muted)] uppercase tracking-wide">
             {TR ? 'Son Depremler' : 'Latest Earthquakes'}
@@ -159,6 +165,7 @@ export default function HomePage() {
           {([
             { key: 'tr' as const, label: `🇹🇷 ${TR ? 'Türkiye' : 'Turkey'}` },
             { key: 'world' as const, label: `🌍 ${TR ? 'Dünya' : 'World'}` },
+            { key: 'fay' as const, label: `📍 ${TR ? 'Fay Haritası' : 'Fault Map'}` },
           ] as const).map((tab) => (
             <button
               key={tab.key}
@@ -173,7 +180,17 @@ export default function HomePage() {
             </button>
           ))}
         </div>
-        {eqLoading ? (
+        {eqTab === 'fay' ? (
+          <div>
+            <FayHaritasi lang={lang} yukseklik={280} />
+            <p className="text-[10px] text-[var(--muted)] mt-1.5">
+              {TR ? 'Fay hatlarına tıklayın · ' : 'Click fault lines for details · '}
+              <Link href="/fay-hatlari" className="text-red-500 hover:underline">
+                {TR ? 'Detaylı bilgi →' : 'Learn more →'}
+              </Link>
+            </p>
+          </div>
+        ) : eqLoading ? (
           <div className="flex items-center justify-center py-6 gap-2 text-[var(--muted)]">
             <div className="w-4 h-4 border-2 border-red-400 border-t-transparent rounded-full animate-spin" />
             <span className="text-xs">{TR ? 'Yükleniyor...' : 'Loading...'}</span>
@@ -203,6 +220,27 @@ export default function HomePage() {
         )}
       </div>
 
+      {/* Knowledge guide sidebar on desktop */}
+      <div className="lg:col-span-2">
+        <p className="text-xs font-semibold text-[var(--muted)] uppercase tracking-wide mb-3">
+          {TR ? 'Deprem Bilgi Rehberi' : 'Earthquake Guide'}
+        </p>
+        <div className="space-y-2">
+          {articles.map((a) => (
+            <Link
+              key={a.href}
+              href={a.href}
+              className="flex items-center justify-between bg-[var(--card-bg)] border border-[var(--border)] rounded-xl px-3 py-2.5 hover:border-red-200 transition-colors"
+            >
+              <span className="text-xs font-medium text-[var(--foreground)]">{TR ? a.tr : a.en}</span>
+              <span className="text-[var(--muted)] text-xs shrink-0 ml-2">→</span>
+            </Link>
+          ))}
+        </div>
+      </div>
+
+      </div>{/* end desktop 2-col */}
+
       {/* Stats */}
       <div className="grid grid-cols-3 gap-2">
         {[
@@ -215,25 +253,6 @@ export default function HomePage() {
             <p className="text-[10px] text-[var(--muted)] mt-0.5 leading-tight">{TR ? s.tr : s.en}</p>
           </div>
         ))}
-      </div>
-
-      {/* Knowledge guide */}
-      <div>
-        <p className="text-xs font-semibold text-[var(--muted)] uppercase tracking-wide mb-3">
-          {TR ? 'Deprem Bilgi Rehberi' : 'Earthquake Knowledge Guide'}
-        </p>
-        <div className="space-y-2">
-          {articles.map((a) => (
-            <Link
-              key={a.href}
-              href={a.href}
-              className="flex items-center justify-between bg-[var(--card-bg)] border border-[var(--border)] rounded-xl px-4 py-3 hover:border-red-200 transition-colors"
-            >
-              <span className="text-xs font-medium text-[var(--foreground)]">{TR ? a.tr : a.en}</span>
-              <span className="text-[var(--muted)] text-xs shrink-0 ml-2">→</span>
-            </Link>
-          ))}
-        </div>
       </div>
 
       <p className="text-[10px] text-[var(--muted)] text-center pb-2">

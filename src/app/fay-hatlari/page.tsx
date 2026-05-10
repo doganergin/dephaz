@@ -1,6 +1,9 @@
 'use client';
 import Link from 'next/link';
+import dynamic from 'next/dynamic';
 import { useLanguage } from '@/contexts/LanguageContext';
+
+const FayHaritasi = dynamic(() => import('@/components/FayHaritasi'), { ssr: false });
 
 export default function FayHatlariPage() {
   const { lang } = useLanguage();
@@ -93,6 +96,32 @@ export default function FayHatlariPage() {
         <h1 className="text-2xl font-bold text-[var(--foreground)]">{TR ? 'Türkiye\'deki Fay Hatları' : 'Fault Lines in Turkey'}</h1>
         <p className="text-sm text-[var(--muted)] mt-1">{TR ? 'Hangi fay nerede, ne kadar tehlikeli?' : 'Which fault is where, and how dangerous is it?'}</p>
       </div>
+
+      {/* Interactive fault map */}
+      <section className="space-y-2">
+        <h2 className="text-base font-bold text-[var(--foreground)]">
+          {TR ? 'Türkiye Aktif Fay Haritası' : 'Turkey Active Fault Map'}
+        </h2>
+        <p className="text-xs text-[var(--muted)]">
+          {TR ? 'Fay hatlarına tıklayarak detaylı bilgi alabilirsiniz.' : 'Click on fault lines to view detailed information.'}
+        </p>
+        <FayHaritasi lang={lang} yukseklik={420} />
+        <div className="flex flex-wrap gap-2 pt-1">
+          {[
+            { renk: '#dc2626', ad: TR ? 'KAF (Kuzey Anadolu)' : 'NAF (North Anatolian)' },
+            { renk: '#ea580c', ad: TR ? 'DAF (Doğu Anadolu)' : 'EAF (East Anatolian)' },
+            { renk: '#7c3aed', ad: TR ? 'Gediz Grabeni' : 'Gediz Graben' },
+            { renk: '#0891b2', ad: TR ? 'B. Menderes Grabeni' : 'B. Menderes Graben' },
+            { renk: '#d97706', ad: TR ? 'Fethiye-Burdur' : 'Fethiye-Burdur' },
+            { renk: '#be185d', ad: TR ? 'Van Fayı' : 'Van Fault' },
+          ].map((item) => (
+            <span key={item.ad} className="flex items-center gap-1 text-[10px] text-[var(--muted)]">
+              <span className="w-4 h-1.5 rounded-full shrink-0" style={{ backgroundColor: item.renk }} />
+              {item.ad}
+            </span>
+          ))}
+        </div>
+      </section>
 
       <section className="space-y-3">
         <h2 className="text-base font-bold text-[var(--foreground)]">{TR ? 'Fay Hattı Nedir?' : 'What Is a Fault Line?'}</h2>

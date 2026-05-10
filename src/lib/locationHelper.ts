@@ -33,6 +33,21 @@ const IZINLI_KODLAR = new Set([
   '14', // Bolu
   '81', // Düzce
   '77', // Yalova
+  '06', // Ankara
+  '45', // Manisa
+  '09', // Aydın
+  '59', // Tekirdağ
+  '26', // Eskişehir
+  '42', // Konya
+  '33', // Mersin
+  '65', // Van
+  '23', // Elazığ
+  '25', // Erzurum
+  '61', // Trabzon
+  '38', // Kayseri
+  '18', // Çanakkale
+  '12', // Bingöl
+  '03', // Afyonkarahisar
 ]);
 
 const ilceLookup = new Map<number, { cityCode: string; districtName: string }>();
