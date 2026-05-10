@@ -12,7 +12,8 @@
       "Bash(git commit -m 'fix: add disclaimer note below region map for neighbourhood precision *)",
       "Bash(git add *)",
       "Bash(git commit -m 'feat: add map-based location selection in bolge-analizi, improve disclaimer text *)",
-      "Bash(git push *)"
+      "Bash(git push *)",
+      "Bash(git commit -m ' *)"
     ]
   }
 }

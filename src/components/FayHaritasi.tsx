@@ -1,5 +1,7 @@
 'use client';
-import { MapContainer, TileLayer, Polyline, Popup, useMap } from 'react-leaflet';
+import { useEffect, useState } from 'react';
+import { MapContainer, TileLayer, Polyline, CircleMarker, Popup, useMap } from 'react-leaflet';
+import { tarihselDepremler } from '@/data/tarihselDepremler';
 
 interface FayHatti {
   isim: string;
@@ -10,10 +12,10 @@ interface FayHatti {
   koordinatlar: [number, number][];
 }
 
-const FAYLAR: FayHatti[] = [
+export const FAYLAR: FayHatti[] = [
   {
     isim: 'Kuzey Anadolu Fayı (KAF)',
-    renkKodu: '#dc2626',
+    renkKodu: '#ef4444',
     uzunluk: '~1500 km',
     maksimumMw: 'Mw 7.8',
     notlar: '1999 İzmit ve Düzce depremleri (Mw 7.4–7.2)',
@@ -26,7 +28,7 @@ const FAYLAR: FayHatti[] = [
   },
   {
     isim: 'Doğu Anadolu Fayı (DAF)',
-    renkKodu: '#ea580c',
+    renkKodu: '#f97316',
     uzunluk: '~600 km',
     maksimumMw: 'Mw 7.8',
     notlar: '2023 Kahramanmaraş depremleri (Mw 7.7–7.8)',
@@ -37,11 +39,11 @@ const FAYLAR: FayHatti[] = [
     ],
   },
   {
-    isim: 'Gediz Grabeni (Ege Fayı)',
-    renkKodu: '#7c3aed',
+    isim: 'Gediz Grabeni',
+    renkKodu: '#a855f7',
     uzunluk: '~150 km',
     maksimumMw: 'Mw 7.0',
-    notlar: '1969 Alaşehir, bölge aktif fay sistemi',
+    notlar: '1969 Alaşehir depremi, bölge aktif fay sistemi',
     koordinatlar: [
       [38.95, 26.60], [38.75, 27.00], [38.65, 27.50], [38.55, 28.00],
       [38.50, 28.50], [38.55, 29.20],
@@ -49,29 +51,18 @@ const FAYLAR: FayHatti[] = [
   },
   {
     isim: 'Büyük Menderes Grabeni',
-    renkKodu: '#0891b2',
+    renkKodu: '#06b6d4',
     uzunluk: '~250 km',
     maksimumMw: 'Mw 6.9',
-    notlar: 'Aydın, Nazilli, Söke bölgesi aktif sistem',
+    notlar: 'Aydın, Nazilli, Söke bölgesi aktif fay sistemi',
     koordinatlar: [
       [37.75, 27.00], [37.80, 27.60], [37.85, 28.20], [37.92, 28.80],
       [37.95, 29.20], [38.00, 29.80],
     ],
   },
   {
-    isim: 'Küçük Menderes Grabeni',
-    renkKodu: '#0e7490',
-    uzunluk: '~100 km',
-    maksimumMw: 'Mw 6.5',
-    notlar: 'Selçuk, Ödemiş bölgesi fay sistemi',
-    koordinatlar: [
-      [37.95, 27.10], [38.00, 27.50], [38.05, 27.80], [38.10, 28.20],
-      [38.15, 28.60],
-    ],
-  },
-  {
     isim: 'Fethiye-Burdur Fayı',
-    renkKodu: '#d97706',
+    renkKodu: '#f59e0b',
     uzunluk: '~280 km',
     maksimumMw: 'Mw 7.0',
     notlar: '1995 Dinar depremi (Mw 6.1)',
@@ -82,7 +73,7 @@ const FAYLAR: FayHatti[] = [
   },
   {
     isim: 'Eskişehir Fayı',
-    renkKodu: '#059669',
+    renkKodu: '#10b981',
     uzunluk: '~100 km',
     maksimumMw: 'Mw 6.5',
     notlar: 'KAF kuzey kolu, Eskişehir kentini etkiler',
@@ -92,7 +83,7 @@ const FAYLAR: FayHatti[] = [
   },
   {
     isim: 'Van Fayı',
-    renkKodu: '#be185d',
+    renkKodu: '#ec4899',
     uzunluk: '~120 km',
     maksimumMw: 'Mw 7.2',
     notlar: '2011 Van (Mw 7.1) ve Erciş (Mw 7.2) depremleri',
@@ -102,11 +93,47 @@ const FAYLAR: FayHatti[] = [
   },
 ];
 
-function BoundsFitter() {
+function useDarkMode() {
+  const [dark, setDark] = useState(false);
+  useEffect(() => {
+    const check = () => setDark(
+      document.documentElement.classList.contains('dark') ||
+      document.documentElement.classList.contains('black')
+    );
+    check();
+    const observer = new MutationObserver(check);
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+    return () => observer.disconnect();
+  }, []);
+  return dark;
+}
+
+function magRadius(mag: number): number {
+  if (mag >= 7.8) return 14;
+  if (mag >= 7.5) return 12;
+  if (mag >= 7.0) return 10;
+  if (mag >= 6.5) return 8;
+  return 6;
+}
+
+function magColor(mag: number): string {
+  if (mag >= 7.5) return '#7f1d1d';
+  if (mag >= 7.0) return '#dc2626';
+  if (mag >= 6.5) return '#f97316';
+  return '#f59e0b';
+}
+
+function TurkeyBounds() {
   const map = useMap();
-  map.fitBounds([[36.0, 25.5], [42.5, 45.0]], { padding: [10, 10] });
+  useEffect(() => {
+    map.fitBounds([[36.0, 25.5], [42.5, 45.0]], { padding: [8, 8] });
+  }, [map]);
   return null;
 }
+
+const BUYUK_DEPREMLER = tarihselDepremler.filter(
+  (d) => d.buyukluk >= 6.5 && d.lat && d.lon
+);
 
 interface Props {
   lang: 'TR' | 'EN';
@@ -115,6 +142,14 @@ interface Props {
 
 export default function FayHaritasi({ lang, yukseklik = 420 }: Props) {
   const TR = lang === 'TR';
+  const dark = useDarkMode();
+
+  const tileUrl = dark
+    ? 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png'
+    : 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
+  const tileAttr = dark
+    ? '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/">CARTO</a>'
+    : '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>';
 
   return (
     <div className="rounded-xl overflow-hidden border border-[var(--border)]" style={{ height: yukseklik }}>
@@ -123,17 +158,32 @@ export default function FayHaritasi({ lang, yukseklik = 420 }: Props) {
         zoom={6}
         style={{ height: '100%', width: '100%' }}
         scrollWheelZoom={true}
+        key={dark ? 'dark' : 'light'}
       >
-        <TileLayer
-          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-        />
-        <BoundsFitter />
+        <TileLayer attribution={tileAttr} url={tileUrl} />
+        <TurkeyBounds />
+
+        {/* Fault lines — glow layer in dark mode */}
+        {FAYLAR.map((fay) => (
+          dark ? (
+            <Polyline
+              key={`glow-${fay.isim}`}
+              positions={fay.koordinatlar}
+              pathOptions={{ color: fay.renkKodu, weight: 10, opacity: 0.18 }}
+            />
+          ) : null
+        ))}
+
+        {/* Fault lines — main lines */}
         {FAYLAR.map((fay) => (
           <Polyline
             key={fay.isim}
             positions={fay.koordinatlar}
-            pathOptions={{ color: fay.renkKodu, weight: 3, opacity: 0.85 }}
+            pathOptions={{
+              color: fay.renkKodu,
+              weight: dark ? 3.5 : 3,
+              opacity: dark ? 0.95 : 0.85,
+            }}
           >
             <Popup>
               <div style={{ fontSize: '12px', minWidth: '180px' }}>
@@ -149,9 +199,46 @@ export default function FayHaritasi({ lang, yukseklik = 420 }: Props) {
             </Popup>
           </Polyline>
         ))}
+
+        {/* Historical earthquake markers */}
+        {BUYUK_DEPREMLER.map((dep) => (
+          <CircleMarker
+            key={dep.id}
+            center={[dep.lat, dep.lon]}
+            radius={magRadius(dep.buyukluk)}
+            pathOptions={{
+              color: magColor(dep.buyukluk),
+              fillColor: magColor(dep.buyukluk),
+              fillOpacity: dark ? 0.85 : 0.75,
+              weight: dark ? 1.5 : 1,
+            }}
+          >
+            <Popup>
+              <div style={{ fontSize: '12px', minWidth: '190px' }}>
+                <p style={{ fontWeight: 700, margin: '0 0 2px', color: magColor(dep.buyukluk), fontSize: '14px' }}>
+                  Mw {dep.buyukluk}
+                </p>
+                <p style={{ fontWeight: 600, margin: '0 0 4px', color: '#111827' }}>{dep.yer}</p>
+                <p style={{ margin: '2px 0', color: '#6b7280', fontSize: '11px' }}>{dep.tarih}</p>
+                {dep.olum ? (
+                  <p style={{ margin: '2px 0', color: '#6b7280', fontSize: '11px' }}>
+                    {TR ? 'Can kaybı' : 'Deaths'}: <strong>{dep.olum.toLocaleString('tr-TR')}</strong>
+                  </p>
+                ) : null}
+                <p style={{ margin: '6px 0 0', color: '#374151', fontSize: '11px', lineHeight: '1.4' }}>
+                  {dep.ozet.slice(0, 120)}{dep.ozet.length > 120 ? '…' : ''}
+                </p>
+                <a
+                  href={`/tarihsel#${dep.id}`}
+                  style={{ display: 'inline-block', marginTop: '6px', color: '#dc2626', fontSize: '11px', fontWeight: 600 }}
+                >
+                  {TR ? 'Detayları gör →' : 'See details →'}
+                </a>
+              </div>
+            </Popup>
+          </CircleMarker>
+        ))}
       </MapContainer>
     </div>
   );
 }
-
-export { FAYLAR };

@@ -1,10 +1,7 @@
 'use client';
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import dynamic from 'next/dynamic';
 import { useLanguage } from '@/contexts/LanguageContext';
-
-const FayHaritasi = dynamic(() => import('@/components/FayHaritasi'), { ssr: false });
 
 interface LatestEq { buyukluk: number; konum: string; tarih: string; derinlik: number; kaynak?: string; }
 
@@ -12,7 +9,7 @@ export default function HomePage() {
   const { lang } = useLanguage();
   const TR = lang === 'TR';
 
-  const [eqTab, setEqTab] = useState<'tr' | 'world' | 'fay'>('tr');
+  const [eqTab, setEqTab] = useState<'tr' | 'world'>('tr');
   const [trEqs, setTrEqs] = useState<LatestEq[]>([]);
   const [worldEqs, setWorldEqs] = useState<LatestEq[]>([]);
   const [eqLoading, setEqLoading] = useState(true);
@@ -63,14 +60,14 @@ export default function HomePage() {
     { href: '/tarihsel', icon: '📜', title: 'Tarihsel Depremler', desc: "Osmanlı'dan günümüze Türkiye'nin büyük deprem tarihini inceleyin.", color: 'purple' },
     { href: '/uzman', icon: '🔬', title: 'Uzman Görüşleri', desc: 'Seismologların ve jeologların bilimsel değerlendirmelerini okuyun.', color: 'green' },
     { href: '/canta', icon: '🎒', title: 'Deprem Çantası', desc: '72 saatlik acil durum çantası için kontrol listesi oluşturun.', color: 'amber' },
-    { href: '/aile-plani', icon: '👨‍👩‍👧', title: 'Aile Planı', desc: 'Toplanma noktası ve acil iletişim planı hazırlayın.', color: 'orange' },
+    { href: '/fay-hatlari', icon: '🔴', title: 'Aktif Fay Haritası', desc: "Türkiye'deki aktif fay hatlarını ve büyük tarihi depremleri interaktif haritada görün.", color: 'orange' },
   ] : [
     { href: '/bolge-analizi', icon: '🗺️', title: 'Risk Analysis', desc: 'Select province, district and neighbourhood to find fault distance, soil type, and risk score.', color: 'red' },
     { href: '/harita', icon: '🌍', title: 'Live Earthquake Map', desc: 'Monitor Kandilli, AFAD and USGS data on a real-time interactive map.', color: 'blue' },
     { href: '/tarihsel', icon: '📜', title: 'Historical Earthquakes', desc: "Explore Turkey's major earthquake history from the Ottoman era to the present.", color: 'purple' },
     { href: '/uzman', icon: '🔬', title: 'Expert Opinions', desc: 'Read scientific assessments from seismologists and geologists.', color: 'green' },
     { href: '/canta', icon: '🎒', title: 'Emergency Kit', desc: 'Build a 72-hour emergency supply checklist for your household.', color: 'amber' },
-    { href: '/aile-plani', icon: '👨‍👩‍👧', title: 'Family Plan', desc: 'Set up a meeting point and emergency contact plan with your family.', color: 'orange' },
+    { href: '/fay-hatlari', icon: '🔴', title: 'Active Fault Map', desc: 'See Turkey\'s active fault lines and major historical earthquakes on an interactive map.', color: 'orange' },
   ];
 
   const colorMap: Record<string, { card: string; icon: string; label: string }> = {
@@ -90,6 +87,7 @@ export default function HomePage() {
     { href: '/fay-hatlari',            tr: 'Türkiye\'deki Fay Hatları',              en: 'Fault Lines in Turkey' },
     { href: '/zemin-tipleri',          tr: 'Zemin Tipleri ve Deprem Riski',          en: 'Soil Types and Earthquake Risk' },
     { href: '/deprem-cantasi-rehberi', tr: '72 Saatlik Deprem Çantası Rehberi',      en: '72-Hour Earthquake Kit Guide' },
+    { href: '/aile-plani',            tr: 'Aile Acil Durum Planı',                  en: 'Family Emergency Plan' },
   ];
 
   return (
@@ -165,7 +163,6 @@ export default function HomePage() {
           {([
             { key: 'tr' as const, label: `🇹🇷 ${TR ? 'Türkiye' : 'Turkey'}` },
             { key: 'world' as const, label: `🌍 ${TR ? 'Dünya' : 'World'}` },
-            { key: 'fay' as const, label: `📍 ${TR ? 'Fay Haritası' : 'Fault Map'}` },
           ] as const).map((tab) => (
             <button
               key={tab.key}
@@ -180,17 +177,7 @@ export default function HomePage() {
             </button>
           ))}
         </div>
-        {eqTab === 'fay' ? (
-          <div>
-            <FayHaritasi lang={lang} yukseklik={280} />
-            <p className="text-[10px] text-[var(--muted)] mt-1.5">
-              {TR ? 'Fay hatlarına tıklayın · ' : 'Click fault lines for details · '}
-              <Link href="/fay-hatlari" className="text-red-500 hover:underline">
-                {TR ? 'Detaylı bilgi →' : 'Learn more →'}
-              </Link>
-            </p>
-          </div>
-        ) : eqLoading ? (
+        {eqLoading ? (
           <div className="flex items-center justify-center py-6 gap-2 text-[var(--muted)]">
             <div className="w-4 h-4 border-2 border-red-400 border-t-transparent rounded-full animate-spin" />
             <span className="text-xs">{TR ? 'Yükleniyor...' : 'Loading...'}</span>

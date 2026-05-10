@@ -1,5 +1,5 @@
 'use client';
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import dynamic from 'next/dynamic';
 import { tarihselDepremler, type TarihselDeprem, type OncuAciklama } from '@/data/tarihselDepremler';
 import { useLanguage } from '@/contexts/LanguageContext';
@@ -42,6 +42,20 @@ export default function TarihselDepremlerSayfasi() {
   const [onemFiltre, setOnemFiltre] = useState<TarihselDeprem['onem'] | 'hepsi'>('hepsi');
   const [siralama, setSiralama] = useState<'tarih' | 'buyukluk'>('tarih');
   const [secilenId, setSecilenId] = useState<string | null>(null);
+  const cardRefs = useRef<Record<string, HTMLDivElement | null>>({});
+
+  useEffect(() => {
+    const hash = window.location.hash.slice(1);
+    if (!hash) return;
+    const dep = tarihselDepremler.find((d) => d.id === hash);
+    if (!dep) return;
+    setSecilenId(hash);
+    setDonemFiltre('hepsi');
+    setOnemFiltre('hepsi');
+    setTimeout(() => {
+      cardRefs.current[hash]?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }, 300);
+  }, []);
 
   const onemLabel: Record<TarihselDeprem['onem'], string> = {
     yikici: t('tarihselYikici'),
@@ -260,8 +274,13 @@ export default function TarihselDepremlerSayfasi() {
           </div>
         </div>
         {sirali.map((d) => (
-          <button
+          <div
             key={d.id}
+            id={d.id}
+            ref={(el) => { cardRefs.current[d.id] = el; }}
+          >
+          <button
+            key={`btn-${d.id}`}
             onClick={() => setSecilenId(secilenId === d.id ? null : d.id)}
             className={`w-full text-left bg-[var(--card-bg)] rounded-2xl border p-3 transition-colors ${
               secilenId === d.id ? 'border-red-400' : 'border-[var(--border)] hover:border-red-300'
@@ -291,6 +310,7 @@ export default function TarihselDepremlerSayfasi() {
               <span className="text-[var(--muted)] text-xs shrink-0">{secilenId === d.id ? '▲' : '▼'}</span>
             </div>
           </button>
+          </div>
         ))}
       </div>
 
