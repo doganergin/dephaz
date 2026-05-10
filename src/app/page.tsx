@@ -230,16 +230,19 @@ export default function HomePage() {
 
       {/* Stats */}
       <div className="grid grid-cols-3 gap-2">
-        {[
-          { n: 'M4.0+', tr: 'Anlık deprem takibi', en: 'Live earthquake tracking' },
-          { n: '81', tr: 'İl risk analizi', en: 'Province analyses' },
-          { n: '900+', tr: 'İlçe risk skoru', en: 'District risk scores' },
-        ].map((s) => (
-          <div key={s.n} className="bg-[var(--card-bg)] border border-[var(--border)] rounded-xl p-3 text-center">
-            <p className="text-base font-bold text-red-600">{s.n}</p>
-            <p className="text-[10px] text-[var(--muted)] mt-0.5 leading-tight">{TR ? s.tr : s.en}</p>
-          </div>
-        ))}
+        <div className="bg-[var(--card-bg)] border border-[var(--border)] rounded-xl p-3 text-center">
+          <p className="text-base font-bold text-red-600">M4.0+</p>
+          <p className="text-[10px] text-[var(--muted)] mt-0.5 leading-tight">{TR ? 'Anlık deprem takibi' : 'Live earthquake tracking'}</p>
+        </div>
+        <div className="bg-[var(--card-bg)] border border-[var(--border)] rounded-xl p-3 text-center">
+          <p className="text-base font-bold text-red-600">38</p>
+          <p className="text-[10px] text-[var(--muted)] mt-0.5 leading-tight">{TR ? 'Desteklenen il' : 'Supported provinces'}</p>
+          <p className="text-[9px] text-amber-500 mt-1 leading-tight">{TR ? 'Kalan iller yakında' : 'More cities soon'}</p>
+        </div>
+        <div className="bg-[var(--card-bg)] border border-[var(--border)] rounded-xl p-3 text-center">
+          <p className="text-base font-bold text-red-600">337</p>
+          <p className="text-[10px] text-[var(--muted)] mt-0.5 leading-tight">{TR ? 'İlçe risk verisi' : 'District risk entries'}</p>
+        </div>
       </div>
 
       <p className="text-[10px] text-[var(--muted)] text-center pb-2">
