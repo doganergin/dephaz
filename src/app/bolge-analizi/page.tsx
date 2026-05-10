@@ -11,6 +11,7 @@ import { IL_KOORDINATLARI } from '@/lib/ilKoordinatlari';
 import type { BolgeRisk, ZeminTipi } from '@/types';
 
 const BolgeHaritasi = dynamic(() => import('@/components/BolgeHaritasi'), { ssr: false });
+const KonumSecHaritasi = dynamic(() => import('@/components/KonumSecHaritasi'), { ssr: false });
 
 const ZEMIN_EN: Record<string, string> = {
   'Kaya': 'Rock', 'Killi zemin': 'Clay soil', 'Alüvyon': 'Alluvium',
@@ -176,6 +177,7 @@ export default function BolgeAnalizi() {
   const [risk, setRisk] = useState<BolgeRisk | null>(null);
   const [hata, setHata] = useState('');
   const [haritaMerkez, setHaritaMerkez] = useState<[number, number] | null>(null);
+  const [secimModu, setSecimModu] = useState<'dropdown' | 'harita'>('dropdown');
   const riskRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -278,6 +280,31 @@ export default function BolgeAnalizi() {
     }
   }, [secilenIl, secilenIlce, setMahalle, setBolgeRisk, t]);
 
+  const onHaritaSec = useCallback(async ({ il, ilce }: { il: string; ilce: string; lat: number; lon: number }) => {
+    const normalize = (s: string) => s.toLowerCase().replace(/\s*(ili|province|il)\s*$/i, '').trim();
+    const ilNorm = normalize(il);
+    const ilObj = getProvinces().find((p) => normalize(p.name) === ilNorm || normalize(p.name).includes(ilNorm) || ilNorm.includes(normalize(p.name)));
+    if (!ilObj) { setHata(lang === 'TR' ? `"${il}" desteklenen iller arasında değil.` : `"${il}" is not in the supported provinces.`); return; }
+    setIl({ id: ilObj.id, name: ilObj.name });
+
+    const ilceNorm = normalize(ilce);
+    const ilceler2 = getDistricts(ilObj.id);
+    const ilceObj = ilceler2.find((d) => normalize(d.name) === ilceNorm || normalize(d.name).includes(ilceNorm) || ilceNorm.includes(normalize(d.name)));
+    if (!ilceObj) { setHata(lang === 'TR' ? `"${ilce}" ilçesi veri tabanında bulunamadı.` : `District "${ilce}" not found in database.`); return; }
+    setIlce({ id: ilceObj.id, name: ilceObj.name, provinceId: ilObj.id });
+
+    setRisk(null); setHaritaMerkez(null); setHata('');
+    setYukleniyor(true);
+    try {
+      const data = await bolgeRiskGetir(ilObj.name, ilceObj.name, ilceObj.name);
+      setRisk(data); setBolgeRisk(data);
+    } catch {
+      setHata(t('error'));
+    } finally {
+      setYukleniyor(false);
+    }
+  }, [lang, setIl, setIlce, setBolgeRisk, t]);
+
   const renk = risk ? riskRenk(risk.riskSinifi) : null;
   const bilimsel = risk ? (bilimselKaynaklar[`${risk.il}-${risk.ilce}`] ?? bilimselKaynaklar[risk.il]) : null;
 
@@ -311,34 +338,64 @@ export default function BolgeAnalizi() {
 
       {/* Seçiciler */}
       <div className="bg-[var(--card-bg)] rounded-2xl p-4 shadow-sm border border-[var(--border)]">
-        <Select
-          label={t('selectIl')}
-          items={iller}
-          value={secilenIl?.id ?? null}
-          onChange={onIlSec}
-          badge={`${iller.length} ${t('badgeSehir')}`}
-          placeholder={t('ilSec')}
-        />
-        <Select
-          label={t('selectIlce')}
-          items={ilceler}
-          value={secilenIlce?.id ?? null}
-          onChange={onIlceSec}
-          disabled={!secilenIl}
-          badge={ilceler.length ? `${ilceler.length} ${t('badgeIlce')}` : undefined}
-          placeholder={t('ilceSec')}
-        />
-        <div className="mb-0">
-          <Select
-            label={t('selectMahalle')}
-            items={mahalleler}
-            value={secilenMahalle?.id ?? null}
-            onChange={onMahalleSec}
-            disabled={!secilenIlce}
-            badge={mahalleler.length ? `${mahalleler.length} ${t('badgeMahalle')}` : undefined}
-            placeholder={t('mahalleSec')}
-          />
+        {/* Mod seçici */}
+        <div className="flex gap-0 bg-gray-100 dark:bg-gray-700 rounded-xl overflow-hidden mb-4">
+          {[
+            { key: 'dropdown' as const, label: lang === 'TR' ? '☰ Liste' : '☰ List' },
+            { key: 'harita' as const,   label: lang === 'TR' ? '🗺️ Haritadan Seç' : '🗺️ Pick on Map' },
+          ].map((m) => (
+            <button
+              key={m.key}
+              onClick={() => setSecimModu(m.key)}
+              className={`flex-1 py-2 text-[11px] font-semibold transition-colors ${
+                secimModu === m.key
+                  ? 'bg-white dark:bg-gray-600 text-red-600 shadow-sm rounded-xl'
+                  : 'text-[var(--muted)]'
+              }`}
+            >
+              {m.label}
+            </button>
+          ))}
         </div>
+
+        {secimModu === 'dropdown' ? (
+          <>
+            <Select
+              label={t('selectIl')}
+              items={iller}
+              value={secilenIl?.id ?? null}
+              onChange={onIlSec}
+              badge={`${iller.length} ${t('badgeSehir')}`}
+              placeholder={t('ilSec')}
+            />
+            <Select
+              label={t('selectIlce')}
+              items={ilceler}
+              value={secilenIlce?.id ?? null}
+              onChange={onIlceSec}
+              disabled={!secilenIl}
+              badge={ilceler.length ? `${ilceler.length} ${t('badgeIlce')}` : undefined}
+              placeholder={t('ilceSec')}
+            />
+            <div className="mb-0">
+              <Select
+                label={t('selectMahalle')}
+                items={mahalleler}
+                value={secilenMahalle?.id ?? null}
+                onChange={onMahalleSec}
+                disabled={!secilenIlce}
+                badge={mahalleler.length ? `${mahalleler.length} ${t('badgeMahalle')}` : undefined}
+                placeholder={t('mahalleSec')}
+              />
+            </div>
+          </>
+        ) : (
+          <KonumSecHaritasi
+            onSec={onHaritaSec}
+            yukleniyor={yukleniyor}
+            lang={lang}
+          />
+        )}
       </div>
 
       {/* Deprem Büyüklük Skalası */}
