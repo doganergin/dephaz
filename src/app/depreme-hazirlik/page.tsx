@@ -38,7 +38,7 @@ export default function DepremHazirlikPage() {
 
       <div className="space-y-3">
         {steps.map((s) => (
-          <div key={s.n} className="flex gap-3 bg-[var(--card-bg)] border border-[var(--border)] rounded-xl p-4">
+          <div key={s.n} className="flex gap-3 bg-[var(--card-bg)] border border-[var(--border)] rounded-xl p-4 glow-card glow-red">
             <div className="w-7 h-7 rounded-full bg-red-100 dark:bg-red-900/30 text-red-600 text-sm font-bold flex items-center justify-center shrink-0">{s.n}</div>
             <div>
               <p className="text-sm font-bold text-[var(--foreground)]">{s.t}</p>

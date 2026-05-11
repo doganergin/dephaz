@@ -42,7 +42,7 @@ export default function TurkiyeDepremRiskiPage() {
           { sayi: '%95', tr: 'Risk altındaki nüfus', en: 'Population at risk' },
           { sayi: '~1,500', tr: 'Aktif fay hattı (km)', en: 'Active fault length (km)' },
         ].map((item) => (
-          <div key={item.sayi} className="bg-[var(--card-bg)] border border-[var(--border)] rounded-xl p-3 text-center">
+          <div key={item.sayi} className="bg-[var(--card-bg)] border border-[var(--border)] rounded-xl p-3 text-center glow-card glow-red">
             <p className="text-lg font-bold text-red-600">{item.sayi}</p>
             <p className="text-[10px] text-[var(--muted)] mt-1 leading-tight">{TR ? item.tr : item.en}</p>
           </div>
@@ -66,7 +66,7 @@ export default function TurkiyeDepremRiskiPage() {
               enA: '~580 km left-lateral fault. In February 2023 it produced Mw 7.7 + 7.6 earthquakes, causing over 50,000 fatalities and destroying approximately 120,000 buildings.',
             },
           ].map((f) => (
-            <div key={f.tr} className="bg-[var(--card-bg)] border border-[var(--border)] rounded-xl p-4">
+            <div key={f.tr} className="bg-[var(--card-bg)] border border-[var(--border)] rounded-xl p-4 glow-card glow-red">
               <p className="text-sm font-bold text-[var(--foreground)]">{TR ? f.tr : f.en}</p>
               <p className="text-xs text-[var(--muted)] mt-1 leading-relaxed">{TR ? f.trA : f.enA}</p>
             </div>
@@ -78,7 +78,7 @@ export default function TurkiyeDepremRiskiPage() {
         <h2 className="text-base font-bold text-[var(--foreground)]">{TR ? 'Bölgesel Risk Durumu' : 'Regional Risk Overview'}</h2>
         <div className="space-y-2">
           {bolgeler.map((item) => (
-            <div key={item.b} className="flex items-start gap-3 bg-[var(--card-bg)] border border-[var(--border)] rounded-xl p-3">
+            <div key={item.b} className={`flex items-start gap-3 bg-[var(--card-bg)] border border-[var(--border)] rounded-xl p-3 glow-card glow-${item.renk}`}>
               <div className={`w-2 h-2 rounded-full mt-1 shrink-0 ${item.renk === 'red' ? 'bg-red-500' : item.renk === 'orange' ? 'bg-orange-500' : item.renk === 'amber' ? 'bg-amber-500' : 'bg-green-500'}`} />
               <div>
                 <div className="flex items-center gap-2 flex-wrap">
@@ -96,7 +96,7 @@ export default function TurkiyeDepremRiskiPage() {
         <h2 className="text-base font-bold text-[var(--foreground)]">{TR ? 'Son 25 Yılın Büyük Depremleri' : 'Major Earthquakes of the Last 25 Years'}</h2>
         <div className="space-y-2">
           {depremler.map((d) => (
-            <div key={d.tarih} className="flex items-center gap-3 bg-[var(--card-bg)] border border-[var(--border)] rounded-xl p-3">
+            <div key={d.tarih} className="flex items-center gap-3 bg-[var(--card-bg)] border border-[var(--border)] rounded-xl p-3 glow-card glow-red">
               <div className="w-10 h-10 rounded-xl bg-red-50 dark:bg-red-900/30 flex items-center justify-center text-xs font-bold text-red-600 shrink-0">{d.mag.split(' ')[0]}</div>
               <div className="flex-1">
                 <p className="text-xs font-bold text-[var(--foreground)]">{d.yer}</p>
@@ -107,7 +107,7 @@ export default function TurkiyeDepremRiskiPage() {
         </div>
       </section>
 
-      <div className="bg-red-50 dark:bg-red-900/10 border border-red-100 dark:border-red-900/30 rounded-xl p-4">
+      <div className="bg-red-50 dark:bg-red-900/10 border border-red-100 dark:border-red-900/30 rounded-xl p-4 glow-card glow-red">
         <p className="text-xs font-bold text-red-700 dark:text-red-400 mb-2">{TR ? 'Kendi Bölgenizi Analiz Edin' : 'Analyse Your Region'}</p>
         <p className="text-xs text-red-800 dark:text-red-300 leading-relaxed mb-3">
           {TR ? 'Yaşadığınız ilçenin fay mesafesini, zemin yapısını ve risk skorunu öğrenin.' : 'Learn the fault distance, soil type, and risk score for your district.'}

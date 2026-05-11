@@ -46,7 +46,7 @@ export default function ZeminTipleriPage() {
         </p>
         <div className="space-y-2">
           {siniflar.map((item) => (
-            <div key={item.sinif} className="bg-[var(--card-bg)] border border-[var(--border)] rounded-xl p-3">
+            <div key={item.sinif} className={`bg-[var(--card-bg)] border border-[var(--border)] rounded-xl p-3 glow-card glow-${item.renk}`}>
               <div className="flex items-center justify-between mb-1">
                 <p className="text-xs font-bold text-[var(--foreground)]">{item.sinif}</p>
                 <span className={`text-[10px] font-semibold px-2 py-0.5 rounded-full ${

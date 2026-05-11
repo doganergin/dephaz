@@ -137,7 +137,7 @@ export default function DepremCantasiRehberiPage() {
 
       <section className="space-y-4">
         {kategoriler.map((kat) => (
-          <section key={kat.kategori} className="bg-[var(--card-bg)] border border-[var(--border)] rounded-2xl overflow-hidden">
+          <section key={kat.kategori} className="bg-[var(--card-bg)] border border-[var(--border)] rounded-2xl overflow-hidden glow-card glow-red">
             <div className="flex items-center justify-between px-4 py-3 border-b border-[var(--border)] bg-gray-50 dark:bg-gray-800/50">
               <div className="flex items-center gap-2">
                 <span className="text-xl">{kat.icon}</span>
@@ -165,7 +165,7 @@ export default function DepremCantasiRehberiPage() {
         <h2 className="text-base font-bold text-[var(--foreground)]">{TR ? 'Çanta Seçimi ve Saklama' : 'Choosing and Storing Your Kit'}</h2>
         <div className="space-y-2">
           {cantaBilgi.map((item) => (
-            <div key={item.baslik} className="bg-[var(--card-bg)] border border-[var(--border)] rounded-xl p-3">
+            <div key={item.baslik} className="bg-[var(--card-bg)] border border-[var(--border)] rounded-xl p-3 glow-row">
               <p className="text-xs font-bold text-[var(--foreground)]">{item.baslik}</p>
               <p className="text-[11px] text-[var(--muted)] mt-0.5 leading-relaxed">{item.aciklama}</p>
             </div>

@@ -141,7 +141,7 @@ export default function FayHatlariPage() {
         <h2 className="text-base font-bold text-[var(--foreground)]">{TR ? 'Ana Fay Sistemleri' : 'Main Fault Systems'}</h2>
         <div className="space-y-3">
           {faylar.map((fay) => (
-            <div key={fay.ad} className="bg-[var(--card-bg)] border border-[var(--border)] rounded-xl p-4 space-y-2">
+            <div key={fay.ad} className={`bg-[var(--card-bg)] border border-[var(--border)] rounded-xl p-4 space-y-2 glow-card glow-${fay.renk}`}>
               <div className="flex items-start justify-between gap-2">
                 <p className="text-sm font-bold text-[var(--foreground)]">{fay.ad}</p>
                 <span className={`text-[9px] font-bold px-2 py-0.5 rounded-full shrink-0 ${
@@ -170,7 +170,7 @@ export default function FayHatlariPage() {
         </p>
         <div className="space-y-2">
           {mesafeler.map((item) => (
-            <div key={item.mesafe} className="flex items-center gap-3 bg-[var(--card-bg)] border border-[var(--border)] rounded-xl p-3">
+            <div key={item.mesafe} className="flex items-center gap-3 bg-[var(--card-bg)] border border-[var(--border)] rounded-xl p-3 glow-row">
               <div className="text-xs font-bold text-[var(--foreground)] w-20 shrink-0">{item.mesafe}</div>
               <div>
                 <p className="text-[11px] font-semibold text-[var(--foreground)]">{item.durum}</p>
@@ -181,7 +181,7 @@ export default function FayHatlariPage() {
         </div>
       </section>
 
-      <div className="bg-red-50 dark:bg-red-900/10 border border-red-100 dark:border-red-900/30 rounded-xl p-4">
+      <div className="bg-red-50 dark:bg-red-900/10 border border-red-100 dark:border-red-900/30 rounded-xl p-4 glow-card glow-red">
         <p className="text-xs font-bold text-red-700 dark:text-red-400 mb-2">{TR ? 'Yaşadığınız Yerin Fay Mesafesini Öğrenin' : 'Find the Fault Distance for Your Location'}</p>
         <p className="text-xs text-red-800 dark:text-red-300 leading-relaxed mb-3">
           {TR

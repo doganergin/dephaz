@@ -260,7 +260,7 @@ export default function CantaPage() {
         const katTamamlanan = gorunenler.filter((e) => tamamlanan.has(e.id)).length;
 
         return (
-          <div key={kat.baslikTR} className="bg-[var(--card-bg)] border border-[var(--border)] rounded-2xl overflow-hidden">
+          <div key={kat.baslikTR} className={`bg-[var(--card-bg)] border border-[var(--border)] rounded-2xl overflow-hidden glow-card glow-${kat.renk}`}>
             <div className={`flex items-center justify-between px-4 py-3 border-b border-[var(--border)] ${RENK_MAP[kat.renk].split(' ').slice(0, 2).join(' ')}`}>
               <div className="flex items-center gap-2">
                 <span className={`w-7 h-7 flex items-center justify-center rounded-lg text-base ${ICON_BG[kat.renk]}`}>
@@ -315,7 +315,7 @@ export default function CantaPage() {
       })}
 
       {/* Bilgi notu */}
-      <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-100 dark:border-blue-800 rounded-xl p-3">
+      <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-100 dark:border-blue-800 rounded-xl p-3 glow-card glow-blue">
         <p className="text-[11px] text-blue-700 dark:text-blue-300 leading-relaxed">
           <span className="font-semibold">💡 {TR ? 'İpucu:' : 'Tip:'}</span>{' '}
           {TR
@@ -324,7 +324,7 @@ export default function CantaPage() {
         </p>
       </div>
 
-      <div className="bg-amber-50 dark:bg-amber-900/20 border border-amber-100 dark:border-amber-800 rounded-xl p-3">
+      <div className="bg-amber-50 dark:bg-amber-900/20 border border-amber-100 dark:border-amber-800 rounded-xl p-3 glow-card glow-amber">
         <p className="text-[11px] text-amber-700 dark:text-amber-300 leading-relaxed">
           <span className="font-semibold">⚠️ {TR ? 'Kaynak:' : 'Source:'}</span>{' '}
           {TR

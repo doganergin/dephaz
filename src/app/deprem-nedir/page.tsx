@@ -72,7 +72,7 @@ export default function DepremNedirPage() {
             { tr: 'S Dalgası (İkincil)', en: 'S-Wave (Secondary)', trA: 'P dalgasından daha yavaştır, yalnızca katı ortamda ilerler. Yapılar için daha yıkıcıdır.', enA: 'Slower than P-waves; travels only through solids. More destructive to structures.' },
             { tr: 'Yüzey Dalgaları', en: 'Surface Waves', trA: 'Yeryüzü boyunca ilerleyen en yavaş ama genellikle en yıkıcı dalgalardır.', enA: 'The slowest but usually most destructive waves; travel along the Earth\'s surface.' },
           ].map((d) => (
-            <div key={d.tr} className="bg-[var(--card-bg)] border border-[var(--border)] rounded-xl p-3">
+            <div key={d.tr} className="bg-[var(--card-bg)] border border-[var(--border)] rounded-xl p-3 glow-card glow-blue">
               <p className="text-xs font-bold text-[var(--foreground)]">{TR ? d.tr : d.en}</p>
               <p className="text-[11px] text-[var(--muted)] mt-0.5 leading-relaxed">{TR ? d.trA : d.enA}</p>
             </div>
@@ -89,7 +89,7 @@ export default function DepremNedirPage() {
         </p>
       </section>
 
-      <div className="bg-red-50 dark:bg-red-900/10 border border-red-100 dark:border-red-900/30 rounded-xl p-4">
+      <div className="bg-red-50 dark:bg-red-900/10 border border-red-100 dark:border-red-900/30 rounded-xl p-4 glow-card glow-red">
         <p className="text-xs font-bold text-red-700 dark:text-red-400 mb-2">{TR ? 'Bölgenizin Deprem Riskini Öğrenin' : 'Check Your Region\'s Earthquake Risk'}</p>
         <p className="text-xs text-red-800 dark:text-red-300 leading-relaxed mb-3">
           {TR

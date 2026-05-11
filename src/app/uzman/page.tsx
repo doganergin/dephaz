@@ -21,7 +21,7 @@ export default function UzmanDegerlendirmeleri() {
 
       <div className="space-y-3">
         {sayfaHaberler.map((h, i) => (
-          <div key={i} className="bg-[var(--card-bg)] rounded-2xl shadow-sm border border-[var(--border)] p-4">
+          <div key={i} className="bg-[var(--card-bg)] rounded-2xl shadow-sm border border-[var(--border)] p-4 glow-card glow-green">
             <div className="flex items-start gap-2 mb-2">
               <div className="flex-1">
                 <p className="text-sm font-bold text-[var(--foreground)]">{h.uzman}</p>

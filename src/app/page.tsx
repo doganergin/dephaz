@@ -110,7 +110,7 @@ export default function HomePage() {
       {/* Primary CTA */}
       <Link
         href="/bolge-analizi"
-        className="flex items-center justify-between bg-[var(--card-bg)] border border-red-500/40 hover:border-red-500 rounded-2xl p-4 transition-colors group"
+        className="flex items-center justify-between bg-[var(--card-bg)] border border-red-500/40 rounded-2xl p-4 glow-card glow-red group"
       >
         <div>
           <p className="font-bold text-sm text-red-500 group-hover:text-red-400 transition-colors">{TR ? 'Bölge Riski Analizi Yap' : 'Run Risk Analysis'}</p>
@@ -133,7 +133,7 @@ export default function HomePage() {
               <Link
                 key={f.href}
                 href={f.href}
-                className={`border rounded-2xl p-3.5 flex flex-col gap-2 hover:shadow-sm transition-shadow ${c.card}`}
+                className={`border rounded-2xl p-3.5 flex flex-col gap-2 glow-card glow-${f.color} ${c.card}`}
               >
                 <div className={`w-9 h-9 rounded-xl flex items-center justify-center text-lg ${c.icon}`}>
                   {f.icon}
@@ -188,7 +188,7 @@ export default function HomePage() {
               <p className="text-xs text-[var(--muted)] text-center py-4">{TR ? 'Veri alınamadı' : 'No data available'}</p>
             ) : (
               (eqTab === 'tr' ? trEqs : worldEqs).map((d, i) => (
-                <div key={i} className="flex items-center gap-3 py-1.5 border-b border-[var(--border)] last:border-0">
+                <div key={i} className="flex items-center gap-3 py-1.5 border-b border-[var(--border)] last:border-0 glow-row">
                   <div className={`w-10 h-10 rounded-xl flex items-center justify-center text-sm font-bold shrink-0 ${
                     d.buyukluk >= 6 ? 'bg-red-50 dark:bg-red-900/30 text-red-600' :
                     d.buyukluk >= 4 ? 'bg-amber-50 dark:bg-amber-900/30 text-amber-600' :
@@ -217,7 +217,7 @@ export default function HomePage() {
             <Link
               key={a.href}
               href={a.href}
-              className="flex items-center justify-between bg-[var(--card-bg)] border border-[var(--border)] rounded-xl px-3 py-2.5 hover:border-red-200 transition-colors"
+              className="flex items-center justify-between bg-[var(--card-bg)] border border-[var(--border)] rounded-xl px-3 py-2.5 glow-card glow-red"
             >
               <span className="text-xs font-medium text-[var(--foreground)]">{TR ? a.tr : a.en}</span>
               <span className="text-[var(--muted)] text-xs shrink-0 ml-2">→</span>
@@ -230,16 +230,16 @@ export default function HomePage() {
 
       {/* Stats */}
       <div className="grid grid-cols-3 gap-2">
-        <div className="bg-[var(--card-bg)] border border-[var(--border)] rounded-xl p-3 text-center">
+        <div className="bg-[var(--card-bg)] border border-[var(--border)] rounded-xl p-3 text-center glow-card glow-red">
           <p className="text-base font-bold text-red-600">M4.0+</p>
           <p className="text-[10px] text-[var(--muted)] mt-0.5 leading-tight">{TR ? 'Anlık deprem takibi' : 'Live earthquake tracking'}</p>
         </div>
-        <div className="bg-[var(--card-bg)] border border-[var(--border)] rounded-xl p-3 text-center">
+        <div className="bg-[var(--card-bg)] border border-[var(--border)] rounded-xl p-3 text-center glow-card glow-red">
           <p className="text-base font-bold text-red-600">38</p>
           <p className="text-[10px] text-[var(--muted)] mt-0.5 leading-tight">{TR ? 'Desteklenen il' : 'Supported provinces'}</p>
           <p className="text-[9px] text-amber-500 mt-1 leading-tight">{TR ? 'Kalan iller yakında' : 'More cities soon'}</p>
         </div>
-        <div className="bg-[var(--card-bg)] border border-[var(--border)] rounded-xl p-3 text-center">
+        <div className="bg-[var(--card-bg)] border border-[var(--border)] rounded-xl p-3 text-center glow-card glow-red">
           <p className="text-base font-bold text-red-600">337</p>
           <p className="text-[10px] text-[var(--muted)] mt-0.5 leading-tight">{TR ? 'İlçe risk verisi' : 'District risk entries'}</p>
         </div>

@@ -45,7 +45,7 @@ export default function DepremAnindaPage() {
         </h2>
         <div className="space-y-2">
           {depremAnindaOnlemler.map((o) => (
-            <div key={o.adim} className="flex items-start gap-3 bg-[var(--card-bg)] border border-[var(--border)] rounded-xl p-3">
+            <div key={o.adim} className="flex items-start gap-3 bg-[var(--card-bg)] border border-[var(--border)] rounded-xl p-3 glow-card glow-red">
               <span className="text-xl shrink-0">{o.ikon}</span>
               <div>
                 <p className="text-xs font-bold text-[var(--foreground)]">
@@ -67,7 +67,7 @@ export default function DepremAnindaPage() {
         </h2>
         <div className="space-y-2">
           {depremSonrasiOnlemler.map((o) => (
-            <div key={o.adim} className="flex items-start gap-3 bg-[var(--card-bg)] border border-[var(--border)] rounded-xl p-3">
+            <div key={o.adim} className="flex items-start gap-3 bg-[var(--card-bg)] border border-[var(--border)] rounded-xl p-3 glow-card glow-red">
               <span className="text-xl shrink-0">{o.ikon}</span>
               <div>
                 <p className="text-xs font-bold text-[var(--foreground)]">
@@ -83,7 +83,7 @@ export default function DepremAnindaPage() {
       </section>
 
       {/* CTA */}
-      <div className="bg-[var(--card-bg)] border border-[var(--border)] rounded-xl p-4">
+      <div className="bg-[var(--card-bg)] border border-[var(--border)] rounded-xl p-4 glow-card glow-blue">
         <p className="text-xs font-bold text-[var(--foreground)] mb-2">
           {TR ? 'Hazırlığınızı Tamamlayın' : 'Complete Your Preparedness'}
         </p>

@@ -282,8 +282,8 @@ export default function TarihselDepremlerSayfasi() {
           <button
             key={`btn-${d.id}`}
             onClick={() => setSecilenId(secilenId === d.id ? null : d.id)}
-            className={`w-full text-left bg-[var(--card-bg)] rounded-2xl border p-3 transition-colors ${
-              secilenId === d.id ? 'border-red-400' : 'border-[var(--border)] hover:border-red-300'
+            className={`w-full text-left bg-[var(--card-bg)] rounded-2xl border p-3 glow-card glow-red ${
+              secilenId === d.id ? 'border-red-400' : 'border-[var(--border)]'
             }`}
           >
             <div className="flex items-center gap-3">
