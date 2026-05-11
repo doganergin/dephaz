@@ -612,6 +612,167 @@ export const bilimselKaynaklar: Record<string, BilimselVeri> = {
   },
 
   // ── KAF — YALOVA ──────────────────────────────────────────────────────────
+  // ── YENİ EKLENEN İLLER ────────────────────────────────────────────────────
+
+  'Ankara': {
+    genelDegerlendirme:
+      'Ankara, Orta Anadolu\'nun görece ılımlı sismik ortamında yer alır. ' +
+      'Haymana ve Polatlı fay zonları güney ve güneybatıdan geçmektedir. ' +
+      'Beklenen maksimum büyüklük Mw 6.0–6.5 düzeyinde olmakla birlikte ' +
+      'eski yapı stoğu ve kentsel yoğunluk bölgesel riski artırmaktadır. ' +
+      'Kaynak: AFAD Türkiye Deprem Tehlike Haritası 2018.',
+    kaynaklar: [{ yazar: 'AFAD', yil: 2018, baslik: 'Türkiye Deprem Tehlike Haritası', link: 'https://deprem.afad.gov.tr' }],
+  },
+
+  'Manisa': {
+    genelDegerlendirme:
+      'Manisa, Gediz Grabeni üzerinde yer alır; bu aktif normal fay sistemi ' +
+      '1969 Alaşehir-Salihli depremini (Mw 6.9) üretmiştir. ' +
+      'Gediz ve Salihli-Turgutlu koridorları yüksek fay yoğunluğuna sahiptir. ' +
+      'Bölgede Mw 6.5–7.0 büyüklüğünde deprem üretme potansiyeli sürmektedir. ' +
+      'Kaynak: AFAD / MTA Aktif Fay Haritası 2012.',
+    kaynaklar: [{ yazar: 'Emre, Ö. ve ark.', yil: 2012, baslik: 'Türkiye Aktif Fay Haritası', dergi: 'MTA Özel Yayın', link: 'https://www.mta.gov.tr' }],
+  },
+
+  'Aydın': {
+    genelDegerlendirme:
+      'Aydın, Büyük Menderes Grabeni boyunca uzanan yoğun normal fay sistemi üzerinde yer alır. ' +
+      '2020 İzmir depremi (Mw 6.9) bu sistemin Seferihisar fayında oluşmuştur. ' +
+      'Söke, Nazilli ve Germencik ilçeleri fay hatlarına yakın konumdadır. ' +
+      'Bölgede orta-yüksek sismik tehlike söz konusudur. ' +
+      'Kaynak: AFAD Türkiye Deprem Tehlike Haritası 2018.',
+    kaynaklar: [{ yazar: 'AFAD', yil: 2018, baslik: 'Türkiye Deprem Tehlike Haritası', link: 'https://deprem.afad.gov.tr' }],
+  },
+
+  'Tekirdağ': {
+    genelDegerlendirme:
+      'Tekirdağ, Kuzey Anadolu Fayı\'nın Marmara Denizi\'nden geçen koluna yakın konumdadır. ' +
+      'Güney Marmara ile Saroz Körfezi arasındaki fay geometrisi Tekirdağ\'ı ' +
+      'beklenen büyük Marmara depremi senaryolarında doğrudan etki alanına sokmaktadır. ' +
+      'Özellikle sahil şeridindeki alüvyal zeminler şiddet büyütmesi açısından risk taşımaktadır. ' +
+      'Kaynak: AFAD Türkiye Deprem Tehlike Haritası 2018.',
+    kaynaklar: [{ yazar: 'AFAD', yil: 2018, baslik: 'Türkiye Deprem Tehlike Haritası', link: 'https://deprem.afad.gov.tr' }],
+  },
+
+  'Eskişehir': {
+    genelDegerlendirme:
+      'Eskişehir, Kuzey Anadolu Fayı\'nın kuzey kolu olan Eskişehir Fayı üzerinde konumlanmıştır. ' +
+      'Bu fay segmenti tarihsel dönemde Mw 6.5 büyüklüğüne ulaşan depremler üretmiştir. ' +
+      'Porsuk nehri vadisi boyunca uzanan alüvyal dolgu alanları zemin büyütmesi riski taşımaktadır. ' +
+      'Kaynak: AFAD / MTA Aktif Fay Haritası 2012.',
+    kaynaklar: [{ yazar: 'Emre, Ö. ve ark.', yil: 2012, baslik: 'Türkiye Aktif Fay Haritası', dergi: 'MTA Özel Yayın', link: 'https://www.mta.gov.tr' }],
+  },
+
+  'Konya': {
+    genelDegerlendirme:
+      'Konya, Orta Anadolu\'nun görece düşük sismik aktivite gösteren iç kesiminde yer alır. ' +
+      'Bölge aktif faylardan uzak olmakla birlikte, Sultandağı ve Beyşehir fay sistemleri ' +
+      'doğu-güneybatıdan etki alanına girebilir. ' +
+      'Yatay zemin ve görece sağlam yapı temelinin getirdiği avantaj bölgeyi daha güvenli kılmaktadır. ' +
+      'Kaynak: AFAD Türkiye Deprem Tehlike Haritası 2018.',
+    kaynaklar: [{ yazar: 'AFAD', yil: 2018, baslik: 'Türkiye Deprem Tehlike Haritası', link: 'https://deprem.afad.gov.tr' }],
+  },
+
+  'Mersin': {
+    genelDegerlendirme:
+      'Mersin, Ölü Deniz Fay Sistemi\'nin kuzey uzantısı ve Doğu Anadolu Fayı\'nın güney kollarının ' +
+      'etki alanına girmektedir. Tarsus ve Erdemli civarında kabuk gerilmesi izlenmektedir. ' +
+      'Akdeniz kıyısındaki sahil ovası alüvyal dolgu zeminleri zemin büyütmesi açısından ' +
+      'yerel bir risk faktörü oluşturmaktadır. ' +
+      'Kaynak: AFAD Türkiye Deprem Tehlike Haritası 2018.',
+    kaynaklar: [{ yazar: 'AFAD', yil: 2018, baslik: 'Türkiye Deprem Tehlike Haritası', link: 'https://deprem.afad.gov.tr' }],
+  },
+
+  'Van': {
+    genelDegerlendirme:
+      'Van, 23 Ekim 2011\'de Mw 7.1 ve 9 Kasım 2011\'de Mw 5.6 büyüklüğünde deprem üreten ' +
+      'Van Fayı ile aktif sismik bir kuşakta yer almaktadır. ' +
+      'Erciş ve Edremit\'te kalitesiz yapı stoku can kaybını artırmıştır. ' +
+      'Fay hattı Van gölünün doğu ve kuzeyinden geçmekte; ' +
+      'bölge yüksek deprem tehlikesini korumaktadır. ' +
+      'Kaynak: AFAD / Doğan et al. (2014), BSSA.',
+    kaynaklar: [
+      { yazar: 'Doğan, U. ve ark.', yil: 2014, baslik: 'Uzay jeodezisi ve sismoloji ile 2011 Van depremi', dergi: 'BSSA', doi: '10.1785/0120120158' },
+      { yazar: 'AFAD', yil: 2018, baslik: 'Türkiye Deprem Tehlike Haritası', link: 'https://deprem.afad.gov.tr' },
+    ],
+  },
+
+  'Elazığ': {
+    genelDegerlendirme:
+      'Elazığ, Doğu Anadolu Fayı\'nın Sivrice segmenti üzerinde yer almaktadır. ' +
+      '24 Ocak 2020\'de Sivrice-Elazığ depremi (Mw 6.8) bu fay üzerinde oluşmuş; ' +
+      '41 kişi hayatını kaybetmiş, 1607 kişi yaralanmıştır. ' +
+      'Fay segmenti 2020 depreminden önce birkaç yüzyıldır enerji biriktiriyordu; ' +
+      'bölge güncelliğini koruyan yüksek sismik tehlike altındadır. ' +
+      'Kaynak: Işık et al. (2020), Seismological Research Letters.',
+    kaynaklar: [
+      { yazar: 'Işık, E. ve ark.', yil: 2020, baslik: '2020 Elazığ (Sivrice) Depremi yapısal analizi', dergi: 'Seismological Research Letters', doi: '10.1785/0220200172' },
+    ],
+  },
+
+  'Erzurum': {
+    genelDegerlendirme:
+      'Erzurum, Kuzey ve Doğu Anadolu fay sistemlerinin arasında yer alan, ' +
+      'Horasan-Erzurum fay zonuyla çevrili yüksek riskli bir kenttir. ' +
+      '30 Ekim 1983\'te Horasan-Narman depremi (Mw 6.9) bölgede 1155 kişinin hayatını kaybetmesine yol açmıştır. ' +
+      'Erzurum şehir merkezi ile ilçelerinde zemin koşulları ve yapı kalitesi ' +
+      'sismik riski belirleyen en önemli etkenler arasındadır. ' +
+      'Kaynak: Kandilli Rasathanesi / AFAD 2018.',
+    kaynaklar: [{ yazar: 'AFAD', yil: 2018, baslik: 'Türkiye Deprem Tehlike Haritası', link: 'https://deprem.afad.gov.tr' }],
+  },
+
+  'Trabzon': {
+    genelDegerlendirme:
+      'Trabzon, Kuzey Anadolu Fayı\'nın kuzey deniz koluna görece uzak olmakla birlikte, ' +
+      'Doğu Karadeniz kıyı şeridi boyunca yerel fay aktivitesi gözlemlenmektedir. ' +
+      'Dağlık topografya kaynaklı heyelan ve zemin sıvılaşması, sismik şiddet ile birleşince ' +
+      'kentsel alanlarda sekonder risk oluşturmaktadır. ' +
+      'Bölge, Ege veya Marmara gibi yüksek riskli alanlara kıyasla ılımlı bir tehlike kuşağındadır. ' +
+      'Kaynak: AFAD Türkiye Deprem Tehlike Haritası 2018.',
+    kaynaklar: [{ yazar: 'AFAD', yil: 2018, baslik: 'Türkiye Deprem Tehlike Haritası', link: 'https://deprem.afad.gov.tr' }],
+  },
+
+  'Kayseri': {
+    genelDegerlendirme:
+      'Kayseri, Orta Anadolu\'nun volkanik jeolojisi ve görece ılımlı fay aktivitesi içindedir. ' +
+      'Develi ve Bünyan ilçeleri bölgedeki en yakın fay hatlarına komşu konumdadır. ' +
+      'Erciyes Dağı çevresinde jeothermal aktivite de gözlemlenmektedir. ' +
+      'Bölgede yüksek Mw\'ye ulaşan fay segmenti bulunmamakla birlikte, ' +
+      'uzak kaynaklı sarsıntılar da riskin bir parçasıdır. ' +
+      'Kaynak: AFAD Türkiye Deprem Tehlike Haritası 2018.',
+    kaynaklar: [{ yazar: 'AFAD', yil: 2018, baslik: 'Türkiye Deprem Tehlike Haritası', link: 'https://deprem.afad.gov.tr' }],
+  },
+
+  'Çanakkale': {
+    genelDegerlendirme:
+      'Çanakkale, Kuzey Anadolu Fayı\'nın Marmara ve Ege\'ye uzanan kollarına yakın konumdadır. ' +
+      'Yenice-Gönen fay zonu ile Ege açılma tektoniği bölgeyi etkilemekte; ' +
+      'Gökçeada ve Bozcaada çevresinde deniz altı fayları da gözlemlenmektedir. ' +
+      'Tarihsel dönemde Çan-Yenice hattında önemli depremler yaşanmıştır. ' +
+      'Kaynak: AFAD / MTA Aktif Fay Haritası 2012.',
+    kaynaklar: [{ yazar: 'Emre, Ö. ve ark.', yil: 2012, baslik: 'Türkiye Aktif Fay Haritası', dergi: 'MTA Özel Yayın', link: 'https://www.mta.gov.tr' }],
+  },
+
+  'Bingöl': {
+    genelDegerlendirme:
+      'Bingöl, Kuzey ve Doğu Anadolu faylarının buluştuğu Karlıova üçlü kavşağına çok yakın, ' +
+      'Türkiye\'nin en yüksek sismik tehlike kuşaklarından birinde yer almaktadır. ' +
+      '1971 Bingöl depremi (Mw 6.8) ile 2003 Bingöl depremi (Mw 6.4) bu riskin somut örnekleridir. ' +
+      'Karlıova çevresinde yoğunlaşan fay aktivitesi sürmektedir. ' +
+      'Kaynak: Kandilli Rasathanesi / AFAD 2018.',
+    kaynaklar: [{ yazar: 'AFAD', yil: 2018, baslik: 'Türkiye Deprem Tehlike Haritası', link: 'https://deprem.afad.gov.tr' }],
+  },
+
+  'Afyonkarahisar': {
+    genelDegerlendirme:
+      'Afyonkarahisar, Batı Anadolu genişleme tektonik rejiminin etkisiyle gelişen normal fay ağı içindedir. ' +
+      '3 Şubat 2002\'de Sultandağı depremi (Mw 6.5) Afyon\'u derinden etkilemiş; ' +
+      '44 kişi hayatını kaybetmiştir. ' +
+      'Sultandağı ve Sandıklı fay zonları ilin güneybatısından geçmektedir. ' +
+      'Kaynak: Kandilli Rasathanesi / AFAD 2018.',
+    kaynaklar: [{ yazar: 'AFAD', yil: 2018, baslik: 'Türkiye Deprem Tehlike Haritası', link: 'https://deprem.afad.gov.tr' }],
+  },
+
   'Yalova': {
     uzmanGorusleri: [
       {

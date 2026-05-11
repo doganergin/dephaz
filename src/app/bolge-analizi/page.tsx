@@ -319,12 +319,12 @@ export default function BolgeAnalizi() {
 
   const zeminAd = (ad: string) => lang === 'EN' ? (ZEMIN_EN[ad] ?? ad) : ad;
 
-  // Risk badge label
+  // Risk badge label — thresholds match the main risk level labels (90/70/40/20)
   const riskEtiket = risk
     ? risk.riskSkoru >= 90 ? `M5.0–5.5+ ${lang === 'EN' ? 'prob. very high' : 'olasılığı çok yüksek'}`
-      : risk.riskSkoru >= 75 ? `M5.0–5.5+ ${lang === 'EN' ? 'prob. high' : 'olasılığı yüksek'}`
-      : risk.riskSkoru >= 50 ? `M5.0–5.5+ ${lang === 'EN' ? 'prob. medium-high' : 'olasılığı orta-yüksek'}`
-      : risk.riskSkoru >= 35 ? `M5.0–5.5+ ${lang === 'EN' ? 'prob. medium' : 'olasılığı orta'}`
+      : risk.riskSkoru >= 70 ? `M5.0–5.5+ ${lang === 'EN' ? 'prob. high' : 'olasılığı yüksek'}`
+      : risk.riskSkoru >= 40 ? `M5.0–5.5+ ${lang === 'EN' ? 'prob. medium' : 'olasılığı orta'}`
+      : risk.riskSkoru >= 20 ? `M5.0–5.5+ ${lang === 'EN' ? 'prob. low-medium' : 'olasılığı düşük-orta'}`
       : `M5.0–5.5+ ${lang === 'EN' ? 'prob. low' : 'olasılığı düşük'}`
     : '';
 
