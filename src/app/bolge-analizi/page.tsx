@@ -416,17 +416,24 @@ export default function BolgeAnalizi() {
         <div ref={riskRef} className="space-y-3">
 
           {/* Risk skoru kartı */}
-          <div className="bg-[var(--card-bg)] rounded-2xl shadow-sm border border-[var(--border)] overflow-hidden">
+          <div
+            className="bg-[var(--card-bg)] rounded-2xl shadow-sm border overflow-hidden transition-all duration-300 hover:shadow-lg"
+            style={{ borderColor: renk.border }}
+          >
             <div className="p-4" style={{ backgroundColor: renk.bg }}>
               <div className="flex items-start justify-between mb-3">
                 <div>
-                  <p className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-1">
+                  <p className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-1.5">
                     {risk.mahalle} · {risk.ilce} · {risk.il}
                   </p>
                   <RiskBadge sinif={risk.riskSinifi} etiket={riskEtiket} />
                 </div>
-                <div className="text-right">
-                  <p className="text-sm font-bold leading-tight" style={{ color: renk.text }}>
+                <div className="text-right shrink-0 ml-3">
+                  <p className="text-4xl font-black leading-none tabular-nums" style={{ color: renk.text }}>
+                    {risk.riskSkoru}
+                  </p>
+                  <p className="text-[10px] font-semibold mt-0.5" style={{ color: renk.text, opacity: 0.6 }}>/100</p>
+                  <p className="text-[11px] font-bold mt-1" style={{ color: renk.text }}>
                     {risk.riskSkoru >= 90 ? (lang === 'EN' ? 'Very High Risk' : 'Çok Yüksek Risk')
                      : risk.riskSkoru >= 70 ? (lang === 'EN' ? 'High Risk' : 'Yüksek Risk')
                      : risk.riskSkoru >= 40 ? (lang === 'EN' ? 'Medium Risk' : 'Orta Risk')
@@ -435,11 +442,14 @@ export default function BolgeAnalizi() {
                   </p>
                 </div>
               </div>
-              <div className="h-2 rounded-full bg-black/10 overflow-hidden">
-                <div className="h-full rounded-full transition-all duration-700" style={{ width: `${risk.riskSkoru}%`, backgroundColor: renk.bar }} />
+              <div className="h-3 rounded-full bg-black/10 overflow-hidden">
+                <div
+                  className="h-full rounded-full transition-all duration-1000"
+                  style={{ width: `${risk.riskSkoru}%`, backgroundColor: renk.bar, boxShadow: `0 0 8px ${renk.bar}99` }}
+                />
               </div>
               {risk.aciklama && lang === 'TR' && (
-                <p className="text-xs mt-2 leading-relaxed" style={{ color: renk.text }}>{risk.aciklama}</p>
+                <p className="text-xs mt-2.5 leading-relaxed" style={{ color: renk.text }}>{risk.aciklama}</p>
               )}
             </div>
             {/* Metrikler */}
@@ -450,8 +460,8 @@ export default function BolgeAnalizi() {
                 { label: t('metricOlasilik'), value: OLASILIK_EN[risk.olasilik30Yil] ?? risk.olasilik30Yil },
                 { label: t('metricDepremSayisi'), value: risk.depremler.length > 0 ? String(risk.depremler.length) : '—' },
               ].map((m) => (
-                <div key={m.label} className="p-3 text-center">
-                  <p className="text-[10px] text-[var(--muted)] leading-tight mb-1">{m.label}</p>
+                <div key={m.label} className="p-3 text-center transition-colors hover:bg-black/[0.03] dark:hover:bg-white/[0.03] cursor-default group">
+                  <p className="text-[10px] text-[var(--muted)] leading-tight mb-1 group-hover:text-[var(--foreground)] transition-colors">{m.label}</p>
                   <p className="text-xs font-bold text-[var(--foreground)]">{m.value}</p>
                 </div>
               ))}
@@ -488,7 +498,7 @@ export default function BolgeAnalizi() {
           </div>
 
           {/* Zemin */}
-          <div className="bg-[var(--card-bg)] rounded-2xl shadow-sm border border-[var(--border)] p-4">
+          <div className="bg-[var(--card-bg)] rounded-2xl shadow-sm border border-[var(--border)] p-4 transition-all duration-300 hover:shadow-md hover:border-amber-200 dark:hover:border-amber-900/40">
             <p className="text-xs font-bold text-[var(--muted)] uppercase tracking-wide mb-3">{t('sectionZemin')}</p>
             {risk.zemin === null ? (
               <div className="space-y-2">
@@ -530,7 +540,7 @@ export default function BolgeAnalizi() {
           </div>
 
           {/* Bina stoğu */}
-          <div className="bg-[var(--card-bg)] rounded-2xl shadow-sm border border-[var(--border)] p-4">
+          <div className="bg-[var(--card-bg)] rounded-2xl shadow-sm border border-[var(--border)] p-4 transition-all duration-300 hover:shadow-md hover:border-orange-200 dark:hover:border-orange-900/40">
             <div className="flex items-center justify-between mb-3">
               <p className="text-xs font-bold text-[var(--muted)] uppercase tracking-wide">{t('sectionBina')}</p>
               <a
@@ -558,14 +568,14 @@ export default function BolgeAnalizi() {
 
           {/* Son depremler */}
           {risk.depremler.length > 0 && (
-            <div className="bg-[var(--card-bg)] rounded-2xl shadow-sm border border-[var(--border)] p-4">
+            <div className="bg-[var(--card-bg)] rounded-2xl shadow-sm border border-[var(--border)] p-4 transition-all duration-300 hover:shadow-md hover:border-red-200 dark:hover:border-red-900/40">
               <div className="flex items-center justify-between mb-3">
                 <p className="text-xs font-bold text-[var(--muted)] uppercase tracking-wide">{t('tarihselDepremler')}</p>
                 <span className="text-[10px] text-[var(--muted)] bg-gray-50 dark:bg-gray-700 px-2 py-1 rounded-full">USGS</span>
               </div>
               <div className="space-y-2">
                 {risk.depremler.slice(0, 20).map((d, i) => (
-                  <div key={i} className="flex items-center gap-3 py-1.5 border-b border-[var(--border)] last:border-0">
+                  <div key={i} className="flex items-center gap-3 py-1.5 border-b border-[var(--border)] last:border-0 transition-colors hover:bg-black/[0.02] dark:hover:bg-white/[0.02] rounded-lg px-1 -mx-1">
                     <div className={`w-10 h-10 rounded-xl flex items-center justify-center text-sm font-bold shrink-0 ${
                       d.buyukluk >= 6 ? 'bg-red-50 dark:bg-red-900/30 text-red-600' :
                       d.buyukluk >= 4 ? 'bg-amber-50 dark:bg-amber-900/30 text-amber-600' :
@@ -584,7 +594,7 @@ export default function BolgeAnalizi() {
           )}
 
           {/* Tavsiyeler */}
-          <div className="bg-[var(--card-bg)] rounded-2xl shadow-sm border border-[var(--border)] p-4">
+          <div className="bg-[var(--card-bg)] rounded-2xl shadow-sm border border-[var(--border)] p-4 transition-all duration-300 hover:shadow-md hover:border-blue-200 dark:hover:border-blue-900/40">
             <p className="text-xs font-bold text-[var(--muted)] uppercase tracking-wide mb-3">{t('sectionOneriler')}</p>
             <div className="space-y-2">
               {risk.tavsiyeler.map((tv, i) => {
@@ -593,7 +603,7 @@ export default function BolgeAnalizi() {
                   tv.tur === 'onemli' ? { bg: '#FFFBEB', dot: '#F59E0B', text: '#78350F' } :
                   { bg: '#EFF6FF', dot: '#3B82F6', text: '#1E3A8A' };
                 return (
-                  <div key={i} className="flex items-start gap-2.5 rounded-xl p-3" style={{ backgroundColor: tr.bg }}>
+                  <div key={i} className="flex items-start gap-2.5 rounded-xl p-3 transition-transform duration-150 hover:scale-[1.01]" style={{ backgroundColor: tr.bg }}>
                     <div className="w-1.5 h-1.5 rounded-full mt-1.5 shrink-0" style={{ backgroundColor: tr.dot }} />
                     <p className="text-xs leading-relaxed" style={{ color: tr.text }}>{tv.key ? t(tv.key as Parameters<typeof import('@/lib/i18n').t>[0]) : tv.metin}</p>
                   </div>
@@ -604,11 +614,11 @@ export default function BolgeAnalizi() {
 
           {/* Uzman görüşleri */}
           {bilimsel && bilimsel.uzmanGorusleri && bilimsel.uzmanGorusleri.length > 0 && (
-            <div className="bg-[var(--card-bg)] rounded-2xl shadow-sm border border-[var(--border)] p-4">
+            <div className="bg-[var(--card-bg)] rounded-2xl shadow-sm border border-[var(--border)] p-4 transition-all duration-300 hover:shadow-md hover:border-amber-200 dark:hover:border-amber-900/40">
               <p className="text-xs font-bold text-[var(--muted)] uppercase tracking-wide mb-3">{t('sectionUzman')}</p>
               <div className="space-y-3">
                 {bilimsel.uzmanGorusleri.map((u, i) => (
-                  <div key={i} className="border border-[var(--border)] rounded-xl p-3 bg-gray-50 dark:bg-gray-800/50">
+                  <div key={i} className="border border-[var(--border)] rounded-xl p-3 bg-gray-50 dark:bg-gray-800/50 transition-all duration-200 hover:border-amber-300 dark:hover:border-amber-700 hover:shadow-sm">
                     <div className="flex items-start justify-between gap-2 mb-2">
                       <div>
                         <p className="text-xs font-bold text-[var(--foreground)]">{u.uzman}</p>
