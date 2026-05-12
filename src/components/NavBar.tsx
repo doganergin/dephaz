@@ -109,7 +109,7 @@ export default function NavBar() {
               <LanguageToggle />
               <ThemeToggle />
               {isSignedIn ? (
-                <UserButton afterSignOutUrl="/" />
+                <UserButton />
               ) : (
                 <SignInButton mode="modal">
                   <button className="p-1.5 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors text-[var(--muted)] hover:text-[var(--foreground)]" title={TR ? 'Giriş Yap' : 'Sign In'}>

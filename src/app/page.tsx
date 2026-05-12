@@ -61,6 +61,8 @@ export default function HomePage() {
     { href: '/uzman', icon: '🔬', title: 'Uzman Görüşleri', desc: 'Seismologların ve jeologların bilimsel değerlendirmelerini okuyun.', color: 'green' },
     { href: '/canta', icon: '🎒', title: 'Deprem Çantası', desc: '72 saatlik acil durum çantası için kontrol listesi oluşturun.', color: 'amber' },
     { href: '/fay-hatlari', icon: '🔴', title: 'Aktif Fay Haritası', desc: "Türkiye'deki aktif fay hatlarını ve büyük tarihi depremleri interaktif haritada görün.", color: 'orange' },
+    { href: '/aile-plani', icon: '👨‍👩‍👧', title: 'Aile Acil Durum Planı', desc: 'Acil iletişim kişileri, buluşma noktası ve 72 saatlik çanta durumunuzu kaydedin.', color: 'red' },
+    { href: '#', icon: '🔔', title: 'Yakında', desc: 'Yeni özellikler geliyor…', color: 'gray', coming: true },
   ] : [
     { href: '/bolge-analizi', icon: '🗺️', title: 'Risk Analysis', desc: 'Select province, district and neighbourhood to find fault distance, soil type, and risk score.', color: 'red' },
     { href: '/harita', icon: '🌍', title: 'Live Earthquake Map', desc: 'Monitor Kandilli, AFAD and USGS data on a real-time interactive map.', color: 'blue' },
@@ -68,6 +70,8 @@ export default function HomePage() {
     { href: '/uzman', icon: '🔬', title: 'Expert Opinions', desc: 'Read scientific assessments from seismologists and geologists.', color: 'green' },
     { href: '/canta', icon: '🎒', title: 'Emergency Kit', desc: 'Build a 72-hour emergency supply checklist for your household.', color: 'amber' },
     { href: '/fay-hatlari', icon: '🔴', title: 'Active Fault Map', desc: 'See Turkey\'s active fault lines and major historical earthquakes on an interactive map.', color: 'orange' },
+    { href: '/aile-plani', icon: '👨‍👩‍👧', title: 'Family Emergency Plan', desc: 'Save emergency contacts, meeting point and kit status for your family.', color: 'red' },
+    { href: '#', icon: '🔔', title: 'Coming Soon', desc: 'New features on the way…', color: 'gray', coming: true },
   ];
 
   const colorMap: Record<string, { card: string; icon: string; label: string }> = {
@@ -77,6 +81,7 @@ export default function HomePage() {
     green:  { card: 'bg-green-50 dark:bg-green-900/10 border-green-100 dark:border-green-900/30', icon: 'bg-green-100 dark:bg-green-900/30 text-green-600', label: 'text-green-700 dark:text-green-400' },
     amber:  { card: 'bg-amber-50 dark:bg-amber-900/10 border-amber-100 dark:border-amber-900/30', icon: 'bg-amber-100 dark:bg-amber-900/30 text-amber-600', label: 'text-amber-700 dark:text-amber-400' },
     orange: { card: 'bg-orange-50 dark:bg-orange-900/10 border-orange-100 dark:border-orange-900/30', icon: 'bg-orange-100 dark:bg-orange-900/30 text-orange-600', label: 'text-orange-700 dark:text-orange-400' },
+    gray:   { card: 'bg-gray-50 dark:bg-gray-800/40 border-gray-100 dark:border-gray-700/50',   icon: 'bg-gray-100 dark:bg-gray-700 text-gray-400',       label: 'text-gray-400 dark:text-gray-500' },
   };
 
   const articles = [
@@ -129,6 +134,21 @@ export default function HomePage() {
         <div className="grid grid-cols-2 lg:grid-cols-3 gap-3">
           {features.map((f) => {
             const c = colorMap[f.color];
+            const coming = 'coming' in f && f.coming;
+            if (coming) return (
+              <div key={f.href} className={`border rounded-2xl p-3.5 flex flex-col gap-2 opacity-50 cursor-default ${c.card}`}>
+                <div className={`w-9 h-9 rounded-xl flex items-center justify-center text-lg ${c.icon}`}>
+                  {f.icon}
+                </div>
+                <div className="flex items-center gap-1.5">
+                  <p className={`text-xs font-bold leading-snug ${c.label}`}>{f.title}</p>
+                  <span className="text-[9px] font-bold px-1.5 py-0.5 rounded-full bg-amber-100 dark:bg-amber-900/30 text-amber-600 dark:text-amber-400 leading-none">
+                    {TR ? 'Yakında' : 'Soon'}
+                  </span>
+                </div>
+                <p className="text-[11px] text-[var(--muted)] leading-relaxed">{f.desc}</p>
+              </div>
+            );
             return (
               <Link
                 key={f.href}
