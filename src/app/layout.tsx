@@ -15,12 +15,12 @@ export const metadata: Metadata = {
   title: "Deprem Hattı — Deprem Risk Analizi ve Hazırlık Rehberi",
   description: "Bölgenizin deprem riskini öğrenin. Fay mesafesi, zemin yapısı, risk skoru. Canlı deprem takibi, tarihsel depremler ve hazırlık rehberleri.",
   keywords: [
-    "deprem riski", "deprem hazırlık", "fay hattı", "zemin analizi", "deprem risk skoru",
-    "Türkiye deprem", "İstanbul deprem riski", "AFAD", "Kandilli", "deprem çantası",
-    "deprem anında ne yapmalı", "earthquake risk Turkey", "depremhatti"
+    "deprem hattı", "depremhatti", "deprem riski", "deprem hazırlık", "fay hattı",
+    "zemin analizi", "deprem risk skoru", "Türkiye deprem", "İstanbul deprem riski",
+    "AFAD", "Kandilli", "deprem çantası", "deprem anında ne yapmalı",
+    "canlı deprem", "deprem takibi", "earthquake risk Turkey", "depremhatti.com"
   ],
   metadataBase: new URL("https://depremhatti.com"),
-  alternates: { canonical: "/" },
   icons: {
     icon: "/logo.png",
     apple: "/logo.png",
@@ -51,6 +51,41 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <script
           dangerouslySetInnerHTML={{
             __html: `(function(){try{var t=localStorage.getItem('theme');var m=window.matchMedia('(prefers-color-scheme: dark)').matches;if(t==='black'){document.documentElement.classList.add('black')}else if(t==='dark'||(t==null&&m)){document.documentElement.classList.add('dark')}}catch(e){}})()`,
+          }}
+        />
+        {/* JSON-LD Yapısal Veri */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@graph": [
+                {
+                  "@type": "WebSite",
+                  "@id": "https://depremhatti.com/#website",
+                  "url": "https://depremhatti.com",
+                  "name": "Deprem Hattı",
+                  "description": "Türkiye deprem risk analizi, canlı deprem takibi ve hazırlık rehberleri.",
+                  "inLanguage": "tr-TR",
+                  "potentialAction": {
+                    "@type": "SearchAction",
+                    "target": "https://depremhatti.com/bolge-analizi?q={search_term_string}",
+                    "query-input": "required name=search_term_string"
+                  }
+                },
+                {
+                  "@type": "Organization",
+                  "@id": "https://depremhatti.com/#organization",
+                  "name": "Deprem Hattı",
+                  "url": "https://depremhatti.com",
+                  "logo": {
+                    "@type": "ImageObject",
+                    "url": "https://depremhatti.com/logo.png"
+                  },
+                  "sameAs": []
+                }
+              ]
+            }),
           }}
         />
         {/* Google AdSense */}

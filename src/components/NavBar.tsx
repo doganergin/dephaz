@@ -90,19 +90,16 @@ export default function NavBar() {
               </div>
             </button>
 
-            {/* Logo + title */}
-            <Link href="/" className="flex items-center gap-2.5 flex-1 min-w-0">
+            {/* Logo */}
+            <Link href="/" className="flex items-center flex-1 min-w-0">
               <Image
                 src="/logo.png"
                 alt="Deprem Hattı"
-                width={28}
-                height={28}
-                className="rounded-lg shadow-sm shrink-0"
+                width={160}
+                height={40}
+                className="object-contain shrink-0"
+                style={{ maxHeight: '40px', width: 'auto' }}
               />
-              <div className="min-w-0">
-                <p className="text-sm font-semibold text-[var(--foreground)] leading-none truncate">{t('appName')}</p>
-                <p className="text-[10px] text-[var(--muted)] leading-none mt-0.5 truncate">{t('appSubtitle')}</p>
-              </div>
             </Link>
 
             <div className="flex items-center gap-1.5 shrink-0">
@@ -140,9 +137,8 @@ export default function NavBar() {
       >
         {/* Drawer header */}
         <div className="flex items-center justify-between px-4 py-4 border-b border-[var(--border)] shrink-0">
-          <div className="flex items-center gap-2.5">
-            <Image src="/logo.png" alt="Deprem Hattı" width={28} height={28} className="rounded-lg" />
-            <p className="text-sm font-bold text-[var(--foreground)]">Deprem Hattı</p>
+          <div className="flex items-center">
+            <Image src="/logo.png" alt="Deprem Hattı" width={160} height={40} className="object-contain" style={{ maxHeight: '36px', width: 'auto' }} />
           </div>
           <button
             onClick={() => setMenuAcik(false)}
