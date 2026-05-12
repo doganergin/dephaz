@@ -25,8 +25,11 @@ export async function POST(req: Request) {
 
 export interface FamilyPlan {
   contacts: { isim: string; telefon: string; iliski: string }[];
+  uyeler?: { isim: string; iliski: string; konum: string; telefon: string }[];
   bulusmaNoktasi: string;
   bulusmaAdresi: string;
+  bulusmaLat?: number;
+  bulusmaLon?: number;
   notlar: string;
   guncellendi: string;
 }
