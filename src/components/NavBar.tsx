@@ -93,7 +93,7 @@ export default function NavBar() {
             {/* Logo + title */}
             <Link href="/" className="flex items-center gap-2.5 flex-1 min-w-0">
               <Image
-                src="/gecicilogo.png"
+                src="/logo.png"
                 alt="Deprem Hattı"
                 width={28}
                 height={28}
@@ -141,7 +141,7 @@ export default function NavBar() {
         {/* Drawer header */}
         <div className="flex items-center justify-between px-4 py-4 border-b border-[var(--border)] shrink-0">
           <div className="flex items-center gap-2.5">
-            <Image src="/gecicilogo.png" alt="Deprem Hattı" width={28} height={28} className="rounded-lg" />
+            <Image src="/logo.png" alt="Deprem Hattı" width={28} height={28} className="rounded-lg" />
             <p className="text-sm font-bold text-[var(--foreground)]">Deprem Hattı</p>
           </div>
           <button

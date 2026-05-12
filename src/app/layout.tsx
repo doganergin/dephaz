@@ -22,13 +22,13 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://depremhatti.com"),
   alternates: { canonical: "/" },
   icons: {
-    icon: "/gecicilogo.png",
-    apple: "/gecicilogo.png",
+    icon: "/logo.png",
+    apple: "/logo.png",
   },
   openGraph: {
     title: "Deprem Hattı — Deprem Risk Analizi ve Hazırlık Rehberi",
     description: "Bölgenizin deprem riskini öğrenin. Fay mesafesi, zemin yapısı, risk skoru. Canlı deprem takibi ve hazırlık rehberleri.",
-    images: [{ url: "/gecicilogo.png", width: 1200, height: 630, alt: "Deprem Hattı" }],
+    images: [{ url: "/logo.png", width: 1200, height: 630, alt: "Deprem Hattı" }],
     type: "website",
     locale: "tr_TR",
     siteName: "Deprem Hattı",
@@ -38,7 +38,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Deprem Hattı — Deprem Risk Analizi ve Hazırlık Rehberi",
     description: "Bölgenizin deprem riskini öğrenin. Fay mesafesi, zemin yapısı, risk skoru.",
-    images: ["/gecicilogo.png"],
+    images: ["/logo.png"],
   },
 };
 

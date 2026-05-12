@@ -15,7 +15,14 @@
       "Bash(git push *)",
       "Bash(git commit -m ' *)",
       "Bash(git commit -m 'fix: update stats to accurate 38 provinces / 337 districts with '\\\\''coming soon'\\\\'' note *)",
-      "Bash(findstr /i \"clerk\")"
+      "Bash(findstr /i \"clerk\")",
+      "Read(//c/Users/MSİ/Downloads/**)",
+      "Bash(dir \"C:\\\\Users\\\\MSİ\\\\Downloads\" /b)",
+      "Bash(findstr /i \"deprem logo hatti\")",
+      "Bash(cp \"C:\\\\Users\\\\MSİ\\\\Downloads\\\\depremhatti.png\" \"C:\\\\Users\\\\MSİ\\\\Desktop\\\\depremapp-web\\\\public\\\\logo.png\")"
+    ],
+    "additionalDirectories": [
+      "C:\\Users\\MSİ\\Downloads"
     ]
   }
 }
