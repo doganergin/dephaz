@@ -164,13 +164,19 @@ export default function CantaPage() {
   const { lang } = useLanguage();
   const TR = lang === 'TR';
 
-  const [tamamlanan, setTamamlanan] = useState<Set<string>>(new Set());
+  const [tamamlanan, setTamamlanan] = useState<Set<string>>(() => {
+    try {
+      const saved = JSON.parse(localStorage.getItem('depremCanta') || '[]');
+      return new Set<string>(Array.isArray(saved) ? saved : []);
+    } catch { return new Set<string>(); }
+  });
   const [sadaceKritik, setSadaceKritik] = useState(false);
 
   const toggle = (id: string) => {
     setTamamlanan((prev) => {
       const s = new Set(prev);
       s.has(id) ? s.delete(id) : s.add(id);
+      localStorage.setItem('depremCanta', JSON.stringify([...s]));
       return s;
     });
   };
@@ -184,6 +190,7 @@ export default function CantaPage() {
       const s = new Set(prev);
       if (hepsiTamam) tumIds.forEach((id) => s.delete(id));
       else tumIds.forEach((id) => s.add(id));
+      localStorage.setItem('depremCanta', JSON.stringify([...s]));
       return s;
     });
   };

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist } from "next/font/google";
 import "./globals.css";
+import { ClerkProvider } from "@clerk/nextjs";
 import NavBar from "@/components/NavBar";
 import AtaturkBanner from "@/components/AtaturkBanner";
 import BackBar from "@/components/BackBar";
@@ -42,6 +43,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
+    <ClerkProvider>
     <html lang="tr" className={geist.className}>
       <head>
         {/* Dark mode anti-flash: reads localStorage before hydration */}
@@ -73,5 +75,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         </LanguageProvider>
       </body>
     </html>
+    </ClerkProvider>
   );
 }

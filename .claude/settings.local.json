@@ -14,7 +14,8 @@
       "Bash(git commit -m 'feat: add map-based location selection in bolge-analizi, improve disclaimer text *)",
       "Bash(git push *)",
       "Bash(git commit -m ' *)",
-      "Bash(git commit -m 'fix: update stats to accurate 38 provinces / 337 districts with '\\\\''coming soon'\\\\'' note *)"
+      "Bash(git commit -m 'fix: update stats to accurate 38 provinces / 337 districts with '\\\\''coming soon'\\\\'' note *)",
+      "Bash(findstr /i \"clerk\")"
     ]
   }
 }

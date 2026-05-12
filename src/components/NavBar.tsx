@@ -3,6 +3,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { useState } from 'react';
+import { useUser, SignInButton, UserButton } from '@clerk/nextjs';
 import ThemeToggle from './ThemeToggle';
 import LanguageToggle from './LanguageToggle';
 import { useLanguage } from '@/contexts/LanguageContext';
@@ -10,6 +11,7 @@ import { useLanguage } from '@/contexts/LanguageContext';
 export default function NavBar() {
   const path = usePathname();
   const { t, lang } = useLanguage();
+  const { isSignedIn } = useUser();
   const [menuAcik, setMenuAcik] = useState(false);
   const TR = lang === 'TR';
 
@@ -106,6 +108,17 @@ export default function NavBar() {
             <div className="flex items-center gap-1.5 shrink-0">
               <LanguageToggle />
               <ThemeToggle />
+              {isSignedIn ? (
+                <UserButton afterSignOutUrl="/" />
+              ) : (
+                <SignInButton mode="modal">
+                  <button className="p-1.5 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors text-[var(--muted)] hover:text-[var(--foreground)]" title={TR ? 'Giriş Yap' : 'Sign In'}>
+                    <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
+                    </svg>
+                  </button>
+                </SignInButton>
+              )}
             </div>
           </div>
         </div>
