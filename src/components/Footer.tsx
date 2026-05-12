@@ -25,6 +25,9 @@ export default function Footer() {
           <span className="font-medium">Kandilli (KOERI)</span> · <span className="font-medium">AFAD</span> · <span className="font-medium">USGS</span> · {TR ? 'Fay:' : 'Faults:'} <span className="font-medium">MTA</span>
         </p>
         <p className="text-[11px] text-[var(--muted)] text-center">
+          ✨ {TR ? 'Yapay Zeka Destekli Analiz' : 'AI-Powered Analysis'} · <span className="font-medium">Claude (Anthropic)</span>
+        </p>
+        <p className="text-[11px] text-[var(--muted)] text-center">
           © 2026 <span className="font-semibold">Doğan Ergin</span> · {TR ? 'Tüm haklar saklıdır.' : 'All rights reserved.'}
         </p>
       </div>

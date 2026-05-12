@@ -99,9 +99,14 @@ export default function HomePage() {
     <div className="space-y-6">
       {/* Hero */}
       <div className="text-center pt-1 pb-2">
-        <p className="text-xs font-semibold text-red-500 uppercase tracking-wide mb-2">
-          {TR ? 'Türkiye Deprem Bilgi Platformu' : 'Turkey Earthquake Information Platform'}
-        </p>
+        <div className="flex items-center justify-center gap-2 mb-2">
+          <p className="text-xs font-semibold text-red-500 uppercase tracking-wide">
+            {TR ? 'Türkiye Deprem Bilgi Platformu' : 'Turkey Earthquake Information Platform'}
+          </p>
+          <span className="inline-flex items-center gap-1 text-[10px] font-semibold px-2 py-0.5 rounded-full bg-violet-100 dark:bg-violet-900/30 text-violet-600 dark:text-violet-400">
+            ✨ {TR ? 'YZ Destekli' : 'AI-Powered'}
+          </span>
+        </div>
         <h1 className="text-2xl font-bold text-[var(--foreground)] mb-2">
           {TR ? 'Bölgenizi Tanıyın,\nHazırlıklı Olun' : 'Know Your Region,\nStay Prepared'}
         </h1>
