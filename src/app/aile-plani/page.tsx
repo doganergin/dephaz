@@ -48,6 +48,10 @@ export default function AilePlaniPage() {
   const [yeniUye, setYeniUye]         = useState<Uye>({ ...BOŞ_UYE });
   const [cantaOzet, setCantaOzet]     = useState<{ toplam: number; tamamlanan: number } | null>(null);
   const [kartGoster, setKartGoster]   = useState(false);
+  const [konumAliniyor, setKonumAl]   = useState(false);
+  const [mevcutKonum, setMevcutKonum] = useState<{ lat: number; lon: number } | null>(null);
+  const [konumHatasi, setKonumHatasi] = useState('');
+  const [paylasildı, setPaylasıldi]   = useState(false);
 
   useEffect(() => {
     try {
@@ -86,6 +90,38 @@ export default function AilePlaniPage() {
     if (!yeniKisi.isim.trim() || !yeniKisi.telefon.trim()) return;
     setPlan((p) => ({ ...p, contacts: [...p.contacts, { ...yeniKisi }] }));
     setYeniKisi({ ...BOŞ_KİŞİ });
+  }
+
+  function konumuAl() {
+    setKonumAl(true);
+    setKonumHatasi('');
+    navigator.geolocation.getCurrentPosition(
+      (pos) => {
+        setMevcutKonum({ lat: pos.coords.latitude, lon: pos.coords.longitude });
+        setKonumAl(false);
+      },
+      () => {
+        setKonumHatasi(TR ? 'Konum alınamadı. Tarayıcı iznini kontrol edin.' : 'Could not get location. Check browser permissions.');
+        setKonumAl(false);
+      },
+      { enableHighAccuracy: true, timeout: 10000 }
+    );
+  }
+
+  async function konumuPaylas() {
+    if (!mevcutKonum) return;
+    const { lat, lon } = mevcutKonum;
+    const mapsUrl = `https://maps.google.com/?q=${lat.toFixed(6)},${lon.toFixed(6)}`;
+    const metin = TR
+      ? `🆘 Deprem anı konumum:\n${mapsUrl}`
+      : `🆘 My earthquake location:\n${mapsUrl}`;
+    if (navigator.share) {
+      await navigator.share({ title: TR ? 'Deprem Konumum' : 'My Earthquake Location', text: metin });
+    } else {
+      await navigator.clipboard.writeText(metin);
+      setPaylasıldi(true);
+      setTimeout(() => setPaylasıldi(false), 2500);
+    }
   }
 
   function uyeEkle() {
@@ -218,6 +254,45 @@ export default function AilePlaniPage() {
             <h2 className="text-sm font-bold text-[var(--foreground)]">{TR ? 'Aile Üyeleri & Konumları' : 'Family Members & Locations'}</h2>
           </div>
           <p className="text-[11px] text-[var(--muted)]">{TR ? 'Deprem anında kimin nerede olduğunu bilin.' : 'Know where each family member typically is.'}</p>
+
+          {/* Konum Paylaş */}
+          <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-xl p-3 space-y-2 no-print">
+            <p className="text-[11px] font-semibold text-blue-700 dark:text-blue-300">
+              📡 {TR ? 'Anlık Konumunu Paylaş' : 'Share Your Live Location'}
+            </p>
+            <p className="text-[10px] text-[var(--muted)] leading-relaxed">
+              {TR ? 'Deprem anında ailenize şu anki GPS konumunuzu gönderin.' : 'Send your current GPS location to family during an earthquake.'}
+            </p>
+            {mevcutKonum ? (
+              <div className="flex items-center gap-2 flex-wrap">
+                <span className="text-[10px] font-mono text-blue-600 dark:text-blue-400">
+                  {mevcutKonum.lat.toFixed(5)}, {mevcutKonum.lon.toFixed(5)}
+                </span>
+                <button
+                  onClick={konumuPaylas}
+                  className="flex items-center gap-1 text-[11px] font-semibold text-white bg-blue-500 px-3 py-1 rounded-lg hover:bg-blue-600 transition-colors"
+                >
+                  {paylasildı ? (TR ? '✅ Kopyalandı' : '✅ Copied') : `📤 ${TR ? 'Paylaş' : 'Share'}`}
+                </button>
+                <button
+                  onClick={() => setMevcutKonum(null)}
+                  className="text-[10px] text-[var(--muted)] hover:text-red-500"
+                >✕</button>
+              </div>
+            ) : (
+              <button
+                onClick={konumuAl}
+                disabled={konumAliniyor}
+                className="flex items-center gap-1.5 text-[11px] font-semibold text-blue-600 dark:text-blue-400 border border-blue-300 dark:border-blue-700 px-3 py-1.5 rounded-lg hover:bg-blue-100 dark:hover:bg-blue-900/30 transition-colors disabled:opacity-50"
+              >
+                {konumAliniyor
+                  ? (TR ? '⏳ Alınıyor…' : '⏳ Getting…')
+                  : `📍 ${TR ? 'Konumumu Al' : 'Get My Location'}`}
+              </button>
+            )}
+            {konumHatasi && <p className="text-[10px] text-red-500">{konumHatasi}</p>}
+          </div>
+
           {(plan.uyeler ?? []).length === 0 && <p className="text-xs text-[var(--muted)] italic">{TR ? 'Henüz üye eklenmedi.' : 'No members yet.'}</p>}
           <div className="space-y-2">
             {(plan.uyeler ?? []).map((u, i) => (
