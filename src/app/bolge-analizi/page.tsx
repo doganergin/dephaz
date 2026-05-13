@@ -9,6 +9,7 @@ import { depremAnindaOnlemler, depremSonrasiOnlemler } from '@/data/depremOnleml
 import { useLanguage } from '@/contexts/LanguageContext';
 import { IL_KOORDINATLARI } from '@/lib/ilKoordinatlari';
 import type { BolgeRisk, ZeminTipi } from '@/types';
+import { Globe, Search } from 'lucide-react';
 
 const BolgeHaritasi = dynamic(() => import('@/components/BolgeHaritasi'), { ssr: false });
 const KonumSecHaritasi = dynamic(() => import('@/components/KonumSecHaritasi'), { ssr: false });
@@ -27,7 +28,7 @@ function IlZeminiDetay({ il, zemin, t, lang }: { il: string; zemin: ZeminTipi[];
         onClick={() => setAcik(!acik)}
         className="w-full flex items-center justify-between px-3 py-2.5 text-left bg-gray-50 dark:bg-gray-800/50 hover:bg-gray-100 dark:hover:bg-gray-700/50 transition-colors"
       >
-        <span className="text-[11px] font-semibold text-[var(--muted)]">🌍 {il}{t('ilZeminiBtn')}</span>
+        <span className="text-[11px] font-semibold text-[var(--muted)] flex items-center gap-1"><Globe size={12} className="shrink-0" /> {il}{t('ilZeminiBtn')}</span>
         <span className="text-[var(--muted)] text-xs">{acik ? '▲' : '▼'}</span>
       </button>
       {acik && (
@@ -342,7 +343,7 @@ export default function BolgeAnalizi() {
         <div className="flex gap-0 bg-gray-100 dark:bg-gray-700 rounded-xl overflow-hidden mb-4">
           {[
             { key: 'dropdown' as const, label: lang === 'TR' ? '☰ Liste' : '☰ List' },
-            { key: 'harita' as const,   label: lang === 'TR' ? '🗺️ Haritadan Seç' : '🗺️ Pick on Map' },
+            { key: 'harita' as const,   label: lang === 'TR' ? 'Haritadan Seç' : 'Pick on Map' },
           ].map((m) => (
             <button
               key={m.key}
@@ -448,7 +449,7 @@ export default function BolgeAnalizi() {
                   style={{ width: `${risk.riskSkoru}%`, backgroundColor: renk.bar, boxShadow: `0 0 8px ${renk.bar}99` }}
                 />
               </div>
-              {risk.aciklama && lang === 'TR' && (
+              {risk.aciklama && (
                 <p className="text-xs mt-2.5 leading-relaxed" style={{ color: renk.text }}>{risk.aciklama}</p>
               )}
             </div>
@@ -503,7 +504,7 @@ export default function BolgeAnalizi() {
             {risk.zemin === null ? (
               <div className="space-y-2">
                 <div className="flex items-start gap-2.5 bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 rounded-xl p-3">
-                  <span className="text-amber-500 text-base shrink-0">🔍</span>
+                  <Search size={16} className="text-amber-500 shrink-0" />
                   <div>
                     <p className="text-xs font-semibold text-amber-700 dark:text-amber-400">{risk.ilce}{t('zeminInceleniyor')}</p>
                     <p className="text-[11px] text-amber-600 dark:text-amber-500 mt-0.5 leading-relaxed">{t('zeminInceleniyor2')}</p>
@@ -530,7 +531,7 @@ export default function BolgeAnalizi() {
                     );
                   })}
                 </div>
-                {lang === 'TR' && risk.zemin.map((z) => z.risk === 'yuksek' && (
+                {risk.zemin.map((z) => z.risk === 'yuksek' && (
                   <p key={z.ad} className="text-[11px] text-[var(--muted)] mt-2 leading-relaxed">
                     <span className="font-semibold">{zeminAd(z.ad)}:</span> {z.aciklama}
                   </p>
@@ -628,7 +629,7 @@ export default function BolgeAnalizi() {
                         <span className={`text-[10px] px-2 py-0.5 rounded-full font-semibold ${
                           u.ulke === 'TR' ? 'bg-red-50 dark:bg-red-900/30 text-red-600' : 'bg-blue-50 dark:bg-blue-900/30 text-blue-600'
                         }`}>
-                          {u.ulke === 'TR' ? t('yerli') : `🌍 ${u.ulke}`}
+                          {u.ulke === 'TR' ? t('yerli') : u.ulke}
                         </span>
                         <span className="text-[10px] text-[var(--muted)]">{u.yil}</span>
                       </div>
@@ -725,8 +726,8 @@ export default function BolgeAnalizi() {
         {/* Kaynak sekmeleri */}
         <div className="flex gap-0 bg-gray-100 dark:bg-gray-700 rounded-xl overflow-hidden mb-3">
           {([
-            { key: 'tr' as const, label: `🇹🇷 ${t('haritaTurkiye')}`, sub: 'Kandilli + AFAD · M3.5+' },
-            { key: 'dunya' as const, label: `🌍 ${t('haritaDunya')}`, sub: 'USGS · M6.5+' },
+            { key: 'tr' as const, label: t('haritaTurkiye'), sub: 'Kandilli + AFAD · M3.5+' },
+            { key: 'dunya' as const, label: t('haritaDunya'), sub: 'USGS · M6.5+' },
           ] as const).map((tab) => (
             <button
               key={tab.key}

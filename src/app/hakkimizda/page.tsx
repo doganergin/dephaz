@@ -1,6 +1,7 @@
 'use client';
 import Link from 'next/link';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { Globe, Backpack, Search, User } from 'lucide-react';
 
 export default function HakkimizdaPage() {
   const { lang } = useLanguage();
@@ -31,13 +32,13 @@ export default function HakkimizdaPage() {
         <h2 className="text-base font-bold text-[var(--foreground)]">{TR ? 'Ne Sunuyoruz?' : 'What We Offer'}</h2>
         <div className="space-y-3">
           {[
-            { icon: '🗺️', tr: 'Bölge Risk Analizi', en: 'Regional Risk Analysis', trA: 'İl, ilçe ve mahalle bazında fay mesafesi, zemin yapısı, bina stoku ve tarihsel deprem verileriyle kapsamlı risk değerlendirmesi.', enA: 'Comprehensive risk assessment by province, district, and neighbourhood — including fault distance, soil conditions, building stock, and historical earthquake data.' },
-            { icon: '🌍', tr: 'Canlı Deprem Haritası', en: 'Live Earthquake Map', trA: 'Kandilli, AFAD ve USGS kaynaklarından anlık deprem verilerini harita üzerinde görselleştirme.', enA: 'Real-time earthquake data from Kandilli, AFAD, and USGS visualised on an interactive map.' },
-            { icon: '🎒', tr: '72 Saatlik Deprem Çantası', en: '72-Hour Emergency Kit', trA: 'AFAD, FEMA ve Kızılay kılavuzlarına dayanan interaktif hazırlık listesi.', enA: 'Interactive preparedness checklist based on AFAD, FEMA, and Red Crescent guidelines.' },
-            { icon: '🔬', tr: 'Uzman Değerlendirmeleri', en: 'Expert Assessments', trA: 'Deprem bilimcilerin hakemli makalelere dayanan açıklamaları ve analizleri.', enA: 'Peer-reviewed analyses and sourced expert statements from seismologists and geologists.' },
+            { iconEl: <Globe size={20} className="shrink-0" />, tr: 'Bölge Risk Analizi', en: 'Regional Risk Analysis', trA: 'İl, ilçe ve mahalle bazında fay mesafesi, zemin yapısı, bina stoku ve tarihsel deprem verileriyle kapsamlı risk değerlendirmesi.', enA: 'Comprehensive risk assessment by province, district, and neighbourhood — including fault distance, soil conditions, building stock, and historical earthquake data.' },
+            { iconEl: <Globe size={20} className="shrink-0" />, tr: 'Canlı Deprem Haritası', en: 'Live Earthquake Map', trA: 'Kandilli, AFAD ve USGS kaynaklarından anlık deprem verilerini harita üzerinde görselleştirme.', enA: 'Real-time earthquake data from Kandilli, AFAD, and USGS visualised on an interactive map.' },
+            { iconEl: <Backpack size={20} className="shrink-0" />, tr: '72 Saatlik Deprem Çantası', en: '72-Hour Emergency Kit', trA: 'AFAD, FEMA ve Kızılay kılavuzlarına dayanan interaktif hazırlık listesi.', enA: 'Interactive preparedness checklist based on AFAD, FEMA, and Red Crescent guidelines.' },
+            { iconEl: <Search size={20} className="shrink-0" />, tr: 'Uzman Değerlendirmeleri', en: 'Expert Assessments', trA: 'Deprem bilimcilerin hakemli makalelere dayanan açıklamaları ve analizleri.', enA: 'Peer-reviewed analyses and sourced expert statements from seismologists and geologists.' },
           ].map((item) => (
             <div key={item.tr} className="flex gap-3 bg-[var(--card-bg)] border border-[var(--border)] rounded-xl p-4">
-              <span className="text-2xl shrink-0">{item.icon}</span>
+              <span className="shrink-0">{item.iconEl}</span>
               <div>
                 <p className="text-sm font-bold text-[var(--foreground)]">{TR ? item.tr : item.en}</p>
                 <p className="text-xs text-[var(--muted)] mt-0.5 leading-relaxed">{TR ? item.trA : item.enA}</p>
@@ -74,7 +75,7 @@ export default function HakkimizdaPage() {
       <section className="space-y-3">
         <h2 className="text-base font-bold text-[var(--foreground)]">{TR ? 'Geliştirici' : 'Developer'}</h2>
         <div className="bg-[var(--card-bg)] border border-[var(--border)] rounded-xl p-4 flex items-start gap-4">
-          <div className="w-12 h-12 rounded-xl bg-red-100 dark:bg-red-900/30 flex items-center justify-center text-2xl shrink-0">👤</div>
+          <div className="w-12 h-12 rounded-xl bg-red-100 dark:bg-red-900/30 flex items-center justify-center shrink-0"><User size={24} className="text-red-500" /></div>
           <div>
             <p className="text-sm font-bold text-[var(--foreground)]">Doğan Ergin</p>
             <p className="text-xs text-[var(--muted)] mt-0.5 leading-relaxed">

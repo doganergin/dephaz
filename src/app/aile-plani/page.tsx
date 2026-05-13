@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import dynamic from 'next/dynamic';
 import { useUser, SignInButton } from '@clerk/nextjs';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { BarChart2, Phone, Users, MapPin, Backpack, FileText, CreditCard, Printer, Save } from 'lucide-react';
+import { BarChart2, Phone, Users, MapPin, Backpack, FileText, CreditCard, Printer, Save, Check, X, Lightbulb, AlertTriangle } from 'lucide-react';
 
 const BulusmaHaritasi = dynamic(() => import('@/components/BulusmaHaritasi'), { ssr: false });
 
@@ -80,9 +80,9 @@ export default function AilePlaniPage() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(guncel),
       });
-      if (r.ok) { setPlan(guncel); setKayitMesaj(TR ? '✅ Kaydedildi' : '✅ Saved'); }
-      else setKayitMesaj(TR ? '❌ Hata' : '❌ Error');
-    } catch { setKayitMesaj(TR ? '❌ Ağ hatası' : '❌ Network error'); }
+      if (r.ok) { setPlan(guncel); setKayitMesaj(TR ? 'Kaydedildi' : 'Saved'); }
+      else setKayitMesaj(TR ? 'Hata' : 'Error');
+    } catch { setKayitMesaj(TR ? 'Ağ hatası' : 'Network error'); }
     setKaydedil(false);
     setTimeout(() => setKayitMesaj(''), 3000);
   }
@@ -114,8 +114,8 @@ export default function AilePlaniPage() {
     const { lat, lon } = mevcutKonum;
     const mapsUrl = `https://maps.google.com/?q=${lat.toFixed(6)},${lon.toFixed(6)}`;
     const metin = TR
-      ? `🆘 Deprem anı konumum:\n${mapsUrl}`
-      : `🆘 My earthquake location:\n${mapsUrl}`;
+      ? `Deprem anı konumum:\n${mapsUrl}`
+      : `My earthquake location:\n${mapsUrl}`;
     if (navigator.share) {
       await navigator.share({ title: TR ? 'Deprem Konumum' : 'My Earthquake Location', text: metin });
     } else {
@@ -195,15 +195,15 @@ export default function AilePlaniPage() {
           </div>
           <div className="grid grid-cols-3 gap-1.5 mt-3">
             {[
-              { label: TR ? '📞 Kişiler' : '📞 Contacts', done: plan.contacts.length >= 2 },
-              { label: TR ? '👥 Aile' : '👥 Members',    done: (plan.uyeler ?? []).length >= 1 },
-              { label: TR ? '📍 Harita' : '📍 Map',       done: !!(plan.bulusmaLat && plan.bulusmaLon) },
-              { label: TR ? '🏷️ Nokta' : '🏷️ Point',      done: !!plan.bulusmaNoktasi.trim() },
-              { label: TR ? '📝 Notlar' : '📝 Notes',     done: !!plan.notlar.trim() },
-              { label: TR ? '🎒 Çanta' : '🎒 Kit',        done: !!(cantaOzet && cantaOzet.tamamlanan > 20) },
+              { label: TR ? 'Kişiler' : 'Contacts', done: plan.contacts.length >= 2 },
+              { label: TR ? 'Aile' : 'Members',    done: (plan.uyeler ?? []).length >= 1 },
+              { label: TR ? 'Harita' : 'Map',       done: !!(plan.bulusmaLat && plan.bulusmaLon) },
+              { label: TR ? 'Nokta' : 'Point',      done: !!plan.bulusmaNoktasi.trim() },
+              { label: TR ? 'Notlar' : 'Notes',     done: !!plan.notlar.trim() },
+              { label: TR ? 'Çanta' : 'Kit',        done: !!(cantaOzet && cantaOzet.tamamlanan > 20) },
             ].map((item) => (
               <div key={item.label} className={`flex items-center gap-1.5 text-[10px] font-semibold px-2 py-1.5 rounded-lg ${item.done ? 'bg-green-50 dark:bg-green-900/20 text-green-700 dark:text-green-400' : 'bg-gray-50 dark:bg-gray-800 text-[var(--muted)]'}`}>
-                <span>{item.done ? '✓' : '○'}</span>
+                {item.done ? <Check size={12} className="shrink-0" /> : <span className="text-[10px]">○</span>}
                 <span>{item.label}</span>
               </div>
             ))}
@@ -259,7 +259,7 @@ export default function AilePlaniPage() {
           {/* Konum Paylaş */}
           <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-xl p-3 space-y-2 no-print">
             <p className="text-[11px] font-semibold text-blue-700 dark:text-blue-300">
-              📡 {TR ? 'Anlık Konumunu Paylaş' : 'Share Your Live Location'}
+              {TR ? 'Anlık Konumunu Paylaş' : 'Share Your Live Location'}
             </p>
             <p className="text-[10px] text-[var(--muted)] leading-relaxed">
               {TR ? 'Deprem anında ailenize şu anki GPS konumunuzu gönderin.' : 'Send your current GPS location to family during an earthquake.'}
@@ -273,7 +273,7 @@ export default function AilePlaniPage() {
                   onClick={konumuPaylas}
                   className="flex items-center gap-1 text-[11px] font-semibold text-white bg-blue-500 px-3 py-1 rounded-lg hover:bg-blue-600 transition-colors"
                 >
-                  {paylasildı ? (TR ? '✅ Kopyalandı' : '✅ Copied') : `📤 ${TR ? 'Paylaş' : 'Share'}`}
+                  {paylasildı ? (TR ? 'Kopyalandı' : 'Copied') : (TR ? 'Paylaş' : 'Share')}
                 </button>
                 <button
                   onClick={() => setMevcutKonum(null)}
@@ -287,8 +287,8 @@ export default function AilePlaniPage() {
                 className="flex items-center gap-1.5 text-[11px] font-semibold text-blue-600 dark:text-blue-400 border border-blue-300 dark:border-blue-700 px-3 py-1.5 rounded-lg hover:bg-blue-100 dark:hover:bg-blue-900/30 transition-colors disabled:opacity-50"
               >
                 {konumAliniyor
-                  ? (TR ? '⏳ Alınıyor…' : '⏳ Getting…')
-                  : `📍 ${TR ? 'Konumumu Al' : 'Get My Location'}`}
+                  ? (TR ? 'Alınıyor…' : 'Getting…')
+                  : (TR ? 'Konumumu Al' : 'Get My Location')}
               </button>
             )}
             {konumHatasi && <p className="text-[10px] text-red-500">{konumHatasi}</p>}
@@ -302,7 +302,7 @@ export default function AilePlaniPage() {
                   <div className="flex items-center gap-2 flex-wrap">
                     <span className="text-xs font-bold text-[var(--foreground)]">{u.isim}</span>
                     <span className="text-[10px] bg-purple-100 dark:bg-purple-900/30 text-purple-600 px-1.5 py-0.5 rounded-full font-semibold">{u.iliski}</span>
-                    {u.konum && <span className="text-[10px] text-[var(--muted)]">📍 {u.konum}</span>}
+                    {u.konum && <span className="text-[10px] text-[var(--muted)] flex items-center gap-0.5"><MapPin size={11} className="shrink-0" /> {u.konum}</span>}
                   </div>
                   {u.telefon && <a href={`tel:${u.telefon}`} className="text-[11px] text-blue-500 font-mono">{u.telefon}</a>}
                 </div>
@@ -374,7 +374,7 @@ export default function AilePlaniPage() {
               </div>
             </div>
           ) : (
-            <p className="text-[11px] text-amber-600 dark:text-amber-400">⚠️ {TR ? 'Çanta listesini henüz doldurmadınız.' : 'Kit checklist not filled yet.'}</p>
+            <p className="text-[11px] text-amber-600 dark:text-amber-400 flex items-center gap-1"><AlertTriangle size={14} className="text-amber-500 shrink-0" /> {TR ? 'Çanta listesini henüz doldurmadınız.' : 'Kit checklist not filled yet.'}</p>
           )}
           <a href="/canta" className="text-[11px] text-amber-600 dark:text-amber-400 hover:underline no-print">{TR ? 'Çanta listesine git →' : 'Go to kit checklist →'}</a>
         </section>
@@ -406,7 +406,7 @@ export default function AilePlaniPage() {
           {kartGoster && (
             <div className="print-card border-2 border-dashed border-orange-300 dark:border-orange-700 rounded-xl p-4 space-y-2" style={{ maxWidth: '340px' }}>
               <div className="flex items-center justify-between border-b border-orange-200 dark:border-orange-800 pb-1.5 mb-1.5">
-                <span className="text-xs font-black text-orange-600">🚨 {TR ? 'ACİL DURUM KARTI' : 'EMERGENCY CARD'}</span>
+                <span className="text-xs font-black text-orange-600">{TR ? 'ACİL DURUM KARTI' : 'EMERGENCY CARD'}</span>
               </div>
               {plan.contacts.slice(0, 3).map((k, i) => (
                 <div key={i} className="flex items-center justify-between text-[11px]">
@@ -416,7 +416,7 @@ export default function AilePlaniPage() {
               ))}
               {plan.bulusmaNoktasi && (
                 <div className="text-[11px] pt-1 border-t border-orange-200 dark:border-orange-800">
-                  <span className="font-semibold text-[var(--foreground)]">📍 {TR ? 'Buluşma:' : 'Meet:'}</span> {plan.bulusmaNoktasi}
+                  <span className="font-semibold text-[var(--foreground)] flex items-center gap-1"><MapPin size={12} className="shrink-0" />{TR ? 'Buluşma:' : 'Meet:'}</span> {plan.bulusmaNoktasi}
                 </div>
               )}
               {plan.bulusmaLat && plan.bulusmaLon && (
@@ -439,7 +439,7 @@ export default function AilePlaniPage() {
 
         <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-100 dark:border-blue-800 rounded-xl p-3">
           <p className="text-[11px] text-blue-700 dark:text-blue-300 leading-relaxed">
-            <span className="font-semibold">💡 {TR ? 'İpucu:' : 'Tip:'}</span>{' '}
+            <span className="font-semibold flex items-center gap-1"><Lightbulb size={14} className="text-amber-500 shrink-0" />{TR ? 'İpucu:' : 'Tip:'}</span>{' '}
             {TR ? 'Planı yazdırıp buzdolabına yapıştırın ve cüzdan kartını keserek cüzdanınıza koyun.' : 'Print the plan and stick it on the fridge. Cut out the wallet card and keep it with you.'}
           </p>
         </div>

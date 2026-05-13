@@ -2,6 +2,7 @@
 import Link from 'next/link';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { depremAnindaOnlemler, depremSonrasiOnlemler, kaynaklar } from '@/data/depremOnlemleri';
+import { Backpack, Users, Globe } from 'lucide-react';
 
 export default function DepremAnindaPage() {
   const { lang } = useLanguage();
@@ -29,7 +30,7 @@ export default function DepremAnindaPage() {
           {TR ? 'En Önemli Kural' : 'The Most Important Rule'}
         </p>
         <p className="text-sm font-semibold text-red-800 dark:text-red-300">
-          {TR ? '🫳 Çök — Kapan — Tutun' : '🫳 Drop — Cover — Hold On'}
+          {TR ? 'Çök — Kapan — Tutun' : 'Drop — Cover — Hold On'}
         </p>
         <p className="text-xs text-red-700 dark:text-red-400 mt-1 leading-relaxed">
           {TR
@@ -88,14 +89,14 @@ export default function DepremAnindaPage() {
           {TR ? 'Hazırlığınızı Tamamlayın' : 'Complete Your Preparedness'}
         </p>
         <div className="flex flex-col gap-2">
-          <Link href="/canta" className="text-xs text-blue-500 hover:underline">
-            🎒 {TR ? '72 Saatlik Deprem Çantası Listesi →' : '72-Hour Emergency Kit Checklist →'}
+          <Link href="/canta" className="text-xs text-blue-500 hover:underline flex items-center gap-1">
+            <Backpack size={13} className="shrink-0" /> {TR ? '72 Saatlik Deprem Çantası Listesi →' : '72-Hour Emergency Kit Checklist →'}
           </Link>
-          <Link href="/aile-plani" className="text-xs text-blue-500 hover:underline">
-            👨‍👩‍👧 {TR ? 'Aile Buluşma Planı →' : 'Family Meeting Plan →'}
+          <Link href="/aile-plani" className="text-xs text-blue-500 hover:underline flex items-center gap-1">
+            <Users size={13} className="shrink-0" /> {TR ? 'Aile Buluşma Planı →' : 'Family Meeting Plan →'}
           </Link>
-          <Link href="/bolge-analizi" className="text-xs text-blue-500 hover:underline">
-            🗺️ {TR ? 'Bölgenizin Risk Skorunu Öğrenin →' : 'Check Your Region\'s Risk Score →'}
+          <Link href="/bolge-analizi" className="text-xs text-blue-500 hover:underline flex items-center gap-1">
+            <Globe size={13} className="shrink-0" /> {TR ? 'Bölgenizin Risk Skorunu Öğrenin →' : 'Check Your Region\'s Risk Score →'}
           </Link>
         </div>
       </div>

@@ -151,7 +151,7 @@ export default function FayHatlariPage() {
                 }`}>{TR ? 'Aktif' : 'Active'}</span>
               </div>
               <div className="flex gap-4 text-[10px] text-[var(--muted)]">
-                <span>📏 {fay.uzunluk}</span>
+                <span>{fay.uzunluk}</span>
                 <span>↔ {fay.tip}</span>
               </div>
               <p className="text-[11px] text-[var(--muted)] leading-relaxed">{fay.rota}</p>

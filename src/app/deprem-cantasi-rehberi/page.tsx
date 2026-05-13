@@ -1,6 +1,7 @@
 'use client';
 import Link from 'next/link';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { Backpack } from 'lucide-react';
 
 export default function DepremCantasiRehberiPage() {
   const { lang } = useLanguage();
@@ -178,7 +179,7 @@ export default function DepremCantasiRehberiPage() {
           <p className="text-sm font-bold">{TR ? 'İnteraktif Çanta Listesi' : 'Interactive Kit Checklist'}</p>
           <p className="text-xs text-gray-400 mt-0.5">{TR ? 'İşaretleyerek takip edebileceğiniz tam liste' : 'Full list you can tick off as you prepare'}</p>
         </div>
-        <span className="text-xl">🎒</span>
+        <Backpack size={20} className="shrink-0" />
       </Link>
 
       <div className="text-[11px] text-[var(--muted)] space-y-1 border-t border-[var(--border)] pt-4">

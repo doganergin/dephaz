@@ -1,5 +1,6 @@
 'use client';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { Mail, Lightbulb, BarChart2, Users, Scale, Bug } from 'lucide-react';
 
 export default function IletisimPage() {
   const { lang } = useLanguage();
@@ -16,7 +17,7 @@ export default function IletisimPage() {
 
       <div className="bg-[var(--card-bg)] border border-[var(--border)] rounded-2xl p-5 space-y-4">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-xl bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center text-xl shrink-0">📧</div>
+          <div className="w-10 h-10 rounded-xl bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center shrink-0"><Mail size={20} className="text-blue-500" /></div>
           <div>
             <p className="text-sm font-bold text-[var(--foreground)]">{TR ? 'E-posta' : 'Email'}</p>
             <a href="mailto:info@depremhatti.com" className="text-sm text-blue-500 hover:underline">info@depremhatti.com</a>
@@ -31,14 +32,14 @@ export default function IletisimPage() {
         <h2 className="text-base font-bold text-[var(--foreground)]">{TR ? 'Ne Zaman İletişime Geçebilirsiniz?' : 'When to Contact Us'}</h2>
         <div className="space-y-2">
           {[
-            { icon: '🐛', tr: 'Hata Bildirimi', en: 'Bug Report', trA: 'Sitede çalışmayan bir özellik veya yanlış veri gördüyseniz.', enA: 'If you find a broken feature or incorrect data on the site.' },
-            { icon: '💡', tr: 'Öneri', en: 'Suggestion', trA: 'Yeni özellik veya iyileştirme fikiriniz varsa.', enA: 'If you have an idea for a new feature or improvement.' },
-            { icon: '📊', tr: 'Veri Talebi', en: 'Data Request', trA: 'Bölgenize ait eksik veya hatalı veri için.', enA: 'For missing or incorrect data about your region.' },
-            { icon: '🤝', tr: 'İş Birliği', en: 'Collaboration', trA: 'Akademik veya kurumsal iş birliği teklifleri için.', enA: 'For academic or institutional collaboration proposals.' },
-            { icon: '⚖️', tr: 'Hukuki Konular', en: 'Legal', trA: 'Telif hakkı veya gizlilik politikasına ilişkin talepler için.', enA: 'For copyright or privacy policy related requests.' },
+            { iconEl: <Bug size={18} className="shrink-0" />, tr: 'Hata Bildirimi', en: 'Bug Report', trA: 'Sitede çalışmayan bir özellik veya yanlış veri gördüyseniz.', enA: 'If you find a broken feature or incorrect data on the site.' },
+            { iconEl: <Lightbulb size={18} className="shrink-0 text-amber-500" />, tr: 'Öneri', en: 'Suggestion', trA: 'Yeni özellik veya iyileştirme fikiriniz varsa.', enA: 'If you have an idea for a new feature or improvement.' },
+            { iconEl: <BarChart2 size={18} className="shrink-0" />, tr: 'Veri Talebi', en: 'Data Request', trA: 'Bölgenize ait eksik veya hatalı veri için.', enA: 'For missing or incorrect data about your region.' },
+            { iconEl: <Users size={18} className="shrink-0" />, tr: 'İş Birliği', en: 'Collaboration', trA: 'Akademik veya kurumsal iş birliği teklifleri için.', enA: 'For academic or institutional collaboration proposals.' },
+            { iconEl: <Scale size={18} className="shrink-0" />, tr: 'Hukuki Konular', en: 'Legal', trA: 'Telif hakkı veya gizlilik politikasına ilişkin talepler için.', enA: 'For copyright or privacy policy related requests.' },
           ].map((item) => (
             <div key={item.tr} className="flex gap-3 bg-[var(--card-bg)] border border-[var(--border)] rounded-xl p-3">
-              <span className="text-lg shrink-0">{item.icon}</span>
+              <span className="shrink-0 mt-0.5">{item.iconEl}</span>
               <div>
                 <p className="text-xs font-bold text-[var(--foreground)]">{TR ? item.tr : item.en}</p>
                 <p className="text-[11px] text-[var(--muted)] mt-0.5">{TR ? item.trA : item.enA}</p>

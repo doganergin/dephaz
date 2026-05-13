@@ -1,6 +1,7 @@
 'use client';
 import { useState } from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { Backpack, Check, Lightbulb, AlertTriangle } from 'lucide-react';
 
 interface Esya {
   id: string;
@@ -206,8 +207,8 @@ export default function CantaPage() {
     <div className="space-y-4">
       {/* Başlık */}
       <div>
-        <h1 className="text-xl font-bold text-[var(--foreground)]">
-          🎒 {TR ? '72 Saatlik Deprem Çantası' : '72-Hour Earthquake Kit'}
+        <h1 className="text-xl font-bold text-[var(--foreground)] flex items-center gap-2">
+          <Backpack size={20} className="shrink-0" /> {TR ? '72 Saatlik Deprem Çantası' : '72-Hour Earthquake Kit'}
         </h1>
         <p className="text-sm text-[var(--muted)] mt-0.5">
           {TOPLAM} {TR ? 'eşya' : 'items'} · {KRITIK} {TR ? 'kritik' : 'critical'} · {TR ? 'Depremden sonra ilk 72 saat için hazırlık listesi' : 'Preparedness checklist for the first 72 hours after an earthquake'}
@@ -233,7 +234,7 @@ export default function CantaPage() {
         </div>
         {yuzde === 100 && (
           <p className="text-xs text-green-600 dark:text-green-400 font-semibold mt-2 text-center">
-            {TR ? '✅ Çantanız hazır! Depreme hazırsınız.' : '✅ Your kit is ready! You are prepared.'}
+            <Check size={14} className="inline text-green-500 mr-1" />{TR ? 'Çantanız hazır! Depreme hazırsınız.' : 'Your kit is ready! You are prepared.'}
           </p>
         )}
       </div>
@@ -242,13 +243,13 @@ export default function CantaPage() {
       <div className="flex gap-2 flex-wrap">
         <button
           onClick={() => setSadaceKritik(!sadaceKritik)}
-          className={`px-3 py-1.5 text-[11px] font-semibold rounded-full border transition-colors ${
+          className={`px-3 py-1.5 text-[11px] font-semibold rounded-full border transition-colors flex items-center gap-1.5 ${
             sadaceKritik
               ? 'bg-red-500 text-white border-red-500'
               : 'bg-[var(--card-bg)] text-[var(--muted)] border-[var(--border)]'
           }`}
         >
-          🔴 {TR ? 'Yalnız kritik eşyalar' : 'Critical items only'}
+          <span className="w-2 h-2 rounded-full bg-red-500 shrink-0 inline-block" /> {TR ? 'Yalnız kritik eşyalar' : 'Critical items only'}
         </button>
         <button
           onClick={tumunuIsaretle}
@@ -324,7 +325,7 @@ export default function CantaPage() {
       {/* Bilgi notu */}
       <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-100 dark:border-blue-800 rounded-xl p-3 glow-card glow-blue">
         <p className="text-[11px] text-blue-700 dark:text-blue-300 leading-relaxed">
-          <span className="font-semibold">💡 {TR ? 'İpucu:' : 'Tip:'}</span>{' '}
+          <span className="font-semibold flex items-center gap-1"><Lightbulb size={14} className="text-amber-500 shrink-0" />{TR ? 'İpucu:' : 'Tip:'}</span>{' '}
           {TR
             ? 'Çantanı serin, kuru ve hızlı ulaşılabilir bir yerde (kapı kenarı, dolap önü) saklayın. 6 ayda bir kontrol edip ilaç ve gıdaların son kullanma tarihlerini yenileyin.'
             : 'Store your kit in a cool, dry, easily accessible place (by the door, in front of a cupboard). Check it every 6 months and refresh medication and food expiry dates.'}
@@ -333,7 +334,7 @@ export default function CantaPage() {
 
       <div className="bg-amber-50 dark:bg-amber-900/20 border border-amber-100 dark:border-amber-800 rounded-xl p-3 glow-card glow-amber">
         <p className="text-[11px] text-amber-700 dark:text-amber-300 leading-relaxed">
-          <span className="font-semibold">⚠️ {TR ? 'Kaynak:' : 'Source:'}</span>{' '}
+          <span className="font-semibold flex items-center gap-1"><AlertTriangle size={14} className="text-amber-500 shrink-0" />{TR ? 'Kaynak:' : 'Source:'}</span>{' '}
           {TR
             ? 'Bu liste AFAD, FEMA ve Kızılay deprem hazırlık kılavuzları esas alınarak hazırlanmıştır. Aile büyüklüğünüze ve özel ihtiyaçlarınıza göre uyarlayın.'
             : 'This list is based on AFAD, FEMA, and Turkish Red Crescent earthquake preparedness guides. Adapt it to your household size and special needs.'}

@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { Globe } from 'lucide-react';
 
 const MAX_DEPREM = 250;  // listede tutulacak max kayıt
 const YENILEME_SN = 60; // kaç saniyede bir yenile
@@ -195,10 +196,10 @@ export default function HaritaSayfasi() {
 
       {/* Ana sekmeler */}
       <div className="flex gap-0 bg-[var(--card-bg)] border border-[var(--border)] rounded-2xl overflow-hidden shadow-sm">
-        {[
-          { key: 'turkiye' as const, label: t('haritaTurkiye'), icon: '🇹🇷' },
-          { key: 'dunya' as const, label: t('haritaDunya'), icon: '🌍' },
-        ].map((tab) => (
+        {([
+          { key: 'turkiye' as const, label: t('haritaTurkiye') },
+          { key: 'dunya' as const, label: t('haritaDunya') },
+        ] as const).map((tab) => (
           <button
             key={tab.key}
             onClick={() => setAnaTab(tab.key)}
@@ -208,7 +209,7 @@ export default function HaritaSayfasi() {
                 : 'border-transparent text-[var(--muted)] hover:text-[var(--foreground)]'
             }`}
           >
-            <span>{tab.icon}</span>
+            {tab.key === 'dunya' && <Globe size={13} className="shrink-0" />}
             <span>{tab.label}</span>
           </button>
         ))}

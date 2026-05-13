@@ -1,6 +1,7 @@
 'use client';
 import Link from 'next/link';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { Backpack, Globe } from 'lucide-react';
 
 export default function DepremHazirlikPage() {
   const { lang } = useLanguage();
@@ -50,10 +51,10 @@ export default function DepremHazirlikPage() {
 
       <div className="grid grid-cols-2 gap-3">
         <Link href="/canta" className="flex items-center justify-center gap-2 bg-gray-900 dark:bg-gray-700 text-white rounded-xl py-3 text-xs font-semibold hover:bg-gray-800 transition-colors">
-          🎒 {TR ? 'Çanta Listesi' : 'Kit Checklist'}
+          <Backpack size={14} className="shrink-0" /> {TR ? 'Çanta Listesi' : 'Kit Checklist'}
         </Link>
         <Link href="/bolge-analizi" className="flex items-center justify-center gap-2 border border-[var(--border)] text-[var(--foreground)] rounded-xl py-3 text-xs font-semibold hover:border-red-300 transition-colors">
-          🗺️ {TR ? 'Bölge Analizi' : 'Risk Analysis'}
+          <Globe size={14} className="shrink-0" /> {TR ? 'Bölge Analizi' : 'Risk Analysis'}
         </Link>
       </div>
 
