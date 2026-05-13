@@ -4089,6 +4089,8 @@ function hesaplaRisk(il: string, ilce: string, mahalle: string, depremler: Depre
       : 'M5.0–5.5+ deprem olasılığı düşük',
     aciklama: bilimsel?.genelDegerlendirme
       ?? `${ilce} ilçesi deprem risk analizi · Fay: ${veri?.fayAdi ?? 'belirsiz'} · Veri: AFAD / MTA`,
+    aciklamaEN: bilimsel?.genelDegerlendirmeEN
+      ?? `${ilce} district seismic risk analysis · Fault: ${veri?.fayAdi ?? 'unknown'} · Data: AFAD / MTA`,
     fayMesafe: veri?.fayMesafe ?? 50,
     beklenenMax: veri?.beklenenMw ?? 'Mw 6.0–7.0',
     olasilik30Yil: olasilikEtiket(veri?.olasilik30 ?? 25),

@@ -454,7 +454,9 @@ export default function BolgeAnalizi() {
                 />
               </div>
               {risk.aciklama && (
-                <p className="text-xs mt-2.5 leading-relaxed" style={{ color: renk.text }}>{risk.aciklama}</p>
+                <p className="text-xs mt-2.5 leading-relaxed" style={{ color: renk.text }}>
+                  {lang === 'EN' ? risk.aciklamaEN : risk.aciklama}
+                </p>
               )}
             </div>
             {/* Metrikler */}

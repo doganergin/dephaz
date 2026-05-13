@@ -43,6 +43,7 @@ export interface BolgeRisk {
   riskSinifi: 'dusuk' | 'orta' | 'yuksek';
   riskMetni: string;
   aciklama: string;
+  aciklamaEN: string;
   fayMesafe: number;
   beklenenMax: string;
   olasilik30Yil: string;

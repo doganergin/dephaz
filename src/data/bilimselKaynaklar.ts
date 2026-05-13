@@ -28,6 +28,7 @@ export interface BilimselVeri {
   zemin?: BolgeZemin[];
   kaynaklar: Kaynak[];
   genelDegerlendirme?: string;
+  genelDegerlendirmeEN?: string;
   uzmanGorusleri?: UzmanGorus[];
 }
 
@@ -64,6 +65,9 @@ export const bilimselKaynaklar: Record<string, BilimselVeri> = {
       'İstanbul, Kuzey Anadolu Fayı\'nın Marmara Denizi\'nden geçen kolu üzerinde yer almaktadır. ' +
       '1999 Marmara depreminin ardından fay üzerinde biriken enerji nedeniyle ' +
       'yaklaşan büyük bir deprem için beklenti yüksektir.',
+    genelDegerlendirmeEN:
+      'Istanbul lies on the branch of the North Anatolian Fault that passes through the Sea of Marmara. ' +
+      'Energy accumulated on the fault since the 1999 Marmara earthquake means the expectation of a major earthquake approaching is high.',
     kaynaklar: [
       {
         yazar: 'Şengör, A.M.C., Tüysüz, O., İmren, C., Sakınç, M., Eyidoğan, H., Görür, N., Le Pichon, X., Rangin, C.',
@@ -128,6 +132,9 @@ export const bilimselKaynaklar: Record<string, BilimselVeri> = {
       '17 Ağustos 1999\'daki Mw 7.4 Kocaeli depremi, KAF\'ın İzmit körfezi segmentinin kırılmasıyla ' +
       'meydana gelmiş; 17.000\'den fazla kişi hayatını kaybetmiştir. ' +
       'Fay hattı şehrin tam altından geçmektedir.',
+    genelDegerlendirmeEN:
+      'The Mw 7.4 Kocaeli earthquake on 17 August 1999 was caused by the rupture of the NAF\'s Izmit Bay segment, ' +
+      'killing more than 17,000 people. The fault line runs directly beneath the city.',
     kaynaklar: [
       {
         yazar: 'Barka, A., Akyüz, H.S., Altunel, E., Sunal, G., Çakır, Z., Dikbaş, A. ve diğ.',
@@ -164,6 +171,9 @@ export const bilimselKaynaklar: Record<string, BilimselVeri> = {
       'Sakarya, 1999 Kocaeli depreminden en çok etkilenen illerden biridir. ' +
       'Adapazarı ovasının alüvyal zemini deprem sırasında yoğun sıvılaşmaya neden olmuş, ' +
       'binalar zemine gömülmüştür.',
+    genelDegerlendirmeEN:
+      'Sakarya was one of the provinces most severely affected by the 1999 Kocaeli earthquake. ' +
+      'The alluvial soil of the Adapazarı plain caused intense liquefaction during the earthquake, causing buildings to sink into the ground.',
     kaynaklar: [
       {
         yazar: 'Youd, T.L., Idriss, I.M.',
@@ -190,6 +200,9 @@ export const bilimselKaynaklar: Record<string, BilimselVeri> = {
     genelDegerlendirme:
       'Bursa, KAF\'ın güney kolu olan İznik-Mekece fayına yakın konumdadır. ' +
       'İznik ve Gemlik körfezi çevresi özellikle riskli bölgelerdir.',
+    genelDegerlendirmeEN:
+      'Bursa is located near the Iznik-Mekece fault, the southern branch of the NAF. ' +
+      'The areas around Lake Iznik and the Gulf of Gemlik are particularly high-risk zones.',
     kaynaklar: [
       {
         yazar: 'Özdemir, Ş., Tüysüz, O.',
@@ -216,6 +229,9 @@ export const bilimselKaynaklar: Record<string, BilimselVeri> = {
     genelDegerlendirme:
       'Balıkesir, Yenice-Gönen fayı ile KAF\'ın Marmara güneyindeki uzantıları arasında yer almaktadır. ' +
       'Bandırma ve Erdek çevresi Marmara depremine karşı kırılgan bölgelerdir.',
+    genelDegerlendirmeEN:
+      'Balıkesir lies between the Yenice-Gönen fault and the southern Marmara extensions of the NAF. ' +
+      'The areas around Bandırma and Erdek are vulnerable to a Marmara earthquake.',
     kaynaklar: [
       {
         yazar: 'Altınok, Y., Ersoy, Ş.',
@@ -233,6 +249,9 @@ export const bilimselKaynaklar: Record<string, BilimselVeri> = {
     genelDegerlendirme:
       'Samsun, KAF\'ın doğu uzantısı bölgesinde yer almakta, risk diğer şehirlere kıyasla daha düşüktür. ' +
       'Bununla birlikte tarihsel dönemde bölgede M6+ depremler kaydedilmiştir.',
+    genelDegerlendirmeEN:
+      'Samsun is located in the region of the eastern extension of the NAF, with lower risk compared to other cities. ' +
+      'Nevertheless, historical M6+ earthquakes have been recorded in the region.',
     kaynaklar: [
       {
         yazar: 'Guidoboni, E., Comastri, A.',
@@ -276,6 +295,9 @@ export const bilimselKaynaklar: Record<string, BilimselVeri> = {
       '6 Şubat 2023\'te Pazarcık (Mw 7.8) ve Elbistan (Mw 7.7) olmak üzere iki yıkıcı deprem ' +
       'Doğu Anadolu Fayı\'nın farklı segmentlerini kırmıştır. ' +
       '50.000\'i aşkın kişinin hayatını kaybettiği bu depremler, Türkiye tarihinin en büyük afeti olarak kayıtlara geçmiştir.',
+    genelDegerlendirmeEN:
+      'On 6 February 2023, two devastating earthquakes — Pazarcık (Mw 7.8) and Elbistan (Mw 7.7) — ruptured different segments of the East Anatolian Fault. ' +
+      'With over 50,000 lives lost, these earthquakes are recorded as the deadliest disaster in Turkey\'s history.',
     zemin: [
       { ad: 'Alüvyon', yuzde: 55, risk: 'yuksek', aciklama: 'Nehir taşkın ovası, sıvılaşma riski yüksek' },
       { ad: 'Genç çökel', yuzde: 30, risk: 'yuksek', aciklama: 'Amplifikasyon riski var' },
@@ -324,6 +346,10 @@ export const bilimselKaynaklar: Record<string, BilimselVeri> = {
       'Hatay, Doğu Anadolu Fayı\'nın Amanos segmenti üzerinde yer almaktadır. ' +
       '6 Şubat 2023 depremi Antakya\'yı büyük ölçüde tahrip etmiş; ' +
       'şehir merkezi neredeyse tamamen yıkılmıştır.',
+    genelDegerlendirmeEN:
+      'Hatay sits on the Amanos segment of the East Anatolian Fault. ' +
+      'The February 6, 2023 earthquake devastated Antakya; ' +
+      'the city center was almost completely destroyed.',
     kaynaklar: [
       {
         yazar: 'Yönlü, Ö., Güneç Kıyak, N., Yıldırım, C.',
@@ -351,6 +377,9 @@ export const bilimselKaynaklar: Record<string, BilimselVeri> = {
     genelDegerlendirme:
       'Adıyaman, DAF\'ın Pazarcık segmentine çok yakın konumuyla 6 Şubat 2023\'te ağır hasar almıştır. ' +
       'Merkez ilçe ile Kahta, en fazla can kaybı yaşanan bölgeler arasındadır.',
+    genelDegerlendirmeEN:
+      'Adıyaman suffered severe damage on February 6, 2023, due to its proximity to the Pazarcık segment of the EAF. ' +
+      'The central district and Kahta are among the areas with the highest death tolls.',
     kaynaklar: [
       {
         yazar: 'AFAD',
@@ -379,6 +408,10 @@ export const bilimselKaynaklar: Record<string, BilimselVeri> = {
       'Malatya, DAF\'ın Sürgü segmenti üzerinde yer almaktadır. ' +
       '6 Şubat 2023\'teki ikinci büyük deprem (Mw 7.7) Elbistan merkezli olup ' +
       'Malatya\'yı özellikle Battalgazi ve Yeşilyurt\'ta ağır biçimde etkilemiştir.',
+    genelDegerlendirmeEN:
+      'Malatya lies on the Sürgü segment of the EAF. ' +
+      'The second major earthquake on February 6, 2023 (Mw 7.7), centered in Elbistan, ' +
+      'severely affected Malatya — particularly the Battalgazi and Yeşilyurt districts.',
     kaynaklar: [
       {
         yazar: 'Karakaş, A., Doğan, B.',
@@ -404,6 +437,9 @@ export const bilimselKaynaklar: Record<string, BilimselVeri> = {
     genelDegerlendirme:
       'Gaziantep, DAF\'ın batı koluna yakın konumda olup 6 Şubat 2023\'ten ciddi biçimde etkilenmiştir. ' +
       'Nurdağı ve İslahiye ilçeleri fay hattına en yakın bölgelerdir.',
+    genelDegerlendirmeEN:
+      'Gaziantep is located near the western branch of the EAF and was seriously affected by the February 6, 2023 earthquakes. ' +
+      'The Nurdağı and İslahiye districts are closest to the fault line.',
     kaynaklar: [
       {
         yazar: 'Emre, Ö., Duman, T.Y., Özalp, S., Şaroğlu, F., Olgun, Ş., Elmacı, H., Çan, T.',
@@ -421,6 +457,9 @@ export const bilimselKaynaklar: Record<string, BilimselVeri> = {
     genelDegerlendirme:
       'Şanlıurfa, DAF\'ın güney uzantılarına daha uzak konumda olup 6 Şubat depreminden nispeten daha az etkilenmiştir. ' +
       'Yine de orta düzeyde sismik risk barındırmaktadır.',
+    genelDegerlendirmeEN:
+      'Şanlıurfa is farther from the southern extensions of the EAF and was relatively less affected by the February 6 earthquake. ' +
+      'It still carries a moderate level of seismic risk.',
     kaynaklar: [],
   },
 
@@ -428,12 +467,17 @@ export const bilimselKaynaklar: Record<string, BilimselVeri> = {
     genelDegerlendirme:
       'Diyarbakır, DAF\'ın kuzey uzantılarından etkilenmektedir. ' +
       '6 Şubat 2023 depremlerinde görece uzak konumda olmasına karşın hasar kaydedilmiştir.',
+    genelDegerlendirmeEN:
+      'Diyarbakır is affected by the northern extensions of the EAF. ' +
+      'Despite being relatively distant, damage was recorded in the February 6, 2023 earthquakes.',
     kaynaklar: [],
   },
 
   'Kilis': {
     genelDegerlendirme:
       'Kilis, DAF\'a yakın küçük bir il olup 6 Şubat 2023\'te önemli hasar görmüştür.',
+    genelDegerlendirmeEN:
+      'Kilis is a small province close to the EAF that suffered significant damage on February 6, 2023.',
     kaynaklar: [],
   },
 
@@ -441,6 +485,9 @@ export const bilimselKaynaklar: Record<string, BilimselVeri> = {
     genelDegerlendirme:
       'Osmaniye, DAF üzerindedir ve 6 Şubat 2023\'te şiddetli sarsıntı yaşamıştır. ' +
       'Toprakkale ve Merkez, fay hattına en yakın yerleşimlerdir.',
+    genelDegerlendirmeEN:
+      'Osmaniye sits on the EAF and experienced intense shaking on February 6, 2023. ' +
+      'Toprakkale and the central district are the settlements closest to the fault line.',
     kaynaklar: [],
   },
 
@@ -448,6 +495,9 @@ export const bilimselKaynaklar: Record<string, BilimselVeri> = {
     genelDegerlendirme:
       'Adana, DAF\'ın güney ucuna yakın konumda olup Ceyhan ilçesi özellikle risk altındadır. ' +
       '6 Şubat 2023\'te hasar kaydedilmiş, tarihsel dönemde de büyük depremler yaşanmıştır.',
+    genelDegerlendirmeEN:
+      'Adana is located near the southern tip of the EAF; the Ceyhan district is particularly at risk. ' +
+      'Damage was recorded on February 6, 2023, and major historical earthquakes have also struck the region.',
     kaynaklar: [
       {
         yazar: 'Ambraseys, N., Finkel, C.',
@@ -477,6 +527,12 @@ export const bilimselKaynaklar: Record<string, BilimselVeri> = {
       'özellikle Bayraklı ilçesinde alüvyal zemin üzerindeki çok katlı binalar çökmüştür. ' +
       'İzmir Körfezi çevresindeki aktif normal faylar şehir için süregelen bir risk oluşturmaktadır. ' +
       'Kaynak: AFAD Türkiye Deprem Tehlike Haritası 2018; Sözbilir vd. aktif tektonik çalışmaları.',
+    genelDegerlendirmeEN:
+      'İzmir lies within the extensional tectonic regime of the Aegean region. ' +
+      'The Mw 7.0 Samos earthquake on October 30, 2020 caused major damage in İzmir; ' +
+      'multi-story buildings on alluvial soil in the Bayraklı district collapsed. ' +
+      'Active normal faults around the Gulf of İzmir represent an ongoing risk for the city. ' +
+      'Source: AFAD Turkey Earthquake Hazard Map 2018; Sözbilir et al. active tectonics studies.',
     zemin: [
       { ad: 'Alüvyon', yuzde: 55, risk: 'yuksek', aciklama: '2020 depreminde en fazla hasar alüvyal zemin üzerinde oluştu' },
       { ad: 'Killi zemin', yuzde: 30, risk: 'orta', aciklama: 'Orta zemin büyütme riski' },
@@ -510,6 +566,10 @@ export const bilimselKaynaklar: Record<string, BilimselVeri> = {
       'Bölge görece düşük-orta sismik risk taşımakla birlikte, Kıbrıs yayı ile ilişkili faylar ' +
       'zaman zaman orta büyüklükte depremler üretmektedir. ' +
       'Kaynak: AFAD Türkiye Deprem Tehlike Haritası 2018.',
+    genelDegerlendirmeEN:
+      'Antalya is influenced by the complex tectonic structure of the Mediterranean basin. ' +
+      'The region carries relatively low-to-moderate seismic risk, though faults associated with the Cyprus arc ' +
+      'occasionally produce moderate-sized earthquakes.',
     kaynaklar: [
       {
         yazar: 'Gülen, L., Pınar, A., Kalafat, D., Özel, N., Horasan, G., Yılmazer, M., Işıkara, A.M.',
@@ -529,6 +589,10 @@ export const bilimselKaynaklar: Record<string, BilimselVeri> = {
       'Fethiye-Burdur fayı ve Bodrum-Kos fayı başta olmak üzere birçok aktif fay ile kuşatılmıştır. ' +
       'Tarihsel dönemde Bodrum ve Fethiye çevresinde yıkıcı depremler yaşanmıştır. ' +
       'Kaynak: AFAD Türkiye Deprem Tehlike Haritası 2018; MTA Aktif Fay Haritası.',
+    genelDegerlendirmeEN:
+      'Muğla lies within the dense tectonic fault system of southwestern Anatolia. ' +
+      'It is surrounded by multiple active faults, most notably the Fethiye-Burdur fault and the Bodrum-Kos fault. ' +
+      'Destructive earthquakes have historically occurred around Bodrum and Fethiye.',
     kaynaklar: [
       {
         yazar: 'Emre, Ö., Duman, T.Y., Özalp, S. ve diğ.',
@@ -549,6 +613,10 @@ export const bilimselKaynaklar: Record<string, BilimselVeri> = {
       'Bu graben sistemi, Ege genişleme tektoniğinin bir parçası olarak aktif deformasyon göstermekte; ' +
       'tarihsel dönemde Denizli çevresinde birçok yıkıcı deprem kaydedilmiştir. ' +
       'Kaynak: AFAD Türkiye Deprem Tehlike Haritası 2018; MTA Aktif Fay Haritası.',
+    genelDegerlendirmeEN:
+      'Denizli lies in the eastern part of the Büyük Menderes Graben. ' +
+      'This graben system shows active deformation as part of the Aegean extensional tectonics; ' +
+      'multiple destructive earthquakes have been recorded around Denizli throughout history.',
     kaynaklar: [
       {
         yazar: 'Bozkurt, E.',
@@ -569,6 +637,10 @@ export const bilimselKaynaklar: Record<string, BilimselVeri> = {
       'Bu segment, 12 Kasım 1999 Düzce depremi (Mw 7.2) sırasında kısmen kırılmıştır. ' +
       'Gerede ilçesi fay hattına son derece yakın konumdadır. ' +
       'Kaynak: AFAD Türkiye Deprem Tehlike Haritası 2018.',
+    genelDegerlendirmeEN:
+      'Bolu lies on the Bolu-Düzce segment of the North Anatolian Fault. ' +
+      'This segment was partially ruptured during the Mw 7.2 Düzce earthquake on November 12, 1999. ' +
+      'The Gerede district is extremely close to the fault line.',
     kaynaklar: [
       {
         yazar: 'Barka, A., Akyüz, H.S., Altunel, E., Sunal, G., Çakır, Z., Dikbaş, A. ve diğ.',
@@ -599,6 +671,10 @@ export const bilimselKaynaklar: Record<string, BilimselVeri> = {
       'KAF\'ın Düzce segmenti şehrin tam altından geçmektedir. ' +
       'Alüvyal ova zemini, zemin büyütmesi ve sıvılaşma riski açısından kritik önem taşımaktadır. ' +
       'Kaynak: AFAD Türkiye Deprem Tehlike Haritası 2018.',
+    genelDegerlendirmeEN:
+      'Düzce was struck by an Mw 7.2 earthquake on November 12, 1999. ' +
+      'The Düzce segment of the NAF runs directly beneath the city. ' +
+      'The alluvial plain soil is critically important for ground amplification and liquefaction risk.',
     kaynaklar: [
       {
         yazar: 'Bolu, İ., Özalp, S., Üçer, S.B.',
@@ -621,6 +697,11 @@ export const bilimselKaynaklar: Record<string, BilimselVeri> = {
       'Beklenen maksimum büyüklük Mw 6.0–6.5 düzeyinde olmakla birlikte ' +
       'eski yapı stoğu ve kentsel yoğunluk bölgesel riski artırmaktadır. ' +
       'Kaynak: AFAD Türkiye Deprem Tehlike Haritası 2018.',
+    genelDegerlendirmeEN:
+      'Ankara sits in the relatively moderate seismic environment of Central Anatolia. ' +
+      'The Haymana and Polatlı fault zones pass through the south and southwest. ' +
+      'While the expected maximum magnitude is around Mw 6.0–6.5, ' +
+      'old building stock and urban density increase regional risk.',
     kaynaklar: [{ yazar: 'AFAD', yil: 2018, baslik: 'Türkiye Deprem Tehlike Haritası', link: 'https://deprem.afad.gov.tr' }],
   },
 
@@ -631,6 +712,10 @@ export const bilimselKaynaklar: Record<string, BilimselVeri> = {
       'Gediz ve Salihli-Turgutlu koridorları yüksek fay yoğunluğuna sahiptir. ' +
       'Bölgede Mw 6.5–7.0 büyüklüğünde deprem üretme potansiyeli sürmektedir. ' +
       'Kaynak: AFAD / MTA Aktif Fay Haritası 2012.',
+    genelDegerlendirmeEN:
+      'Manisa lies on the Gediz Graben; this active normal fault system produced the 1969 Alaşehir-Salihli earthquake (Mw 6.9). ' +
+      'The Gediz and Salihli-Turgutlu corridors have high fault density. ' +
+      'The potential to produce earthquakes of Mw 6.5–7.0 magnitude persists in the region.',
     kaynaklar: [{ yazar: 'Emre, Ö. ve ark.', yil: 2012, baslik: 'Türkiye Aktif Fay Haritası', dergi: 'MTA Özel Yayın', link: 'https://www.mta.gov.tr' }],
   },
 
@@ -641,6 +726,11 @@ export const bilimselKaynaklar: Record<string, BilimselVeri> = {
       'Söke, Nazilli ve Germencik ilçeleri fay hatlarına yakın konumdadır. ' +
       'Bölgede orta-yüksek sismik tehlike söz konusudur. ' +
       'Kaynak: AFAD Türkiye Deprem Tehlike Haritası 2018.',
+    genelDegerlendirmeEN:
+      'Aydın lies on the dense normal fault system extending along the Büyük Menderes Graben. ' +
+      'The 2020 İzmir earthquake (Mw 6.9) occurred on the Seferihisar fault within this system. ' +
+      'The Söke, Nazilli and Germencik districts are close to the fault lines. ' +
+      'The region faces moderate-to-high seismic hazard.',
     kaynaklar: [{ yazar: 'AFAD', yil: 2018, baslik: 'Türkiye Deprem Tehlike Haritası', link: 'https://deprem.afad.gov.tr' }],
   },
 
@@ -651,6 +741,11 @@ export const bilimselKaynaklar: Record<string, BilimselVeri> = {
       'beklenen büyük Marmara depremi senaryolarında doğrudan etki alanına sokmaktadır. ' +
       'Özellikle sahil şeridindeki alüvyal zeminler şiddet büyütmesi açısından risk taşımaktadır. ' +
       'Kaynak: AFAD Türkiye Deprem Tehlike Haritası 2018.',
+    genelDegerlendirmeEN:
+      'Tekirdağ is located near the branch of the North Anatolian Fault passing through the Sea of Marmara. ' +
+      'The fault geometry between the southern Marmara and the Gulf of Saros places Tekirdağ directly in the impact zone ' +
+      'of expected major Marmara earthquake scenarios. ' +
+      'Alluvial soils along the coast are particularly at risk for intensity amplification.',
     kaynaklar: [{ yazar: 'AFAD', yil: 2018, baslik: 'Türkiye Deprem Tehlike Haritası', link: 'https://deprem.afad.gov.tr' }],
   },
 
@@ -660,6 +755,10 @@ export const bilimselKaynaklar: Record<string, BilimselVeri> = {
       'Bu fay segmenti tarihsel dönemde Mw 6.5 büyüklüğüne ulaşan depremler üretmiştir. ' +
       'Porsuk nehri vadisi boyunca uzanan alüvyal dolgu alanları zemin büyütmesi riski taşımaktadır. ' +
       'Kaynak: AFAD / MTA Aktif Fay Haritası 2012.',
+    genelDegerlendirmeEN:
+      'Eskişehir sits on the Eskişehir Fault, the northern branch of the North Anatolian Fault. ' +
+      'This fault segment has historically produced earthquakes reaching Mw 6.5. ' +
+      'Alluvial fill areas along the Porsuk River valley carry ground amplification risk.',
     kaynaklar: [{ yazar: 'Emre, Ö. ve ark.', yil: 2012, baslik: 'Türkiye Aktif Fay Haritası', dergi: 'MTA Özel Yayın', link: 'https://www.mta.gov.tr' }],
   },
 
@@ -670,6 +769,11 @@ export const bilimselKaynaklar: Record<string, BilimselVeri> = {
       'doğu-güneybatıdan etki alanına girebilir. ' +
       'Yatay zemin ve görece sağlam yapı temelinin getirdiği avantaj bölgeyi daha güvenli kılmaktadır. ' +
       'Kaynak: AFAD Türkiye Deprem Tehlike Haritası 2018.',
+    genelDegerlendirmeEN:
+      'Konya lies in the relatively low seismic activity inner zone of Central Anatolia. ' +
+      'While the region is distant from active faults, the Sultandağı and Beyşehir fault systems ' +
+      'may affect it from the east-southwest. ' +
+      'Flat terrain and relatively solid building foundations make the region comparatively safer.',
     kaynaklar: [{ yazar: 'AFAD', yil: 2018, baslik: 'Türkiye Deprem Tehlike Haritası', link: 'https://deprem.afad.gov.tr' }],
   },
 
@@ -680,6 +784,10 @@ export const bilimselKaynaklar: Record<string, BilimselVeri> = {
       'Akdeniz kıyısındaki sahil ovası alüvyal dolgu zeminleri zemin büyütmesi açısından ' +
       'yerel bir risk faktörü oluşturmaktadır. ' +
       'Kaynak: AFAD Türkiye Deprem Tehlike Haritası 2018.',
+    genelDegerlendirmeEN:
+      'Mersin falls within the influence of the northern extension of the Dead Sea Fault System and the southern branches of the EAF. ' +
+      'Crustal strain is observed around Tarsus and Erdemli. ' +
+      'Alluvial fill soils along the Mediterranean coastal plain represent a local ground amplification risk factor.',
     kaynaklar: [{ yazar: 'AFAD', yil: 2018, baslik: 'Türkiye Deprem Tehlike Haritası', link: 'https://deprem.afad.gov.tr' }],
   },
 
@@ -691,6 +799,10 @@ export const bilimselKaynaklar: Record<string, BilimselVeri> = {
       'Fay hattı Van gölünün doğu ve kuzeyinden geçmekte; ' +
       'bölge yüksek deprem tehlikesini korumaktadır. ' +
       'Kaynak: AFAD / Doğan et al. (2014), BSSA.',
+    genelDegerlendirmeEN:
+      'Van lies in an active seismic belt associated with the Van Fault, which produced Mw 7.1 and Mw 5.6 earthquakes on October 23 and November 9, 2011, respectively. ' +
+      'Poor building stock in Erciş and Edremit contributed to the death toll. ' +
+      'The fault line passes east and north of Lake Van; the region remains under high seismic hazard.',
     kaynaklar: [
       { yazar: 'Doğan, U. ve ark.', yil: 2014, baslik: 'Uzay jeodezisi ve sismoloji ile 2011 Van depremi', dergi: 'BSSA', doi: '10.1785/0120120158' },
       { yazar: 'AFAD', yil: 2018, baslik: 'Türkiye Deprem Tehlike Haritası', link: 'https://deprem.afad.gov.tr' },
@@ -703,7 +815,12 @@ export const bilimselKaynaklar: Record<string, BilimselVeri> = {
       '24 Ocak 2020\'de Sivrice-Elazığ depremi (Mw 6.8) bu fay üzerinde oluşmuş; ' +
       '41 kişi hayatını kaybetmiş, 1607 kişi yaralanmıştır. ' +
       'Fay segmenti 2020 depreminden önce birkaç yüzyıldır enerji biriktiriyordu; ' +
-      'bölge güncelliğini koruyan yüksek sismik tehlike altındadır. ' +
+      'bölge güncelliğini koruyan yüksek sismik tehlike altındadır. ',
+    genelDegerlendirmeEN:
+      'Elazığ lies on the Sivrice segment of the East Anatolian Fault. ' +
+      'The Sivrice-Elazığ earthquake (Mw 6.8) on January 24, 2020 occurred on this fault, killing 41 people and injuring 1,607. ' +
+      'The fault segment had been accumulating energy for several centuries before the 2020 earthquake; ' +
+      'the region remains under high seismic hazard. ' +
       'Kaynak: Işık et al. (2020), Seismological Research Letters.',
     kaynaklar: [
       { yazar: 'Işık, E. ve ark.', yil: 2020, baslik: '2020 Elazığ (Sivrice) Depremi yapısal analizi', dergi: 'Seismological Research Letters', doi: '10.1785/0220200172' },
@@ -718,6 +835,10 @@ export const bilimselKaynaklar: Record<string, BilimselVeri> = {
       'Erzurum şehir merkezi ile ilçelerinde zemin koşulları ve yapı kalitesi ' +
       'sismik riski belirleyen en önemli etkenler arasındadır. ' +
       'Kaynak: Kandilli Rasathanesi / AFAD 2018.',
+    genelDegerlendirmeEN:
+      'Erzurum is a high-risk city located between the North and East Anatolian fault systems, surrounded by the Horasan-Erzurum fault zone. ' +
+      'The Horasan-Narman earthquake (Mw 6.9) on October 30, 1983 killed 1,155 people in the region. ' +
+      'Soil conditions and building quality in Erzurum\'s city center and districts are among the key factors determining seismic risk.',
     kaynaklar: [{ yazar: 'AFAD', yil: 2018, baslik: 'Türkiye Deprem Tehlike Haritası', link: 'https://deprem.afad.gov.tr' }],
   },
 
@@ -729,6 +850,10 @@ export const bilimselKaynaklar: Record<string, BilimselVeri> = {
       'kentsel alanlarda sekonder risk oluşturmaktadır. ' +
       'Bölge, Ege veya Marmara gibi yüksek riskli alanlara kıyasla ılımlı bir tehlike kuşağındadır. ' +
       'Kaynak: AFAD Türkiye Deprem Tehlike Haritası 2018.',
+    genelDegerlendirmeEN:
+      'Trabzon is relatively distant from the northern sea branch of the NAF, though local fault activity is observed along the Eastern Black Sea coastline. ' +
+      'Landslides from mountainous topography and ground liquefaction, combined with seismic intensity, create secondary urban risk. ' +
+      'The region is in a moderate hazard zone compared to high-risk areas like the Aegean or Marmara.',
     kaynaklar: [{ yazar: 'AFAD', yil: 2018, baslik: 'Türkiye Deprem Tehlike Haritası', link: 'https://deprem.afad.gov.tr' }],
   },
 
@@ -740,6 +865,11 @@ export const bilimselKaynaklar: Record<string, BilimselVeri> = {
       'Bölgede yüksek Mw\'ye ulaşan fay segmenti bulunmamakla birlikte, ' +
       'uzak kaynaklı sarsıntılar da riskin bir parçasıdır. ' +
       'Kaynak: AFAD Türkiye Deprem Tehlike Haritası 2018.',
+    genelDegerlendirmeEN:
+      'Kayseri lies within the volcanic geology of Central Anatolia and has relatively moderate fault activity. ' +
+      'The Develi and Bünyan districts are adjacent to the nearest fault lines in the region. ' +
+      'Geothermal activity is also observed around Mount Erciyes. ' +
+      'While there are no fault segments capable of very high Mw in the area, distant-source shaking is also part of the risk.',
     kaynaklar: [{ yazar: 'AFAD', yil: 2018, baslik: 'Türkiye Deprem Tehlike Haritası', link: 'https://deprem.afad.gov.tr' }],
   },
 
@@ -750,6 +880,11 @@ export const bilimselKaynaklar: Record<string, BilimselVeri> = {
       'Gökçeada ve Bozcaada çevresinde deniz altı fayları da gözlemlenmektedir. ' +
       'Tarihsel dönemde Çan-Yenice hattında önemli depremler yaşanmıştır. ' +
       'Kaynak: AFAD / MTA Aktif Fay Haritası 2012.',
+    genelDegerlendirmeEN:
+      'Çanakkale is located near the Marmara and Aegean-extending branches of the North Anatolian Fault. ' +
+      'The Yenice-Gönen fault zone and Aegean extensional tectonics affect the region; ' +
+      'submarine faults are also observed around Gökçeada and Bozcaada. ' +
+      'Significant historical earthquakes have occurred along the Çan-Yenice line.',
     kaynaklar: [{ yazar: 'Emre, Ö. ve ark.', yil: 2012, baslik: 'Türkiye Aktif Fay Haritası', dergi: 'MTA Özel Yayın', link: 'https://www.mta.gov.tr' }],
   },
 
@@ -760,6 +895,11 @@ export const bilimselKaynaklar: Record<string, BilimselVeri> = {
       '1971 Bingöl depremi (Mw 6.8) ile 2003 Bingöl depremi (Mw 6.4) bu riskin somut örnekleridir. ' +
       'Karlıova çevresinde yoğunlaşan fay aktivitesi sürmektedir. ' +
       'Kaynak: Kandilli Rasathanesi / AFAD 2018.',
+    genelDegerlendirmeEN:
+      'Bingöl lies very close to the Karlıova triple junction where the North and East Anatolian faults meet, ' +
+      'placing it in one of Turkey\'s highest seismic hazard belts. ' +
+      'The 1971 Bingöl earthquake (Mw 6.8) and the 2003 Bingöl earthquake (Mw 6.4) are concrete examples of this risk. ' +
+      'Fault activity concentrated around Karlıova continues.',
     kaynaklar: [{ yazar: 'AFAD', yil: 2018, baslik: 'Türkiye Deprem Tehlike Haritası', link: 'https://deprem.afad.gov.tr' }],
   },
 
@@ -770,6 +910,10 @@ export const bilimselKaynaklar: Record<string, BilimselVeri> = {
       '44 kişi hayatını kaybetmiştir. ' +
       'Sultandağı ve Sandıklı fay zonları ilin güneybatısından geçmektedir. ' +
       'Kaynak: Kandilli Rasathanesi / AFAD 2018.',
+    genelDegerlendirmeEN:
+      'Afyonkarahisar lies within the normal fault network formed by the Western Anatolian extensional tectonic regime. ' +
+      'The Sultandağı earthquake (Mw 6.5) on February 3, 2002 deeply affected Afyon, killing 44 people. ' +
+      'The Sultandağı and Sandıklı fault zones pass through the southwest of the province.',
     kaynaklar: [{ yazar: 'AFAD', yil: 2018, baslik: 'Türkiye Deprem Tehlike Haritası', link: 'https://deprem.afad.gov.tr' }],
   },
 
@@ -790,6 +934,11 @@ export const bilimselKaynaklar: Record<string, BilimselVeri> = {
       'beklenen İstanbul-Marmara depremi senaryolarında da yüksek etki alanı içinde kalmaktadır. ' +
       'Çınarcık fayı şehre çok yakın geçmektedir. ' +
       'Kaynak: AFAD Türkiye Deprem Tehlike Haritası 2018.',
+    genelDegerlendirmeEN:
+      'Yalova is very close to the southern Marmara branch of the NAF. ' +
+      'Severely damaged in the August 17, 1999 earthquake, Yalova also remains in the high-impact zone ' +
+      'for expected Istanbul-Marmara earthquake scenarios. ' +
+      'The Çınarcık fault passes very close to the city.',
     kaynaklar: [
       {
         yazar: 'Parsons, T.',
