@@ -9,7 +9,11 @@ import { depremAnindaOnlemler, depremSonrasiOnlemler } from '@/data/depremOnleml
 import { useLanguage } from '@/contexts/LanguageContext';
 import { IL_KOORDINATLARI } from '@/lib/ilKoordinatlari';
 import type { BolgeRisk, ZeminTipi } from '@/types';
-import { Globe, Search } from 'lucide-react';
+import { Globe, Search, ShieldCheck, EyeOff, Ban, TreePine, Car, DoorOpen, Waves, Flame, HeartPulse, Construction } from 'lucide-react';
+import type { LucideIcon } from 'lucide-react';
+
+const ANINDA_ICONS: LucideIcon[] = [ShieldCheck, EyeOff, Ban, TreePine, Car, DoorOpen];
+const SONRASI_ICONS: LucideIcon[] = [Waves, Flame, HeartPulse, Construction];
 
 const BolgeHaritasi = dynamic(() => import('@/components/BolgeHaritasi'), { ssr: false });
 const KonumSecHaritasi = dynamic(() => import('@/components/KonumSecHaritasi'), { ssr: false });
@@ -776,27 +780,37 @@ export default function BolgeAnalizi() {
       <div className="bg-[var(--card-bg)] rounded-2xl shadow-sm border border-[var(--border)] p-4">
         <p className="text-xs font-bold text-[var(--muted)] uppercase tracking-wide mb-3">{t('depremAnindaTitle')}</p>
         <div className="space-y-2 mb-4">
-          {depremAnindaOnlemler.map((o) => (
+          {depremAnindaOnlemler.map((o, i) => {
+            const Icon = ANINDA_ICONS[i];
+            return (
             <div key={o.adim} className="flex items-start gap-3 border border-[var(--border)] rounded-xl p-3 bg-gray-50 dark:bg-gray-800/50">
-              <span className="w-7 h-7 rounded-full bg-red-100 dark:bg-red-900/30 text-red-600 text-xs font-bold flex items-center justify-center shrink-0">{o.adim}</span>
+              <span className="w-9 h-9 rounded-xl bg-red-100 dark:bg-red-900/30 text-red-600 flex items-center justify-center shrink-0">
+                <Icon size={18} strokeWidth={1.8} />
+              </span>
               <div>
                 <p className="text-xs font-bold text-[var(--foreground)]">{lang === 'EN' ? o.baslikEN : o.baslik}</p>
                 <p className="text-[11px] text-[var(--muted)] leading-relaxed mt-0.5">{lang === 'EN' ? o.aciklamaEN : o.aciklama}</p>
               </div>
             </div>
-          ))}
+            );
+          })}
         </div>
         <p className="text-xs font-bold text-[var(--muted)] uppercase tracking-wide mb-2">{t('depremSonrasindaTitle')}</p>
         <div className="space-y-2">
-          {depremSonrasiOnlemler.map((o) => (
+          {depremSonrasiOnlemler.map((o, i) => {
+            const Icon = SONRASI_ICONS[i];
+            return (
             <div key={o.adim} className="flex items-start gap-3 border border-[var(--border)] rounded-xl p-3 bg-gray-50 dark:bg-gray-800/50">
-              <span className="w-7 h-7 rounded-full bg-red-100 dark:bg-red-900/30 text-red-600 text-xs font-bold flex items-center justify-center shrink-0">{o.adim}</span>
+              <span className="w-9 h-9 rounded-xl bg-red-100 dark:bg-red-900/30 text-red-600 flex items-center justify-center shrink-0">
+                <Icon size={18} strokeWidth={1.8} />
+              </span>
               <div>
                 <p className="text-xs font-bold text-[var(--foreground)]">{lang === 'EN' ? o.baslikEN : o.baslik}</p>
                 <p className="text-[11px] text-[var(--muted)] leading-relaxed mt-0.5">{lang === 'EN' ? o.aciklamaEN : o.aciklama}</p>
               </div>
             </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </div>

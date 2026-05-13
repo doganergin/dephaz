@@ -2,7 +2,11 @@
 import Link from 'next/link';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { depremAnindaOnlemler, depremSonrasiOnlemler, kaynaklar } from '@/data/depremOnlemleri';
-import { Backpack, Users, Globe } from 'lucide-react';
+import { Backpack, Users, Globe, ShieldCheck, EyeOff, Ban, TreePine, Car, DoorOpen, Waves, Flame, HeartPulse, Construction } from 'lucide-react';
+import type { LucideIcon } from 'lucide-react';
+
+const ANINDA_ICONS: LucideIcon[] = [ShieldCheck, EyeOff, Ban, TreePine, Car, DoorOpen];
+const SONRASI_ICONS: LucideIcon[] = [Waves, Flame, HeartPulse, Construction];
 
 export default function DepremAnindaPage() {
   const { lang } = useLanguage();
@@ -45,9 +49,13 @@ export default function DepremAnindaPage() {
           {TR ? 'Deprem Sırasında' : 'During the Earthquake'}
         </h2>
         <div className="space-y-2">
-          {depremAnindaOnlemler.map((o) => (
+          {depremAnindaOnlemler.map((o, i) => {
+            const Icon = ANINDA_ICONS[i];
+            return (
             <div key={o.adim} className="flex items-start gap-3 bg-[var(--card-bg)] border border-[var(--border)] rounded-xl p-3 glow-card glow-red">
-              <span className="w-7 h-7 rounded-full bg-red-100 dark:bg-red-900/30 text-red-600 text-xs font-bold flex items-center justify-center shrink-0">{o.adim}</span>
+              <span className="w-9 h-9 rounded-xl bg-red-100 dark:bg-red-900/30 text-red-600 flex items-center justify-center shrink-0">
+                <Icon size={18} strokeWidth={1.8} />
+              </span>
               <div>
                 <p className="text-xs font-bold text-[var(--foreground)]">
                   {TR ? o.baslik : o.baslikEN}
@@ -57,7 +65,8 @@ export default function DepremAnindaPage() {
                 </p>
               </div>
             </div>
-          ))}
+            );
+          })}
         </div>
       </section>
 
@@ -67,9 +76,13 @@ export default function DepremAnindaPage() {
           {TR ? 'Deprem Sonrasında' : 'After the Earthquake'}
         </h2>
         <div className="space-y-2">
-          {depremSonrasiOnlemler.map((o) => (
+          {depremSonrasiOnlemler.map((o, i) => {
+            const Icon = SONRASI_ICONS[i];
+            return (
             <div key={o.adim} className="flex items-start gap-3 bg-[var(--card-bg)] border border-[var(--border)] rounded-xl p-3 glow-card glow-red">
-              <span className="w-7 h-7 rounded-full bg-red-100 dark:bg-red-900/30 text-red-600 text-xs font-bold flex items-center justify-center shrink-0">{o.adim}</span>
+              <span className="w-9 h-9 rounded-xl bg-red-100 dark:bg-red-900/30 text-red-600 flex items-center justify-center shrink-0">
+                <Icon size={18} strokeWidth={1.8} />
+              </span>
               <div>
                 <p className="text-xs font-bold text-[var(--foreground)]">
                   {TR ? o.baslik : o.baslikEN}
@@ -79,7 +92,8 @@ export default function DepremAnindaPage() {
                 </p>
               </div>
             </div>
-          ))}
+            );
+          })}
         </div>
       </section>
 
