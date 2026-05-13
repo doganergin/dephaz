@@ -778,7 +778,7 @@ export default function BolgeAnalizi() {
         <div className="space-y-2 mb-4">
           {depremAnindaOnlemler.map((o) => (
             <div key={o.adim} className="flex items-start gap-3 border border-[var(--border)] rounded-xl p-3 bg-gray-50 dark:bg-gray-800/50">
-              <span className="text-xl shrink-0">{o.ikon}</span>
+              <span className="w-7 h-7 rounded-full bg-red-100 dark:bg-red-900/30 text-red-600 text-xs font-bold flex items-center justify-center shrink-0">{o.adim}</span>
               <div>
                 <p className="text-xs font-bold text-[var(--foreground)]">{lang === 'EN' ? o.baslikEN : o.baslik}</p>
                 <p className="text-[11px] text-[var(--muted)] leading-relaxed mt-0.5">{lang === 'EN' ? o.aciklamaEN : o.aciklama}</p>
@@ -790,7 +790,7 @@ export default function BolgeAnalizi() {
         <div className="space-y-2">
           {depremSonrasiOnlemler.map((o) => (
             <div key={o.adim} className="flex items-start gap-3 border border-[var(--border)] rounded-xl p-3 bg-gray-50 dark:bg-gray-800/50">
-              <span className="text-xl shrink-0">{o.ikon}</span>
+              <span className="w-7 h-7 rounded-full bg-red-100 dark:bg-red-900/30 text-red-600 text-xs font-bold flex items-center justify-center shrink-0">{o.adim}</span>
               <div>
                 <p className="text-xs font-bold text-[var(--foreground)]">{lang === 'EN' ? o.baslikEN : o.baslik}</p>
                 <p className="text-[11px] text-[var(--muted)] leading-relaxed mt-0.5">{lang === 'EN' ? o.aciklamaEN : o.aciklama}</p>
