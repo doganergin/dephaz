@@ -7,6 +7,8 @@ import { useUser, SignInButton, UserButton } from '@clerk/nextjs';
 import ThemeToggle from './ThemeToggle';
 import LanguageToggle from './LanguageToggle';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { Home, MapPin, Globe, ScrollText, FlaskConical, Backpack, Users, Activity } from 'lucide-react';
+import type { LucideIcon } from 'lucide-react';
 
 export default function NavBar() {
   const path = usePathname();
@@ -15,14 +17,14 @@ export default function NavBar() {
   const [menuAcik, setMenuAcik] = useState(false);
   const TR = lang === 'TR';
 
-  const tools = [
-    { href: '/',              icon: '🏠', tr: 'Ana Sayfa',          en: 'Home' },
-    { href: '/bolge-analizi', icon: '🗺️', tr: t('navBolgeAnalizi'), en: t('navBolgeAnalizi') },
-    { href: '/harita',        icon: '🌍', tr: t('navHarita'),        en: t('navHarita') },
-    { href: '/tarihsel',      icon: '📜', tr: t('navTarihsel'),      en: t('navTarihsel') },
-    { href: '/uzman',         icon: '🔬', tr: t('navUzman'),         en: t('navUzman') },
-    { href: '/canta',         icon: '🎒', tr: t('navDepremCantasi'), en: t('navDepremCantasi') },
-    { href: '/aile-plani',    icon: '👨‍👩‍👧', tr: 'Aile Planı',          en: 'Family Plan' },
+  const tools: { href: string; Icon: LucideIcon; tr: string; en: string }[] = [
+    { href: '/',              Icon: Home,        tr: 'Ana Sayfa',          en: 'Home' },
+    { href: '/bolge-analizi', Icon: MapPin,      tr: t('navBolgeAnalizi'), en: t('navBolgeAnalizi') },
+    { href: '/harita',        Icon: Globe,       tr: t('navHarita'),        en: t('navHarita') },
+    { href: '/tarihsel',      Icon: ScrollText,  tr: t('navTarihsel'),      en: t('navTarihsel') },
+    { href: '/uzman',         Icon: FlaskConical,tr: t('navUzman'),         en: t('navUzman') },
+    { href: '/canta',         Icon: Backpack,    tr: t('navDepremCantasi'), en: t('navDepremCantasi') },
+    { href: '/aile-plani',    Icon: Users,       tr: 'Aile Planı',          en: 'Family Plan' },
   ];
 
   const rehber = [
@@ -41,7 +43,7 @@ export default function NavBar() {
     { href: '/gizlilik',   tr: 'Gizlilik Politikası', en: 'Privacy Policy' },
   ];
 
-  const navItem = (href: string, label: string, icon?: string) => (
+  const navItem = (href: string, label: string, Icon?: LucideIcon) => (
     <Link
       key={href}
       href={href}
@@ -52,7 +54,7 @@ export default function NavBar() {
           : 'text-[var(--foreground)] hover:bg-gray-50 dark:hover:bg-gray-800/50'
       }`}
     >
-      {icon && <span className="text-base w-5 text-center">{icon}</span>}
+      {Icon && <Icon size={17} strokeWidth={1.8} className="shrink-0" />}
       <span>{label}</span>
     </Link>
   );
@@ -160,7 +162,7 @@ export default function NavBar() {
             <p className="text-[10px] font-semibold text-[var(--muted)] uppercase tracking-wide px-3 mb-1.5">
               {TR ? 'Araçlar' : 'Tools'}
             </p>
-            {tools.map((t) => navItem(t.href, TR ? t.tr : t.en, t.icon))}
+            {tools.map((t) => navItem(t.href, TR ? t.tr : t.en, t.Icon))}
           </div>
 
           <div className="border-t border-[var(--border)] mx-3 my-3" />

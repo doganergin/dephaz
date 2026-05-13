@@ -2,6 +2,8 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { MapPin, Globe, ScrollText, FlaskConical, Backpack, Activity, Users, Bell, Sparkles } from 'lucide-react';
+import type { LucideIcon } from 'lucide-react';
 
 interface LatestEq { buyukluk: number; konum: string; tarih: string; derinlik: number; kaynak?: string; }
 
@@ -54,24 +56,15 @@ export default function HomePage() {
     fetchEqs();
   }, []);
 
-  const features = TR ? [
-    { href: '/bolge-analizi', icon: '🗺️', title: 'Bölge Analizi', desc: 'İl, ilçe ve mahalle seçerek fay mesafesi, zemin yapısı ve deprem risk skorunu öğrenin.', color: 'red' },
-    { href: '/harita', icon: '🌍', title: 'Canlı Deprem Haritası', desc: 'Kandilli, AFAD ve USGS verilerini gerçek zamanlı haritada izleyin.', color: 'blue' },
-    { href: '/tarihsel', icon: '📜', title: 'Tarihsel Depremler', desc: "Osmanlı'dan günümüze Türkiye'nin büyük deprem tarihini inceleyin.", color: 'purple' },
-    { href: '/uzman', icon: '🔬', title: 'Uzman Görüşleri', desc: 'Seismologların ve jeologların bilimsel değerlendirmelerini okuyun.', color: 'green' },
-    { href: '/canta', icon: '🎒', title: 'Deprem Çantası', desc: '72 saatlik acil durum çantası için kontrol listesi oluşturun.', color: 'amber' },
-    { href: '/fay-hatlari', icon: '🔴', title: 'Aktif Fay Haritası', desc: "Türkiye'deki aktif fay hatlarını ve büyük tarihi depremleri interaktif haritada görün.", color: 'orange' },
-    { href: '/aile-plani', icon: '👨‍👩‍👧', title: 'Aile Acil Durum Planı', desc: 'Acil iletişim kişileri, buluşma noktası ve 72 saatlik çanta durumunuzu kaydedin.', color: 'red' },
-    { href: '#', icon: '🔔', title: 'Yakında', desc: 'Yeni özellikler geliyor…', color: 'gray', coming: true },
-  ] : [
-    { href: '/bolge-analizi', icon: '🗺️', title: 'Risk Analysis', desc: 'Select province, district and neighbourhood to find fault distance, soil type, and risk score.', color: 'red' },
-    { href: '/harita', icon: '🌍', title: 'Live Earthquake Map', desc: 'Monitor Kandilli, AFAD and USGS data on a real-time interactive map.', color: 'blue' },
-    { href: '/tarihsel', icon: '📜', title: 'Historical Earthquakes', desc: "Explore Turkey's major earthquake history from the Ottoman era to the present.", color: 'purple' },
-    { href: '/uzman', icon: '🔬', title: 'Expert Opinions', desc: 'Read scientific assessments from seismologists and geologists.', color: 'green' },
-    { href: '/canta', icon: '🎒', title: 'Emergency Kit', desc: 'Build a 72-hour emergency supply checklist for your household.', color: 'amber' },
-    { href: '/fay-hatlari', icon: '🔴', title: 'Active Fault Map', desc: 'See Turkey\'s active fault lines and major historical earthquakes on an interactive map.', color: 'orange' },
-    { href: '/aile-plani', icon: '👨‍👩‍👧', title: 'Family Emergency Plan', desc: 'Save emergency contacts, meeting point and kit status for your family.', color: 'red' },
-    { href: '#', icon: '🔔', title: 'Coming Soon', desc: 'New features on the way…', color: 'gray', coming: true },
+  const features: Array<{ href: string; Icon: LucideIcon; tr: string; en: string; trDesc: string; enDesc: string; color: string; coming?: true }> = [
+    { href: '/bolge-analizi', Icon: MapPin,      tr: 'Bölge Analizi',          en: 'Risk Analysis',         trDesc: 'İl, ilçe ve mahalle seçerek fay mesafesi, zemin yapısı ve deprem risk skorunu öğrenin.', enDesc: 'Select province, district and neighbourhood to find fault distance, soil type, and risk score.', color: 'red' },
+    { href: '/harita',        Icon: Globe,       tr: 'Canlı Deprem Haritası',  en: 'Live Earthquake Map',   trDesc: 'Kandilli, AFAD ve USGS verilerini gerçek zamanlı haritada izleyin.',                       enDesc: 'Monitor Kandilli, AFAD and USGS data on a real-time interactive map.',                        color: 'blue' },
+    { href: '/tarihsel',      Icon: ScrollText,  tr: 'Tarihsel Depremler',     en: 'Historical Earthquakes',trDesc: "Osmanlı'dan günümüze Türkiye'nin büyük deprem tarihini inceleyin.",                         enDesc: "Explore Turkey's major earthquake history from the Ottoman era to the present.",               color: 'purple' },
+    { href: '/uzman',         Icon: FlaskConical,tr: 'Uzman Görüşleri',        en: 'Expert Opinions',       trDesc: 'Seismologların ve jeologların bilimsel değerlendirmelerini okuyun.',                        enDesc: 'Read scientific assessments from seismologists and geologists.',                              color: 'green' },
+    { href: '/canta',         Icon: Backpack,    tr: 'Deprem Çantası',         en: 'Emergency Kit',         trDesc: '72 saatlik acil durum çantası için kontrol listesi oluşturun.',                            enDesc: 'Build a 72-hour emergency supply checklist for your household.',                              color: 'amber' },
+    { href: '/fay-hatlari',   Icon: Activity,    tr: 'Aktif Fay Haritası',     en: 'Active Fault Map',      trDesc: "Türkiye'deki aktif fay hatlarını ve büyük tarihi depremleri interaktif haritada görün.",  enDesc: "See Turkey's active fault lines and major historical earthquakes on an interactive map.",     color: 'orange' },
+    { href: '/aile-plani',    Icon: Users,       tr: 'Aile Acil Durum Planı',  en: 'Family Emergency Plan', trDesc: 'Acil iletişim kişileri, buluşma noktası ve 72 saatlik çanta durumunuzu kaydedin.',          enDesc: 'Save emergency contacts, meeting point and kit status for your family.',                      color: 'red' },
+    { href: '#',              Icon: Bell,        tr: 'Yakında',                en: 'Coming Soon',            trDesc: 'Yeni özellikler geliyor…',                                                                 enDesc: 'New features on the way…',                                                                   color: 'gray', coming: true },
   ];
 
   const colorMap: Record<string, { card: string; icon: string; label: string }> = {
@@ -104,7 +97,7 @@ export default function HomePage() {
             {TR ? 'Türkiye Deprem Bilgi Platformu' : 'Turkey Earthquake Information Platform'}
           </p>
           <span className="inline-flex items-center gap-1 text-[10px] font-semibold px-2 py-0.5 rounded-full bg-violet-100 dark:bg-violet-900/30 text-violet-600 dark:text-violet-400">
-            ✨ {TR ? 'YZ Destekli' : 'AI-Powered'}
+            <Sparkles size={10} /> {TR ? 'YZ Destekli' : 'AI-Powered'}
           </span>
         </div>
         <h1 className="text-2xl font-bold text-[var(--foreground)] mb-2">
@@ -128,7 +121,7 @@ export default function HomePage() {
             {TR ? 'İl ve ilçenizi seçin, risk skorunuzu öğrenin' : 'Select your province and district, find your risk score'}
           </p>
         </div>
-        <span className="text-2xl shrink-0">🗺️</span>
+        <MapPin size={24} className="text-red-400 shrink-0" strokeWidth={1.8} />
       </Link>
 
       {/* Features grid — 2-col mobile, 3-col desktop */}
@@ -142,16 +135,16 @@ export default function HomePage() {
             const coming = 'coming' in f && f.coming;
             if (coming) return (
               <div key={f.href} className={`border rounded-2xl p-3.5 flex flex-col gap-2 opacity-50 cursor-default ${c.card}`}>
-                <div className={`w-9 h-9 rounded-xl flex items-center justify-center text-lg ${c.icon}`}>
-                  {f.icon}
+                <div className={`w-9 h-9 rounded-xl flex items-center justify-center ${c.icon}`}>
+                  <f.Icon size={20} strokeWidth={1.8} />
                 </div>
                 <div className="flex items-center gap-1.5">
-                  <p className={`text-xs font-bold leading-snug ${c.label}`}>{f.title}</p>
+                  <p className={`text-xs font-bold leading-snug ${c.label}`}>{TR ? f.tr : f.en}</p>
                   <span className="text-[9px] font-bold px-1.5 py-0.5 rounded-full bg-amber-100 dark:bg-amber-900/30 text-amber-600 dark:text-amber-400 leading-none">
                     {TR ? 'Yakında' : 'Soon'}
                   </span>
                 </div>
-                <p className="text-[11px] text-[var(--muted)] leading-relaxed">{f.desc}</p>
+                <p className="text-[11px] text-[var(--muted)] leading-relaxed">{TR ? f.trDesc : f.enDesc}</p>
               </div>
             );
             return (
@@ -160,11 +153,11 @@ export default function HomePage() {
                 href={f.href}
                 className={`border rounded-2xl p-3.5 flex flex-col gap-2 glow-card glow-${f.color} ${c.card}`}
               >
-                <div className={`w-9 h-9 rounded-xl flex items-center justify-center text-lg ${c.icon}`}>
-                  {f.icon}
+                <div className={`w-9 h-9 rounded-xl flex items-center justify-center ${c.icon}`}>
+                  <f.Icon size={20} strokeWidth={1.8} />
                 </div>
-                <p className={`text-xs font-bold leading-snug ${c.label}`}>{f.title}</p>
-                <p className="text-[11px] text-[var(--muted)] leading-relaxed">{f.desc}</p>
+                <p className={`text-xs font-bold leading-snug ${c.label}`}>{TR ? f.tr : f.en}</p>
+                <p className="text-[11px] text-[var(--muted)] leading-relaxed">{TR ? f.trDesc : f.enDesc}</p>
               </Link>
             );
           })}
@@ -186,8 +179,8 @@ export default function HomePage() {
         </div>
         <div className="flex gap-0 bg-gray-100 dark:bg-gray-700 rounded-xl overflow-hidden mb-3">
           {([
-            { key: 'tr' as const, label: `🇹🇷 ${TR ? 'Türkiye' : 'Turkey'}` },
-            { key: 'world' as const, label: `🌍 ${TR ? 'Dünya' : 'World'}` },
+            { key: 'tr' as const, label: TR ? 'Türkiye' : 'Turkey' },
+            { key: 'world' as const, label: TR ? 'Dünya' : 'World' },
           ] as const).map((tab) => (
             <button
               key={tab.key}

@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import dynamic from 'next/dynamic';
 import { useUser, SignInButton } from '@clerk/nextjs';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { BarChart2, Phone, Users, MapPin, Backpack, FileText, CreditCard, Printer, Save } from 'lucide-react';
 
 const BulusmaHaritasi = dynamic(() => import('@/components/BulusmaHaritasi'), { ssr: false });
 
@@ -141,7 +142,7 @@ export default function AilePlaniPage() {
 
   if (!isSignedIn) return (
     <div className="flex flex-col items-center justify-center py-20 text-center space-y-5">
-      <div className="w-16 h-16 bg-red-50 dark:bg-red-900/20 rounded-2xl flex items-center justify-center text-3xl">👨‍👩‍👧</div>
+      <div className="w-16 h-16 bg-red-50 dark:bg-red-900/20 rounded-2xl flex items-center justify-center text-red-500"><Users size={32} strokeWidth={1.5} /></div>
       <div>
         <h1 className="text-xl font-bold text-[var(--foreground)] mb-2">{TR ? 'Aile Acil Durum Planı' : 'Family Emergency Plan'}</h1>
         <p className="text-sm text-[var(--muted)] max-w-xs leading-relaxed">
@@ -166,12 +167,12 @@ export default function AilePlaniPage() {
         {/* ── Başlık + butonlar ── */}
         <div className="flex items-start justify-between gap-3">
           <div>
-            <h1 className="text-xl font-bold text-[var(--foreground)]">👨‍👩‍👧 {TR ? 'Aile Acil Durum Planı' : 'Family Emergency Plan'}</h1>
+            <h1 className="text-xl font-bold text-[var(--foreground)] flex items-center gap-2"><Users size={20} strokeWidth={1.8} />{TR ? 'Aile Acil Durum Planı' : 'Family Emergency Plan'}</h1>
             <p className="text-sm text-[var(--muted)] mt-0.5">{TR ? 'Deprem anında ailenizle nasıl iletişime geçeceğinizi planlayın.' : 'Plan how to contact your family during an earthquake.'}</p>
             {plan.guncellendi && <p className="text-[11px] text-[var(--muted)] mt-1">{TR ? 'Son kayıt:' : 'Last saved:'} {plan.guncellendi}</p>}
           </div>
           <div className="flex gap-2 shrink-0 no-print">
-            <button onClick={() => window.print()} className="px-3 py-1.5 text-xs font-semibold rounded-lg border border-[var(--border)] bg-[var(--card-bg)] text-[var(--muted)] hover:text-[var(--foreground)] transition-colors">🖨️</button>
+            <button onClick={() => window.print()} className="px-3 py-1.5 text-xs font-semibold rounded-lg border border-[var(--border)] bg-[var(--card-bg)] text-[var(--muted)] hover:text-[var(--foreground)] transition-colors flex items-center"><Printer size={14} /></button>
             <button onClick={kaydet} disabled={kaydediliyor} className="px-3 py-1.5 text-xs font-semibold rounded-lg bg-red-600 text-white hover:bg-red-700 transition-colors disabled:opacity-50">
               {kaydediliyor ? '…' : (TR ? 'Kaydet' : 'Save')}
             </button>
@@ -184,7 +185,7 @@ export default function AilePlaniPage() {
         <section className="bg-[var(--card-bg)] border border-[var(--border)] rounded-2xl p-4 glow-card glow-green">
           <div className="flex items-center justify-between mb-3">
             <div className="flex items-center gap-2">
-              <span className="w-7 h-7 bg-green-100 dark:bg-green-900/30 rounded-lg flex items-center justify-center text-sm">📊</span>
+              <span className="w-7 h-7 bg-green-100 dark:bg-green-900/30 rounded-lg flex items-center justify-center text-green-600"><BarChart2 size={15} strokeWidth={1.8} /></span>
               <h2 className="text-sm font-bold text-[var(--foreground)]">{TR ? 'Plan Tamamlanma' : 'Plan Completion'}</h2>
             </div>
             <span className="text-2xl font-black" style={{ color: skorRenk }}>{skor}%</span>
@@ -212,7 +213,7 @@ export default function AilePlaniPage() {
         {/* ── 2. Acil İletişim Kişileri ── */}
         <section className="bg-[var(--card-bg)] border border-[var(--border)] rounded-2xl p-4 space-y-4 glow-card glow-red">
           <div className="flex items-center gap-2">
-            <span className="w-7 h-7 bg-red-100 dark:bg-red-900/30 rounded-lg flex items-center justify-center text-sm">📞</span>
+            <span className="w-7 h-7 bg-red-100 dark:bg-red-900/30 rounded-lg flex items-center justify-center text-red-600"><Phone size={15} strokeWidth={1.8} /></span>
             <h2 className="text-sm font-bold text-[var(--foreground)]">{TR ? 'Acil İletişim Kişileri' : 'Emergency Contacts'}</h2>
           </div>
           {plan.contacts.length === 0 && <p className="text-xs text-[var(--muted)] italic">{TR ? 'Henüz kişi eklenmedi.' : 'No contacts yet.'}</p>}
@@ -250,7 +251,7 @@ export default function AilePlaniPage() {
         {/* ── 3. Aile Üyeleri ── */}
         <section className="bg-[var(--card-bg)] border border-[var(--border)] rounded-2xl p-4 space-y-4 glow-card glow-purple">
           <div className="flex items-center gap-2">
-            <span className="w-7 h-7 bg-purple-100 dark:bg-purple-900/30 rounded-lg flex items-center justify-center text-sm">👥</span>
+            <span className="w-7 h-7 bg-purple-100 dark:bg-purple-900/30 rounded-lg flex items-center justify-center text-purple-600"><Users size={15} strokeWidth={1.8} /></span>
             <h2 className="text-sm font-bold text-[var(--foreground)]">{TR ? 'Aile Üyeleri & Konumları' : 'Family Members & Locations'}</h2>
           </div>
           <p className="text-[11px] text-[var(--muted)]">{TR ? 'Deprem anında kimin nerede olduğunu bilin.' : 'Know where each family member typically is.'}</p>
@@ -329,7 +330,7 @@ export default function AilePlaniPage() {
         {/* ── 4. Buluşma Noktası + Harita ── */}
         <section className="bg-[var(--card-bg)] border border-[var(--border)] rounded-2xl p-4 space-y-3 glow-card glow-blue">
           <div className="flex items-center gap-2">
-            <span className="w-7 h-7 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center text-sm">📍</span>
+            <span className="w-7 h-7 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center text-blue-600"><MapPin size={15} strokeWidth={1.8} /></span>
             <h2 className="text-sm font-bold text-[var(--foreground)]">{TR ? 'Buluşma Noktası' : 'Meeting Point'}</h2>
           </div>
           <p className="text-[11px] text-[var(--muted)]">
@@ -359,7 +360,7 @@ export default function AilePlaniPage() {
         {/* ── 5. Deprem Çantası ── */}
         <section className="bg-[var(--card-bg)] border border-[var(--border)] rounded-2xl p-4 space-y-3 glow-card glow-amber">
           <div className="flex items-center gap-2">
-            <span className="w-7 h-7 bg-amber-100 dark:bg-amber-900/30 rounded-lg flex items-center justify-center text-sm">🎒</span>
+            <span className="w-7 h-7 bg-amber-100 dark:bg-amber-900/30 rounded-lg flex items-center justify-center text-amber-600"><Backpack size={15} strokeWidth={1.8} /></span>
             <h2 className="text-sm font-bold text-[var(--foreground)]">{TR ? '72 Saatlik Çanta Durumu' : '72-Hour Kit Status'}</h2>
           </div>
           {cantaOzet && cantaOzet.tamamlanan > 0 ? (
@@ -381,7 +382,7 @@ export default function AilePlaniPage() {
         {/* ── 6. Ek Notlar ── */}
         <section className="bg-[var(--card-bg)] border border-[var(--border)] rounded-2xl p-4 space-y-3 glow-card glow-green">
           <div className="flex items-center gap-2">
-            <span className="w-7 h-7 bg-green-100 dark:bg-green-900/30 rounded-lg flex items-center justify-center text-sm">📝</span>
+            <span className="w-7 h-7 bg-green-100 dark:bg-green-900/30 rounded-lg flex items-center justify-center text-green-600"><FileText size={15} strokeWidth={1.8} /></span>
             <h2 className="text-sm font-bold text-[var(--foreground)]">{TR ? 'Ek Notlar' : 'Additional Notes'}</h2>
           </div>
           <textarea value={plan.notlar} onChange={(e) => setPlan((p) => ({ ...p, notlar: e.target.value }))} rows={3}
@@ -393,7 +394,7 @@ export default function AilePlaniPage() {
         <section className="bg-[var(--card-bg)] border border-[var(--border)] rounded-2xl p-4 space-y-3 glow-card glow-orange">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
-              <span className="w-7 h-7 bg-orange-100 dark:bg-orange-900/30 rounded-lg flex items-center justify-center text-sm">💳</span>
+              <span className="w-7 h-7 bg-orange-100 dark:bg-orange-900/30 rounded-lg flex items-center justify-center text-orange-600"><CreditCard size={15} strokeWidth={1.8} /></span>
               <h2 className="text-sm font-bold text-[var(--foreground)]">{TR ? 'Cüzdan Acil Kartı' : 'Wallet Emergency Card'}</h2>
             </div>
             <button onClick={() => setKartGoster((v) => !v)} className="text-xs text-orange-500 font-semibold hover:underline no-print">
@@ -422,7 +423,7 @@ export default function AilePlaniPage() {
                 <p className="text-[9px] text-[var(--muted)] font-mono">{plan.bulusmaLat.toFixed(4)}, {plan.bulusmaLon.toFixed(4)}</p>
               )}
               <button onClick={() => window.print()} className="w-full mt-1 py-1.5 text-[11px] font-semibold bg-orange-500 text-white rounded-lg hover:bg-orange-600 transition-colors no-print">
-                🖨️ {TR ? 'Yazdır' : 'Print'}
+                <Printer size={13} className="inline mr-1" /> {TR ? 'Yazdır' : 'Print'}
               </button>
             </div>
           )}
@@ -431,9 +432,9 @@ export default function AilePlaniPage() {
         {/* ── Alt kaydet butonu ── */}
         <div className="flex gap-3 no-print">
           <button onClick={kaydet} disabled={kaydediliyor} className="flex-1 py-3 text-sm font-bold bg-red-600 text-white rounded-2xl hover:bg-red-700 transition-colors disabled:opacity-50">
-            {kaydediliyor ? (TR ? 'Kaydediliyor…' : 'Saving…') : (TR ? '💾 Planı Kaydet' : '💾 Save Plan')}
+            {kaydediliyor ? (TR ? 'Kaydediliyor…' : 'Saving…') : <span className="flex items-center justify-center gap-1.5"><Save size={15} />{TR ? 'Planı Kaydet' : 'Save Plan'}</span>}
           </button>
-          <button onClick={() => window.print()} className="px-5 py-3 text-sm font-semibold border border-[var(--border)] bg-[var(--card-bg)] text-[var(--muted)] rounded-2xl hover:text-[var(--foreground)] transition-colors">🖨️</button>
+          <button onClick={() => window.print()} className="px-5 py-3 text-sm font-semibold border border-[var(--border)] bg-[var(--card-bg)] text-[var(--muted)] rounded-2xl hover:text-[var(--foreground)] transition-colors flex items-center"><Printer size={16} /></button>
         </div>
 
         <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-100 dark:border-blue-800 rounded-xl p-3">
