@@ -95,10 +95,10 @@ export default function NavBar() {
               <Image
                 src="/logo.png"
                 alt="Deprem Hattı"
-                width={160}
-                height={40}
+                width={1448}
+                height={1086}
                 className="object-contain shrink-0"
-                style={{ maxHeight: '40px', width: 'auto' }}
+                style={{ height: '36px', width: 'auto' }}
               />
             </Link>
 
@@ -138,7 +138,7 @@ export default function NavBar() {
         {/* Drawer header */}
         <div className="flex items-center justify-between px-4 py-4 border-b border-[var(--border)] shrink-0">
           <div className="flex items-center">
-            <Image src="/logo.png" alt="Deprem Hattı" width={160} height={40} className="object-contain" style={{ maxHeight: '36px', width: 'auto' }} />
+            <Image src="/logo.png" alt="Deprem Hattı" width={1448} height={1086} className="object-contain" style={{ height: '32px', width: 'auto' }} />
           </div>
           <button
             onClick={() => setMenuAcik(false)}

@@ -22,8 +22,11 @@ export const metadata: Metadata = {
   ],
   metadataBase: new URL("https://depremhatti.com"),
   icons: {
-    icon: "/logo.png",
-    apple: "/logo.png",
+    icon: [
+      { url: "/favicon-32.png", sizes: "32x32", type: "image/png" },
+      { url: "/favicon-512.png", sizes: "512x512", type: "image/png" },
+    ],
+    apple: "/favicon-512.png",
   },
   openGraph: {
     title: "Deprem Hattı — Deprem Risk Analizi ve Hazırlık Rehberi",
