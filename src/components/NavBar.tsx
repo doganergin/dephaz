@@ -28,6 +28,7 @@ export default function NavBar() {
   ];
 
   const rehber = [
+    { href: '/blog',                   tr: 'Blog & Makaleler',               en: 'Blog & Articles' },
     { href: '/deprem-nedir',           tr: 'Deprem Nedir?',                 en: 'What Is an Earthquake?' },
     { href: '/depreme-hazirlik',       tr: 'Depreme Hazırlık',              en: 'Earthquake Preparedness' },
     { href: '/deprem-aninda',          tr: 'Deprem Anında Ne Yapmalı?',      en: 'What to Do in an Earthquake?' },
