@@ -2,7 +2,7 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { MapPin, Globe, ScrollText, FlaskConical, Backpack, Activity, Users, Bell, Sparkles } from 'lucide-react';
+import { MapPin, Globe, ScrollText, FlaskConical, Backpack, Activity, Users, Phone, ShieldCheck, HeartPulse, Sparkles } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
 
 interface LatestEq { buyukluk: number; konum: string; tarih: string; derinlik: number; kaynak?: string; }
@@ -63,8 +63,10 @@ export default function HomePage() {
     { href: '/uzman',         Icon: FlaskConical,tr: 'Uzman Görüşleri',        en: 'Expert Opinions',       trDesc: 'Seismologların ve jeologların bilimsel değerlendirmelerini okuyun.',                        enDesc: 'Read scientific assessments from seismologists and geologists.',                              color: 'green' },
     { href: '/canta',         Icon: Backpack,    tr: 'Deprem Çantası',         en: 'Emergency Kit',         trDesc: '72 saatlik acil durum çantası için kontrol listesi oluşturun.',                            enDesc: 'Build a 72-hour emergency supply checklist for your household.',                              color: 'amber' },
     { href: '/fay-hatlari',   Icon: Activity,    tr: 'Aktif Fay Haritası',     en: 'Active Fault Map',      trDesc: "Türkiye'deki aktif fay hatlarını ve büyük tarihi depremleri interaktif haritada görün.",  enDesc: "See Turkey's active fault lines and major historical earthquakes on an interactive map.",     color: 'orange' },
-    { href: '/aile-plani',    Icon: Users,       tr: 'Aile Acil Durum Planı',  en: 'Family Emergency Plan', trDesc: 'Acil iletişim kişileri, buluşma noktası ve 72 saatlik çanta durumunuzu kaydedin.',          enDesc: 'Save emergency contacts, meeting point and kit status for your family.',                      color: 'red' },
-    { href: '#',              Icon: Bell,        tr: 'Yakında',                en: 'Coming Soon',            trDesc: 'Yeni özellikler geliyor…',                                                                 enDesc: 'New features on the way…',                                                                   color: 'gray', coming: true },
+    { href: '/aile-plani',     Icon: Users,       tr: 'Aile Acil Durum Planı',  en: 'Family Emergency Plan',  trDesc: 'Acil iletişim kişileri, buluşma noktası ve 72 saatlik çanta durumunuzu kaydedin.',         enDesc: 'Save emergency contacts, meeting point and kit status for your family.',                      color: 'red' },
+    { href: '/acil-numaralar', Icon: Phone,       tr: 'Acil Numaralar',         en: 'Emergency Numbers',      trDesc: '112, 122, AFAD ve tüm kritik hatlar — tek dokunuşla arama.',                             enDesc: '112, 122, AFAD and all critical lines — call with one tap.',                                  color: 'orange' },
+    { href: '/ilk-yardim',     Icon: HeartPulse, tr: 'İlk Yardım Rehberi',     en: 'First Aid Guide',        trDesc: 'Bilinç kontrolü, kanama durdurma, CPR temelleri ve enkaz yaralanmaları.',                enDesc: 'Consciousness check, bleeding control, basic CPR, and debris injuries.',                      color: 'green' },
+    { href: '/dask',           Icon: ShieldCheck, tr: 'DASK Deprem Sigortası',  en: 'DASK Insurance',         trDesc: 'Zorunlu deprem sigortası: kapsam, prim ve poliçe sorgulama rehberi.',                    enDesc: 'Mandatory earthquake insurance: coverage, premium and policy query guide.',                   color: 'blue' },
   ];
 
   const colorMap: Record<string, { card: string; icon: string; label: string }> = {
@@ -81,11 +83,13 @@ export default function HomePage() {
     { href: '/deprem-nedir',           tr: 'Deprem Nedir? Nasıl Oluşur?',           en: 'What Is an Earthquake?' },
     { href: '/depreme-hazirlik',       tr: 'Depreme Hazırlık Rehberi',               en: 'Earthquake Preparedness Guide' },
     { href: '/deprem-aninda',          tr: 'Deprem Anında Ne Yapmalı?',               en: 'What to Do in an Earthquake?' },
+    { href: '/enkaz-altinda',          tr: 'Enkaz Altında Hayatta Kalma',            en: 'Surviving Under Debris' },
+    { href: '/ilk-yardim',             tr: 'Deprem Sonrası İlk Yardım',              en: 'First Aid After Earthquake' },
     { href: '/turkiyede-deprem-riski', tr: "Türkiye'de Deprem Riski",                en: 'Earthquake Risk in Turkey' },
     { href: '/fay-hatlari',            tr: 'Türkiye\'deki Fay Hatları',              en: 'Fault Lines in Turkey' },
     { href: '/zemin-tipleri',          tr: 'Zemin Tipleri ve Deprem Riski',          en: 'Soil Types and Earthquake Risk' },
     { href: '/deprem-cantasi-rehberi', tr: '72 Saatlik Deprem Çantası Rehberi',      en: '72-Hour Earthquake Kit Guide' },
-    { href: '/aile-plani',            tr: 'Aile Acil Durum Planı',                  en: 'Family Emergency Plan' },
+    { href: '/dask',                   tr: 'DASK Zorunlu Deprem Sigortası',          en: 'DASK Mandatory Earthquake Insurance' },
   ];
 
   return (
