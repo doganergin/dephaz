@@ -15,12 +15,13 @@ export default function HomePage() {
   const [trEqs, setTrEqs] = useState<LatestEq[]>([]);
   const [worldEqs, setWorldEqs] = useState<LatestEq[]>([]);
   const [eqLoading, setEqLoading] = useState(true);
+  const [eqFilter, setEqFilter] = useState(false);
 
   useEffect(() => {
     async function fetchEqs() {
       const [kandilliRes, afadRes, usgsRes] = await Promise.allSettled([
-        fetch('/api/kandilli?limit=20'),
-        fetch('/api/afad?limit=20&minmag=3.5'),
+        fetch('/api/kandilli?limit=50'),
+        fetch('/api/afad?limit=50&minmag=2.0'),
         fetch('/api/usgs'),
       ]);
       const combined: LatestEq[] = [];
@@ -38,11 +39,11 @@ export default function HomePage() {
           buyukluk: x.buyukluk, konum: x.konum, tarih: x.tarih, derinlik: x.derinlik, kaynak: 'AFAD',
         })));
       }
-      setTrEqs(combined.sort((a, b) => b.tarih.localeCompare(a.tarih)).slice(0, 20));
+      setTrEqs(combined.sort((a, b) => b.tarih.localeCompare(a.tarih)).slice(0, 50));
       if (usgsRes.status === 'fulfilled' && usgsRes.value.ok) {
         const d = await usgsRes.value.json();
         if (d.features) {
-          setWorldEqs(d.features.slice(0, 20).map((f: { properties: { mag: number; place: string; time: number }; geometry: { coordinates: [number, number, number] } }) => ({
+          setWorldEqs(d.features.slice(0, 50).map((f: { properties: { mag: number; place: string; time: number }; geometry: { coordinates: [number, number, number] } }) => ({
             buyukluk: f.properties.mag,
             konum: f.properties.place,
             tarih: new Date(f.properties.time).toLocaleString('tr-TR'),
@@ -180,9 +181,21 @@ export default function HomePage() {
           <p className="text-xs font-bold text-[var(--muted)] uppercase tracking-wide">
             {TR ? 'Son Depremler' : 'Latest Earthquakes'}
           </p>
-          <Link href="/harita" className="text-[11px] text-red-500 hover:underline">
-            {TR ? 'Tümünü Gör →' : 'See all →'}
-          </Link>
+          <div className="flex items-center gap-2">
+            <button
+              onClick={() => setEqFilter((v) => !v)}
+              className={`text-[10px] font-bold px-2 py-0.5 rounded-full border transition-colors ${
+                eqFilter
+                  ? 'bg-amber-500 border-amber-500 text-white'
+                  : 'border-[var(--border)] text-[var(--muted)] hover:border-amber-400 hover:text-amber-500'
+              }`}
+            >
+              M4.0+
+            </button>
+            <Link href="/harita" className="text-[11px] text-red-500 hover:underline">
+              {TR ? 'Tümünü Gör →' : 'See all →'}
+            </Link>
+          </div>
         </div>
         <div className="flex gap-0 bg-gray-100 dark:bg-gray-700 rounded-xl overflow-hidden mb-3">
           {([
@@ -208,7 +221,8 @@ export default function HomePage() {
             <span className="text-xs">{TR ? 'Yükleniyor...' : 'Loading...'}</span>
           </div>
         ) : (() => {
-          const eqList = eqTab === 'tr' ? trEqs : worldEqs;
+          const raw = eqTab === 'tr' ? trEqs : worldEqs;
+          const eqList = eqFilter ? raw.filter((d) => d.buyukluk >= 4.0) : raw;
           if (eqList.length === 0) return (
             <p className="text-xs text-[var(--muted)] text-center py-4">{TR ? 'Veri alınamadı' : 'No data available'}</p>
           );
