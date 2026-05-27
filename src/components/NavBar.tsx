@@ -32,6 +32,8 @@ export default function NavBar() {
     { href: '/deprem-nedir',           tr: 'Deprem Nedir?',                 en: 'What Is an Earthquake?' },
     { href: '/depreme-hazirlik',       tr: 'Depreme Hazırlık',              en: 'Earthquake Preparedness' },
     { href: '/deprem-aninda',          tr: 'Deprem Anında Ne Yapmalı?',      en: 'What to Do in an Earthquake?' },
+    { href: '/enkaz-altinda',          tr: 'Enkaz Altında Hayatta Kalma',    en: 'Surviving Under Debris' },
+    { href: '/ilk-yardim',             tr: 'Deprem Sonrası İlk Yardım',      en: 'First Aid After Earthquake' },
     { href: '/turkiyede-deprem-riski', tr: "Türkiye'de Deprem Riski",        en: 'Earthquake Risk in Turkey' },
     { href: '/fay-hatlari',            tr: 'Fay Hatları',                   en: 'Fault Lines' },
     { href: '/zemin-tipleri',          tr: 'Zemin Tipleri',                 en: 'Soil Types' },
@@ -39,9 +41,11 @@ export default function NavBar() {
   ];
 
   const kurumsal = [
-    { href: '/hakkimizda', tr: 'Hakkımızda',        en: 'About Us' },
-    { href: '/iletisim',   tr: 'İletişim',           en: 'Contact' },
-    { href: '/gizlilik',   tr: 'Gizlilik Politikası', en: 'Privacy Policy' },
+    { href: '/hakkimizda',      tr: 'Hakkımızda',           en: 'About Us' },
+    { href: '/iletisim',        tr: 'İletişim',              en: 'Contact' },
+    { href: '/dask',            tr: 'DASK Zorunlu Sigorta',  en: 'DASK Earthquake Insurance' },
+    { href: '/acil-numaralar',  tr: 'Acil Numaralar',        en: 'Emergency Numbers' },
+    { href: '/gizlilik',        tr: 'Gizlilik Politikası',   en: 'Privacy Policy' },
   ];
 
   const navItem = (href: string, label: string, Icon?: LucideIcon) => (
