@@ -224,7 +224,11 @@ export default function HomePage() {
           const raw = eqTab === 'tr' ? trEqs : worldEqs;
           const eqList = eqFilter ? raw.filter((d) => d.buyukluk >= 4.0) : raw;
           if (eqList.length === 0) return (
-            <p className="text-xs text-[var(--muted)] text-center py-4">{TR ? 'Veri alınamadı' : 'No data available'}</p>
+            <p className="text-xs text-[var(--muted)] text-center py-4">
+              {eqFilter
+                ? (TR ? 'Son depremler arasında M4.0+ deprem gerçekleşmemiş.' : 'No M4.0+ earthquakes in recent data.')
+                : (TR ? 'Veri alınamadı.' : 'No data available.')}
+            </p>
           );
           const EqRow = ({ d, i }: { d: LatestEq; i: number }) => (
             <div key={i} className="flex items-center gap-2.5 py-1 border-b border-[var(--border)]">
