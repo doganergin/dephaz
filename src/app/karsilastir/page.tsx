@@ -4,11 +4,19 @@ import { useLanguage } from '@/contexts/LanguageContext';
 import { getProvinces, getDistricts } from '@/lib/locationHelper';
 import { bolgeRiskGetir } from '@/api/riskApi';
 import type { BolgeRisk } from '@/types';
+import type { Il, Ilce } from '@/types';
 import { Search, ArrowLeftRight } from 'lucide-react';
 
-interface Slot { il: string; ilce: string; risk: BolgeRisk | null; loading: boolean; }
+interface Slot {
+  ilId: number | null;
+  ilAd: string;
+  ilceId: number | null;
+  ilceAd: string;
+  risk: BolgeRisk | null;
+  loading: boolean;
+}
 
-const EMPTY: Slot = { il: '', ilce: '', risk: null, loading: false };
+const EMPTY: Slot = { ilId: null, ilAd: '', ilceId: null, ilceAd: '', risk: null, loading: false };
 
 function SkorRenk(skor: number) {
   if (skor >= 70) return { text: 'text-red-600', bg: 'bg-red-50 dark:bg-red-900/10', bar: 'bg-red-500' };
@@ -20,39 +28,49 @@ function BolgeSecici({
   slot, onIlChange, onIlceChange, onAra, label,
 }: {
   slot: Slot;
-  onIlChange: (il: string) => void;
-  onIlceChange: (ilce: string) => void;
+  onIlChange: (il: Il) => void;
+  onIlceChange: (ilce: Ilce) => void;
   onAra: () => void;
   label: string;
 }) {
   const { lang } = useLanguage();
   const TR = lang === 'TR';
-  const iller = getProvinces();
-  const ilceler = slot.il ? getDistricts(slot.il) : [];
+  const iller: Il[] = getProvinces();
+  const ilceler: Ilce[] = slot.ilId !== null ? getDistricts(slot.ilId) : [];
 
   return (
     <div className="space-y-2">
       <p className="text-xs font-bold text-[var(--muted)] uppercase tracking-wide">{label}</p>
       <select
-        value={slot.il}
-        onChange={(e) => onIlChange(e.target.value)}
+        value={slot.ilId ?? ''}
+        onChange={(e) => {
+          const found = iller.find((il) => il.id === Number(e.target.value));
+          if (found) onIlChange(found);
+        }}
         className="w-full text-sm border border-[var(--border)] rounded-xl px-3 py-2 bg-[var(--card-bg)] text-[var(--foreground)]"
       >
         <option value="">{TR ? 'İl seçin' : 'Select province'}</option>
-        {iller.map((il) => <option key={il} value={il}>{il}</option>)}
+        {iller.map((il) => (
+          <option key={il.id} value={il.id}>{il.name}</option>
+        ))}
       </select>
       <select
-        value={slot.ilce}
-        onChange={(e) => onIlceChange(e.target.value)}
-        disabled={!slot.il}
+        value={slot.ilceId ?? ''}
+        onChange={(e) => {
+          const found = ilceler.find((ilce) => ilce.id === Number(e.target.value));
+          if (found) onIlceChange(found);
+        }}
+        disabled={slot.ilId === null}
         className="w-full text-sm border border-[var(--border)] rounded-xl px-3 py-2 bg-[var(--card-bg)] text-[var(--foreground)] disabled:opacity-40"
       >
         <option value="">{TR ? 'İlçe seçin' : 'Select district'}</option>
-        {ilceler.map((ilce) => <option key={ilce} value={ilce}>{ilce}</option>)}
+        {ilceler.map((ilce) => (
+          <option key={ilce.id} value={ilce.id}>{ilce.name}</option>
+        ))}
       </select>
       <button
         onClick={onAra}
-        disabled={!slot.il || !slot.ilce || slot.loading}
+        disabled={slot.ilId === null || slot.ilceId === null || slot.loading}
         className="w-full flex items-center justify-center gap-2 py-2 bg-red-500 hover:bg-red-600 text-white text-sm font-semibold rounded-xl disabled:opacity-40 transition-colors"
       >
         {slot.loading ? (
@@ -116,10 +134,10 @@ export default function KarsilastirPage() {
   const ara = useCallback(async (which: 'A' | 'B') => {
     const slot = which === 'A' ? slotA : slotB;
     const setSlot = which === 'A' ? setSlotA : setSlotB;
-    if (!slot.il || !slot.ilce) return;
+    if (!slot.ilAd || !slot.ilceAd) return;
     setSlot((s) => ({ ...s, loading: true, risk: null }));
     try {
-      const risk = await bolgeRiskGetir(slot.il, slot.ilce, '');
+      const risk = await bolgeRiskGetir(slot.ilAd, slot.ilceAd, '');
       setSlot((s) => ({ ...s, loading: false, risk }));
     } catch {
       setSlot((s) => ({ ...s, loading: false }));
@@ -149,8 +167,8 @@ export default function KarsilastirPage() {
         <div className="bg-[var(--card-bg)] border border-[var(--border)] rounded-2xl p-4">
           <BolgeSecici
             slot={slotA}
-            onIlChange={(il) => setSlotA({ ...EMPTY, il })}
-            onIlceChange={(ilce) => setSlotA((s) => ({ ...s, ilce }))}
+            onIlChange={(il) => setSlotA({ ...EMPTY, ilId: il.id, ilAd: il.name })}
+            onIlceChange={(ilce) => setSlotA((s) => ({ ...s, ilceId: ilce.id, ilceAd: ilce.name }))}
             onAra={() => ara('A')}
             label={TR ? 'Birinci Bölge' : 'First Region'}
           />
@@ -166,8 +184,8 @@ export default function KarsilastirPage() {
         <div className="bg-[var(--card-bg)] border border-[var(--border)] rounded-2xl p-4">
           <BolgeSecici
             slot={slotB}
-            onIlChange={(il) => setSlotB({ ...EMPTY, il })}
-            onIlceChange={(ilce) => setSlotB((s) => ({ ...s, ilce }))}
+            onIlChange={(il) => setSlotB({ ...EMPTY, ilId: il.id, ilAd: il.name })}
+            onIlceChange={(ilce) => setSlotB((s) => ({ ...s, ilceId: ilce.id, ilceAd: ilce.name }))}
             onAra={() => ara('B')}
             label={TR ? 'İkinci Bölge' : 'Second Region'}
           />
