@@ -93,9 +93,6 @@ export default function HomePage() {
     { href: '/zemin-tipleri',          tr: 'Zemin Tipleri ve Deprem Riski',          en: 'Soil Types and Earthquake Risk' },
     { href: '/deprem-cantasi-rehberi', tr: '72 Saatlik Deprem Çantası Rehberi',      en: '72-Hour Earthquake Kit Guide' },
     { href: '/dask',                   tr: 'DASK Zorunlu Deprem Sigortası',          en: 'DASK Mandatory Earthquake Insurance' },
-    { href: '/hazirlik-testi',         tr: 'Depreme Hazırlık Testini Yap',           en: 'Take the Preparedness Quiz' },
-    { href: '/karsilastir',            tr: 'İki Bölgeyi Karşılaştır',                en: 'Compare Two Regions' },
-    { href: '/bildirimler',            tr: 'Anlık Deprem Bildirimleri',               en: 'Real-Time Earthquake Alerts' },
   ];
 
   return (
@@ -231,7 +228,7 @@ export default function HomePage() {
             </div>
           );
           return (
-            <div className="eq-ticker-wrap overflow-hidden h-[280px] relative">
+            <div className="eq-ticker-wrap overflow-hidden h-[400px] relative">
               {/* üst fade */}
               <div className="absolute top-0 left-0 right-0 h-6 bg-gradient-to-b from-[var(--card-bg)] to-transparent z-10 pointer-events-none" />
               {/* alt fade */}
