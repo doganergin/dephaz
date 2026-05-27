@@ -241,8 +241,10 @@ export default function HomePage() {
               </div>
             </div>
           );
+          const ROW_H = 44;
+          const tickerH = Math.min(400, eqList.length * ROW_H);
           return (
-            <div className="eq-ticker-wrap overflow-hidden h-[400px] relative">
+            <div className="eq-ticker-wrap overflow-hidden relative" style={{ height: tickerH }}>
               {/* üst fade */}
               <div className="absolute top-0 left-0 right-0 h-6 bg-gradient-to-b from-[var(--card-bg)] to-transparent z-10 pointer-events-none" />
               {/* alt fade */}
