@@ -118,3 +118,15 @@ body {
 .dark .glow-row:hover, .black .glow-row:hover {
   background-color: rgba(255, 255, 255, 0.04);
 }
+
+/* ── Deprem ticker (otomatik kayan bant) ─────────────────────────────────── */
+@keyframes eq-scroll-up {
+  0%   { transform: translateY(0); }
+  100% { transform: translateY(-50%); }
+}
+.eq-ticker-track {
+  animation: eq-scroll-up 22s linear infinite;
+}
+.eq-ticker-wrap:hover .eq-ticker-track {
+  animation-play-state: paused;
+}

@@ -210,29 +210,45 @@ export default function HomePage() {
             <div className="w-4 h-4 border-2 border-red-400 border-t-transparent rounded-full animate-spin" />
             <span className="text-xs">{TR ? 'Yükleniyor...' : 'Loading...'}</span>
           </div>
-        ) : (
-          <div className="space-y-2 max-h-[216px] overflow-y-auto">
-            {(eqTab === 'tr' ? trEqs : worldEqs).length === 0 ? (
-              <p className="text-xs text-[var(--muted)] text-center py-4">{TR ? 'Veri alınamadı' : 'No data available'}</p>
-            ) : (
-              (eqTab === 'tr' ? trEqs : worldEqs).map((d, i) => (
-                <div key={i} className="flex items-center gap-3 py-1.5 border-b border-[var(--border)] last:border-0 glow-row">
-                  <div className={`w-10 h-10 rounded-xl flex items-center justify-center text-sm font-bold shrink-0 ${
-                    d.buyukluk >= 6 ? 'bg-red-50 dark:bg-red-900/30 text-red-600' :
-                    d.buyukluk >= 4 ? 'bg-amber-50 dark:bg-amber-900/30 text-amber-600' :
-                    'bg-gray-50 dark:bg-gray-700 text-gray-500'
-                  }`}>
-                    {d.buyukluk.toFixed(1)}
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <p className="text-xs font-medium text-[var(--foreground)] truncate">{d.konum}</p>
-                    <p className="text-[11px] text-[var(--muted)]">{d.tarih} · {d.derinlik} km · {d.kaynak}</p>
-                  </div>
+        ) : (() => {
+          const eqList = eqTab === 'tr' ? trEqs : worldEqs;
+          if (eqList.length === 0) return (
+            <p className="text-xs text-[var(--muted)] text-center py-4">{TR ? 'Veri alınamadı' : 'No data available'}</p>
+          );
+          const EqRow = ({ d, i }: { d: LatestEq; i: number }) => (
+            <div key={i} className="flex items-center gap-3 py-1.5 border-b border-[var(--border)]">
+              <div className={`w-10 h-10 rounded-xl flex items-center justify-center text-sm font-bold shrink-0 ${
+                d.buyukluk >= 6 ? 'bg-red-50 dark:bg-red-900/30 text-red-600' :
+                d.buyukluk >= 4 ? 'bg-amber-50 dark:bg-amber-900/30 text-amber-600' :
+                'bg-gray-50 dark:bg-gray-700 text-gray-500'
+              }`}>
+                {d.buyukluk.toFixed(1)}
+              </div>
+              <div className="flex-1 min-w-0">
+                <p className="text-xs font-medium text-[var(--foreground)] truncate">{d.konum}</p>
+                <p className="text-[11px] text-[var(--muted)]">{d.tarih} · {d.derinlik} km · {d.kaynak}</p>
+              </div>
+            </div>
+          );
+          return (
+            <div className="eq-ticker-wrap overflow-hidden h-[240px] relative">
+              {/* üst fade */}
+              <div className="absolute top-0 left-0 right-0 h-6 bg-gradient-to-b from-[var(--card-bg)] to-transparent z-10 pointer-events-none" />
+              {/* alt fade */}
+              <div className="absolute bottom-0 left-0 right-0 h-6 bg-gradient-to-t from-[var(--card-bg)] to-transparent z-10 pointer-events-none" />
+              <div className="eq-ticker-track">
+                {/* orijinal liste */}
+                <div className="space-y-0">
+                  {eqList.map((d, i) => <EqRow key={`a-${i}`} d={d} i={i} />)}
                 </div>
-              ))
-            )}
-          </div>
-        )}
+                {/* seamless loop için kopya */}
+                <div className="space-y-0" aria-hidden>
+                  {eqList.map((d, i) => <EqRow key={`b-${i}`} d={d} i={i} />)}
+                </div>
+              </div>
+            </div>
+          );
+        })()}
       </div>
 
       {/* Knowledge guide sidebar on desktop */}
