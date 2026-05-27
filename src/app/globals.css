@@ -125,7 +125,7 @@ body {
   100% { transform: translateY(-50%); }
 }
 .eq-ticker-track {
-  animation: eq-scroll-up 22s linear infinite;
+  animation: eq-scroll-up 35s linear infinite;
 }
 .eq-ticker-wrap:hover .eq-ticker-track {
   animation-play-state: paused;

@@ -38,11 +38,11 @@ export default function HomePage() {
           buyukluk: x.buyukluk, konum: x.konum, tarih: x.tarih, derinlik: x.derinlik, kaynak: 'AFAD',
         })));
       }
-      setTrEqs(combined.sort((a, b) => b.tarih.localeCompare(a.tarih)).slice(0, 10));
+      setTrEqs(combined.sort((a, b) => b.tarih.localeCompare(a.tarih)).slice(0, 20));
       if (usgsRes.status === 'fulfilled' && usgsRes.value.ok) {
         const d = await usgsRes.value.json();
         if (d.features) {
-          setWorldEqs(d.features.slice(0, 10).map((f: { properties: { mag: number; place: string; time: number }; geometry: { coordinates: [number, number, number] } }) => ({
+          setWorldEqs(d.features.slice(0, 20).map((f: { properties: { mag: number; place: string; time: number }; geometry: { coordinates: [number, number, number] } }) => ({
             buyukluk: f.properties.mag,
             konum: f.properties.place,
             tarih: new Date(f.properties.time).toLocaleString('tr-TR'),
@@ -216,8 +216,8 @@ export default function HomePage() {
             <p className="text-xs text-[var(--muted)] text-center py-4">{TR ? 'Veri alınamadı' : 'No data available'}</p>
           );
           const EqRow = ({ d, i }: { d: LatestEq; i: number }) => (
-            <div key={i} className="flex items-center gap-3 py-1.5 border-b border-[var(--border)]">
-              <div className={`w-10 h-10 rounded-xl flex items-center justify-center text-sm font-bold shrink-0 ${
+            <div key={i} className="flex items-center gap-2.5 py-1 border-b border-[var(--border)]">
+              <div className={`w-9 h-9 rounded-lg flex items-center justify-center text-xs font-bold shrink-0 ${
                 d.buyukluk >= 6 ? 'bg-red-50 dark:bg-red-900/30 text-red-600' :
                 d.buyukluk >= 4 ? 'bg-amber-50 dark:bg-amber-900/30 text-amber-600' :
                 'bg-gray-50 dark:bg-gray-700 text-gray-500'
@@ -225,13 +225,13 @@ export default function HomePage() {
                 {d.buyukluk.toFixed(1)}
               </div>
               <div className="flex-1 min-w-0">
-                <p className="text-xs font-medium text-[var(--foreground)] truncate">{d.konum}</p>
-                <p className="text-[11px] text-[var(--muted)]">{d.tarih} · {d.derinlik} km · {d.kaynak}</p>
+                <p className="text-[11px] font-medium text-[var(--foreground)] truncate leading-tight">{d.konum}</p>
+                <p className="text-[10px] text-[var(--muted)] leading-tight">{d.tarih} · {d.derinlik} km · {d.kaynak}</p>
               </div>
             </div>
           );
           return (
-            <div className="eq-ticker-wrap overflow-hidden h-[240px] relative">
+            <div className="eq-ticker-wrap overflow-hidden h-[400px] relative">
               {/* üst fade */}
               <div className="absolute top-0 left-0 right-0 h-6 bg-gradient-to-b from-[var(--card-bg)] to-transparent z-10 pointer-events-none" />
               {/* alt fade */}
