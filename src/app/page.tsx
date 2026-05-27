@@ -231,7 +231,7 @@ export default function HomePage() {
             </div>
           );
           return (
-            <div className="eq-ticker-wrap overflow-hidden h-[400px] relative">
+            <div className="eq-ticker-wrap overflow-hidden h-[280px] relative">
               {/* üst fade */}
               <div className="absolute top-0 left-0 right-0 h-6 bg-gradient-to-b from-[var(--card-bg)] to-transparent z-10 pointer-events-none" />
               {/* alt fade */}
