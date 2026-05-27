@@ -2,7 +2,7 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { MapPin, Globe, ScrollText, FlaskConical, Backpack, Activity, Users, Phone, ShieldCheck, HeartPulse, Sparkles } from 'lucide-react';
+import { MapPin, Globe, ScrollText, FlaskConical, Backpack, Activity, Users, Phone, ShieldCheck, HeartPulse, Sparkles, ClipboardList, ArrowLeftRight, Bell } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
 
 interface LatestEq { buyukluk: number; konum: string; tarih: string; derinlik: number; kaynak?: string; }
@@ -66,7 +66,10 @@ export default function HomePage() {
     { href: '/aile-plani',     Icon: Users,       tr: 'Aile Acil Durum Planı',  en: 'Family Emergency Plan',  trDesc: 'Acil iletişim kişileri, buluşma noktası ve 72 saatlik çanta durumunuzu kaydedin.',         enDesc: 'Save emergency contacts, meeting point and kit status for your family.',                      color: 'red' },
     { href: '/acil-numaralar', Icon: Phone,       tr: 'Acil Numaralar',         en: 'Emergency Numbers',      trDesc: '112, 122, AFAD ve tüm kritik hatlar — tek dokunuşla arama.',                             enDesc: '112, 122, AFAD and all critical lines — call with one tap.',                                  color: 'orange' },
     { href: '/ilk-yardim',     Icon: HeartPulse, tr: 'İlk Yardım Rehberi',     en: 'First Aid Guide',        trDesc: 'Bilinç kontrolü, kanama durdurma, CPR temelleri ve enkaz yaralanmaları.',                enDesc: 'Consciousness check, bleeding control, basic CPR, and debris injuries.',                      color: 'green' },
-    { href: '/dask',           Icon: ShieldCheck, tr: 'DASK Deprem Sigortası',  en: 'DASK Insurance',         trDesc: 'Zorunlu deprem sigortası: kapsam, prim ve poliçe sorgulama rehberi.',                    enDesc: 'Mandatory earthquake insurance: coverage, premium and policy query guide.',                   color: 'blue' },
+    { href: '/dask',           Icon: ShieldCheck,    tr: 'DASK Deprem Sigortası',  en: 'DASK Insurance',         trDesc: 'Zorunlu deprem sigortası: kapsam, prim ve poliçe sorgulama rehberi.',                    enDesc: 'Mandatory earthquake insurance: coverage, premium and policy query guide.',                   color: 'blue' },
+    { href: '/hazirlik-testi', Icon: ClipboardList,  tr: 'Hazırlık Testi',         en: 'Preparedness Quiz',      trDesc: '10 soruda depreme hazırlık seviyenizi ölçün ve eksiklerinizi öğrenin.',                  enDesc: 'Measure your earthquake preparedness in 10 questions and discover your gaps.',               color: 'purple' },
+    { href: '/karsilastir',    Icon: ArrowLeftRight, tr: 'Bölge Karşılaştır',      en: 'Compare Regions',        trDesc: 'İki farklı ilçenin deprem risk skorlarını yan yana karşılaştırın.',                     enDesc: 'Compare earthquake risk scores of two different districts side by side.',                    color: 'amber' },
+    { href: '/bildirimler',    Icon: Bell,           tr: 'Deprem Bildirimleri',     en: 'Earthquake Alerts',      trDesc: 'M4.0+ depremler için anlık tarayıcı bildirimi alın, sekteyken bile.',                  enDesc: 'Get instant browser notifications for M4.0+ earthquakes, even in the background.',          color: 'red' },
   ];
 
   const colorMap: Record<string, { card: string; icon: string; label: string }> = {
@@ -90,6 +93,9 @@ export default function HomePage() {
     { href: '/zemin-tipleri',          tr: 'Zemin Tipleri ve Deprem Riski',          en: 'Soil Types and Earthquake Risk' },
     { href: '/deprem-cantasi-rehberi', tr: '72 Saatlik Deprem Çantası Rehberi',      en: '72-Hour Earthquake Kit Guide' },
     { href: '/dask',                   tr: 'DASK Zorunlu Deprem Sigortası',          en: 'DASK Mandatory Earthquake Insurance' },
+    { href: '/hazirlik-testi',         tr: 'Depreme Hazırlık Testini Yap',           en: 'Take the Preparedness Quiz' },
+    { href: '/karsilastir',            tr: 'İki Bölgeyi Karşılaştır',                en: 'Compare Two Regions' },
+    { href: '/bildirimler',            tr: 'Anlık Deprem Bildirimleri',               en: 'Real-Time Earthquake Alerts' },
   ];
 
   return (

@@ -1,0 +1,22 @@
+{
+  "name": "Deprem Hattı",
+  "short_name": "Deprem Hattı",
+  "description": "Türkiye deprem risk analizi, canlı deprem takibi ve hazırlık rehberi.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#ef4444",
+  "orientation": "portrait-primary",
+  "icons": [
+    { "src": "/favicon-32.png",  "sizes": "32x32",   "type": "image/png" },
+    { "src": "/favicon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ],
+  "shortcuts": [
+    { "name": "Bölge Analizi", "short_name": "Analiz", "url": "/bolge-analizi", "icons": [{ "src": "/favicon-32.png", "sizes": "32x32" }] },
+    { "name": "Acil Numaralar", "short_name": "Acil", "url": "/acil-numaralar", "icons": [{ "src": "/favicon-32.png", "sizes": "32x32" }] },
+    { "name": "Deprem Çantası", "short_name": "Çanta", "url": "/canta", "icons": [{ "src": "/favicon-32.png", "sizes": "32x32" }] }
+  ],
+  "categories": ["education", "utilities", "lifestyle"],
+  "lang": "tr",
+  "dir": "ltr"
+}

@@ -38,6 +38,9 @@ export default function NavBar() {
     { href: '/fay-hatlari',            tr: 'Fay Hatları',                   en: 'Fault Lines' },
     { href: '/zemin-tipleri',          tr: 'Zemin Tipleri',                 en: 'Soil Types' },
     { href: '/deprem-cantasi-rehberi', tr: '72 Saatlik Deprem Çantası',     en: '72-Hour Earthquake Kit' },
+    { href: '/hazirlik-testi',         tr: 'Hazırlık Testi',                en: 'Preparedness Quiz' },
+    { href: '/karsilastir',            tr: 'Bölge Karşılaştır',             en: 'Compare Regions' },
+    { href: '/bildirimler',            tr: 'Deprem Bildirimleri',            en: 'Earthquake Alerts' },
   ];
 
   const kurumsal = [

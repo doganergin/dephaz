@@ -91,6 +91,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             }),
           }}
         />
+        {/* PWA Manifest */}
+        <link rel="manifest" href="/manifest.json" />
         {/* Google AdSense */}
         <meta name="google-adsense-account" content="ca-pub-8704382349010084" />
         <script
