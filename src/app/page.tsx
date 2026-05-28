@@ -194,19 +194,38 @@ export default function HomePage() {
           </div>
 
           {/* CTAs */}
-          <div className="flex gap-2">
-            <Link
-              href="/bolge-analizi"
-              className="flex-1 flex items-center justify-center gap-1.5 py-2.5 bg-red-500 hover:bg-red-600 text-white text-xs font-bold rounded-xl transition-colors"
-            >
-              <MapPin size={13} /> {TR ? 'Risk Analizi Yap' : 'Run Risk Analysis'}
-            </Link>
-            <Link
-              href="/dashboard"
-              className="flex items-center justify-center gap-1.5 px-4 py-2.5 bg-white/10 hover:bg-white/20 text-gray-200 text-xs font-bold rounded-xl transition-colors border border-white/10"
-            >
-              <LayoutDashboard size={13} /> {TR ? 'Dashboard' : 'Dashboard'}
-            </Link>
+          <div className="space-y-2">
+            <div className="flex gap-2">
+              <Link
+                href="/bolge-analizi"
+                className="flex-1 flex items-center justify-center gap-1.5 py-2.5 bg-red-500 hover:bg-red-600 text-white text-xs font-bold rounded-xl transition-colors"
+              >
+                <MapPin size={13} /> {TR ? 'Risk Analizi Yap' : 'Run Risk Analysis'}
+              </Link>
+              <Link
+                href="/dashboard"
+                className="flex items-center justify-center gap-1.5 px-4 py-2.5 bg-white/10 hover:bg-white/20 text-gray-200 text-xs font-bold rounded-xl transition-colors border border-white/10"
+              >
+                <LayoutDashboard size={13} /> {TR ? 'Dashboard' : 'Dashboard'}
+              </Link>
+            </div>
+            <div className="grid grid-cols-4 gap-2">
+              {[
+                { href: '/harita',         Icon: Globe,        tr: 'Canlı Harita', en: 'Live Map' },
+                { href: '/aile-plani',     Icon: Users,        tr: 'Aile Planı',   en: 'Family' },
+                { href: '/acil-numaralar', Icon: Phone,        tr: 'Acil',         en: 'Emergency' },
+                { href: '/uzman',          Icon: FlaskConical, tr: 'Uzman',        en: 'Experts' },
+              ].map(({ href, Icon, tr, en }) => (
+                <Link
+                  key={href}
+                  href={href}
+                  className="flex flex-col items-center gap-1 py-2 bg-white/10 hover:bg-white/20 text-gray-300 rounded-xl transition-colors border border-white/10"
+                >
+                  <Icon size={15} strokeWidth={1.8} />
+                  <span className="text-[9px] font-bold leading-none">{TR ? tr : en}</span>
+                </Link>
+              ))}
+            </div>
           </div>
         </div>
       </div>
