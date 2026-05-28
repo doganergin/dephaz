@@ -19,7 +19,24 @@
       "Read(//c/Users/MSİ/Downloads/**)",
       "Bash(dir \"C:\\\\Users\\\\MSİ\\\\Downloads\" /b)",
       "Bash(findstr /i \"deprem logo hatti\")",
-      "Bash(cp \"C:\\\\Users\\\\MSİ\\\\Downloads\\\\depremhatti.png\" \"C:\\\\Users\\\\MSİ\\\\Desktop\\\\depremapp-web\\\\public\\\\logo.png\")"
+      "Bash(cp \"C:\\\\Users\\\\MSİ\\\\Downloads\\\\depremhatti.png\" \"C:\\\\Users\\\\MSİ\\\\Desktop\\\\depremapp-web\\\\public\\\\logo.png\")",
+      "Bash(vercel --version)",
+      "Bash(npm i *)",
+      "Bash(vercel --prod)",
+      "Bash(cd \"C:\\\\Users\\\\MSİ\\\\Desktop\\\\depremapp-web\" && cat .env.local | grep VERCEL 2>/dev/null; echo \"---\"; ls ~/.vercel/ 2>/dev/null || echo \"no vercel auth\")",
+      "Read(//c/Users/MSİ/**)",
+      "Bash(python3 -c \"from PIL import Image; img = Image.open\\('C:/Users/MSİ/Desktop/depremapp-web/public/logo.png'\\); print\\(img.size, img.mode\\)\")",
+      "Bash(python -c \"from PIL import Image; img = Image.open\\('C:/Users/MSI/Desktop/depremapp-web/public/logo.png'\\); print\\(img.size, img.mode\\)\")",
+      "Bash(node -e \"const fs=require\\('fs'\\); const b=fs.readFileSync\\('C:/Users/MSİ/Desktop/depremapp-web/public/logo.png'\\); const w=b.readUInt32BE\\(16\\); const h=b.readUInt32BE\\(20\\); console.log\\(w+'x'+h\\);\")",
+      "Bash(python -c ' *)",
+      "Bash(node -e ' *)",
+      "Bash(node -e \"require\\('lucide-react'\\); console.log\\('ok'\\)\")",
+      "Bash(node -e \"console.log\\(require\\('lucide-react/package.json'\\).version\\)\")",
+      "Bash(grep -v \"//\")",
+      "Bash(node -e \"const l = require\\('lucide-react'\\); const icons = ['ShieldCheck','AlertTriangle','Ban','TreePine','Car','DoorOpen','Waves','Flame','HeartPulse','Building2','ShieldAlert','Maximize2','ArrowDownToLine','EyeOff','Construction','Siren']; icons.forEach\\(i => console.log\\(i, !!l[i]\\)\\)\")",
+      "Bash(git commit -m 'logo: dark modda tema uyumlu kapsayici eklendi *)",
+      "Bash(git commit -m '4 yeni sayfa: acil numaralar, dask, ilk yardim, enkaz altinda *)",
+      "Bash(git commit -m 'ana sayfa: yeni sayfalar features grid ve rehber listesine eklendi *)"
     ],
     "additionalDirectories": [
       "C:\\Users\\MSİ\\Downloads"

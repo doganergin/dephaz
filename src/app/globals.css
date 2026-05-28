@@ -123,6 +123,9 @@ body {
 .feature-row { -ms-overflow-style: none; scrollbar-width: none; }
 .feature-row::-webkit-scrollbar { display: none; }
 
+/* ── Alt navigasyon — iPhone çentiği desteği ────────────────────────────── */
+.safe-area-bottom { padding-bottom: env(safe-area-inset-bottom, 0px); }
+
 /* ── Deprem ticker (otomatik kayan bant) ─────────────────────────────────── */
 @keyframes eq-scroll-up {
   0%   { transform: translateY(0); }

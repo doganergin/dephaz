@@ -58,10 +58,10 @@ function FeatureRow({ items, TR }: { items: Feature[]; TR: boolean }) {
           <Link
             key={f.href}
             href={f.href}
-            className={`flex-shrink-0 flex flex-col items-center gap-1.5 w-[72px] bg-[var(--card-bg)] border ${c.border} rounded-2xl p-2.5 hover:opacity-80 transition-opacity`}
+            className={`flex-shrink-0 flex flex-col items-center gap-2 w-[84px] bg-[var(--card-bg)] border ${c.border} rounded-2xl p-3 hover:opacity-80 transition-opacity`}
           >
-            <div className={`w-9 h-9 rounded-xl flex items-center justify-center ${c.icon}`}>
-              <f.Icon size={18} strokeWidth={1.8} />
+            <div className={`w-12 h-12 rounded-xl flex items-center justify-center ${c.icon}`}>
+              <f.Icon size={24} strokeWidth={1.8} />
             </div>
             <p className={`text-[10px] font-bold text-center leading-tight ${c.text}`}>
               {TR ? f.tr : f.en}
@@ -211,84 +211,6 @@ export default function HomePage() {
         </div>
       </div>
 
-      {/* ── SON DEPREMLER ────────────────────────────────────── */}
-      <div className="bg-[var(--card-bg)] rounded-2xl border border-[var(--border)] p-4">
-        <div className="flex items-center justify-between mb-3">
-          <p className="text-xs font-bold text-[var(--foreground)] uppercase tracking-wide">
-            {TR ? 'Son Depremler' : 'Latest Earthquakes'}
-          </p>
-          <div className="flex items-center gap-2">
-            <button
-              onClick={() => setEqFilter(v => !v)}
-              className={`text-[10px] font-bold px-2 py-0.5 rounded-full border transition-colors ${
-                eqFilter ? 'bg-amber-500 border-amber-500 text-white' : 'border-[var(--border)] text-[var(--muted)] hover:border-amber-400 hover:text-amber-500'
-              }`}
-            >M4.0+</button>
-            <Link href="/harita" className="text-[11px] text-red-500 hover:underline">
-              {TR ? 'Harita →' : 'Map →'}
-            </Link>
-          </div>
-        </div>
-
-        {/* Tabs */}
-        <div className="flex bg-gray-100 dark:bg-gray-800 rounded-xl overflow-hidden mb-3">
-          {([
-            { key: 'tr' as const, label: TR ? 'Türkiye' : 'Turkey' },
-            { key: 'world' as const, label: TR ? 'Dünya' : 'World' },
-          ] as const).map(tab => (
-            <button
-              key={tab.key}
-              onClick={() => setEqTab(tab.key)}
-              className={`flex-1 py-1.5 text-[11px] font-semibold transition-colors ${
-                eqTab === tab.key ? 'bg-white dark:bg-gray-700 text-red-600 shadow-sm rounded-xl' : 'text-[var(--muted)]'
-              }`}
-            >{tab.label}</button>
-          ))}
-        </div>
-
-        {eqLoading ? (
-          <div className="flex items-center justify-center py-6 gap-2 text-[var(--muted)]">
-            <div className="w-4 h-4 border-2 border-red-400 border-t-transparent rounded-full animate-spin" />
-            <span className="text-xs">{TR ? 'Yükleniyor...' : 'Loading...'}</span>
-          </div>
-        ) : (() => {
-          const raw = eqTab === 'tr' ? trEqs : worldEqs;
-          const eqList = eqFilter ? raw.filter(d => d.buyukluk >= 4.0) : raw;
-          if (eqList.length === 0) return (
-            <p className="text-xs text-[var(--muted)] text-center py-4">
-              {eqFilter
-                ? (TR ? 'Son depremler arasında M4.0+ deprem gerçekleşmemiş.' : 'No M4.0+ earthquakes in recent data.')
-                : (TR ? 'Veri alınamadı.' : 'No data available.')}
-            </p>
-          );
-          const EqRow = ({ d }: { d: LatestEq }) => (
-            <div className="flex items-center gap-2.5 py-1 border-b border-[var(--border)] last:border-0">
-              <div className={`w-9 h-9 rounded-lg flex items-center justify-center text-xs font-bold shrink-0 ${
-                d.buyukluk >= 6 ? 'bg-red-50 dark:bg-red-900/30 text-red-600' :
-                d.buyukluk >= 4 ? 'bg-amber-50 dark:bg-amber-900/30 text-amber-600' :
-                'bg-gray-50 dark:bg-gray-800 text-gray-500'
-              }`}>{d.buyukluk.toFixed(1)}</div>
-              <div className="flex-1 min-w-0">
-                <p className="text-[11px] font-medium text-[var(--foreground)] truncate leading-tight">{d.konum}</p>
-                <p className="text-[10px] text-[var(--muted)] leading-tight">{d.tarih} · {d.derinlik} km · {d.kaynak}</p>
-              </div>
-            </div>
-          );
-          const ROW_H = 44;
-          const tickerH = Math.min(352, eqList.length * ROW_H);
-          return (
-            <div className="eq-ticker-wrap overflow-hidden relative" style={{ height: tickerH }}>
-              <div className="absolute top-0 left-0 right-0 h-5 bg-gradient-to-b from-[var(--card-bg)] to-transparent z-10 pointer-events-none" />
-              <div className="absolute bottom-0 left-0 right-0 h-5 bg-gradient-to-t from-[var(--card-bg)] to-transparent z-10 pointer-events-none" />
-              <div className="eq-ticker-track">
-                <div>{eqList.map((d, i) => <EqRow key={`a-${i}`} d={d} />)}</div>
-                <div aria-hidden>{eqList.map((d, i) => <EqRow key={`b-${i}`} d={d} />)}</div>
-              </div>
-            </div>
-          );
-        })()}
-      </div>
-
       {/* ── FEATURE CATEGORIES ───────────────────────────────── */}
       <section className="space-y-4">
         {[
@@ -304,6 +226,94 @@ export default function HomePage() {
           </div>
         ))}
       </section>
+
+      {/* ── SON DEPREMLER ────────────────────────────────────── */}
+      <div className="bg-[var(--card-bg)] rounded-2xl border border-[var(--border)] p-4">
+        <div className="flex items-center justify-between mb-3">
+          <p className="text-xs font-bold text-[var(--foreground)] uppercase tracking-wide">
+            {TR ? 'Son Depremler' : 'Latest Earthquakes'}
+          </p>
+          <div className="flex items-center gap-2">
+            <button
+              onClick={() => setEqFilter(v => !v)}
+              className={`text-[10px] font-bold px-2 py-0.5 rounded-full border transition-colors ${
+                eqFilter
+                  ? 'bg-amber-500 text-white border-amber-500'
+                  : 'text-amber-600 border-amber-400 hover:bg-amber-50 dark:hover:bg-amber-900/20'
+              }`}
+            >
+              M4.0+
+            </button>
+            <Link href="/harita" className="text-[11px] text-red-500 hover:underline">
+              {TR ? 'Harita →' : 'Map →'}
+            </Link>
+          </div>
+        </div>
+
+        {/* Tabs */}
+        <div className="flex gap-1 mb-3">
+          {(['tr', 'world'] as const).map(tab => (
+            <button
+              key={tab}
+              onClick={() => setEqTab(tab)}
+              className={`text-[10px] font-bold px-3 py-1 rounded-full transition-colors ${
+                eqTab === tab
+                  ? 'bg-red-500 text-white'
+                  : 'text-[var(--muted)] hover:bg-gray-100 dark:hover:bg-gray-800'
+              }`}
+            >
+              {tab === 'tr' ? (TR ? 'Türkiye' : 'Turkey') : (TR ? 'Dünya' : 'World')}
+            </button>
+          ))}
+        </div>
+
+        {eqLoading ? (
+          <div className="flex items-center justify-center h-24">
+            <div className="w-5 h-5 border-2 border-red-500 border-t-transparent rounded-full animate-spin" />
+          </div>
+        ) : (() => {
+          const rawList = eqTab === 'tr' ? trEqs : worldEqs;
+          const eqList = eqFilter ? rawList.filter(e => e.buyukluk >= 4) : rawList;
+          const ROW_H = 48;
+          const maxH = 400;
+          const tickerH = Math.min(maxH, eqList.length * ROW_H);
+
+          if (eqList.length === 0) {
+            return (
+              <p className="text-xs text-[var(--muted)] text-center py-6">
+                {eqFilter
+                  ? (TR ? 'Son depremler arasında M4.0+ deprem gerçekleşmemiş.' : 'No M4.0+ earthquakes in recent list.')
+                  : (TR ? 'Veri alınamadı.' : 'No data available.')}
+              </p>
+            );
+          }
+
+          const rows = [...eqList, ...eqList];
+          return (
+            <div className="eq-ticker-wrap overflow-hidden rounded-xl" style={{ height: tickerH }}>
+              <div className="eq-ticker-track">
+                {rows.map((eq, i) => (
+                  <div key={i} className="flex items-center gap-2 px-1 py-2.5 border-b border-[var(--border)] last:border-0" style={{ height: ROW_H }}>
+                    <span className={`text-sm font-black tabular-nums w-10 shrink-0 ${
+                      eq.buyukluk >= 6 ? 'text-red-500' :
+                      eq.buyukluk >= 4 ? 'text-amber-500' : 'text-[var(--foreground)]'
+                    }`}>
+                      M{eq.buyukluk.toFixed(1)}
+                    </span>
+                    <div className="min-w-0 flex-1">
+                      <p className="text-[11px] font-medium text-[var(--foreground)] truncate">{eq.konum}</p>
+                      <p className="text-[10px] text-[var(--muted)]">{eq.tarih} · {eq.derinlik} km</p>
+                    </div>
+                    {eq.kaynak && (
+                      <span className="text-[9px] text-[var(--muted)] shrink-0">{eq.kaynak}</span>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </div>
+          );
+        })()}
+      </div>
 
       {/* ── BİLGİ REHBERİ ────────────────────────────────────── */}
       <section>
