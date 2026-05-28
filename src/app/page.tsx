@@ -51,24 +51,28 @@ const colorToken: Record<string, { icon: string; text: string; border: string }>
 
 function FeatureRow({ items, TR }: { items: Feature[]; TR: boolean }) {
   return (
-    <div className="flex gap-2 overflow-x-auto pb-1 feature-row">
-      {items.map((f) => {
-        const c = colorToken[f.color];
-        return (
-          <Link
-            key={f.href}
-            href={f.href}
-            className={`flex-shrink-0 flex flex-col items-center gap-2 w-[84px] bg-[var(--card-bg)] border ${c.border} rounded-2xl p-3 hover:opacity-80 transition-opacity`}
-          >
-            <div className={`w-12 h-12 rounded-xl flex items-center justify-center ${c.icon}`}>
-              <f.Icon size={24} strokeWidth={1.8} />
-            </div>
-            <p className={`text-[10px] font-bold text-center leading-tight ${c.text}`}>
-              {TR ? f.tr : f.en}
-            </p>
-          </Link>
-        );
-      })}
+    <div className="relative">
+      <div className="flex gap-2 overflow-x-auto pb-1 feature-row md:flex-wrap md:overflow-x-visible">
+        {items.map((f) => {
+          const c = colorToken[f.color];
+          return (
+            <Link
+              key={f.href}
+              href={f.href}
+              className={`flex-shrink-0 md:flex-shrink flex flex-col items-center gap-2 w-[84px] md:w-[96px] bg-[var(--card-bg)] border ${c.border} rounded-2xl p-3 hover:opacity-80 transition-opacity`}
+            >
+              <div className={`w-12 h-12 rounded-xl flex items-center justify-center ${c.icon}`}>
+                <f.Icon size={24} strokeWidth={1.8} />
+              </div>
+              <p className={`text-[10px] font-bold text-center leading-tight ${c.text}`}>
+                {TR ? f.tr : f.en}
+              </p>
+            </Link>
+          );
+        })}
+      </div>
+      {/* Mobilde sağ tarafa kaydırma ipucu */}
+      <div className="pointer-events-none absolute right-0 top-0 bottom-1 w-10 bg-gradient-to-l from-[var(--background)] to-transparent md:hidden" />
     </div>
   );
 }
