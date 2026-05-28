@@ -2,20 +2,97 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { MapPin, Globe, ScrollText, FlaskConical, Backpack, Activity, Users, Phone, ShieldCheck, HeartPulse, Sparkles, ClipboardList, ArrowLeftRight, Bell, LayoutDashboard, BarChart2, Thermometer, Navigation, TrendingDown } from 'lucide-react';
+import {
+  MapPin, Globe, ScrollText, FlaskConical, Backpack, Activity, Users, Phone,
+  ShieldCheck, HeartPulse, ClipboardList, ArrowLeftRight, Bell,
+  LayoutDashboard, BarChart2, Thermometer, Navigation, TrendingDown, ChevronRight,
+} from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
 
 interface LatestEq { buyukluk: number; konum: string; tarih: string; derinlik: number; kaynak?: string; }
+
+interface Feature { href: string; Icon: LucideIcon; tr: string; en: string; color: string; }
+
+const analiz: Feature[] = [
+  { href: '/bolge-analizi', Icon: MapPin,          tr: 'Bölge Analizi',       en: 'Risk Analysis',    color: 'red' },
+  { href: '/dashboard',     Icon: LayoutDashboard,  tr: 'Dashboard',           en: 'My Dashboard',     color: 'blue' },
+  { href: '/karsilastir',   Icon: ArrowLeftRight,   tr: 'Karşılaştır',         en: 'Compare',          color: 'amber' },
+  { href: '/risk-haritasi', Icon: Thermometer,      tr: 'Risk Haritası',       en: 'Risk Map',         color: 'orange' },
+  { href: '/istatistikler', Icon: BarChart2,        tr: 'İstatistikler',       en: 'Statistics',       color: 'purple' },
+  { href: '/artci-tahmin',  Icon: TrendingDown,     tr: 'Artçı Tahmin',        en: 'Aftershock',       color: 'amber' },
+];
+
+const hazirlik: Feature[] = [
+  { href: '/canta',          Icon: Backpack,    tr: 'Deprem Çantası',    en: 'Emergency Kit',     color: 'amber' },
+  { href: '/aile-plani',     Icon: Users,       tr: 'Aile Planı',        en: 'Family Plan',       color: 'red' },
+  { href: '/hazirlik-testi', Icon: ClipboardList,tr: 'Hazırlık Testi',  en: 'Quiz',              color: 'purple' },
+  { href: '/acil-numaralar', Icon: Phone,       tr: 'Acil Numaralar',    en: 'Emergency Nos.',    color: 'orange' },
+  { href: '/toplanma-alani', Icon: Navigation,  tr: 'Toplanma Alanı',   en: 'Assembly Area',     color: 'green' },
+  { href: '/dask',           Icon: ShieldCheck, tr: 'DASK',              en: 'DASK',              color: 'blue' },
+  { href: '/ilk-yardim',    Icon: HeartPulse,   tr: 'İlk Yardım',       en: 'First Aid',         color: 'green' },
+];
+
+const takip: Feature[] = [
+  { href: '/harita',    Icon: Globe,      tr: 'Canlı Harita',   en: 'Live Map',       color: 'blue' },
+  { href: '/bildirimler',Icon: Bell,      tr: 'Bildirimler',    en: 'Alerts',         color: 'red' },
+  { href: '/fay-hatlari',Icon: Activity,  tr: 'Fay Hatları',    en: 'Fault Lines',    color: 'orange' },
+  { href: '/tarihsel',  Icon: ScrollText, tr: 'Tarihsel',       en: 'Historical',     color: 'purple' },
+  { href: '/uzman',     Icon: FlaskConical,tr: 'Uzman Görüşleri',en: 'Expert Views', color: 'green' },
+];
+
+const colorToken: Record<string, { icon: string; text: string; border: string }> = {
+  red:    { icon: 'bg-red-100 dark:bg-red-900/30 text-red-600',      text: 'text-red-600 dark:text-red-400',      border: 'border-red-100 dark:border-red-900/30' },
+  blue:   { icon: 'bg-blue-100 dark:bg-blue-900/30 text-blue-600',   text: 'text-blue-600 dark:text-blue-400',   border: 'border-blue-100 dark:border-blue-900/30' },
+  purple: { icon: 'bg-purple-100 dark:bg-purple-900/30 text-purple-600', text: 'text-purple-600 dark:text-purple-400', border: 'border-purple-100 dark:border-purple-900/30' },
+  green:  { icon: 'bg-green-100 dark:bg-green-900/30 text-green-600', text: 'text-green-600 dark:text-green-400', border: 'border-green-100 dark:border-green-900/30' },
+  amber:  { icon: 'bg-amber-100 dark:bg-amber-900/30 text-amber-600', text: 'text-amber-600 dark:text-amber-400', border: 'border-amber-100 dark:border-amber-900/30' },
+  orange: { icon: 'bg-orange-100 dark:bg-orange-900/30 text-orange-600', text: 'text-orange-600 dark:text-orange-400', border: 'border-orange-100 dark:border-orange-900/30' },
+};
+
+function FeatureRow({ items, TR }: { items: Feature[]; TR: boolean }) {
+  return (
+    <div className="flex gap-2 overflow-x-auto pb-1 feature-row">
+      {items.map((f) => {
+        const c = colorToken[f.color];
+        return (
+          <Link
+            key={f.href}
+            href={f.href}
+            className={`flex-shrink-0 flex flex-col items-center gap-1.5 w-[72px] bg-[var(--card-bg)] border ${c.border} rounded-2xl p-2.5 hover:opacity-80 transition-opacity`}
+          >
+            <div className={`w-9 h-9 rounded-xl flex items-center justify-center ${c.icon}`}>
+              <f.Icon size={18} strokeWidth={1.8} />
+            </div>
+            <p className={`text-[10px] font-bold text-center leading-tight ${c.text}`}>
+              {TR ? f.tr : f.en}
+            </p>
+          </Link>
+        );
+      })}
+    </div>
+  );
+}
+
+const articles = [
+  { href: '/deprem-nedir',           tr: 'Deprem Nedir?',                  en: 'What Is an Earthquake?' },
+  { href: '/depreme-hazirlik',       tr: 'Depreme Hazırlık Rehberi',        en: 'Earthquake Preparedness' },
+  { href: '/deprem-aninda',          tr: 'Deprem Anında Ne Yapmalı?',        en: 'What to Do During a Quake?' },
+  { href: '/enkaz-altinda',          tr: 'Enkaz Altında Hayatta Kalma',     en: 'Surviving Under Debris' },
+  { href: '/turkiyede-deprem-riski', tr: "Türkiye'de Deprem Riski",         en: 'Earthquake Risk in Turkey' },
+  { href: '/fay-hatlari',            tr: 'Türkiye\'deki Fay Hatları',       en: 'Fault Lines in Turkey' },
+  { href: '/zemin-tipleri',          tr: 'Zemin Tipleri ve Deprem Riski',   en: 'Soil Types & Seismic Risk' },
+  { href: '/deprem-cantasi-rehberi', tr: '72 Saatlik Deprem Çantası',       en: '72-Hour Emergency Kit' },
+];
 
 export default function HomePage() {
   const { lang } = useLanguage();
   const TR = lang === 'TR';
 
-  const [eqTab, setEqTab] = useState<'tr' | 'world'>('tr');
-  const [trEqs, setTrEqs] = useState<LatestEq[]>([]);
+  const [eqTab, setEqTab]       = useState<'tr' | 'world'>('tr');
+  const [trEqs, setTrEqs]       = useState<LatestEq[]>([]);
   const [worldEqs, setWorldEqs] = useState<LatestEq[]>([]);
   const [eqLoading, setEqLoading] = useState(true);
-  const [eqFilter, setEqFilter] = useState(false);
+  const [eqFilter, setEqFilter]   = useState(false);
 
   useEffect(() => {
     async function fetchEqs() {
@@ -44,11 +121,9 @@ export default function HomePage() {
         const d = await usgsRes.value.json();
         if (d.features) {
           setWorldEqs(d.features.slice(0, 50).map((f: { properties: { mag: number; place: string; time: number }; geometry: { coordinates: [number, number, number] } }) => ({
-            buyukluk: f.properties.mag,
-            konum: f.properties.place,
+            buyukluk: f.properties.mag, konum: f.properties.place,
             tarih: new Date(f.properties.time).toLocaleString('tr-TR'),
-            derinlik: Math.round(f.geometry.coordinates[2]),
-            kaynak: 'USGS',
+            derinlik: Math.round(f.geometry.coordinates[2]), kaynak: 'USGS',
           })));
         }
       }
@@ -57,169 +132,120 @@ export default function HomePage() {
     fetchEqs();
   }, []);
 
-  const features: Array<{ href: string; Icon: LucideIcon; tr: string; en: string; trDesc: string; enDesc: string; color: string; coming?: true }> = [
-    { href: '/bolge-analizi', Icon: MapPin,      tr: 'Bölge Analizi',          en: 'Risk Analysis',         trDesc: 'İl, ilçe ve mahalle seçerek fay mesafesi, zemin yapısı ve deprem risk skorunu öğrenin.', enDesc: 'Select province, district and neighbourhood to find fault distance, soil type, and risk score.', color: 'red' },
-    { href: '/harita',        Icon: Globe,       tr: 'Canlı Deprem Haritası',  en: 'Live Earthquake Map',   trDesc: 'Kandilli, AFAD ve USGS verilerini gerçek zamanlı haritada izleyin.',                       enDesc: 'Monitor Kandilli, AFAD and USGS data on a real-time interactive map.',                        color: 'blue' },
-    { href: '/tarihsel',      Icon: ScrollText,  tr: 'Tarihsel Depremler',     en: 'Historical Earthquakes',trDesc: "Osmanlı'dan günümüze Türkiye'nin büyük deprem tarihini inceleyin.",                         enDesc: "Explore Turkey's major earthquake history from the Ottoman era to the present.",               color: 'purple' },
-    { href: '/uzman',         Icon: FlaskConical,tr: 'Uzman Görüşleri',        en: 'Expert Opinions',       trDesc: 'Seismologların ve jeologların bilimsel değerlendirmelerini okuyun.',                        enDesc: 'Read scientific assessments from seismologists and geologists.',                              color: 'green' },
-    { href: '/canta',         Icon: Backpack,    tr: 'Deprem Çantası',         en: 'Emergency Kit',         trDesc: '72 saatlik acil durum çantası için kontrol listesi oluşturun.',                            enDesc: 'Build a 72-hour emergency supply checklist for your household.',                              color: 'amber' },
-    { href: '/fay-hatlari',   Icon: Activity,    tr: 'Aktif Fay Haritası',     en: 'Active Fault Map',      trDesc: "Türkiye'deki aktif fay hatlarını ve büyük tarihi depremleri interaktif haritada görün.",  enDesc: "See Turkey's active fault lines and major historical earthquakes on an interactive map.",     color: 'orange' },
-    { href: '/aile-plani',     Icon: Users,       tr: 'Aile Acil Durum Planı',  en: 'Family Emergency Plan',  trDesc: 'Acil iletişim kişileri, buluşma noktası ve 72 saatlik çanta durumunuzu kaydedin.',         enDesc: 'Save emergency contacts, meeting point and kit status for your family.',                      color: 'red' },
-    { href: '/acil-numaralar', Icon: Phone,       tr: 'Acil Numaralar',         en: 'Emergency Numbers',      trDesc: '112, 122, AFAD ve tüm kritik hatlar — tek dokunuşla arama.',                             enDesc: '112, 122, AFAD and all critical lines — call with one tap.',                                  color: 'orange' },
-    { href: '/ilk-yardim',     Icon: HeartPulse, tr: 'İlk Yardım Rehberi',     en: 'First Aid Guide',        trDesc: 'Bilinç kontrolü, kanama durdurma, CPR temelleri ve enkaz yaralanmaları.',                enDesc: 'Consciousness check, bleeding control, basic CPR, and debris injuries.',                      color: 'green' },
-    { href: '/dask',           Icon: ShieldCheck,    tr: 'DASK Deprem Sigortası',  en: 'DASK Insurance',         trDesc: 'Zorunlu deprem sigortası: kapsam, prim ve poliçe sorgulama rehberi.',                    enDesc: 'Mandatory earthquake insurance: coverage, premium and policy query guide.',                   color: 'blue' },
-    { href: '/hazirlik-testi', Icon: ClipboardList,  tr: 'Hazırlık Testi',         en: 'Preparedness Quiz',      trDesc: '10 soruda depreme hazırlık seviyenizi ölçün ve eksiklerinizi öğrenin.',                  enDesc: 'Measure your earthquake preparedness in 10 questions and discover your gaps.',               color: 'purple' },
-    { href: '/karsilastir',    Icon: ArrowLeftRight, tr: 'Bölge Karşılaştır',      en: 'Compare Regions',        trDesc: 'İki farklı ilçenin deprem risk skorlarını yan yana karşılaştırın.',                     enDesc: 'Compare earthquake risk scores of two different districts side by side.',                    color: 'amber' },
-    { href: '/bildirimler',    Icon: Bell,            tr: 'Deprem Bildirimleri',     en: 'Earthquake Alerts',     trDesc: 'M4.0+ depremler için anlık tarayıcı bildirimi alın, sekteyken bile.',        enDesc: 'Get instant browser notifications for M4.0+ earthquakes, even in the background.',  color: 'red' },
-    { href: '/dashboard',      Icon: LayoutDashboard, tr: 'Kişisel Dashboard',       en: 'My Dashboard',          trDesc: 'Konumunuzu kaydedin; risk skorunuzu ve bölgenizdeki depremleri takip edin.',    enDesc: 'Save your location; track your risk score and local earthquakes.',                   color: 'blue' },
-    { href: '/istatistikler',  Icon: BarChart2,        tr: 'Deprem İstatistikleri',   en: 'Statistics',            trDesc: 'Büyüklük dağılımı, en aktif bölgeler ve son kayıtların veri analizi.',         enDesc: 'Magnitude distribution, most active regions and recent data analysis.',              color: 'purple' },
-    { href: '/risk-haritasi',  Icon: Thermometer,      tr: 'Risk Isı Haritası',       en: 'Risk Heat Map',         trDesc: 'AFAD verilerine göre 38 ilin deprem risk seviyesi tek ekranda.',               enDesc: '38 provinces earthquake risk levels based on AFAD data at a glance.',                color: 'orange' },
-    { href: '/artci-tahmin',   Icon: TrendingDown,     tr: 'Artçı Deprem Tahmini',    en: 'Aftershock Estimator',  trDesc: 'Bath ve Omori yasalarıyla artçı büyüklük ve sayı tahmini yapın.',              enDesc: "Estimate aftershock magnitude and count using Bath's and Omori's laws.",             color: 'amber' },
-    { href: '/toplanma-alani', Icon: Navigation,       tr: 'Toplanma Alanı Bul',      en: 'Find Assembly Area',    trDesc: 'Konumunuza en yakın deprem toplanma alanını haritada bulun.',                  enDesc: 'Find the nearest earthquake assembly area to your location on the map.',             color: 'green' },
-  ];
-
-  const colorMap: Record<string, { card: string; icon: string; label: string }> = {
-    red:    { card: 'bg-red-50 dark:bg-red-900/10 border-red-100 dark:border-red-900/30',       icon: 'bg-red-100 dark:bg-red-900/30 text-red-600',       label: 'text-red-700 dark:text-red-400' },
-    blue:   { card: 'bg-blue-50 dark:bg-blue-900/10 border-blue-100 dark:border-blue-900/30',   icon: 'bg-blue-100 dark:bg-blue-900/30 text-blue-600',    label: 'text-blue-700 dark:text-blue-400' },
-    purple: { card: 'bg-purple-50 dark:bg-purple-900/10 border-purple-100 dark:border-purple-900/30', icon: 'bg-purple-100 dark:bg-purple-900/30 text-purple-600', label: 'text-purple-700 dark:text-purple-400' },
-    green:  { card: 'bg-green-50 dark:bg-green-900/10 border-green-100 dark:border-green-900/30', icon: 'bg-green-100 dark:bg-green-900/30 text-green-600', label: 'text-green-700 dark:text-green-400' },
-    amber:  { card: 'bg-amber-50 dark:bg-amber-900/10 border-amber-100 dark:border-amber-900/30', icon: 'bg-amber-100 dark:bg-amber-900/30 text-amber-600', label: 'text-amber-700 dark:text-amber-400' },
-    orange: { card: 'bg-orange-50 dark:bg-orange-900/10 border-orange-100 dark:border-orange-900/30', icon: 'bg-orange-100 dark:bg-orange-900/30 text-orange-600', label: 'text-orange-700 dark:text-orange-400' },
-    gray:   { card: 'bg-gray-50 dark:bg-gray-800/40 border-gray-100 dark:border-gray-700/50',   icon: 'bg-gray-100 dark:bg-gray-700 text-gray-400',       label: 'text-gray-400 dark:text-gray-500' },
-  };
-
-  const articles = [
-    { href: '/deprem-nedir',           tr: 'Deprem Nedir? Nasıl Oluşur?',           en: 'What Is an Earthquake?' },
-    { href: '/depreme-hazirlik',       tr: 'Depreme Hazırlık Rehberi',               en: 'Earthquake Preparedness Guide' },
-    { href: '/deprem-aninda',          tr: 'Deprem Anında Ne Yapmalı?',               en: 'What to Do in an Earthquake?' },
-    { href: '/enkaz-altinda',          tr: 'Enkaz Altında Hayatta Kalma',            en: 'Surviving Under Debris' },
-    { href: '/ilk-yardim',             tr: 'Deprem Sonrası İlk Yardım',              en: 'First Aid After Earthquake' },
-    { href: '/turkiyede-deprem-riski', tr: "Türkiye'de Deprem Riski",                en: 'Earthquake Risk in Turkey' },
-    { href: '/fay-hatlari',            tr: 'Türkiye\'deki Fay Hatları',              en: 'Fault Lines in Turkey' },
-    { href: '/zemin-tipleri',          tr: 'Zemin Tipleri ve Deprem Riski',          en: 'Soil Types and Earthquake Risk' },
-    { href: '/deprem-cantasi-rehberi', tr: '72 Saatlik Deprem Çantası Rehberi',      en: '72-Hour Earthquake Kit Guide' },
-    { href: '/dask',                   tr: 'DASK Zorunlu Deprem Sigortası',          en: 'DASK Mandatory Earthquake Insurance' },
-  ];
+  const latest = trEqs[0];
+  const m4Count = trEqs.filter(e => e.buyukluk >= 4).length;
 
   return (
-    <div className="space-y-6">
-      {/* Hero */}
-      <div className="text-center pt-1 pb-2">
-        <div className="flex items-center justify-center gap-2 mb-2">
-          <p className="text-xs font-semibold text-red-500 uppercase tracking-wide">
-            {TR ? 'Türkiye Deprem Bilgi Platformu' : 'Turkey Earthquake Information Platform'}
-          </p>
-          <span className="inline-flex items-center gap-1 text-[10px] font-semibold px-2 py-0.5 rounded-full bg-violet-100 dark:bg-violet-900/30 text-violet-600 dark:text-violet-400">
-            <Sparkles size={10} /> {TR ? 'YZ Destekli' : 'AI-Powered'}
-          </span>
-        </div>
-        <h1 className="text-2xl font-bold text-[var(--foreground)] mb-2">
-          {TR ? 'Bölgenizi Tanıyın,\nHazırlıklı Olun' : 'Know Your Region,\nStay Prepared'}
-        </h1>
-        <p className="text-sm text-[var(--muted)] leading-relaxed">
-          {TR
-            ? 'Bilimsel verilerle desteklenen deprem risk analizi, canlı deprem takibi ve hazırlık rehberleri.'
-            : 'Science-backed earthquake risk analysis, live tracking and preparedness guides for Turkey.'}
-        </p>
-      </div>
+    <div className="space-y-5">
 
-      {/* Primary CTA */}
-      <Link
-        href="/bolge-analizi"
-        className="flex items-center justify-between bg-[var(--card-bg)] border border-red-500/40 rounded-2xl p-4 glow-card glow-red group"
-      >
-        <div>
-          <p className="font-bold text-sm text-red-500 group-hover:text-red-400 transition-colors">{TR ? 'Bölge Riski Analizi Yap' : 'Run Risk Analysis'}</p>
-          <p className="text-[11px] text-[var(--muted)] mt-0.5">
-            {TR ? 'İl ve ilçenizi seçin, risk skorunuzu öğrenin' : 'Select your province and district, find your risk score'}
-          </p>
-        </div>
-        <MapPin size={24} className="text-red-400 shrink-0" strokeWidth={1.8} />
-      </Link>
+      {/* ── HERO ─────────────────────────────────────────────── */}
+      <div className="relative overflow-hidden rounded-2xl bg-gray-900 dark:bg-gray-950 border border-gray-800 p-5">
+        <div className="absolute inset-0 bg-gradient-to-br from-red-950/50 via-transparent to-transparent pointer-events-none" />
+        <div className="relative">
+          {/* Live badge */}
+          <div className="flex items-center gap-2 mb-4">
+            <span className="flex items-center gap-1.5 text-[10px] font-bold text-red-400 uppercase tracking-widest">
+              <span className="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse" />
+              {TR ? 'CANLI' : 'LIVE'}
+            </span>
+            <span className="text-gray-700 text-[10px]">·</span>
+            <span className="text-[10px] text-gray-500">depremhatti.com</span>
+          </div>
 
-      {/* Features grid — 2-col mobile, 3-col desktop */}
-      <div>
-        <p className="text-xs font-semibold text-[var(--muted)] uppercase tracking-wide mb-3">
-          {TR ? 'Tüm Özellikler' : 'All Features'}
-        </p>
-        <div className="grid grid-cols-2 lg:grid-cols-3 gap-3">
-          {features.map((f) => {
-            const c = colorMap[f.color];
-            const coming = 'coming' in f && f.coming;
-            if (coming) return (
-              <div key={f.href} className={`border rounded-2xl p-3.5 flex flex-col gap-2 opacity-50 cursor-default ${c.card}`}>
-                <div className={`w-9 h-9 rounded-xl flex items-center justify-center ${c.icon}`}>
-                  <f.Icon size={20} strokeWidth={1.8} />
+          {/* Latest quake */}
+          {!eqLoading && latest ? (
+            <div className="mb-5">
+              <p className="text-[10px] text-gray-500 uppercase tracking-wide mb-1">
+                {TR ? 'Son Deprem' : 'Latest Earthquake'}
+              </p>
+              <div className="flex items-center gap-3">
+                <span className={`text-4xl font-black tabular-nums leading-none ${
+                  latest.buyukluk >= 6 ? 'text-red-400' :
+                  latest.buyukluk >= 4 ? 'text-amber-400' : 'text-white'
+                }`}>
+                  M{latest.buyukluk.toFixed(1)}
+                </span>
+                <div className="min-w-0">
+                  <p className="text-sm font-bold text-white truncate">{latest.konum}</p>
+                  <p className="text-[10px] text-gray-400">{latest.tarih} · {latest.derinlik} km</p>
                 </div>
-                <div className="flex items-center gap-1.5">
-                  <p className={`text-xs font-bold leading-snug ${c.label}`}>{TR ? f.tr : f.en}</p>
-                  <span className="text-[9px] font-bold px-1.5 py-0.5 rounded-full bg-amber-100 dark:bg-amber-900/30 text-amber-600 dark:text-amber-400 leading-none">
-                    {TR ? 'Yakında' : 'Soon'}
-                  </span>
-                </div>
-                <p className="text-[11px] text-[var(--muted)] leading-relaxed">{TR ? f.trDesc : f.enDesc}</p>
               </div>
-            );
-            return (
-              <Link
-                key={f.href}
-                href={f.href}
-                className={`border rounded-2xl p-3.5 flex flex-col gap-2 glow-card glow-${f.color} ${c.card}`}
-              >
-                <div className={`w-9 h-9 rounded-xl flex items-center justify-center ${c.icon}`}>
-                  <f.Icon size={20} strokeWidth={1.8} />
-                </div>
-                <p className={`text-xs font-bold leading-snug ${c.label}`}>{TR ? f.tr : f.en}</p>
-                <p className="text-[11px] text-[var(--muted)] leading-relaxed">{TR ? f.trDesc : f.enDesc}</p>
-              </Link>
-            );
-          })}
+            </div>
+          ) : (
+            <div className="mb-5 h-14 flex items-center">
+              <div className="w-4 h-4 border-2 border-red-500 border-t-transparent rounded-full animate-spin" />
+            </div>
+          )}
+
+          {/* Stats strip */}
+          <div className="flex gap-4 mb-5">
+            <div>
+              <p className="text-lg font-black text-amber-400 tabular-nums">{m4Count}</p>
+              <p className="text-[10px] text-gray-500">M4.0+ {TR ? 'son liste' : 'recent'}</p>
+            </div>
+            <div>
+              <p className="text-lg font-black text-white">38</p>
+              <p className="text-[10px] text-gray-500">{TR ? 'desteklenen il' : 'provinces'}</p>
+            </div>
+            <div>
+              <p className="text-lg font-black text-white">337</p>
+              <p className="text-[10px] text-gray-500">{TR ? 'ilçe risk verisi' : 'district scores'}</p>
+            </div>
+          </div>
+
+          {/* CTAs */}
+          <div className="flex gap-2">
+            <Link
+              href="/bolge-analizi"
+              className="flex-1 flex items-center justify-center gap-1.5 py-2.5 bg-red-500 hover:bg-red-600 text-white text-xs font-bold rounded-xl transition-colors"
+            >
+              <MapPin size={13} /> {TR ? 'Risk Analizi Yap' : 'Run Risk Analysis'}
+            </Link>
+            <Link
+              href="/dashboard"
+              className="flex items-center justify-center gap-1.5 px-4 py-2.5 bg-white/10 hover:bg-white/20 text-gray-200 text-xs font-bold rounded-xl transition-colors border border-white/10"
+            >
+              <LayoutDashboard size={13} /> {TR ? 'Dashboard' : 'Dashboard'}
+            </Link>
+          </div>
         </div>
       </div>
 
-      {/* Latest Earthquakes + Knowledge Guide — side by side on desktop */}
-      <div className="lg:grid lg:grid-cols-5 lg:gap-5 space-y-6 lg:space-y-0">
-
-      {/* Latest Earthquakes */}
-      <div className="bg-[var(--card-bg)] rounded-2xl shadow-sm border border-[var(--border)] p-4 lg:col-span-3">
+      {/* ── SON DEPREMLER ────────────────────────────────────── */}
+      <div className="bg-[var(--card-bg)] rounded-2xl border border-[var(--border)] p-4">
         <div className="flex items-center justify-between mb-3">
-          <p className="text-xs font-bold text-[var(--muted)] uppercase tracking-wide">
+          <p className="text-xs font-bold text-[var(--foreground)] uppercase tracking-wide">
             {TR ? 'Son Depremler' : 'Latest Earthquakes'}
           </p>
           <div className="flex items-center gap-2">
             <button
-              onClick={() => setEqFilter((v) => !v)}
+              onClick={() => setEqFilter(v => !v)}
               className={`text-[10px] font-bold px-2 py-0.5 rounded-full border transition-colors ${
-                eqFilter
-                  ? 'bg-amber-500 border-amber-500 text-white'
-                  : 'border-[var(--border)] text-[var(--muted)] hover:border-amber-400 hover:text-amber-500'
+                eqFilter ? 'bg-amber-500 border-amber-500 text-white' : 'border-[var(--border)] text-[var(--muted)] hover:border-amber-400 hover:text-amber-500'
               }`}
-            >
-              M4.0+
-            </button>
+            >M4.0+</button>
             <Link href="/harita" className="text-[11px] text-red-500 hover:underline">
-              {TR ? 'Tümünü Gör →' : 'See all →'}
+              {TR ? 'Harita →' : 'Map →'}
             </Link>
           </div>
         </div>
-        <div className="flex gap-0 bg-gray-100 dark:bg-gray-700 rounded-xl overflow-hidden mb-3">
+
+        {/* Tabs */}
+        <div className="flex bg-gray-100 dark:bg-gray-800 rounded-xl overflow-hidden mb-3">
           {([
             { key: 'tr' as const, label: TR ? 'Türkiye' : 'Turkey' },
             { key: 'world' as const, label: TR ? 'Dünya' : 'World' },
-          ] as const).map((tab) => (
+          ] as const).map(tab => (
             <button
               key={tab.key}
               onClick={() => setEqTab(tab.key)}
-              className={`flex-1 py-2 text-[11px] font-semibold transition-colors ${
-                eqTab === tab.key
-                  ? 'bg-white dark:bg-gray-600 text-red-600 shadow-sm rounded-xl'
-                  : 'text-[var(--muted)]'
+              className={`flex-1 py-1.5 text-[11px] font-semibold transition-colors ${
+                eqTab === tab.key ? 'bg-white dark:bg-gray-700 text-red-600 shadow-sm rounded-xl' : 'text-[var(--muted)]'
               }`}
-            >
-              {tab.label}
-            </button>
+            >{tab.label}</button>
           ))}
         </div>
+
         {eqLoading ? (
           <div className="flex items-center justify-center py-6 gap-2 text-[var(--muted)]">
             <div className="w-4 h-4 border-2 border-red-400 border-t-transparent rounded-full animate-spin" />
@@ -227,7 +253,7 @@ export default function HomePage() {
           </div>
         ) : (() => {
           const raw = eqTab === 'tr' ? trEqs : worldEqs;
-          const eqList = eqFilter ? raw.filter((d) => d.buyukluk >= 4.0) : raw;
+          const eqList = eqFilter ? raw.filter(d => d.buyukluk >= 4.0) : raw;
           if (eqList.length === 0) return (
             <p className="text-xs text-[var(--muted)] text-center py-4">
               {eqFilter
@@ -235,15 +261,13 @@ export default function HomePage() {
                 : (TR ? 'Veri alınamadı.' : 'No data available.')}
             </p>
           );
-          const EqRow = ({ d, i }: { d: LatestEq; i: number }) => (
-            <div key={i} className="flex items-center gap-2.5 py-1 border-b border-[var(--border)]">
+          const EqRow = ({ d }: { d: LatestEq }) => (
+            <div className="flex items-center gap-2.5 py-1 border-b border-[var(--border)] last:border-0">
               <div className={`w-9 h-9 rounded-lg flex items-center justify-center text-xs font-bold shrink-0 ${
                 d.buyukluk >= 6 ? 'bg-red-50 dark:bg-red-900/30 text-red-600' :
                 d.buyukluk >= 4 ? 'bg-amber-50 dark:bg-amber-900/30 text-amber-600' :
-                'bg-gray-50 dark:bg-gray-700 text-gray-500'
-              }`}>
-                {d.buyukluk.toFixed(1)}
-              </div>
+                'bg-gray-50 dark:bg-gray-800 text-gray-500'
+              }`}>{d.buyukluk.toFixed(1)}</div>
               <div className="flex-1 min-w-0">
                 <p className="text-[11px] font-medium text-[var(--foreground)] truncate leading-tight">{d.konum}</p>
                 <p className="text-[10px] text-[var(--muted)] leading-tight">{d.tarih} · {d.derinlik} km · {d.kaynak}</p>
@@ -251,68 +275,57 @@ export default function HomePage() {
             </div>
           );
           const ROW_H = 44;
-          const tickerH = Math.min(400, eqList.length * ROW_H);
+          const tickerH = Math.min(352, eqList.length * ROW_H);
           return (
             <div className="eq-ticker-wrap overflow-hidden relative" style={{ height: tickerH }}>
-              {/* üst fade */}
-              <div className="absolute top-0 left-0 right-0 h-6 bg-gradient-to-b from-[var(--card-bg)] to-transparent z-10 pointer-events-none" />
-              {/* alt fade */}
-              <div className="absolute bottom-0 left-0 right-0 h-6 bg-gradient-to-t from-[var(--card-bg)] to-transparent z-10 pointer-events-none" />
+              <div className="absolute top-0 left-0 right-0 h-5 bg-gradient-to-b from-[var(--card-bg)] to-transparent z-10 pointer-events-none" />
+              <div className="absolute bottom-0 left-0 right-0 h-5 bg-gradient-to-t from-[var(--card-bg)] to-transparent z-10 pointer-events-none" />
               <div className="eq-ticker-track">
-                {/* orijinal liste */}
-                <div className="space-y-0">
-                  {eqList.map((d, i) => <EqRow key={`a-${i}`} d={d} i={i} />)}
-                </div>
-                {/* seamless loop için kopya */}
-                <div className="space-y-0" aria-hidden>
-                  {eqList.map((d, i) => <EqRow key={`b-${i}`} d={d} i={i} />)}
-                </div>
+                <div>{eqList.map((d, i) => <EqRow key={`a-${i}`} d={d} />)}</div>
+                <div aria-hidden>{eqList.map((d, i) => <EqRow key={`b-${i}`} d={d} />)}</div>
               </div>
             </div>
           );
         })()}
       </div>
 
-      {/* Knowledge guide sidebar on desktop */}
-      <div className="lg:col-span-2">
-        <p className="text-xs font-semibold text-[var(--muted)] uppercase tracking-wide mb-3">
-          {TR ? 'Deprem Bilgi Rehberi' : 'Earthquake Guide'}
+      {/* ── FEATURE CATEGORIES ───────────────────────────────── */}
+      <section className="space-y-4">
+        {[
+          { label: { tr: 'Analiz & Araçlar', en: 'Analysis & Tools' }, items: analiz },
+          { label: { tr: 'Hazırlık',          en: 'Preparedness' },    items: hazirlik },
+          { label: { tr: 'Takip & Keşfet',    en: 'Monitor & Explore'}, items: takip },
+        ].map(cat => (
+          <div key={cat.label.tr}>
+            <p className="text-[10px] font-bold text-[var(--muted)] uppercase tracking-widest mb-2">
+              {TR ? cat.label.tr : cat.label.en}
+            </p>
+            <FeatureRow items={cat.items} TR={TR} />
+          </div>
+        ))}
+      </section>
+
+      {/* ── BİLGİ REHBERİ ────────────────────────────────────── */}
+      <section>
+        <p className="text-[10px] font-bold text-[var(--muted)] uppercase tracking-widest mb-2">
+          {TR ? 'Bilgi Rehberi' : 'Knowledge Guide'}
         </p>
-        <div className="space-y-2">
-          {articles.map((a) => (
+        <div className="grid grid-cols-1 gap-1.5">
+          {articles.map(a => (
             <Link
               key={a.href}
               href={a.href}
-              className="flex items-center justify-between bg-[var(--card-bg)] border border-[var(--border)] rounded-xl px-3 py-2.5 glow-card glow-red"
+              className="flex items-center justify-between bg-[var(--card-bg)] border border-[var(--border)] rounded-xl px-3 py-2.5 hover:border-red-300 dark:hover:border-red-900/50 transition-colors group"
             >
-              <span className="text-xs font-medium text-[var(--foreground)]">{TR ? a.tr : a.en}</span>
-              <span className="text-[var(--muted)] text-xs shrink-0 ml-2">→</span>
+              <span className="text-xs text-[var(--foreground)] group-hover:text-red-500 transition-colors">{TR ? a.tr : a.en}</span>
+              <ChevronRight size={13} className="text-[var(--muted)] shrink-0" />
             </Link>
           ))}
         </div>
-      </div>
-
-      </div>{/* end desktop 2-col */}
-
-      {/* Stats */}
-      <div className="grid grid-cols-3 gap-2">
-        <div className="bg-[var(--card-bg)] border border-[var(--border)] rounded-xl p-3 text-center glow-card glow-red">
-          <p className="text-base font-bold text-red-600">M4.0+</p>
-          <p className="text-[10px] text-[var(--muted)] mt-0.5 leading-tight">{TR ? 'Anlık deprem takibi' : 'Live earthquake tracking'}</p>
-        </div>
-        <div className="bg-[var(--card-bg)] border border-[var(--border)] rounded-xl p-3 text-center glow-card glow-red">
-          <p className="text-base font-bold text-red-600">38</p>
-          <p className="text-[10px] text-[var(--muted)] mt-0.5 leading-tight">{TR ? 'Desteklenen il' : 'Supported provinces'}</p>
-          <p className="text-[9px] text-amber-500 mt-1 leading-tight">{TR ? 'Kalan iller yakında' : 'More cities soon'}</p>
-        </div>
-        <div className="bg-[var(--card-bg)] border border-[var(--border)] rounded-xl p-3 text-center glow-card glow-red">
-          <p className="text-base font-bold text-red-600">337</p>
-          <p className="text-[10px] text-[var(--muted)] mt-0.5 leading-tight">{TR ? 'İlçe risk verisi' : 'District risk entries'}</p>
-        </div>
-      </div>
+      </section>
 
       <p className="text-[10px] text-[var(--muted)] text-center pb-2">
-        {TR ? 'Veri kaynakları: Kandilli · AFAD · USGS · MTA · TÜİK' : 'Data sources: Kandilli · AFAD · USGS · MTA · TÜİK'}
+        {TR ? 'Veri kaynakları: Kandilli · AFAD · USGS · MTA' : 'Sources: Kandilli · AFAD · USGS · MTA'}
       </p>
     </div>
   );

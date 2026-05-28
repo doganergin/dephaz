@@ -119,6 +119,10 @@ body {
   background-color: rgba(255, 255, 255, 0.04);
 }
 
+/* ── Yatay feature satırı — scrollbar gizle ─────────────────────────────── */
+.feature-row { -ms-overflow-style: none; scrollbar-width: none; }
+.feature-row::-webkit-scrollbar { display: none; }
+
 /* ── Deprem ticker (otomatik kayan bant) ─────────────────────────────────── */
 @keyframes eq-scroll-up {
   0%   { transform: translateY(0); }
