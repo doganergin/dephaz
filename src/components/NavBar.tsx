@@ -7,7 +7,7 @@ import { useUser, SignInButton, UserButton } from '@clerk/nextjs';
 import ThemeToggle from './ThemeToggle';
 import LanguageToggle from './LanguageToggle';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { Home, MapPin, Globe, ScrollText, FlaskConical, Backpack, Users, Activity } from 'lucide-react';
+import { Home, MapPin, Globe, ScrollText, FlaskConical, Backpack, Users, Activity, LayoutDashboard, BarChart2, Thermometer } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
 
 export default function NavBar() {
@@ -24,7 +24,10 @@ export default function NavBar() {
     { href: '/tarihsel',      Icon: ScrollText,  tr: t('navTarihsel'),      en: t('navTarihsel') },
     { href: '/uzman',         Icon: FlaskConical,tr: t('navUzman'),         en: t('navUzman') },
     { href: '/canta',         Icon: Backpack,    tr: t('navDepremCantasi'), en: t('navDepremCantasi') },
-    { href: '/aile-plani',    Icon: Users,       tr: 'Aile Planı',          en: 'Family Plan' },
+    { href: '/aile-plani',    Icon: Users,           tr: 'Aile Planı',            en: 'Family Plan' },
+    { href: '/dashboard',     Icon: LayoutDashboard, tr: 'Kişisel Dashboard',     en: 'My Dashboard' },
+    { href: '/istatistikler', Icon: BarChart2,        tr: 'Deprem İstatistikleri', en: 'Statistics' },
+    { href: '/risk-haritasi', Icon: Thermometer,      tr: 'Risk Isı Haritası',     en: 'Risk Heat Map' },
   ];
 
   const rehber = [
@@ -41,6 +44,8 @@ export default function NavBar() {
     { href: '/hazirlik-testi',         tr: 'Hazırlık Testi',                en: 'Preparedness Quiz' },
     { href: '/karsilastir',            tr: 'Bölge Karşılaştır',             en: 'Compare Regions' },
     { href: '/bildirimler',            tr: 'Deprem Bildirimleri',            en: 'Earthquake Alerts' },
+    { href: '/artci-tahmin',           tr: 'Artçı Deprem Tahmini',           en: 'Aftershock Estimator' },
+    { href: '/toplanma-alani',         tr: 'Toplanma Alanı Bul',             en: 'Find Assembly Area' },
   ];
 
   const kurumsal = [

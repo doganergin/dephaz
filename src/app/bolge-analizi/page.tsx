@@ -9,7 +9,7 @@ import { depremAnindaOnlemler, depremSonrasiOnlemler } from '@/data/depremOnleml
 import { useLanguage } from '@/contexts/LanguageContext';
 import { IL_KOORDINATLARI } from '@/lib/ilKoordinatlari';
 import type { BolgeRisk, ZeminTipi } from '@/types';
-import { Globe, Search, ShieldCheck, EyeOff, Ban, TreePine, Car, DoorOpen, Waves, Flame, HeartPulse, Construction } from 'lucide-react';
+import { Globe, Search, ShieldCheck, EyeOff, Ban, TreePine, Car, DoorOpen, Waves, Flame, HeartPulse, Construction, Share2 } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
 
 const ANINDA_ICONS: LucideIcon[] = [ShieldCheck, EyeOff, Ban, TreePine, Car, DoorOpen];
@@ -433,6 +433,22 @@ export default function BolgeAnalizi() {
                   </p>
                   <RiskBadge sinif={risk.riskSinifi} etiket={riskEtiket} />
                 </div>
+                <button
+                  onClick={() => {
+                    const text = lang === 'EN'
+                      ? `${risk.ilce}, ${risk.il} earthquake risk score: ${risk.riskSkoru}/100 — ${risk.riskMetni}`
+                      : `${risk.ilce}, ${risk.il} deprem risk skoru: ${risk.riskSkoru}/100 — ${risk.riskMetni}`;
+                    if (typeof navigator !== 'undefined' && navigator.share) {
+                      navigator.share({ title: 'Deprem Hattı', text, url: window.location.href });
+                    } else {
+                      navigator.clipboard?.writeText(`${text}\n${window.location.href}`);
+                    }
+                  }}
+                  className="p-2 rounded-xl bg-white/40 dark:bg-black/20 hover:bg-white/70 dark:hover:bg-black/40 transition-colors shrink-0 ml-2"
+                  title={lang === 'EN' ? 'Share' : 'Paylaş'}
+                >
+                  <Share2 size={15} style={{ color: renk.text }} />
+                </button>
                 <div className="text-right shrink-0 ml-3">
                   <p className="text-4xl font-black leading-none tabular-nums" style={{ color: renk.text }}>
                     {risk.riskSkoru}
