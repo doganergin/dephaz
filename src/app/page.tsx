@@ -250,7 +250,10 @@ export default function HomePage() {
         ))}
       </section>
 
-      {/* ── SON DEPREMLER ────────────────────────────────────── */}
+      {/* ── SON DEPREMLER + BİLGİ REHBERİ ───────────────────── */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 items-start">
+
+      {/* Son Depremler */}
       <div className="bg-[var(--card-bg)] rounded-2xl border border-[var(--border)] p-4">
         <div className="flex items-center justify-between mb-3">
           <p className="text-xs font-bold text-[var(--foreground)] uppercase tracking-wide">
@@ -338,7 +341,7 @@ export default function HomePage() {
         })()}
       </div>
 
-      {/* ── BİLGİ REHBERİ ────────────────────────────────────── */}
+      {/* Bilgi Rehberi */}
       <section>
         <p className="text-[10px] font-bold text-[var(--muted)] uppercase tracking-widest mb-2">
           {TR ? 'Bilgi Rehberi' : 'Knowledge Guide'}
@@ -356,6 +359,8 @@ export default function HomePage() {
           ))}
         </div>
       </section>
+
+      </div>{/* /grid */}
 
       <p className="text-[10px] text-[var(--muted)] text-center pb-2">
         {TR ? 'Veri kaynakları: Kandilli · AFAD · USGS · MTA' : 'Sources: Kandilli · AFAD · USGS · MTA'}
