@@ -9,7 +9,32 @@ import {
 } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
 
-interface LatestEq { buyukluk: number; konum: string; tarih: string; derinlik: number; kaynak?: string; }
+interface LatestEq { buyukluk: number; konum: string; tarih: string; derinlik: number; kaynak?: string; enlem?: number; boylam?: number; onVeri?: boolean; }
+
+function haversine(lat1: number, lon1: number, lat2: number, lon2: number) {
+  const R = 6371;
+  const dLat = (lat2 - lat1) * Math.PI / 180;
+  const dLon = (lon2 - lon1) * Math.PI / 180;
+  const a = Math.sin(dLat / 2) ** 2 + Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) * Math.sin(dLon / 2) ** 2;
+  return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+}
+
+function parseTime(tarih: string): number {
+  return new Date(tarih.replace(/\./g, '-')).getTime() || 0;
+}
+
+function mergeEqs(official: LatestEq[], depremAgi: LatestEq[]): LatestEq[] {
+  const unmatched = depremAgi.filter(da => {
+    if (!da.enlem || !da.boylam) return false;
+    return !official.some(o => {
+      if (!o.enlem || !o.boylam) return false;
+      const dtMs = Math.abs(parseTime(da.tarih) - parseTime(o.tarih));
+      const dist = haversine(da.enlem, da.boylam, o.enlem, o.boylam);
+      return dtMs < 5 * 60 * 1000 && dist < 150;
+    });
+  }).map(da => ({ ...da, onVeri: true }));
+  return [...unmatched, ...official].sort((a, b) => parseTime(b.tarih) - parseTime(a.tarih)).slice(0, 50);
+}
 
 interface Feature { href: string; Icon: LucideIcon; tr: string; en: string; color: string; }
 
@@ -100,27 +125,39 @@ export default function HomePage() {
 
   useEffect(() => {
     async function fetchEqs() {
-      const [kandilliRes, afadRes, usgsRes] = await Promise.allSettled([
+      const [kandilliRes, afadRes, usgsRes, daRes] = await Promise.allSettled([
         fetch('/api/kandilli?limit=50'),
         fetch('/api/afad?limit=50&minmag=2.0'),
         fetch('/api/usgs'),
+        fetch('/api/depremagi?limit=30'),
       ]);
-      const combined: LatestEq[] = [];
+
+      const official: LatestEq[] = [];
       if (kandilliRes.status === 'fulfilled' && kandilliRes.value.ok) {
-        const d: Array<{ buyukluk: number; konum: string; tarih: string; saat?: string; derinlik: number }> = await kandilliRes.value.json();
-        if (Array.isArray(d)) combined.push(...d.map((x) => ({
+        const d: Array<{ buyukluk: number; konum: string; tarih: string; saat?: string; derinlik: number; enlem?: number; boylam?: number }> = await kandilliRes.value.json();
+        if (Array.isArray(d)) official.push(...d.map((x) => ({
           buyukluk: x.buyukluk, konum: x.konum,
           tarih: x.saat ? `${x.tarih} ${x.saat}` : x.tarih,
           derinlik: x.derinlik, kaynak: 'Kandilli',
+          enlem: x.enlem, boylam: x.boylam,
         })));
       }
       if (afadRes.status === 'fulfilled' && afadRes.value.ok) {
-        const d: Array<{ buyukluk: number; konum: string; tarih: string; derinlik: number }> = await afadRes.value.json();
-        if (Array.isArray(d)) combined.push(...d.map((x) => ({
+        const d: Array<{ buyukluk: number; konum: string; tarih: string; derinlik: number; enlem?: number; boylam?: number }> = await afadRes.value.json();
+        if (Array.isArray(d)) official.push(...d.map((x) => ({
           buyukluk: x.buyukluk, konum: x.konum, tarih: x.tarih, derinlik: x.derinlik, kaynak: 'AFAD',
+          enlem: x.enlem, boylam: x.boylam,
         })));
       }
-      setTrEqs(combined.sort((a, b) => b.tarih.localeCompare(a.tarih)).slice(0, 50));
+
+      let daEqs: LatestEq[] = [];
+      if (daRes.status === 'fulfilled' && daRes.value.ok) {
+        const d = await daRes.value.json();
+        if (Array.isArray(d)) daEqs = d;
+      }
+
+      setTrEqs(mergeEqs(official, daEqs));
+
       if (usgsRes.status === 'fulfilled' && usgsRes.value.ok) {
         const d = await usgsRes.value.json();
         if (d.features) {
@@ -133,7 +170,10 @@ export default function HomePage() {
       }
       setEqLoading(false);
     }
+
     fetchEqs();
+    const interval = setInterval(fetchEqs, 30 * 1000);
+    return () => clearInterval(interval);
   }, []);
 
   const latest = trEqs[0];
@@ -330,9 +370,14 @@ export default function HomePage() {
                       <p className="text-[11px] font-medium text-[var(--foreground)] truncate">{eq.konum}</p>
                       <p className="text-[10px] text-[var(--muted)]">{eq.tarih} · {eq.derinlik} km</p>
                     </div>
-                    {eq.kaynak && (
+                    {eq.onVeri ? (
+                      <span className="text-[9px] font-bold text-amber-500 shrink-0 flex items-center gap-0.5">
+                        <span className="w-1.5 h-1.5 rounded-full bg-amber-500 animate-pulse inline-block" />
+                        Ön Veri
+                      </span>
+                    ) : eq.kaynak ? (
                       <span className="text-[9px] text-[var(--muted)] shrink-0">{eq.kaynak}</span>
-                    )}
+                    ) : null}
                   </div>
                 ))}
               </div>

@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="1200" viewBox="0 0 1200 1200">
+  <defs>
+    <linearGradient id="bg2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#111827"/>
+      <stop offset="100%" style="stop-color:#1f0a0a"/>
+    </linearGradient>
+    <linearGradient id="red2" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#ef4444"/>
+      <stop offset="100%" style="stop-color:#b91c1c"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" style="stop-color:#ef444415"/>
+      <stop offset="100%" style="stop-color:#ef444400"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="1200" fill="url(#bg2)"/>
+
+  <!-- Glow center -->
+  <ellipse cx="600" cy="500" rx="500" ry="400" fill="url(#glow)"/>
+
+  <!-- Seismic wave -->
+  <g stroke="#ef444435" stroke-width="3" fill="none">
+    <polyline points="50,600 150,520 220,660 310,440 400,700 480,380 560,750 640,420 720,680 800,500 880,580 950,540 1150,600"/>
+  </g>
+  <g stroke="#ef444420" stroke-width="2" fill="none">
+    <polyline points="50,600 150,540 220,640 310,470 400,670 480,410 560,720 640,450 720,660 800,520 880,565 950,552 1150,600"/>
+  </g>
+
+  <!-- Live badge -->
+  <rect x="460" y="200" width="280" height="48" rx="24" fill="#ef444420" stroke="#ef444460" stroke-width="1.5"/>
+  <circle cx="490" cy="224" r="7" fill="#ef4444"/>
+  <text x="600" y="232" font-family="Arial, sans-serif" font-size="22" font-weight="700" fill="#ef4444" text-anchor="middle" letter-spacing="3">● CANLI TAKİP</text>
+
+  <!-- Main title -->
+  <text x="600" y="400" font-family="Arial, sans-serif" font-size="96" font-weight="900" fill="#ffffff" text-anchor="middle">Deprem</text>
+  <text x="600" y="500" font-family="Arial, sans-serif" font-size="96" font-weight="900" fill="#ef4444" text-anchor="middle">Hattı</text>
+
+  <!-- Red underline -->
+  <rect x="420" y="530" width="360" height="5" rx="2.5" fill="url(#red2)"/>
+
+  <!-- Subtitle -->
+  <text x="600" y="620" font-family="Arial, sans-serif" font-size="32" fill="#9ca3af" text-anchor="middle">Bölge Risk Analizi</text>
+  <text x="600" y="662" font-family="Arial, sans-serif" font-size="32" fill="#9ca3af" text-anchor="middle">Canlı Deprem Takibi</text>
+
+  <!-- Stats row -->
+  <rect x="150" y="730" width="260" height="130" rx="20" fill="#ffffff08" stroke="#ffffff15" stroke-width="1"/>
+  <text x="280" y="805" font-family="Arial, sans-serif" font-size="64" font-weight="900" fill="#f59e0b" text-anchor="middle">38</text>
+  <text x="280" y="845" font-family="Arial, sans-serif" font-size="22" fill="#9ca3af" text-anchor="middle">İl Kapsamı</text>
+
+  <rect x="470" y="730" width="260" height="130" rx="20" fill="#ffffff08" stroke="#ffffff15" stroke-width="1"/>
+  <text x="600" y="805" font-family="Arial, sans-serif" font-size="64" font-weight="900" fill="#ef4444" text-anchor="middle">337</text>
+  <text x="600" y="845" font-family="Arial, sans-serif" font-size="22" fill="#9ca3af" text-anchor="middle">İlçe Verisi</text>
+
+  <rect x="790" y="730" width="260" height="130" rx="20" fill="#ffffff08" stroke="#ffffff15" stroke-width="1"/>
+  <text x="920" y="805" font-family="Arial, sans-serif" font-size="64" font-weight="900" fill="#3b82f6" text-anchor="middle">3</text>
+  <text x="920" y="845" font-family="Arial, sans-serif" font-size="22" fill="#9ca3af" text-anchor="middle">Veri Kaynağı</text>
+
+  <!-- CTA button -->
+  <rect x="300" y="920" width="600" height="80" rx="24" fill="url(#red2)"/>
+  <text x="600" y="970" font-family="Arial, sans-serif" font-size="32" font-weight="700" fill="#ffffff" text-anchor="middle">Risk Analizi Yap →</text>
+
+  <!-- Domain -->
+  <text x="600" y="1080" font-family="Arial, sans-serif" font-size="28" fill="#6b7280" text-anchor="middle">depremhatti.com</text>
+
+  <!-- Corner accent -->
+  <rect x="0" y="0" width="1200" height="8" fill="url(#red2)"/>
+  <rect x="0" y="1192" width="1200" height="8" fill="url(#red2)"/>
+</svg>

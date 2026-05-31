@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="628" viewBox="0 0 1200 628">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#111827"/>
+      <stop offset="100%" style="stop-color:#1f0a0a"/>
+    </linearGradient>
+    <linearGradient id="red" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#ef4444"/>
+      <stop offset="100%" style="stop-color:#b91c1c"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="628" fill="url(#bg)"/>
+
+  <!-- Subtle grid lines -->
+  <g stroke="#ffffff08" stroke-width="1">
+    <line x1="0" y1="157" x2="1200" y2="157"/>
+    <line x1="0" y1="314" x2="1200" y2="314"/>
+    <line x1="0" y1="471" x2="1200" y2="471"/>
+    <line x1="300" y1="0" x2="300" y2="628"/>
+    <line x1="600" y1="0" x2="600" y2="628"/>
+    <line x1="900" y1="0" x2="900" y2="628"/>
+  </g>
+
+  <!-- Red accent bar left -->
+  <rect x="0" y="0" width="8" height="628" fill="url(#red)"/>
+
+  <!-- Seismic wave decoration right side -->
+  <g stroke="#ef444430" stroke-width="2" fill="none">
+    <polyline points="750,314 780,260 810,340 840,200 870,380 900,150 930,420 960,200 990,350 1020,280 1050,320 1080,300 1110,314"/>
+  </g>
+  <g stroke="#ef444418" stroke-width="1.5" fill="none">
+    <polyline points="750,314 780,280 810,330 840,240 870,360 900,200 930,400 960,240 990,340 1020,290 1050,315 1080,305 1110,314"/>
+  </g>
+
+  <!-- Live badge -->
+  <circle cx="120" cy="120" r="7" fill="#ef4444">
+    <animate attributeName="opacity" values="1;0.4;1" dur="1.5s" repeatCount="indefinite"/>
+  </circle>
+  <text x="137" y="126" font-family="Arial, sans-serif" font-size="22" font-weight="700" fill="#ef4444" letter-spacing="4">CANLI</text>
+
+  <!-- Main title -->
+  <text x="100" y="250" font-family="Arial, sans-serif" font-size="72" font-weight="900" fill="#ffffff">Deprem Hattı</text>
+
+  <!-- Subtitle -->
+  <text x="104" y="310" font-family="Arial, sans-serif" font-size="28" fill="#9ca3af">Bölge Risk Analizi &amp; Canlı Deprem Takibi</text>
+
+  <!-- Red divider -->
+  <rect x="100" y="340" width="120" height="4" rx="2" fill="url(#red)"/>
+
+  <!-- Feature pills -->
+  <rect x="100" y="375" width="200" height="44" rx="22" fill="#ef444420" stroke="#ef444460" stroke-width="1.5"/>
+  <text x="200" y="403" font-family="Arial, sans-serif" font-size="20" fill="#ef4444" text-anchor="middle" font-weight="600">Risk Skoru</text>
+
+  <rect x="318" y="375" width="210" height="44" rx="22" fill="#f59e0b20" stroke="#f59e0b60" stroke-width="1.5"/>
+  <text x="423" y="403" font-family="Arial, sans-serif" font-size="20" fill="#f59e0b" text-anchor="middle" font-weight="600">Fay Mesafesi</text>
+
+  <rect x="546" y="375" width="210" height="44" rx="22" fill="#3b82f620" stroke="#3b82f660" stroke-width="1.5"/>
+  <text x="651" y="403" font-family="Arial, sans-serif" font-size="20" fill="#3b82f6" text-anchor="middle" font-weight="600">Canlı Harita</text>
+
+  <!-- Domain -->
+  <text x="100" y="510" font-family="Arial, sans-serif" font-size="24" fill="#6b7280">depremhatti.com</text>
+
+  <!-- CTA button -->
+  <rect x="100" y="540" width="280" height="56" rx="16" fill="url(#red)"/>
+  <text x="240" y="576" font-family="Arial, sans-serif" font-size="22" font-weight="700" fill="#ffffff" text-anchor="middle">Risk Analizi Yap →</text>
+
+  <!-- Stats right side -->
+  <text x="850" y="480" font-family="Arial, sans-serif" font-size="64" font-weight="900" fill="#ffffff" text-anchor="middle">38</text>
+  <text x="850" y="520" font-family="Arial, sans-serif" font-size="20" fill="#9ca3af" text-anchor="middle">desteklenen il</text>
+
+  <text x="1050" y="480" font-family="Arial, sans-serif" font-size="64" font-weight="900" fill="#ffffff" text-anchor="middle">337</text>
+  <text x="1050" y="520" font-family="Arial, sans-serif" font-size="20" fill="#9ca3af" text-anchor="middle">ilçe risk verisi</text>
+</svg>

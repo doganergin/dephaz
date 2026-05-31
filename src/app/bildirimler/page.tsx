@@ -23,17 +23,40 @@ export default function BildirimlerPage() {
     setEnabled(localStorage.getItem(STORAGE_KEY) === '1');
   }, []);
 
-  // Deprem kontrol fonksiyonu
+  // Deprem kontrol — Deprem Ağı (30s) önce, Kandilli teyit
   useEffect(() => {
     if (!enabled || perm !== 'granted') return;
     async function kontrol() {
       try {
+        // Önce Deprem Ağı (hızlı)
+        const daRes = await fetch('/api/depremagi?limit=5&minmag=3.0');
+        if (daRes.ok) {
+          const daData = await daRes.json();
+          if (Array.isArray(daData) && daData.length > 0) {
+            const en = daData[0];
+            const id = `da-${en.tarih}-${en.konum}-${en.buyukluk}`;
+            const lastId = localStorage.getItem(LAST_EQ_KEY);
+            setLastCheck(new Date().toLocaleTimeString(TR ? 'tr-TR' : 'en-US'));
+            if (id !== lastId && en.buyukluk >= MIN_MAG) {
+              localStorage.setItem(LAST_EQ_KEY, id);
+              new Notification(`⚡ M${en.buyukluk.toFixed(1)} — ${en.konum}`, {
+                body: TR
+                  ? `Derinlik: ${en.derinlik} km · ${en.tarih} · Kaynak: Deprem Ağı (ön veri)`
+                  : `Depth: ${en.derinlik} km · ${en.tarih} · Source: Earthquake Network (preliminary)`,
+                icon: '/favicon-512.png',
+                badge: '/favicon-32.png',
+              });
+            }
+            return;
+          }
+        }
+        // Deprem Ağı boşsa Kandilli fallback
         const res = await fetch('/api/kandilli?limit=5');
         if (!res.ok) return;
         const data = await res.json();
         if (!Array.isArray(data) || data.length === 0) return;
         const en = data[0];
-        const id = `${en.tarih}-${en.konum}-${en.buyukluk}`;
+        const id = `k-${en.tarih}-${en.konum}-${en.buyukluk}`;
         const lastId = localStorage.getItem(LAST_EQ_KEY);
         setLastCheck(new Date().toLocaleTimeString(TR ? 'tr-TR' : 'en-US'));
         if (id !== lastId && en.buyukluk >= MIN_MAG) {
@@ -49,7 +72,7 @@ export default function BildirimlerPage() {
       } catch { /* sessiz geç */ }
     }
     kontrol();
-    const interval = setInterval(kontrol, 5 * 60 * 1000); // 5 dakikada bir
+    const interval = setInterval(kontrol, 30 * 1000); // 30 saniyede bir
     return () => clearInterval(interval);
   }, [enabled, perm, TR]);
 
@@ -173,8 +196,8 @@ export default function BildirimlerPage() {
               icon: Activity,
               tr: 'Otomatik kontrol',
               en: 'Automatic check',
-              trD: `Kandilli verileri 5 dakikada bir kontrol edilir.`,
-              enD: `Kandilli data is checked every 5 minutes.`,
+              trD: `Deprem Ağı verileri 30 saniyede bir kontrol edilir.`,
+              enD: `Earthquake Network data is checked every 30 seconds.`,
             },
             {
               icon: CheckCircle,
