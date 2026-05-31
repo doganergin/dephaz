@@ -25,11 +25,13 @@ function parseTime(tarih: string): number {
 
 function mergeEqs(official: LatestEq[], depremAgi: LatestEq[]): LatestEq[] {
   const unmatched = depremAgi.filter(da => {
-    if (!da.enlem || !da.boylam) return false;
+    const daLat = da.enlem; const daLon = da.boylam;
+    if (!daLat || !daLon) return false;
     return !official.some(o => {
-      if (!o.enlem || !o.boylam) return false;
+      const oLat = o.enlem; const oLon = o.boylam;
+      if (!oLat || !oLon) return false;
       const dtMs = Math.abs(parseTime(da.tarih) - parseTime(o.tarih));
-      const dist = haversine(da.enlem, da.boylam, o.enlem, o.boylam);
+      const dist = haversine(daLat, daLon, oLat, oLon);
       return dtMs < 5 * 60 * 1000 && dist < 150;
     });
   }).map(da => ({ ...da, onVeri: true }));
