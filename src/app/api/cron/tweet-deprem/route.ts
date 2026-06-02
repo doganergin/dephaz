@@ -80,6 +80,7 @@ export async function GET(req: Request) {
       eq = kData[0];
     }
 
+    if (!eq) return NextResponse.json({ skipped: 'veri yok' });
     const id = `${eq.tarih}-${eq.konum}-${eq.buyukluk}`;
 
     if (tweetedIds.has(id)) return NextResponse.json({ skipped: 'zaten tweetlendi' });
