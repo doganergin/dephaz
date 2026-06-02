@@ -60,16 +60,27 @@ export async function GET(req: Request) {
   }
 
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL ?? 'https://depremhatti.com'}/api/kandilli?limit=10&minmag=${MIN_MAG}`, {
-      cache: 'no-store',
-    });
-    if (!res.ok) return NextResponse.json({ skipped: 'kandilli hata' });
+    // Önce Deprem Ağı (en hızlı), fallback Kandilli
+    const base = process.env.NEXT_PUBLIC_BASE_URL ?? 'https://depremhatti.com';
+    let eq: Record<string, unknown> | null = null;
+    let kaynak = 'Deprem Ağı';
 
-    const data = await res.json();
-    if (!Array.isArray(data) || data.length === 0) return NextResponse.json({ skipped: 'veri yok' });
+    const daRes = await fetch(`${base}/api/depremagi?limit=5&minmag=${MIN_MAG}`, { cache: 'no-store' });
+    if (daRes.ok) {
+      const daData = await daRes.json();
+      if (Array.isArray(daData) && daData.length > 0) eq = daData[0];
+    }
 
-    const eq = data[0];
-    const id = `${eq.tarih}-${eq.saat ?? ''}-${eq.konum}-${eq.buyukluk}`;
+    if (!eq) {
+      kaynak = 'Kandilli';
+      const kRes = await fetch(`${base}/api/kandilli?limit=5&minmag=${MIN_MAG}`, { cache: 'no-store' });
+      if (!kRes.ok) return NextResponse.json({ skipped: 'veri alınamadı' });
+      const kData = await kRes.json();
+      if (!Array.isArray(kData) || kData.length === 0) return NextResponse.json({ skipped: 'veri yok' });
+      eq = kData[0];
+    }
+
+    const id = `${eq.tarih}-${eq.konum}-${eq.buyukluk}`;
 
     if (tweetedIds.has(id)) return NextResponse.json({ skipped: 'zaten tweetlendi' });
 
@@ -78,9 +89,9 @@ export async function GET(req: Request) {
 
     const tweet = `${emoji} DEPREM | M${mag}
 📍 ${eq.konum}
-⏱ ${eq.tarih}${eq.saat ? ' ' + eq.saat : ''}
+⏱ ${eq.tarih}
 🔽 Derinlik: ${eq.derinlik} km
-Kaynak: Kandilli
+Kaynak: ${kaynak}
 
 🔗 depremhatti.com/harita
 #deprem #depremhatti #AFAD`;
