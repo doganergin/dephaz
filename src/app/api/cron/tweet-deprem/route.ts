@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 import crypto from 'crypto';
 
 const LAST_TWEET_KEY = 'last_tweeted_eq';
-const MIN_MAG = 4.0;
+const MIN_MAG = 1.0;
 
 // Twitter OAuth 1.0a imzalama
 function oauthSign(method: string, url: string, params: Record<string, string>, secrets: { apiSecret: string; tokenSecret: string }) {
