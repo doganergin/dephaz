@@ -11,7 +11,7 @@ jobs:
     steps:
       - name: Tweet deprem
         run: |
-          RESPONSE=$(curl -s -X POST \
+          RESPONSE=$(curl -s -G \
             -H "Authorization: Bearer ${{ secrets.CRON_SECRET }}" \
             "https://depremhatti.com/api/cron/tweet-deprem")
           echo "API Yanıtı: $RESPONSE"
