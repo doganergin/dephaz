@@ -1,0 +1,17 @@
+name: Auto Tweet Deprem
+
+on:
+  schedule:
+    - cron: '*/5 * * * *'  # Her 5 dakikada bir
+  workflow_dispatch:        # Manuel tetikleme
+
+jobs:
+  tweet:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Tweet deprem
+        run: |
+          curl -s -X POST \
+            -H "Authorization: Bearer ${{ secrets.CRON_SECRET }}" \
+            "https://depremhatti.com/api/cron/tweet-deprem" \
+            | cat
