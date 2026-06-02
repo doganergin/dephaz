@@ -340,15 +340,15 @@ export const haberler: Haber[] = [
     ozet: 'Parsons ve ark.\'nın Science dergisinde yayımlanan çalışması, 1999 İzmit depreminin ardından fay üzerindeki Coulomb gerilme aktarımını analiz etmiştir. 30 yıl içinde İstanbul\'a yakın segmentte M≥7 deprem olasılığı %62 (±15) olarak hesaplanmış; bu çalışma günümüzde hâlâ en çok atıf alan Marmara risk analizlerinden biridir.',
     kaynak: 'https://doi.org/10.1126/science.288.5466.661',
     kaynak_tur: 'doi'
-  }
+  },
   {
-  uzman: 'Prof. Dr. Naci Görür',
-  unvan: 'Yer Bilimci',
-  kurum: 'İTÜ / Bilim Akademisi',
-  tarih: 'Güncel',
-  baslik: 'Akoluk Depremleri ve Adana Havzasına İlerleyen Sismik Aktivite',
-  ozet: 'Akoluk\'ta yaşanan 4.0 ve 4.9 büyüklüğündeki depremlerin Savrun ile Saimbeyli Fayları arasında, DAF üzerinde olduğu; depremlerin Adana Havzasına doğru ilerlediği ve 2023 depremlerinin stres birikiminde etkisi olduğu vurgulanarak "Deprem Dirençli Adana" çağrısı yapıldı.',
-  kaynak: 'https://x.com/nacigorur/status/2059019497747382422',
-  kaynak_tur: 'sosyal_medya'
-}
+    uzman: 'Prof. Dr. Naci Görür',
+    unvan: 'Yer Bilimci',
+    kurum: 'İTÜ / Bilim Akademisi',
+    tarih: 'Güncel',
+    baslik: 'Akoluk Depremleri ve Adana Havzasına İlerleyen Sismik Aktivite',
+    ozet: 'Akoluk\'ta yaşanan 4.0 ve 4.9 büyüklüğündeki depremlerin Savrun ile Saimbeyli Fayları arasında, DAF üzerinde olduğu; depremlerin Adana Havzasına doğru ilerlediği ve 2023 depremlerinin stres birikiminde etkisi olduğu vurgulanarak "Deprem Dirençli Adana" çağrısı yapıldı.',
+    kaynak: 'https://x.com/nacigorur/status/2059019497747382422',
+    kaynak_tur: 'sosyal_medya'
+  }
 ];
