@@ -7,6 +7,8 @@ import NavBar from "@/components/NavBar";
 import AtaturkBanner from "@/components/AtaturkBanner";
 import BackBar from "@/components/BackBar";
 import Footer from "@/components/Footer";
+import NotificationManager from "@/components/NotificationManager";
+import PwaInstallBanner from "@/components/PwaInstallBanner";
 import { LanguageProvider } from "@/contexts/LanguageContext";
 
 const geist = Geist({ subsets: ["latin"] });
@@ -113,6 +115,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             {children}
           </main>
           <Footer />
+          <NotificationManager />
+          <PwaInstallBanner />
         </LanguageProvider>
       </body>
     </html>

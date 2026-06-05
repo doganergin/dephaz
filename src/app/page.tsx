@@ -1,5 +1,5 @@
 'use client';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { useLanguage } from '@/contexts/LanguageContext';
 import {
@@ -146,7 +146,11 @@ export default function HomePage() {
   const [trEqs, setTrEqs]       = useState<LatestEq[]>([]);
   const [worldEqs, setWorldEqs] = useState<LatestEq[]>([]);
   const [eqLoading, setEqLoading] = useState(true);
+  const [eqError, setEqError]     = useState(false);
+  const [fetchTrigger, setFetchTrigger] = useState(0);
   const [eqFilter, setEqFilter]   = useState(false);
+  const [newEqAlert, setNewEqAlert] = useState<LatestEq | null>(null);
+  const prevTrFirstRef = useRef<string | null>(null);
 
   useEffect(() => {
     async function fetchEqs() {
@@ -181,7 +185,25 @@ export default function HomePage() {
         if (Array.isArray(d)) daEqs = d;
       }
 
-      setTrEqs(mergeEqs(official, daEqs));
+      const merged = mergeEqs(official, daEqs);
+
+      // Yeni deprem tespiti (sadece ilk yüklemeden sonra)
+      if (prevTrFirstRef.current !== null && merged.length > 0) {
+        const first = merged[0];
+        const firstId = `${first.tarih}-${first.konum}-${first.buyukluk}`;
+        if (prevTrFirstRef.current !== firstId) {
+          setNewEqAlert(first);
+        }
+      }
+      if (merged.length > 0) {
+        prevTrFirstRef.current = `${merged[0].tarih}-${merged[0].konum}-${merged[0].buyukluk}`;
+      }
+      setTrEqs(merged);
+
+      const anyTrOk = [kandilliRes, afadRes, daRes].some(
+        r => r.status === 'fulfilled' && (r as PromiseFulfilledResult<Response>).value.ok
+      );
+      setEqError(!anyTrOk && merged.length === 0);
 
       if (usgsRes.status === 'fulfilled' && usgsRes.value.ok) {
         const d = await usgsRes.value.json();
@@ -199,13 +221,38 @@ export default function HomePage() {
     fetchEqs();
     const interval = setInterval(fetchEqs, 30 * 1000);
     return () => clearInterval(interval);
-  }, []);
+  }, [fetchTrigger]);
+
+  useEffect(() => {
+    if (!newEqAlert) return;
+    const t = setTimeout(() => setNewEqAlert(null), 8000);
+    return () => clearTimeout(t);
+  }, [newEqAlert]);
 
   const latest = trEqs[0];
   const m4Count = trEqs.filter(e => e.buyukluk >= 4).length;
 
   return (
     <div className="space-y-5">
+
+      {/* ── YENİ DEPREM TOAST ────────────────────────────────── */}
+      {newEqAlert && (
+        <div className="fixed top-16 inset-x-0 z-50 flex justify-center px-4 pointer-events-none">
+          <div className="pointer-events-auto bg-gray-900 border border-red-500/60 rounded-2xl px-4 py-3 flex items-center gap-3 shadow-2xl max-w-sm w-full">
+            <span className="w-2 h-2 rounded-full bg-red-500 animate-pulse shrink-0" />
+            <div className="flex-1 min-w-0">
+              <p className="text-white text-xs font-bold">{TR ? 'Yeni Deprem' : 'New Earthquake'}</p>
+              <p className="text-red-300 text-[11px] truncate">
+                M{newEqAlert.buyukluk.toFixed(1)} — {newEqAlert.konum}
+              </p>
+            </div>
+            <button
+              onClick={() => setNewEqAlert(null)}
+              className="text-gray-500 hover:text-white transition-colors text-xs shrink-0"
+            >✕</button>
+          </div>
+        </div>
+      )}
 
       {/* ── HERO ─────────────────────────────────────────────── */}
       <div className="relative overflow-hidden rounded-2xl bg-gray-900 dark:bg-gray-950 border border-gray-800 p-5">
@@ -262,16 +309,16 @@ export default function HomePage() {
           {/* Stats strip */}
           <div className="flex gap-4 mb-5">
             <div>
-              <p className="text-lg font-black text-amber-400 tabular-nums">{m4Count}</p>
-              <p className="text-[10px] text-gray-500">M4.0+ {TR ? 'son liste' : 'recent'}</p>
+              <p className="text-lg font-black text-amber-400 tabular-nums">{eqLoading ? '…' : m4Count}</p>
+              <p className="text-[10px] text-gray-500">M4.0+ {TR ? 'Türkiye' : 'Turkey'}</p>
             </div>
             <div>
-              <p className="text-lg font-black text-white">38</p>
-              <p className="text-[10px] text-gray-500">{TR ? 'desteklenen il' : 'provinces'}</p>
+              <p className="text-lg font-black text-white tabular-nums">{eqLoading ? '…' : trEqs.length}</p>
+              <p className="text-[10px] text-gray-500">{TR ? 'son deprem' : 'recent quakes'}</p>
             </div>
             <div>
-              <p className="text-lg font-black text-white">337</p>
-              <p className="text-[10px] text-gray-500">{TR ? 'ilçe risk verisi' : 'district scores'}</p>
+              <p className="text-lg font-black text-white tabular-nums">{eqLoading ? '…' : worldEqs.filter(e => e.buyukluk >= 4).length}</p>
+              <p className="text-[10px] text-gray-500">{TR ? 'dünya M4.0+' : 'world M4.0+'}</p>
             </div>
           </div>
 
@@ -443,6 +490,18 @@ export default function HomePage() {
           <div className="flex items-center justify-center h-24">
             <div className="w-5 h-5 border-2 border-red-500 border-t-transparent rounded-full animate-spin" />
           </div>
+        ) : eqError ? (
+          <div className="flex flex-col items-center gap-3 py-8 text-center">
+            <p className="text-xs text-[var(--muted)]">
+              {TR ? 'Veri alınamadı. Bağlantınızı kontrol edin.' : 'Could not fetch data. Check your connection.'}
+            </p>
+            <button
+              onClick={() => { setEqLoading(true); setEqError(false); setFetchTrigger(n => n + 1); }}
+              className="px-4 py-1.5 text-xs font-bold bg-red-500 hover:bg-red-600 text-white rounded-xl transition-colors"
+            >
+              {TR ? 'Yeniden Dene' : 'Retry'}
+            </button>
+          </div>
         ) : (() => {
           const rawList = eqTab === 'tr' ? trEqs : worldEqs;
           const eqList = eqFilter ? rawList.filter(e => e.buyukluk >= 4) : rawList;
@@ -476,7 +535,16 @@ export default function HomePage() {
                       <p className="text-[11px] font-medium text-[var(--foreground)] truncate">{eq.konum}</p>
                       <p className="text-[10px] text-[var(--muted)]">{eq.tarih} · {eq.derinlik} km</p>
                     </div>
-                    {eq.onVeri ? (
+                    {eq.enlem && eq.boylam ? (
+                      <Link
+                        href={`/harita?lat=${eq.enlem}&lng=${eq.boylam}&zoom=9`}
+                        className="shrink-0 p-1 rounded-lg text-blue-400 hover:text-blue-500 hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-colors"
+                        title={TR ? 'Haritada gör' : 'View on map'}
+                        onClick={(e) => e.stopPropagation()}
+                      >
+                        <MapPin size={12} />
+                      </Link>
+                    ) : eq.onVeri ? (
                       <span className="text-[9px] font-bold text-amber-500 shrink-0 flex items-center gap-0.5">
                         <span className="w-1.5 h-1.5 rounded-full bg-amber-500 animate-pulse inline-block" />
                         Ön Veri

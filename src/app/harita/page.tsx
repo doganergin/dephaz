@@ -1,7 +1,8 @@
 'use client';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, Suspense } from 'react';
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
+import { useSearchParams } from 'next/navigation';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Globe, Sparkles } from 'lucide-react';
 
@@ -40,9 +41,17 @@ function buyuklukRenk(mag: number): string {
   return '#9CA3AF';
 }
 
-export default function HaritaSayfasi() {
+function HaritaSayfasiInner() {
   const { t, lang } = useLanguage();
   const TR = lang === 'TR';
+  const searchParams = useSearchParams();
+  const urlLat = searchParams.get('lat');
+  const urlLng = searchParams.get('lng');
+  const urlZoom = searchParams.get('zoom');
+  const initialMerkez: [number, number] | null =
+    urlLat && urlLng ? [parseFloat(urlLat), parseFloat(urlLng)] : null;
+  const initialZoom = urlZoom ? parseInt(urlZoom) : null;
+
   const [aiSeçili, setAiSeçili] = useState<MapDeprem | null>(null);
   const [aiSonuc, setAiSonuc] = useState<string | null>(null);
   const [aiYukleniyor, setAiYukleniyor] = useState(false);
@@ -347,8 +356,8 @@ export default function HaritaSayfasi() {
         ) : (
           <DepremHaritasi
             depremler={aktifDepremler}
-            merkez={anaTab === 'turkiye' ? [39, 35] : [20, 0]}
-            zoom={anaTab === 'turkiye' ? 6 : 2}
+            merkez={initialMerkez ?? (anaTab === 'turkiye' ? [39, 35] : [20, 0])}
+            zoom={initialZoom ?? (anaTab === 'turkiye' ? 6 : 2)}
             buyuklukRenk={buyuklukRenk}
             tLabels={{ buyukluk: t('haritaPopupBuyukluk'), tarih: t('haritaPopupTarih'), derinlik: t('haritaPopupDerinlik') }}
           />
@@ -437,5 +446,13 @@ export default function HaritaSayfasi() {
         <span className="text-[var(--muted)] text-sm">→</span>
       </Link>
     </div>
+  );
+}
+
+export default function HaritaSayfasi() {
+  return (
+    <Suspense>
+      <HaritaSayfasiInner />
+    </Suspense>
   );
 }
