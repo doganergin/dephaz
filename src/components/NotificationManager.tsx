@@ -1,11 +1,15 @@
 'use client';
 import { useEffect } from 'react';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 const STORAGE_KEY = 'dh_notif_enabled';
 const LAST_EQ_KEY = 'dh_last_eq_id';
 const MIN_MAG = 4.0;
 
 export default function NotificationManager() {
+  const { lang } = useLanguage();
+  const EN = lang === 'EN';
+
   useEffect(() => {
     if (!('Notification' in window)) return;
     if (Notification.permission !== 'granted') return;
@@ -17,13 +21,15 @@ export default function NotificationManager() {
         if (daRes.ok) {
           const daData = await daRes.json();
           if (Array.isArray(daData) && daData.length > 0) {
-            const en = daData[0];
-            const id = `da-${en.tarih}-${en.konum}-${en.buyukluk}`;
+            const eq = daData[0];
+            const id = `da-${eq.tarih}-${eq.konum}-${eq.buyukluk}`;
             const lastId = localStorage.getItem(LAST_EQ_KEY);
-            if (id !== lastId && en.buyukluk >= MIN_MAG) {
+            if (id !== lastId && eq.buyukluk >= MIN_MAG) {
               localStorage.setItem(LAST_EQ_KEY, id);
-              new Notification(`⚡ M${en.buyukluk.toFixed(1)} — ${en.konum}`, {
-                body: `Derinlik: ${en.derinlik} km · ${en.tarih}`,
+              new Notification(`⚡ M${eq.buyukluk.toFixed(1)} — ${eq.konum}`, {
+                body: EN
+                  ? `Depth: ${eq.derinlik} km · ${eq.tarih} · Preliminary`
+                  : `Derinlik: ${eq.derinlik} km · ${eq.tarih} · Ön Veri`,
                 icon: '/favicon-512.png',
                 badge: '/favicon-32.png',
               });
@@ -35,24 +41,26 @@ export default function NotificationManager() {
         if (!res.ok) return;
         const data = await res.json();
         if (!Array.isArray(data) || data.length === 0) return;
-        const en = data[0];
-        const id = `k-${en.tarih}-${en.konum}-${en.buyukluk}`;
+        const eq = data[0];
+        const id = `k-${eq.tarih}-${eq.konum}-${eq.buyukluk}`;
         const lastId = localStorage.getItem(LAST_EQ_KEY);
-        if (id !== lastId && en.buyukluk >= MIN_MAG) {
+        if (id !== lastId && eq.buyukluk >= MIN_MAG) {
           localStorage.setItem(LAST_EQ_KEY, id);
-          new Notification(`M${en.buyukluk.toFixed(1)} — ${en.konum}`, {
-            body: `Derinlik: ${en.derinlik} km · ${en.tarih} · Kandilli`,
+          new Notification(`M${eq.buyukluk.toFixed(1)} — ${eq.konum}`, {
+            body: EN
+              ? `Depth: ${eq.derinlik} km · ${eq.tarih} · Kandilli`
+              : `Derinlik: ${eq.derinlik} km · ${eq.tarih} · Kandilli`,
             icon: '/favicon-512.png',
             badge: '/favicon-32.png',
           });
         }
-      } catch { /* sessiz */ }
+      } catch { /* silent */ }
     }
 
     kontrol();
     const interval = setInterval(kontrol, 30_000);
     return () => clearInterval(interval);
-  }, []);
+  }, [EN]);
 
   return null;
 }
