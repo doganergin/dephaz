@@ -1,5 +1,6 @@
 'use client';
 import { useState, useEffect } from 'react';
+import Image from 'next/image';
 import { useUser, SignInButton } from '@clerk/nextjs';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { getProvinces, getDistricts } from '@/lib/locationHelper';
@@ -8,10 +9,19 @@ import type { BolgeRisk } from '@/types';
 import type { Il, Ilce } from '@/types';
 import { MapPin, Settings, RefreshCw, AlertTriangle, CheckCircle, LogIn } from 'lucide-react';
 
-const KEY_IL_ID  = 'dh_dash_il_id';
-const KEY_IL_AD  = 'dh_dash_il_ad';
-const KEY_ILCE_ID = 'dh_dash_ilce_id';
-const KEY_ILCE_AD = 'dh_dash_ilce_ad';
+const KNOWN_ACCOUNTS_KEY = 'dh_known_accounts';
+
+interface KnownAccount {
+  id: string;
+  firstName: string | null;
+  lastName: string | null;
+  imageUrl: string;
+  email: string | undefined;
+}
+
+function userKey(userId: string, k: string) {
+  return `dh_${userId}_${k}`;
+}
 
 interface RecentEq { buyukluk: number; konum: string; tarih: string; derinlik: number; }
 
@@ -32,6 +42,7 @@ export default function DashboardPage() {
   const [recentEqs, setRecentEqs] = useState<RecentEq[]>([]);
   const [riskLoading, setRiskLoading] = useState(false);
   const [editing, setEditing] = useState(false);
+  const [knownAccounts, setKnownAccounts] = useState<KnownAccount[]>([]);
 
   // Tmp selections while editing
   const [tmpIl, setTmpIl] = useState<Il | null>(null);
@@ -39,20 +50,45 @@ export default function DashboardPage() {
 
   const iller: Il[] = getProvinces();
 
-  // Load saved location
+  // Load known accounts for the sign-in screen
   useEffect(() => {
-    if (!isSignedIn) return;
-    const ilId  = localStorage.getItem(KEY_IL_ID);
-    const ilAd  = localStorage.getItem(KEY_IL_AD);
-    const ilceId = localStorage.getItem(KEY_ILCE_ID);
-    const ilceAd = localStorage.getItem(KEY_ILCE_AD);
+    try {
+      const saved = JSON.parse(localStorage.getItem(KNOWN_ACCOUNTS_KEY) || '[]');
+      if (Array.isArray(saved)) setKnownAccounts(saved);
+    } catch { /* ignore */ }
+  }, []);
+
+  // Save current user to known accounts list
+  useEffect(() => {
+    if (!isSignedIn || !user) return;
+    const account: KnownAccount = {
+      id: user.id,
+      firstName: user.firstName,
+      lastName: user.lastName,
+      imageUrl: user.imageUrl,
+      email: user.primaryEmailAddress?.emailAddress,
+    };
+    try {
+      const existing: KnownAccount[] = JSON.parse(localStorage.getItem(KNOWN_ACCOUNTS_KEY) || '[]');
+      const updated = [account, ...existing.filter((a) => a.id !== user.id)].slice(0, 4);
+      localStorage.setItem(KNOWN_ACCOUNTS_KEY, JSON.stringify(updated));
+    } catch { /* ignore */ }
+  }, [isSignedIn, user]);
+
+  // Load saved location (user-specific keys)
+  useEffect(() => {
+    if (!isSignedIn || !user) return;
+    const ilId  = localStorage.getItem(userKey(user.id, 'il_id'));
+    const ilAd  = localStorage.getItem(userKey(user.id, 'il_ad'));
+    const ilceId = localStorage.getItem(userKey(user.id, 'ilce_id'));
+    const ilceAd = localStorage.getItem(userKey(user.id, 'ilce_ad'));
     if (ilId && ilAd && ilceId && ilceAd) {
       setHomeIl({ id: Number(ilId), name: ilAd });
       setHomeIlce({ id: Number(ilceId), name: ilceAd, provinceId: Number(ilId) });
     } else {
       setEditing(true);
     }
-  }, [isSignedIn]);
+  }, [isSignedIn, user]);
 
   // Fetch risk + recent quakes when location is set
   useEffect(() => {
@@ -72,11 +108,11 @@ export default function DashboardPage() {
   }, [homeIl, homeIlce]);
 
   function saveLocation() {
-    if (!tmpIl || !tmpIlce) return;
-    localStorage.setItem(KEY_IL_ID,   String(tmpIl.id));
-    localStorage.setItem(KEY_IL_AD,   tmpIl.name);
-    localStorage.setItem(KEY_ILCE_ID, String(tmpIlce.id));
-    localStorage.setItem(KEY_ILCE_AD, tmpIlce.name);
+    if (!tmpIl || !tmpIlce || !user) return;
+    localStorage.setItem(userKey(user.id, 'il_id'),   String(tmpIl.id));
+    localStorage.setItem(userKey(user.id, 'il_ad'),   tmpIl.name);
+    localStorage.setItem(userKey(user.id, 'ilce_id'), String(tmpIlce.id));
+    localStorage.setItem(userKey(user.id, 'ilce_ad'), tmpIlce.name);
     setHomeIl(tmpIl);
     setHomeIlce(tmpIlce);
     setTmpIl(null);
@@ -98,11 +134,54 @@ export default function DashboardPage() {
             {TR ? 'Kişisel Dashboard' : 'Personal Dashboard'}
           </h1>
         </div>
+
+        {/* Daha önce bu cihazdan giriş yapılan hesaplar */}
+        {knownAccounts.length > 0 && (
+          <div className="bg-[var(--card-bg)] border border-[var(--border)] rounded-2xl p-4 space-y-3">
+            <p className="text-xs font-bold text-[var(--muted)] uppercase tracking-wide">
+              {TR ? 'Bu Cihazda Kayıtlı Hesaplar' : 'Accounts on This Device'}
+            </p>
+            <div className="space-y-2">
+              {knownAccounts.map((account) => (
+                <SignInButton key={account.id} mode="modal">
+                  <button className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl border border-[var(--border)] hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors text-left">
+                    {account.imageUrl ? (
+                      <Image
+                        src={account.imageUrl}
+                        alt={account.firstName ?? ''}
+                        width={36}
+                        height={36}
+                        className="rounded-full object-cover"
+                        referrerPolicy="no-referrer"
+                      />
+                    ) : (
+                      <div className="w-9 h-9 rounded-full bg-red-100 dark:bg-red-900/30 flex items-center justify-center text-sm font-bold text-red-600">
+                        {(account.firstName?.[0] ?? account.email?.[0] ?? '?').toUpperCase()}
+                      </div>
+                    )}
+                    <div className="flex-1 min-w-0">
+                      <p className="text-sm font-semibold text-[var(--foreground)] truncate">
+                        {[account.firstName, account.lastName].filter(Boolean).join(' ') || account.email}
+                      </p>
+                      {account.email && (
+                        <p className="text-[11px] text-[var(--muted)] truncate">{account.email}</p>
+                      )}
+                    </div>
+                    <LogIn size={14} className="text-[var(--muted)] shrink-0" />
+                  </button>
+                </SignInButton>
+              ))}
+            </div>
+          </div>
+        )}
+
         <div className="bg-[var(--card-bg)] border border-[var(--border)] rounded-2xl p-8 flex flex-col items-center gap-4 text-center">
           <LogIn size={36} className="text-[var(--muted)]" strokeWidth={1.5} />
           <div>
             <p className="text-sm font-bold text-[var(--foreground)]">
-              {TR ? 'Giriş yapmanız gerekiyor' : 'Sign in required'}
+              {TR
+                ? (knownAccounts.length > 0 ? 'Farklı bir hesapla giriş yapın' : 'Giriş yapmanız gerekiyor')
+                : (knownAccounts.length > 0 ? 'Sign in with a different account' : 'Sign in required')}
             </p>
             <p className="text-xs text-[var(--muted)] mt-1">
               {TR
@@ -113,7 +192,9 @@ export default function DashboardPage() {
           <SignInButton mode="modal">
             <button className="flex items-center gap-2 px-5 py-2.5 bg-red-500 hover:bg-red-600 text-white text-sm font-semibold rounded-xl transition-colors">
               <LogIn size={15} />
-              {TR ? 'Giriş Yap / Kayıt Ol' : 'Sign In / Register'}
+              {TR
+                ? (knownAccounts.length > 0 ? 'Başka Hesapla Giriş Yap' : 'Giriş Yap / Kayıt Ol')
+                : (knownAccounts.length > 0 ? 'Sign In with Another Account' : 'Sign In / Register')}
             </button>
           </SignInButton>
         </div>
