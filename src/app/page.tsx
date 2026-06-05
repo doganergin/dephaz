@@ -5,7 +5,7 @@ import { useLanguage } from '@/contexts/LanguageContext';
 import {
   MapPin, Globe, ScrollText, FlaskConical, Backpack, Activity, Users, Phone,
   ShieldCheck, HeartPulse, ClipboardList, ArrowLeftRight, Bell,
-  LayoutDashboard, BarChart2, Thermometer, Navigation, TrendingDown, ChevronRight,
+  LayoutDashboard, BarChart2, Thermometer, Navigation, TrendingDown, ChevronRight, Sparkles,
 } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
 
@@ -119,6 +119,26 @@ export default function HomePage() {
   const { lang } = useLanguage();
   const TR = lang === 'TR';
 
+  const [aiAnaliz, setAiAnaliz] = useState<string | null>(null);
+  const [aiLoading, setAiLoading] = useState(false);
+
+  async function analizEt(eq: LatestEq) {
+    setAiAnaliz(null);
+    setAiLoading(true);
+    try {
+      const res = await fetch('/api/ai-analiz', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ buyukluk: eq.buyukluk, konum: eq.konum, derinlik: eq.derinlik, tarih: eq.tarih }),
+      });
+      const d = await res.json();
+      setAiAnaliz(d.analiz ?? d.error ?? 'Analiz yapılamadı.');
+    } catch {
+      setAiAnaliz('Bağlantı hatası.');
+    }
+    setAiLoading(false);
+  }
+
   const [eqTab, setEqTab]       = useState<'tr' | 'world'>('tr');
   const [trEqs, setTrEqs]       = useState<LatestEq[]>([]);
   const [worldEqs, setWorldEqs] = useState<LatestEq[]>([]);
@@ -211,11 +231,24 @@ export default function HomePage() {
                 }`}>
                   M{latest.buyukluk.toFixed(1)}
                 </span>
-                <div className="min-w-0">
+                <div className="min-w-0 flex-1">
                   <p className="text-sm font-bold text-white truncate">{latest.konum}</p>
                   <p className="text-[10px] text-gray-400">{latest.tarih} · {latest.derinlik} km</p>
                 </div>
+                <button
+                  onClick={() => analizEt(latest)}
+                  disabled={aiLoading}
+                  className="flex items-center gap-1 px-2.5 py-1.5 bg-purple-500/20 hover:bg-purple-500/30 border border-purple-500/40 text-purple-300 text-[10px] font-bold rounded-lg transition-colors shrink-0 disabled:opacity-50"
+                >
+                  <Sparkles size={11} />
+                  {aiLoading ? (TR ? 'Analiz...' : 'Analyzing...') : (TR ? 'AI Analiz' : 'AI Analysis')}
+                </button>
               </div>
+              {aiAnaliz && (
+                <div className="mt-3 bg-purple-950/40 border border-purple-500/30 rounded-xl p-3">
+                  <p className="text-[11px] text-purple-200 leading-relaxed">{aiAnaliz}</p>
+                </div>
+              )}
             </div>
           ) : (
             <div className="mb-5 h-14 flex items-center">
