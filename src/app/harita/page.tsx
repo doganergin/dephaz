@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { Globe } from 'lucide-react';
+import { Globe, Sparkles } from 'lucide-react';
 
 const MAX_DEPREM = 250;  // listede tutulacak max kayıt
 const YENILEME_SN = 60; // kaç saniyede bir yenile
@@ -41,7 +41,29 @@ function buyuklukRenk(mag: number): string {
 }
 
 export default function HaritaSayfasi() {
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
+  const TR = lang === 'TR';
+  const [aiSeçili, setAiSeçili] = useState<MapDeprem | null>(null);
+  const [aiSonuc, setAiSonuc] = useState<string | null>(null);
+  const [aiYukleniyor, setAiYukleniyor] = useState(false);
+
+  async function haritaAnalizEt(d: MapDeprem) {
+    setAiSeçili(d);
+    setAiSonuc(null);
+    setAiYukleniyor(true);
+    try {
+      const res = await fetch('/api/ai-analiz', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ buyukluk: d.buyukluk, konum: d.konum, derinlik: d.derinlik, tarih: d.tarih, lang }),
+      });
+      const data = await res.json();
+      setAiSonuc(data.analiz ?? data.error ?? 'Analiz yapılamadı.');
+    } catch {
+      setAiSonuc(TR ? 'Bağlantı hatası.' : 'Connection error.');
+    }
+    setAiYukleniyor(false);
+  }
 
   const [anaTab, setAnaTab] = useState<'turkiye' | 'dunya'>('turkiye');
   const [trKaynak, setTrKaynak] = useState<'kandilli' | 'afad' | 'usgs'>('kandilli');
@@ -359,19 +381,41 @@ export default function HaritaSayfasi() {
           <p className="text-xs font-bold text-[var(--muted)] uppercase tracking-wide mb-3">
             {t('haritaSonDepremlerBaslik')} ({aktifDepremler.length})
           </p>
+          <p className="text-[10px] text-purple-500 mb-2 flex items-center gap-1">
+            <Sparkles size={10} />
+            {TR ? 'Depreme tıklayarak AI analiz yaptırabilirsiniz' : 'Tap an earthquake for AI analysis'}
+          </p>
           <div className="space-y-2 max-h-64 overflow-y-auto">
             {aktifDepremler.map((d, i) => (
-              <div key={i} className="flex items-center gap-3 py-1.5 border-b border-[var(--border)] last:border-0">
-                <div
-                  className="w-10 h-10 rounded-xl flex items-center justify-center text-sm font-bold shrink-0 text-white"
-                  style={{ backgroundColor: buyuklukRenk(d.buyukluk) }}
+              <div key={i}>
+                <button
+                  onClick={() => haritaAnalizEt(d)}
+                  className={`w-full flex items-center gap-3 py-1.5 border-b border-[var(--border)] last:border-0 text-left hover:bg-purple-50 dark:hover:bg-purple-900/10 rounded-lg px-1 transition-colors ${aiSeçili === d ? 'bg-purple-50 dark:bg-purple-900/10' : ''}`}
                 >
-                  {d.buyukluk.toFixed(1)}
-                </div>
-                <div className="flex-1 min-w-0">
-                  <p className="text-xs font-medium text-[var(--foreground)] truncate">{d.konum}</p>
-                  <p className="text-[11px] text-[var(--muted)]">{d.tarih} · {d.derinlik?.toFixed(0)} km · {d.kaynak}</p>
-                </div>
+                  <div
+                    className="w-10 h-10 rounded-xl flex items-center justify-center text-sm font-bold shrink-0 text-white"
+                    style={{ backgroundColor: buyuklukRenk(d.buyukluk) }}
+                  >
+                    {d.buyukluk.toFixed(1)}
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <p className="text-xs font-medium text-[var(--foreground)] truncate">{d.konum}</p>
+                    <p className="text-[11px] text-[var(--muted)]">{d.tarih} · {d.derinlik?.toFixed(0)} km · {d.kaynak}</p>
+                  </div>
+                  <Sparkles size={12} className="text-purple-400 shrink-0" />
+                </button>
+                {aiSeçili === d && (
+                  <div className="mx-1 mb-2 bg-purple-950/40 border border-purple-500/30 rounded-xl p-3">
+                    {aiYukleniyor ? (
+                      <div className="flex items-center gap-2 text-purple-300">
+                        <div className="w-3 h-3 border-2 border-purple-400 border-t-transparent rounded-full animate-spin" />
+                        <span className="text-[11px]">{TR ? 'AI analiz yapılıyor...' : 'AI analyzing...'}</span>
+                      </div>
+                    ) : (
+                      <p className="text-[11px] text-purple-200 leading-relaxed">{aiSonuc}</p>
+                    )}
+                  </div>
+                )}
               </div>
             ))}
           </div>

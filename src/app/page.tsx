@@ -142,6 +142,7 @@ export default function HomePage() {
   const [eqTab, setEqTab]       = useState<'tr' | 'world' | 'ai'>('tr');
   const [aiSelected, setAiSelected] = useState<LatestEq | null>(null);
   const [aiTabFilter, setAiTabFilter] = useState(true);
+  const [aiRegion, setAiRegion] = useState<'tr' | 'world'>('tr');
   const [trEqs, setTrEqs]       = useState<LatestEq[]>([]);
   const [worldEqs, setWorldEqs] = useState<LatestEq[]>([]);
   const [eqLoading, setEqLoading] = useState(true);
@@ -243,7 +244,7 @@ export default function HomePage() {
                   className="flex items-center gap-1 px-2.5 py-1.5 bg-purple-500/20 hover:bg-purple-500/30 border border-purple-500/40 text-purple-300 text-[10px] font-bold rounded-lg transition-colors shrink-0 disabled:opacity-50"
                 >
                   <Sparkles size={11} />
-                  {aiLoading ? (TR ? 'Analiz...' : 'Analyzing...') : (TR ? 'AI Analiz' : 'AI Analysis')}
+                  {aiLoading ? (TR ? 'Analiz ediliyor...' : 'Analyzing...') : (TR ? 'AI ile Analiz Et' : 'Analyze with AI')}
                 </button>
               </div>
               {aiAnaliz && (
@@ -371,21 +372,26 @@ export default function HomePage() {
         </div>
 
         {eqTab === 'ai' ? (() => {
-          const aiList = eqFilter || aiTabFilter
-            ? trEqs.filter(e => e.buyukluk >= 4)
-            : trEqs;
+          const aiList = (aiTabFilter ? (aiRegion === 'tr' ? trEqs : worldEqs).filter(e => e.buyukluk >= 4) : (aiRegion === 'tr' ? trEqs : worldEqs));
           return (
             <div className="space-y-2">
-              <div className="flex items-center justify-between mb-1">
-                <p className="text-[10px] text-[var(--muted)]">
-                  {TR ? 'Deprem seç, AI analiz yapsın' : 'Select a quake for AI analysis'}
-                </p>
+              <p className="text-[10px] text-purple-500 mb-2 flex items-center gap-1">
+                <Sparkles size={10} />
+                {TR ? 'Bir depreme tıklayarak AI analiz yaptırın' : 'Tap an earthquake to get AI analysis'}
+              </p>
+              <div className="flex items-center justify-between mb-2">
+                <div className="flex gap-1">
+                  {(['tr', 'world'] as const).map(r => (
+                    <button key={r} onClick={() => { setAiRegion(r); setAiSelected(null); setAiAnaliz(null); }}
+                      className={`text-[10px] font-bold px-2.5 py-1 rounded-full transition-colors ${aiRegion === r ? 'bg-purple-500 text-white' : 'text-[var(--muted)] hover:bg-gray-100 dark:hover:bg-gray-800'}`}>
+                      {r === 'tr' ? (TR ? 'Türkiye' : 'Turkey') : (TR ? 'Dünya' : 'World')}
+                    </button>
+                  ))}
+                </div>
                 <button
                   onClick={() => setAiTabFilter(v => !v)}
                   className={`text-[10px] font-bold px-2 py-0.5 rounded-full border transition-colors ${
-                    aiTabFilter
-                      ? 'bg-amber-500 text-white border-amber-500'
-                      : 'text-amber-600 border-amber-400 hover:bg-amber-50 dark:hover:bg-amber-900/20'
+                    aiTabFilter ? 'bg-amber-500 text-white border-amber-500' : 'text-amber-600 border-amber-400 hover:bg-amber-50 dark:hover:bg-amber-900/20'
                   }`}
                 >M4.0+</button>
               </div>
@@ -399,6 +405,7 @@ export default function HomePage() {
                     <button
                       key={i}
                       onClick={() => { setAiSelected(eq); analizEt(eq); }}
+                      title={TR ? 'AI ile analiz et' : 'Analyze with AI'}
                       className={`w-full flex items-center gap-2 px-3 py-2 rounded-xl border text-left transition-colors ${
                         aiSelected === eq
                           ? 'border-purple-500 bg-purple-500/10'
