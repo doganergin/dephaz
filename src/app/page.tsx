@@ -60,7 +60,7 @@ const hazirlik: Feature[] = [
 ];
 
 const takip: Feature[] = [
-  { href: '/harita',    Icon: Globe,      tr: 'Canlı Harita',   en: 'Live Map',       color: 'blue' },
+  { href: '/harita',    Icon: Globe,      tr: 'Canlı Deprem Haritası',   en: 'Live Earthquake Map',       color: 'blue' },
   { href: '/bildirimler',Icon: Bell,      tr: 'Bildirimler',    en: 'Alerts',         color: 'red' },
   { href: '/fay-hatlari',Icon: Activity,  tr: 'Fay Hatları',    en: 'Fault Lines',    color: 'orange' },
   { href: '/tarihsel',  Icon: ScrollText, tr: 'Tarihsel',       en: 'Historical',     color: 'purple' },
@@ -290,7 +290,7 @@ export default function HomePage() {
             </div>
             <div className="grid grid-cols-4 gap-2">
               {[
-                { href: '/harita',         Icon: Globe,        tr: 'Canlı Harita', en: 'Live Map' },
+                { href: '/harita',         Icon: Globe,        tr: 'Canlı Deprem Haritası', en: 'Live Map' },
                 { href: '/aile-plani',     Icon: Users,        tr: 'Aile Planı',   en: 'Family' },
                 { href: '/acil-numaralar', Icon: Phone,        tr: 'Acil',         en: 'Emergency' },
                 { href: '/uzman',          Icon: FlaskConical, tr: 'Uzman',        en: 'Experts' },
