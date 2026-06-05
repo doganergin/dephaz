@@ -129,7 +129,7 @@ export default function HomePage() {
       const res = await fetch('/api/ai-analiz', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ buyukluk: eq.buyukluk, konum: eq.konum, derinlik: eq.derinlik, tarih: eq.tarih }),
+        body: JSON.stringify({ buyukluk: eq.buyukluk, konum: eq.konum, derinlik: eq.derinlik, tarih: eq.tarih, lang }),
       });
       const d = await res.json();
       setAiAnaliz(d.analiz ?? d.error ?? 'Analiz yapılamadı.');
@@ -139,7 +139,9 @@ export default function HomePage() {
     setAiLoading(false);
   }
 
-  const [eqTab, setEqTab]       = useState<'tr' | 'world'>('tr');
+  const [eqTab, setEqTab]       = useState<'tr' | 'world' | 'ai'>('tr');
+  const [aiSelected, setAiSelected] = useState<LatestEq | null>(null);
+  const [aiTabFilter, setAiTabFilter] = useState(true);
   const [trEqs, setTrEqs]       = useState<LatestEq[]>([]);
   const [worldEqs, setWorldEqs] = useState<LatestEq[]>([]);
   const [eqLoading, setEqLoading] = useState(true);
@@ -353,22 +355,84 @@ export default function HomePage() {
 
         {/* Tabs */}
         <div className="flex gap-1 mb-3">
-          {(['tr', 'world'] as const).map(tab => (
+          {(['tr', 'world', 'ai'] as const).map(tab => (
             <button
               key={tab}
-              onClick={() => setEqTab(tab)}
-              className={`text-[10px] font-bold px-3 py-1 rounded-full transition-colors ${
+              onClick={() => { setEqTab(tab); setAiSelected(null); setAiAnaliz(null); }}
+              className={`text-[10px] font-bold px-3 py-1 rounded-full transition-colors flex items-center gap-1 ${
                 eqTab === tab
-                  ? 'bg-red-500 text-white'
+                  ? tab === 'ai' ? 'bg-purple-500 text-white' : 'bg-red-500 text-white'
                   : 'text-[var(--muted)] hover:bg-gray-100 dark:hover:bg-gray-800'
               }`}
             >
-              {tab === 'tr' ? (TR ? 'Türkiye' : 'Turkey') : (TR ? 'Dünya' : 'World')}
+              {tab === 'tr' ? (TR ? 'Türkiye' : 'Turkey') : tab === 'world' ? (TR ? 'Dünya' : 'World') : <><Sparkles size={10} /> AI Analiz</>}
             </button>
           ))}
         </div>
 
-        {eqLoading ? (
+        {eqTab === 'ai' ? (() => {
+          const aiList = eqFilter || aiTabFilter
+            ? trEqs.filter(e => e.buyukluk >= 4)
+            : trEqs;
+          return (
+            <div className="space-y-2">
+              <div className="flex items-center justify-between mb-1">
+                <p className="text-[10px] text-[var(--muted)]">
+                  {TR ? 'Deprem seç, AI analiz yapsın' : 'Select a quake for AI analysis'}
+                </p>
+                <button
+                  onClick={() => setAiTabFilter(v => !v)}
+                  className={`text-[10px] font-bold px-2 py-0.5 rounded-full border transition-colors ${
+                    aiTabFilter
+                      ? 'bg-amber-500 text-white border-amber-500'
+                      : 'text-amber-600 border-amber-400 hover:bg-amber-50 dark:hover:bg-amber-900/20'
+                  }`}
+                >M4.0+</button>
+              </div>
+              {aiList.length === 0 ? (
+                <p className="text-xs text-[var(--muted)] text-center py-6">
+                  {TR ? 'M4.0+ deprem bulunamadı.' : 'No M4.0+ earthquakes found.'}
+                </p>
+              ) : (
+                <div className="space-y-1.5 max-h-[300px] overflow-y-auto">
+                  {aiList.slice(0, 20).map((eq, i) => (
+                    <button
+                      key={i}
+                      onClick={() => { setAiSelected(eq); analizEt(eq); }}
+                      className={`w-full flex items-center gap-2 px-3 py-2 rounded-xl border text-left transition-colors ${
+                        aiSelected === eq
+                          ? 'border-purple-500 bg-purple-500/10'
+                          : 'border-[var(--border)] bg-[var(--card-bg)] hover:border-purple-400'
+                      }`}
+                    >
+                      <span className={`text-sm font-black tabular-nums w-10 shrink-0 ${
+                        eq.buyukluk >= 6 ? 'text-red-500' :
+                        eq.buyukluk >= 4 ? 'text-amber-500' : 'text-[var(--foreground)]'
+                      }`}>M{eq.buyukluk.toFixed(1)}</span>
+                      <div className="min-w-0 flex-1">
+                        <p className="text-[11px] font-medium text-[var(--foreground)] truncate">{eq.konum}</p>
+                        <p className="text-[10px] text-[var(--muted)]">{eq.tarih} · {eq.derinlik} km</p>
+                      </div>
+                      <Sparkles size={11} className="text-purple-400 shrink-0" />
+                    </button>
+                  ))}
+                </div>
+              )}
+              {aiSelected && (
+                <div className="mt-2 bg-purple-950/40 border border-purple-500/30 rounded-xl p-3">
+                  {aiLoading ? (
+                    <div className="flex items-center gap-2 text-purple-300">
+                      <div className="w-3 h-3 border-2 border-purple-400 border-t-transparent rounded-full animate-spin" />
+                      <span className="text-[11px]">{TR ? 'AI analiz yapılıyor...' : 'AI analyzing...'}</span>
+                    </div>
+                  ) : (
+                    <p className="text-[11px] text-purple-200 leading-relaxed">{aiAnaliz}</p>
+                  )}
+                </div>
+              )}
+            </div>
+          );
+        })() : eqLoading ? (
           <div className="flex items-center justify-center h-24">
             <div className="w-5 h-5 border-2 border-red-500 border-t-transparent rounded-full animate-spin" />
           </div>

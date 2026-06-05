@@ -5,13 +5,30 @@ const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
 
 export async function POST(req: Request) {
   try {
-    const { buyukluk, konum, derinlik, tarih } = await req.json();
+    const { buyukluk, konum, derinlik, tarih, lang } = await req.json();
+    const EN = lang === 'EN';
 
     if (!buyukluk || !konum) {
       return NextResponse.json({ error: 'Eksik veri' }, { status: 400 });
     }
 
-    const prompt = `Sen bir deprem ve sismoloji uzmanısın. Aşağıdaki deprem verilerini analiz et ve Türkçe olarak kısa, sade bir değerlendirme yap.
+    const prompt = EN
+      ? `You are an earthquake and seismology expert. Analyze the following earthquake data and provide a short, clear assessment in English.
+
+Earthquake Data:
+- Magnitude: M${buyukluk}
+- Location: ${konum}
+- Depth: ${derinlik} km
+- Date: ${tarih}
+
+Evaluate the following (4-5 sentences total, plain language):
+1. Risk level (will it be felt? any damage risk?)
+2. Effect of the depth
+3. Aftershock expectation
+4. Brief advice for the public
+
+Avoid technical jargon. Write so anyone can understand.`
+      : `Sen bir deprem ve sismoloji uzmanısın. Aşağıdaki deprem verilerini analiz et ve Türkçe olarak kısa, sade bir değerlendirme yap.
 
 Deprem Bilgileri:
 - Büyüklük: M${buyukluk}
