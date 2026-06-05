@@ -11,24 +11,20 @@ export default function AtaturkBanner() {
   if (!GOSTER_SAYFALARI.includes(pathname)) return null;
 
   return (
-    <div className="flex items-center gap-3 bg-[var(--card-bg)] border border-[var(--border)] rounded-xl px-4 py-3 shadow-sm">
+    <div className="flex items-center gap-2.5 px-1 py-1">
       {!imgHata && (
         <img
           src="/ataturk.jpg"
           alt="Mustafa Kemal Atatürk"
-          className="rounded-lg object-cover shrink-0"
-          style={{ height: '56px', width: '44px' }}
+          className="rounded-full object-cover shrink-0 ring-1 ring-[var(--border)]"
+          style={{ height: '28px', width: '28px' }}
           onError={() => setImgHata(true)}
         />
       )}
-      <div>
-        <p className="text-[13px] italic font-medium text-[var(--foreground)] leading-snug">
-          &ldquo;Hayatta en hakiki mürşit ilimdir.&rdquo;
-        </p>
-        <p className="text-[11px] text-[var(--muted)] mt-0.5 font-medium">
-          — Mustafa Kemal Atatürk
-        </p>
-      </div>
+      <p className="text-[11px] text-[var(--muted)] italic leading-tight">
+        &ldquo;Hayatta en hakiki mürşit ilimdir.&rdquo;
+        <span className="not-italic font-semibold ml-1">— Atatürk</span>
+      </p>
     </div>
   );
 }
