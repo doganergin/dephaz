@@ -238,25 +238,25 @@ export default function HomePage() {
       {/* ── YENİ DEPREM TOAST ────────────────────────────────── */}
       {newEqAlert && (
         <div className="fixed top-16 inset-x-0 z-50 flex justify-center px-4 pointer-events-none">
-          <div className="pointer-events-auto bg-zinc-900 border border-red-500/60 rounded-2xl px-4 py-3 flex items-center gap-3 shadow-2xl max-w-sm w-full">
+          <div className="pointer-events-auto bg-[var(--card-bg)] border border-red-500/60 rounded-2xl px-4 py-3 flex items-center gap-3 shadow-2xl max-w-sm w-full">
             <span className="w-2 h-2 rounded-full bg-red-500 animate-pulse shrink-0" />
             <div className="flex-1 min-w-0">
-              <p className="text-white text-xs font-bold">{TR ? 'Yeni Deprem' : 'New Earthquake'}</p>
-              <p className="text-red-300 text-[11px] truncate">
+              <p className="text-[var(--foreground)] text-xs font-bold">{TR ? 'Yeni Deprem' : 'New Earthquake'}</p>
+              <p className="text-red-500 text-[11px] truncate">
                 M{newEqAlert.buyukluk.toFixed(1)} — {newEqAlert.konum}
               </p>
             </div>
             <button
               onClick={() => setNewEqAlert(null)}
-              className="text-gray-500 hover:text-white transition-colors text-xs shrink-0"
+              className="text-[var(--muted)] hover:text-[var(--foreground)] transition-colors text-xs shrink-0"
             >✕</button>
           </div>
         </div>
       )}
 
       {/* ── HERO ─────────────────────────────────────────────── */}
-      <div className="relative overflow-hidden rounded-2xl bg-[var(--card-bg)] border border-[var(--border)] dark:border-zinc-800 dark:bg-zinc-950 p-5">
-        <div className="absolute inset-0 bg-gradient-to-br from-red-100/40 dark:from-red-950/50 via-transparent to-transparent pointer-events-none" />
+      <div className="relative overflow-hidden rounded-2xl bg-[var(--card-bg)] border border-[var(--border)] p-5">
+        <div className="absolute inset-0 bg-gradient-to-br from-red-500/5 via-transparent to-transparent pointer-events-none" />
         <div className="relative">
           {/* Live badge */}
           <div className="flex items-center gap-2 mb-4">
