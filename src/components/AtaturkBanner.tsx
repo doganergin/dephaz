@@ -22,7 +22,6 @@ export default function AtaturkBanner() {
         />
       )}
       <div className="py-3 pr-4">
-        <div className="w-6 h-0.5 bg-red-500 mb-2 rounded-full" />
         <p className="text-[13px] italic font-medium text-[var(--foreground)] leading-snug">
           &ldquo;Hayatta en hakiki mürşit ilimdir.&rdquo;
         </p>

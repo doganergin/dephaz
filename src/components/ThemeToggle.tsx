@@ -3,19 +3,17 @@ import { useEffect, useState } from 'react';
 import { applyPalette, clearPalette, PALETTE_KEY } from '@/lib/palettes';
 import type { DarkPalette } from '@/lib/palettes';
 
-type Theme = 'light' | 'dark' | 'black';
+type Theme = 'light' | 'dark';
 
 function applyTheme(theme: Theme) {
   document.documentElement.classList.remove('dark', 'black');
-  if (theme === 'dark' || theme === 'black') {
-    document.documentElement.classList.add(theme);
-    // Kaydedilmiş palette'i geri yükle
+  if (theme === 'dark') {
+    document.documentElement.classList.add('dark');
     const saved = localStorage.getItem(PALETTE_KEY);
     if (saved) {
       try { applyPalette(JSON.parse(saved) as DarkPalette); } catch { /* */ }
     }
   } else {
-    // Açık moda geçince palette override'ları temizle
     clearPalette();
   }
 }
@@ -25,11 +23,10 @@ export default function ThemeToggle() {
 
   useEffect(() => {
     const stored = localStorage.getItem('theme') as Theme | null;
-    if (stored === 'light' || stored === 'dark' || stored === 'black') {
+    if (stored === 'light' || stored === 'dark') {
       setTheme(stored);
       applyTheme(stored);
     } else {
-      // Sistem temasına göre varsayılan
       const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
       const initial: Theme = prefersDark ? 'dark' : 'light';
       setTheme(initial);
@@ -37,8 +34,8 @@ export default function ThemeToggle() {
     }
   }, []);
 
-  const cycle = () => {
-    const next: Theme = theme === 'light' ? 'dark' : theme === 'dark' ? 'black' : 'light';
+  const toggle = () => {
+    const next: Theme = theme === 'light' ? 'dark' : 'light';
     setTheme(next);
     applyTheme(next);
     localStorage.setItem('theme', next);
@@ -46,25 +43,16 @@ export default function ThemeToggle() {
 
   return (
     <button
-      onClick={cycle}
+      onClick={toggle}
       aria-label="Tema değiştir"
-      title={theme === 'light' ? 'Açık mod' : theme === 'dark' ? 'Koyu mod' : 'Siyah mod'}
-      className="w-8 h-8 flex items-center justify-center rounded-lg text-gray-500 hover:bg-gray-100 dark:hover:bg-gray-700 dark:text-gray-300 transition-colors"
+      title={theme === 'light' ? 'Koyu moda geç' : 'Açık moda geç'}
+      className="w-8 h-8 flex items-center justify-center rounded-lg text-gray-500 hover:bg-gray-100 dark:hover:bg-zinc-700 dark:text-gray-300 transition-colors"
     >
-      {theme === 'light' && (
-        /* Ay — koyu moda geç */
+      {theme === 'light' ? (
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
           <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
         </svg>
-      )}
-      {theme === 'dark' && (
-        /* Dolu daire — siyah moda geç */
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-          <circle cx="12" cy="12" r="9"/>
-        </svg>
-      )}
-      {theme === 'black' && (
-        /* Güneş — açık moda geç */
+      ) : (
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
           <circle cx="12" cy="12" r="5"/>
           <line x1="12" y1="1" x2="12" y2="3"/>

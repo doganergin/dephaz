@@ -255,48 +255,48 @@ export default function HomePage() {
       )}
 
       {/* ── HERO ─────────────────────────────────────────────── */}
-      <div className="relative overflow-hidden rounded-2xl bg-zinc-900 dark:bg-zinc-950 border border-zinc-800 p-5">
-        <div className="absolute inset-0 bg-gradient-to-br from-red-950/50 via-transparent to-transparent pointer-events-none" />
+      <div className="relative overflow-hidden rounded-2xl bg-[var(--card-bg)] border border-[var(--border)] dark:border-zinc-800 dark:bg-zinc-950 p-5">
+        <div className="absolute inset-0 bg-gradient-to-br from-red-100/40 dark:from-red-950/50 via-transparent to-transparent pointer-events-none" />
         <div className="relative">
           {/* Live badge */}
           <div className="flex items-center gap-2 mb-4">
-            <span className="flex items-center gap-1.5 text-[10px] font-bold text-red-400 uppercase tracking-widest">
+            <span className="flex items-center gap-1.5 text-[10px] font-bold text-red-500 dark:text-red-400 uppercase tracking-widest">
               <span className="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse" />
               {TR ? 'CANLI' : 'LIVE'}
             </span>
-            <span className="text-gray-700 text-[10px]">·</span>
-            <span className="text-[10px] text-gray-500">depremhatti.com</span>
+            <span className="text-[var(--border)] text-[10px]">·</span>
+            <span className="text-[10px] text-[var(--muted)]">depremhatti.com</span>
           </div>
 
           {/* Latest quake */}
           {!eqLoading && latest ? (
             <div className="mb-5">
-              <p className="text-[10px] text-gray-500 uppercase tracking-wide mb-1">
+              <p className="text-[10px] text-[var(--muted)] uppercase tracking-wide mb-1">
                 {TR ? 'Son Deprem' : 'Latest Earthquake'}
               </p>
               <div className="flex items-center gap-3">
                 <span className={`text-4xl font-black tabular-nums leading-none ${
-                  latest.buyukluk >= 6 ? 'text-red-400' :
-                  latest.buyukluk >= 4 ? 'text-amber-400' : 'text-white'
+                  latest.buyukluk >= 6 ? 'text-red-500 dark:text-red-400' :
+                  latest.buyukluk >= 4 ? 'text-amber-500 dark:text-amber-400' : 'text-[var(--foreground)]'
                 }`}>
                   M{latest.buyukluk.toFixed(1)}
                 </span>
                 <div className="min-w-0 flex-1">
-                  <p className="text-sm font-bold text-white truncate">{latest.konum}</p>
-                  <p className="text-[10px] text-gray-400">{latest.tarih} · {latest.derinlik} km</p>
+                  <p className="text-sm font-bold text-[var(--foreground)] truncate">{latest.konum}</p>
+                  <p className="text-[10px] text-[var(--muted)]">{latest.tarih} · {latest.derinlik} km</p>
                 </div>
                 <button
                   onClick={() => analizEt(latest)}
                   disabled={aiLoading}
-                  className="flex items-center gap-1 px-2.5 py-1.5 bg-purple-500/20 hover:bg-purple-500/30 border border-purple-500/40 text-purple-300 text-[10px] font-bold rounded-lg transition-colors shrink-0 disabled:opacity-50"
+                  className="flex items-center gap-1 px-2.5 py-1.5 bg-purple-100 dark:bg-purple-500/20 hover:bg-purple-200 dark:hover:bg-purple-500/30 border border-purple-300 dark:border-purple-500/40 text-purple-700 dark:text-purple-300 text-[10px] font-bold rounded-lg transition-colors shrink-0 disabled:opacity-50"
                 >
                   <Sparkles size={11} />
-                  {aiLoading ? (TR ? 'Analiz ediliyor...' : 'Analyzing...') : (TR ? 'AI ile Analiz Et' : 'Analyze with AI')}
+                  {aiLoading ? (TR ? 'Analiz ediliyor...' : 'Analyzing...') : (TR ? 'Yapay Zeka ile' : 'AI Analysis')}
                 </button>
               </div>
               {aiAnaliz && (
-                <div className="mt-3 bg-purple-950/40 border border-purple-500/30 rounded-xl p-3">
-                  <p className="text-[11px] text-purple-200 leading-relaxed">{aiAnaliz}</p>
+                <div className="mt-3 bg-purple-50 dark:bg-purple-950/40 border border-purple-200 dark:border-purple-500/30 rounded-xl p-3">
+                  <p className="text-[11px] text-purple-700 dark:text-purple-200 leading-relaxed">{aiAnaliz}</p>
                 </div>
               )}
             </div>
@@ -309,16 +309,16 @@ export default function HomePage() {
           {/* Stats strip */}
           <div className="flex gap-4 mb-5">
             <div>
-              <p className="text-lg font-black text-amber-400 tabular-nums">{eqLoading ? '…' : m4Count}</p>
-              <p className="text-[10px] text-gray-500">M4.0+ {TR ? 'Türkiye' : 'Turkey'}</p>
+              <p className="text-lg font-black text-amber-500 dark:text-amber-400 tabular-nums">{eqLoading ? '…' : m4Count}</p>
+              <p className="text-[10px] text-[var(--muted)]">M4.0+ {TR ? 'Türkiye' : 'Turkey'}</p>
             </div>
             <div>
-              <p className="text-lg font-black text-white tabular-nums">{eqLoading ? '…' : trEqs.length}</p>
-              <p className="text-[10px] text-gray-500">{TR ? 'son deprem' : 'recent quakes'}</p>
+              <p className="text-lg font-black text-[var(--foreground)] tabular-nums">{eqLoading ? '…' : trEqs.length}</p>
+              <p className="text-[10px] text-[var(--muted)]">{TR ? 'son deprem' : 'recent quakes'}</p>
             </div>
             <div>
-              <p className="text-lg font-black text-white tabular-nums">{eqLoading ? '…' : worldEqs.filter(e => e.buyukluk >= 4).length}</p>
-              <p className="text-[10px] text-gray-500">{TR ? 'dünya M4.0+' : 'world M4.0+'}</p>
+              <p className="text-lg font-black text-[var(--foreground)] tabular-nums">{eqLoading ? '…' : worldEqs.filter(e => e.buyukluk >= 4).length}</p>
+              <p className="text-[10px] text-[var(--muted)]">{TR ? 'dünya M4.0+' : 'world M4.0+'}</p>
             </div>
           </div>
 
@@ -333,25 +333,25 @@ export default function HomePage() {
               </Link>
               <Link
                 href="/dashboard"
-                className="flex items-center justify-center gap-1.5 px-4 py-2.5 bg-white/10 hover:bg-white/20 text-gray-200 text-xs font-bold rounded-xl transition-colors border border-white/10"
+                className="flex items-center justify-center gap-1.5 px-4 py-2.5 bg-black/5 dark:bg-white/10 hover:bg-black/10 dark:hover:bg-white/20 text-[var(--foreground)] text-xs font-bold rounded-xl transition-colors border border-[var(--border)]"
               >
-                <LayoutDashboard size={13} /> {TR ? 'Dashboard' : 'Dashboard'}
+                <LayoutDashboard size={13} /> Dashboard
               </Link>
             </div>
             <div className="grid grid-cols-4 gap-2">
               {[
-                { href: '/harita',         Icon: Globe,        tr: 'Canlı Deprem Haritası', en: 'Live Map' },
-                { href: '/aile-plani',     Icon: Users,        tr: 'Aile Planı',   en: 'Family' },
-                { href: '/acil-numaralar', Icon: Phone,        tr: 'Acil',         en: 'Emergency' },
-                { href: '/uzman',          Icon: FlaskConical, tr: 'Uzman',        en: 'Experts' },
+                { href: '/harita',         Icon: Globe,        tr: 'Canlı Harita',  en: 'Live Map'   },
+                { href: '/aile-plani',     Icon: Users,        tr: 'Aile Planı',    en: 'Family'     },
+                { href: '/acil-numaralar', Icon: Phone,        tr: 'Acil',          en: 'Emergency'  },
+                { href: '/uzman',          Icon: FlaskConical, tr: 'Uzman',         en: 'Experts'    },
               ].map(({ href, Icon, tr, en }) => (
                 <Link
                   key={href}
                   href={href}
-                  className="flex flex-col items-center gap-1 py-2 bg-white/10 hover:bg-white/20 text-gray-300 rounded-xl transition-colors border border-white/10"
+                  className="flex flex-col items-center gap-1 py-2 bg-black/5 dark:bg-white/10 hover:bg-black/10 dark:hover:bg-white/20 text-[var(--foreground)] rounded-xl transition-colors border border-[var(--border)] dark:border-white/10"
                 >
                   <Icon size={15} strokeWidth={1.8} />
-                  <span className="text-[9px] font-bold leading-none">{TR ? tr : en}</span>
+                  <span className="text-[9px] font-bold leading-tight text-center">{TR ? tr : en}</span>
                 </Link>
               ))}
             </div>
