@@ -42,7 +42,9 @@
       "Bash(curl -X POST \"https://api.vercel.com/v1/integrations/deploy/prj_O8pSKQA6vcCUsmFexQT8lHI9ziYO/HCmgVe45Nw\")",
       "Bash(curl -s -X POST -H \"Authorization: Bearer depremhatti2026\" \"https://depremhatti.com/api/cron/tweet-deprem\")",
       "Bash(curl -v -X POST -H \"Authorization: Bearer depremhatti2026\" \"https://depremhatti.com/api/cron/tweet-deprem\")",
-      "Bash(curl -s \"https://depremhatti.com/ads.txt\")"
+      "Bash(curl -s \"https://depremhatti.com/ads.txt\")",
+      "Bash(echo \"EXIT:$?\")",
+      "Bash(vercel --prod --yes)"
     ],
     "additionalDirectories": [
       "C:\\Users\\MSİ\\Downloads",
