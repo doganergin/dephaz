@@ -271,9 +271,21 @@ export default function HomePage() {
           {/* Latest quake */}
           {!eqLoading && latest ? (
             <div className="mb-5">
-              <p className="text-[10px] text-[var(--muted)] uppercase tracking-wide mb-1">
-                {TR ? 'Son Deprem' : 'Latest Earthquake'}
-              </p>
+              {/* AI butonu — her zaman üstte */}
+              <div className="flex items-center justify-between mb-3">
+                <p className="text-[10px] text-[var(--muted)] uppercase tracking-wide">
+                  {TR ? 'Son Deprem' : 'Latest Earthquake'}
+                </p>
+                <button
+                  onClick={() => analizEt(latest)}
+                  disabled={aiLoading}
+                  className="flex items-center gap-1 px-2.5 py-1.5 bg-purple-100 dark:bg-purple-500/20 hover:bg-purple-200 dark:hover:bg-purple-500/30 border border-purple-300 dark:border-purple-500/40 text-purple-700 dark:text-purple-300 text-[10px] font-bold rounded-lg transition-colors shrink-0 disabled:opacity-50"
+                >
+                  <Sparkles size={11} />
+                  {aiLoading ? (TR ? 'Analiz ediliyor...' : 'Analyzing...') : (TR ? 'Yapay Zeka ile Analiz Et' : 'AI Analysis')}
+                </button>
+              </div>
+              {/* Deprem bilgisi */}
               <div className="flex items-center gap-3">
                 <span className={`text-4xl font-black tabular-nums leading-none ${
                   latest.buyukluk >= 6 ? 'text-red-500 dark:text-red-400' :
@@ -285,14 +297,6 @@ export default function HomePage() {
                   <p className="text-sm font-bold text-[var(--foreground)] truncate">{latest.konum}</p>
                   <p className="text-[10px] text-[var(--muted)]">{latest.tarih} · {latest.derinlik} km</p>
                 </div>
-                <button
-                  onClick={() => analizEt(latest)}
-                  disabled={aiLoading}
-                  className="flex items-center gap-1 px-2.5 py-1.5 bg-purple-100 dark:bg-purple-500/20 hover:bg-purple-200 dark:hover:bg-purple-500/30 border border-purple-300 dark:border-purple-500/40 text-purple-700 dark:text-purple-300 text-[10px] font-bold rounded-lg transition-colors shrink-0 disabled:opacity-50"
-                >
-                  <Sparkles size={11} />
-                  {aiLoading ? (TR ? 'Analiz ediliyor...' : 'Analyzing...') : (TR ? 'Yapay Zeka ile Analiz Et' : 'AI Analysis')}
-                </button>
               </div>
               {aiAnaliz && (
                 <div className="mt-3 bg-purple-50 dark:bg-purple-950/40 border border-purple-200 dark:border-purple-500/30 rounded-xl p-3">
