@@ -238,7 +238,7 @@ export default function HomePage() {
       {/* ── YENİ DEPREM TOAST ────────────────────────────────── */}
       {newEqAlert && (
         <div className="fixed top-16 inset-x-0 z-50 flex justify-center px-4 pointer-events-none">
-          <div className="pointer-events-auto bg-gray-900 border border-red-500/60 rounded-2xl px-4 py-3 flex items-center gap-3 shadow-2xl max-w-sm w-full">
+          <div className="pointer-events-auto bg-zinc-900 border border-red-500/60 rounded-2xl px-4 py-3 flex items-center gap-3 shadow-2xl max-w-sm w-full">
             <span className="w-2 h-2 rounded-full bg-red-500 animate-pulse shrink-0" />
             <div className="flex-1 min-w-0">
               <p className="text-white text-xs font-bold">{TR ? 'Yeni Deprem' : 'New Earthquake'}</p>
@@ -255,7 +255,7 @@ export default function HomePage() {
       )}
 
       {/* ── HERO ─────────────────────────────────────────────── */}
-      <div className="relative overflow-hidden rounded-2xl bg-gray-900 dark:bg-gray-950 border border-gray-800 p-5">
+      <div className="relative overflow-hidden rounded-2xl bg-zinc-900 dark:bg-zinc-950 border border-zinc-800 p-5">
         <div className="absolute inset-0 bg-gradient-to-br from-red-950/50 via-transparent to-transparent pointer-events-none" />
         <div className="relative">
           {/* Live badge */}
@@ -410,7 +410,7 @@ export default function HomePage() {
               className={`text-[10px] font-bold px-3 py-1 rounded-full transition-colors flex items-center gap-1 ${
                 eqTab === tab
                   ? tab === 'ai' ? 'bg-purple-500 text-white' : 'bg-red-500 text-white'
-                  : 'text-[var(--muted)] hover:bg-gray-100 dark:hover:bg-gray-800'
+                  : 'text-[var(--muted)] hover:bg-gray-100 dark:hover:bg-zinc-800'
               }`}
             >
               {tab === 'tr' ? (TR ? 'Türkiye' : 'Turkey') : tab === 'world' ? (TR ? 'Dünya' : 'World') : <><Sparkles size={10} /> AI Analiz</>}
@@ -430,7 +430,7 @@ export default function HomePage() {
                 <div className="flex gap-1">
                   {(['tr', 'world'] as const).map(r => (
                     <button key={r} onClick={() => { setAiRegion(r); setAiSelected(null); setAiAnaliz(null); }}
-                      className={`text-[10px] font-bold px-2.5 py-1 rounded-full transition-colors ${aiRegion === r ? 'bg-purple-500 text-white' : 'text-[var(--muted)] hover:bg-gray-100 dark:hover:bg-gray-800'}`}>
+                      className={`text-[10px] font-bold px-2.5 py-1 rounded-full transition-colors ${aiRegion === r ? 'bg-purple-500 text-white' : 'text-[var(--muted)] hover:bg-gray-100 dark:hover:bg-zinc-800'}`}>
                       {r === 'tr' ? (TR ? 'Türkiye' : 'Turkey') : (TR ? 'Dünya' : 'World')}
                     </button>
                   ))}
