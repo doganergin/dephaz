@@ -21,6 +21,19 @@ export const DARK_PALETTES: DarkPalette[] = [
   { id: 'teal',      name: 'Deep Teal',   background: '#0d1f1f', cardBg: '#132929', border: '#1f3d3d', muted: '#4db6ac', foreground: '#e0f7f5'  },
 ];
 
+export const LIGHT_PALETTES: DarkPalette[] = [
+  { id: 'l-default',   name: 'Varsayılan',  background: '#f9fafb', cardBg: '#ffffff', border: '#f3f4f6', muted: '#6b7280', foreground: '#111827' },
+  { id: 'l-warm',      name: 'Sıcak Beyaz', background: '#faf7f2', cardBg: '#fffef9', border: '#e8e0d0', muted: '#78716c', foreground: '#1c1917' },
+  { id: 'l-cool',      name: 'Soğuk Gri',   background: '#f0f4f8', cardBg: '#f8fafc', border: '#dce6ef', muted: '#64748b', foreground: '#0f172a' },
+  { id: 'l-cream',     name: 'Krem',        background: '#fdf8f0', cardBg: '#fffdf7', border: '#e9ddc8', muted: '#92795a', foreground: '#2c1a0e' },
+  { id: 'l-slate',     name: 'Slate',       background: '#f1f5f9', cardBg: '#f8fafc', border: '#e2e8f0', muted: '#64748b', foreground: '#0f172a' },
+  { id: 'l-stone',     name: 'Taş',         background: '#f5f4f0', cardBg: '#faf9f6', border: '#ddd9d3', muted: '#79756e', foreground: '#1c1917' },
+  { id: 'l-rose',      name: 'Gül',         background: '#fff1f2', cardBg: '#fff5f6', border: '#fecdd3', muted: '#9f1239', foreground: '#1a0a0a' },
+  { id: 'l-mint',      name: 'Nane',        background: '#f0fdf4', cardBg: '#f8fff9', border: '#bbf7d0', muted: '#15803d', foreground: '#052e16' },
+  { id: 'l-lavender',  name: 'Lavanta',     background: '#f5f3ff', cardBg: '#faf8ff', border: '#ddd6fe', muted: '#7c3aed', foreground: '#1e1035' },
+  { id: 'l-sky',       name: 'Gökyüzü',     background: '#f0f9ff', cardBg: '#f8fdff', border: '#bae6fd', muted: '#0369a1', foreground: '#082f49' },
+];
+
 export function applyPalette(palette: DarkPalette) {
   const r = document.documentElement;
   r.style.setProperty('--background', palette.background);
@@ -39,4 +52,5 @@ export function clearPalette() {
   r.style.removeProperty('--foreground');
 }
 
-export const PALETTE_KEY = 'dh_dark_palette';
+export const PALETTE_KEY      = 'dh_dark_palette';
+export const LIGHT_PALETTE_KEY = 'dh_light_palette';

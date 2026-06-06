@@ -291,7 +291,7 @@ export default function HomePage() {
                   className="flex items-center gap-1 px-2.5 py-1.5 bg-purple-100 dark:bg-purple-500/20 hover:bg-purple-200 dark:hover:bg-purple-500/30 border border-purple-300 dark:border-purple-500/40 text-purple-700 dark:text-purple-300 text-[10px] font-bold rounded-lg transition-colors shrink-0 disabled:opacity-50"
                 >
                   <Sparkles size={11} />
-                  {aiLoading ? (TR ? 'Analiz ediliyor...' : 'Analyzing...') : (TR ? 'Yapay Zeka ile' : 'AI Analysis')}
+                  {aiLoading ? (TR ? 'Analiz ediliyor...' : 'Analyzing...') : (TR ? 'Yapay Zeka ile Analiz Et' : 'AI Analysis')}
                 </button>
               </div>
               {aiAnaliz && (

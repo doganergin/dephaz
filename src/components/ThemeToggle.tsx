@@ -1,6 +1,6 @@
 'use client';
 import { useEffect, useState } from 'react';
-import { applyPalette, clearPalette, PALETTE_KEY } from '@/lib/palettes';
+import { applyPalette, clearPalette, PALETTE_KEY, LIGHT_PALETTE_KEY } from '@/lib/palettes';
 import type { DarkPalette } from '@/lib/palettes';
 
 type Theme = 'light' | 'dark';
@@ -15,6 +15,11 @@ function applyTheme(theme: Theme) {
     }
   } else {
     clearPalette();
+    // Kaydedilmiş açık tema rengini geri yükle
+    const savedLight = localStorage.getItem(LIGHT_PALETTE_KEY);
+    if (savedLight) {
+      try { applyPalette(JSON.parse(savedLight) as DarkPalette); } catch { /* */ }
+    }
   }
 }
 
