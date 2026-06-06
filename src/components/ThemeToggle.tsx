@@ -1,12 +1,23 @@
 'use client';
 import { useEffect, useState } from 'react';
+import { applyPalette, clearPalette, PALETTE_KEY } from '@/lib/palettes';
+import type { DarkPalette } from '@/lib/palettes';
 
 type Theme = 'light' | 'dark' | 'black';
 
 function applyTheme(theme: Theme) {
   document.documentElement.classList.remove('dark', 'black');
-  if (theme === 'dark') document.documentElement.classList.add('dark');
-  if (theme === 'black') document.documentElement.classList.add('black');
+  if (theme === 'dark' || theme === 'black') {
+    document.documentElement.classList.add(theme);
+    // Kaydedilmiş palette'i geri yükle
+    const saved = localStorage.getItem(PALETTE_KEY);
+    if (saved) {
+      try { applyPalette(JSON.parse(saved) as DarkPalette); } catch { /* */ }
+    }
+  } else {
+    // Açık moda geçince palette override'ları temizle
+    clearPalette();
+  }
 }
 
 export default function ThemeToggle() {

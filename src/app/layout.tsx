@@ -55,7 +55,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         {/* Dark mode anti-flash: reads localStorage before hydration */}
         <script
           dangerouslySetInnerHTML={{
-            __html: `(function(){try{var t=localStorage.getItem('theme');var m=window.matchMedia('(prefers-color-scheme: dark)').matches;if(t==='black'){document.documentElement.classList.add('black')}else if(t==='dark'||(t==null&&m)){document.documentElement.classList.add('dark')}}catch(e){}})()`,
+            __html: `(function(){try{var t=localStorage.getItem('theme');var m=window.matchMedia('(prefers-color-scheme: dark)').matches;var d=false;if(t==='black'){document.documentElement.classList.add('black');d=true}else if(t==='dark'||(t==null&&m)){document.documentElement.classList.add('dark');d=true}if(d){var p=localStorage.getItem('dh_dark_palette');if(p){try{var c=JSON.parse(p);var r=document.documentElement;r.style.setProperty('--background',c.background);r.style.setProperty('--card-bg',c.cardBg);r.style.setProperty('--border',c.border);r.style.setProperty('--muted',c.muted);r.style.setProperty('--foreground',c.foreground)}catch(e2){}}}}catch(e){}})()`,
           }}
         />
         {/* JSON-LD Yapısal Veri */}

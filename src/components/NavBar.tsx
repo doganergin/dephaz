@@ -5,6 +5,7 @@ import { usePathname } from 'next/navigation';
 import { useState } from 'react';
 import { useUser, SignInButton, UserButton } from '@clerk/nextjs';
 import ThemeToggle from './ThemeToggle';
+import ThemePicker from './ThemePicker';
 import LanguageToggle from './LanguageToggle';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Home, MapPin, Globe, ScrollText, FlaskConical, Backpack, Users, Activity, LayoutDashboard, BarChart2, Thermometer } from 'lucide-react';
@@ -124,6 +125,7 @@ export default function NavBar() {
 
             <div className="flex items-center gap-1.5 shrink-0">
               <LanguageToggle />
+              <ThemePicker />
               <ThemeToggle />
               {isSignedIn ? (
                 <UserButton />
