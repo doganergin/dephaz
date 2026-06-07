@@ -53,9 +53,7 @@ function parseKandilli(text: string): Deprem[] {
 }
 
 async function usgsturkiyeGetir(limit: number, minmag: number, il?: string): Promise<Deprem[]> {
-  const ninetyDaysAgo = new Date(Date.now() - 90 * 24 * 60 * 60 * 1000)
-    .toISOString()
-    .split('T')[0];
+  const oneDayAgo = new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString();
 
   const url =
     `https://earthquake.usgs.gov/fdsnws/event/1/query` +
@@ -66,8 +64,8 @@ async function usgsturkiyeGetir(limit: number, minmag: number, il?: string): Pro
     `&minlongitude=${TURKIYE_BBOX.minlon}` +
     `&maxlongitude=${TURKIYE_BBOX.maxlon}` +
     `&orderby=time` +
-    `&limit=500` +
-    `&starttime=${ninetyDaysAgo}`;
+    `&limit=20000` +
+    `&starttime=${oneDayAgo}`;
 
   const res = await fetch(url, { cache: 'no-store' });
   if (!res.ok) throw new Error(`USGS hata: ${res.status}`);

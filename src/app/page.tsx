@@ -151,59 +151,101 @@ export default function HomePage() {
   const [eqFilter, setEqFilter]   = useState(false);
   const [newEqAlert, setNewEqAlert] = useState<LatestEq | null>(null);
   const prevTrFirstRef = useRef<string | null>(null);
+  interface SrcData { mag: number | null; found: boolean; }
+  const [srcVerify, setSrcVerify] = useState<{ afad: SrcData; kandilli: SrcData } | null>(null);
+  const [srcLoading, setSrcLoading] = useState(false);
 
   useEffect(() => {
+    let cancelled = false;
+
     async function fetchEqs() {
-      const [kandilliRes, afadRes, usgsRes, daRes] = await Promise.allSettled([
+      setSrcVerify(null);
+      setSrcLoading(true);
+      let daEqs: LatestEq[] = [];
+
+      // Aşama 1: DepremAğı — hızlı ön veri, hemen göster
+      try {
+        const daRes = await fetch('/api/depremagi?limit=30');
+        if (!cancelled && daRes.ok) {
+          const d = await daRes.json();
+          if (Array.isArray(d) && d.length > 0) {
+            daEqs = d;
+            const preliminary = daEqs.map(e => ({ ...e, onVeri: true }));
+            const first = preliminary[0];
+            const firstId = `${first.tarih}-${first.konum}-${first.buyukluk}`;
+            if (prevTrFirstRef.current !== null && prevTrFirstRef.current !== firstId) {
+              setNewEqAlert(first);
+            }
+            prevTrFirstRef.current = firstId;
+            setTrEqs(preliminary);
+            setEqLoading(false);
+          }
+        }
+      } catch { /* silent */ }
+
+      // Aşama 2: AFAD + Kandilli + USGS — resmi kaynaklar
+      const [kandilliRes, afadRes, usgsRes] = await Promise.allSettled([
         fetch('/api/kandilli?limit=50'),
         fetch('/api/afad?limit=50&minmag=2.0'),
         fetch('/api/usgs'),
-        fetch('/api/depremagi?limit=30'),
       ]);
 
+      if (cancelled) return;
+
       const official: LatestEq[] = [];
+      let kandilliData: LatestEq[] = [];
+      let afadData: LatestEq[] = [];
+
       if (kandilliRes.status === 'fulfilled' && kandilliRes.value.ok) {
         const d: Array<{ buyukluk: number; konum: string; tarih: string; saat?: string; derinlik: number; enlem?: number; boylam?: number }> = await kandilliRes.value.json();
-        if (Array.isArray(d)) official.push(...d.map((x) => ({
-          buyukluk: x.buyukluk, konum: x.konum,
-          tarih: x.saat ? `${x.tarih} ${x.saat}` : x.tarih,
-          derinlik: x.derinlik, kaynak: 'Kandilli',
-          enlem: x.enlem, boylam: x.boylam,
-        })));
+        if (Array.isArray(d)) {
+          kandilliData = d.map(x => ({
+            buyukluk: x.buyukluk, konum: x.konum,
+            tarih: x.saat ? `${x.tarih} ${x.saat}` : x.tarih,
+            derinlik: x.derinlik, kaynak: 'Kandilli',
+            enlem: x.enlem, boylam: x.boylam,
+          }));
+          official.push(...kandilliData);
+        }
       }
       if (afadRes.status === 'fulfilled' && afadRes.value.ok) {
         const d: Array<{ buyukluk: number; konum: string; tarih: string; derinlik: number; enlem?: number; boylam?: number }> = await afadRes.value.json();
-        if (Array.isArray(d)) official.push(...d.map((x) => ({
-          buyukluk: x.buyukluk, konum: x.konum, tarih: x.tarih, derinlik: x.derinlik, kaynak: 'AFAD',
-          enlem: x.enlem, boylam: x.boylam,
-        })));
-      }
-
-      let daEqs: LatestEq[] = [];
-      if (daRes.status === 'fulfilled' && daRes.value.ok) {
-        const d = await daRes.value.json();
-        if (Array.isArray(d)) daEqs = d;
+        if (Array.isArray(d)) {
+          afadData = d.map(x => ({
+            buyukluk: x.buyukluk, konum: x.konum, tarih: x.tarih, derinlik: x.derinlik, kaynak: 'AFAD',
+            enlem: x.enlem, boylam: x.boylam,
+          }));
+          official.push(...afadData);
+        }
       }
 
       const merged = mergeEqs(official, daEqs);
 
-      // Yeni deprem tespiti (sadece ilk yüklemeden sonra)
-      if (prevTrFirstRef.current !== null && merged.length > 0) {
-        const first = merged[0];
-        const firstId = `${first.tarih}-${first.konum}-${first.buyukluk}`;
-        if (prevTrFirstRef.current !== firstId) {
-          setNewEqAlert(first);
-        }
+      // Kaynak doğrulama: DepremAğı ilk depremini AFAD ve Kandilli'de ara
+      const daFirst = daEqs[0];
+      if (daFirst?.enlem && daFirst?.boylam) {
+        const latTime = parseTime(daFirst.tarih);
+        const afadMatch = afadData.find(a =>
+          a.enlem && a.boylam &&
+          haversine(daFirst.enlem!, daFirst.boylam!, a.enlem, a.boylam) < 150 &&
+          Math.abs(parseTime(a.tarih) - latTime) < 5 * 60 * 1000
+        );
+        const kandMatch = kandilliData.find(k =>
+          k.enlem && k.boylam &&
+          haversine(daFirst.enlem!, daFirst.boylam!, k.enlem, k.boylam) < 150 &&
+          Math.abs(parseTime(k.tarih) - latTime) < 5 * 60 * 1000
+        );
+        setSrcVerify({
+          afad:     { mag: afadMatch?.buyukluk ?? null, found: !!afadMatch },
+          kandilli: { mag: kandMatch?.buyukluk ?? null, found: !!kandMatch },
+        });
       }
-      if (merged.length > 0) {
-        prevTrFirstRef.current = `${merged[0].tarih}-${merged[0].konum}-${merged[0].buyukluk}`;
-      }
-      setTrEqs(merged);
+      setSrcLoading(false);
 
-      const anyTrOk = [kandilliRes, afadRes, daRes].some(
-        r => r.status === 'fulfilled' && (r as PromiseFulfilledResult<Response>).value.ok
-      );
-      setEqError(!anyTrOk && merged.length === 0);
+      const finalList = merged.length > 0 ? merged : daEqs.map(e => ({ ...e, onVeri: true }));
+      setTrEqs(finalList);
+      setEqError(finalList.length === 0);
+      setEqLoading(false);
 
       if (usgsRes.status === 'fulfilled' && usgsRes.value.ok) {
         const d = await usgsRes.value.json();
@@ -215,12 +257,11 @@ export default function HomePage() {
           })));
         }
       }
-      setEqLoading(false);
     }
 
     fetchEqs();
     const interval = setInterval(fetchEqs, 30 * 1000);
-    return () => clearInterval(interval);
+    return () => { cancelled = true; clearInterval(interval); };
   }, [fetchTrigger]);
 
   useEffect(() => {
@@ -297,6 +338,30 @@ export default function HomePage() {
                   <p className="text-sm font-bold text-[var(--foreground)] truncate">{latest.konum}</p>
                   <p className="text-[10px] text-[var(--muted)]">{latest.tarih} · {latest.derinlik} km</p>
                 </div>
+              </div>
+              {/* Kaynak doğrulama şeridi */}
+              <div className="flex items-center gap-2 mt-2 flex-wrap">
+                <span className="inline-flex items-center gap-1 text-[9px] font-bold text-amber-500">
+                  <span className="w-1.5 h-1.5 rounded-full bg-amber-500 animate-pulse inline-block" />
+                  {TR ? 'Ön Veri' : 'Preliminary'}
+                </span>
+                {srcLoading ? (
+                  <>
+                    <span className="text-[9px] text-[var(--muted)]">· AFAD …</span>
+                    <span className="text-[9px] text-[var(--muted)]">· Kandilli …</span>
+                  </>
+                ) : srcVerify ? (
+                  <>
+                    <span className="text-[9px] text-[var(--muted)]">·</span>
+                    <span className={`text-[9px] font-medium ${srcVerify.afad.found ? 'text-green-500 dark:text-green-400' : 'text-[var(--muted)]'}`}>
+                      AFAD {srcVerify.afad.found ? `M${srcVerify.afad.mag?.toFixed(1)} ✓` : '—'}
+                    </span>
+                    <span className="text-[9px] text-[var(--muted)]">·</span>
+                    <span className={`text-[9px] font-medium ${srcVerify.kandilli.found ? 'text-green-500 dark:text-green-400' : 'text-[var(--muted)]'}`}>
+                      Kandilli {srcVerify.kandilli.found ? `M${srcVerify.kandilli.mag?.toFixed(1)} ✓` : '—'}
+                    </span>
+                  </>
+                ) : null}
               </div>
               {aiAnaliz && (
                 <div className="mt-3 bg-purple-50 dark:bg-purple-950/40 border border-purple-200 dark:border-purple-500/30 rounded-xl p-3">
