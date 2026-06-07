@@ -6,16 +6,17 @@ export async function GET(req: Request) {
   const limit = parseInt(searchParams.get('limit') ?? '500');
 
   try {
-    const oneDayAgo = new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString();
-    const maxLimit = Math.min(limit, 20000);
+    const ninetyDaysAgo = new Date(Date.now() - 90 * 24 * 60 * 60 * 1000)
+      .toISOString()
+      .split('T')[0];
 
     const url =
       `https://earthquake.usgs.gov/fdsnws/event/1/query` +
       `?format=geojson` +
       `&minmagnitude=${minmag}` +
       `&orderby=time` +
-      `&limit=${maxLimit}` +
-      `&starttime=${oneDayAgo}`;
+      `&limit=${limit}` +
+      `&starttime=${ninetyDaysAgo}`;
 
     const res = await fetch(url, { cache: 'no-store' });
 
