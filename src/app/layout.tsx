@@ -111,7 +111,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <AtaturkBanner />
           </div>
           <BackBar />
-          <main className="flex-1 max-w-2xl lg:max-w-4xl mx-auto w-full px-4 py-4 pb-12">
+          <main className="flex-1 max-w-2xl lg:max-w-4xl mx-auto w-full px-4 py-4 pb-24 md:pb-12">
             {children}
           </main>
           <Footer />

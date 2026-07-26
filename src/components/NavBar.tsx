@@ -8,7 +8,7 @@ import ThemeToggle from './ThemeToggle';
 import ThemePicker from './ThemePicker';
 import LanguageToggle from './LanguageToggle';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { Home, MapPin, Globe, ScrollText, FlaskConical, Backpack, Users, Activity, LayoutDashboard, BarChart2, Thermometer } from 'lucide-react';
+import { Home, MapPin, Globe, ScrollText, FlaskConical, Backpack, Users, Activity, LayoutDashboard, BarChart2, Thermometer, Bell, MoreHorizontal } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
 
 export default function NavBar() {
@@ -93,10 +93,10 @@ export default function NavBar() {
       <header className="bg-[var(--card-bg)] border-b border-[var(--border)] sticky top-0 z-40">
         <div className="max-w-2xl mx-auto px-4">
           <div className="flex items-center gap-2 py-3">
-            {/* Hamburger */}
+            {/* Hamburger — sadece desktop */}
             <button
               onClick={() => setMenuAcik(true)}
-              className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors shrink-0"
+              className="hidden md:flex p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors shrink-0"
               aria-label={TR ? 'Menüyü aç' : 'Open menu'}
             >
               <div className="space-y-1">
@@ -205,6 +205,43 @@ export default function NavBar() {
           </div>
         </nav>
       </div>
+      {/* ── MOBİL ALT NAVİGASYON ─────────────────────────────────────────── */}
+      <nav
+        className="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-[var(--card-bg)] border-t border-[var(--border)]"
+        style={{ paddingBottom: 'env(safe-area-inset-bottom, 0px)' }}
+      >
+        <div className="flex items-stretch h-[60px]">
+          {([
+            { href: '/',             Icon: Home,            tr: 'Ana Sayfa',  en: 'Home'      },
+            { href: '/harita',       Icon: Globe,           tr: 'Harita',     en: 'Map'       },
+            { href: '/dashboard',    Icon: LayoutDashboard, tr: 'Dashboard',  en: 'Dashboard' },
+            { href: '/bildirimler',  Icon: Bell,            tr: 'Bildirim',   en: 'Alerts'    },
+          ] as { href: string; Icon: typeof Home; tr: string; en: string }[]).map(({ href, Icon: TabIcon, tr: trLabel, en: enLabel }) => {
+            const active = path === href;
+            return (
+              <Link
+                key={href}
+                href={href}
+                className={`flex-1 flex flex-col items-center justify-center gap-[3px] transition-colors ${
+                  active ? 'text-red-500' : 'text-[var(--muted)]'
+                }`}
+              >
+                <TabIcon size={21} strokeWidth={active ? 2.2 : 1.6} />
+                <span className={`text-[9px] leading-none ${active ? 'font-bold' : 'font-medium'}`}>
+                  {TR ? trLabel : enLabel}
+                </span>
+              </Link>
+            );
+          })}
+          <button
+            onClick={() => setMenuAcik(true)}
+            className="flex-1 flex flex-col items-center justify-center gap-[3px] text-[var(--muted)] transition-colors"
+          >
+            <MoreHorizontal size={21} strokeWidth={1.6} />
+            <span className="text-[9px] font-medium leading-none">{TR ? 'Menü' : 'Menu'}</span>
+          </button>
+        </div>
+      </nav>
     </>
   );
 }
